@@ -1,0 +1,10 @@
+var clover = new Object();
+
+// JSON: {classes : [{name, id, sl, el,  methods : [{sl, el}, ...]}, ...]}
+clover.pageData = {"classes":[{"el":98,"id":48063,"methods":[{"el":32,"sc":5,"sl":30},{"el":42,"sc":5,"sl":34},{"el":47,"sc":5,"sl":44},{"el":58,"sc":5,"sl":49},{"el":67,"sc":5,"sl":60},{"el":77,"sc":5,"sl":69},{"el":84,"sc":5,"sl":79},{"el":90,"sc":5,"sl":86},{"el":97,"sc":5,"sl":92}],"name":"DefaultBinderTest","sl":16}]}
+
+// JSON: {test_ID : {"methods": [ID1, ID2, ID3...], "name" : "testXXX() void"}, ...};
+clover.testTargets = {"test_2402":{"methods":[{"sl":49}],"name":"testAssignableBinding","pass":true,"statements":[{"sl":51},{"sl":52},{"sl":53},{"sl":54},{"sl":55},{"sl":57}]},"test_2527":{"methods":[{"sl":44}],"name":"testHandledType","pass":true,"statements":[{"sl":46}]},"test_2956":{"methods":[{"sl":69}],"name":"testIllegalBindingStatic","pass":true,"statements":[{"sl":71},{"sl":72},{"sl":73},{"sl":74},{"sl":76}]},"test_376":{"methods":[{"sl":86}],"name":"testNonInterfaceExplicitType","pass":true,"statements":[{"sl":88},{"sl":89}]},"test_3801":{"methods":[{"sl":79}],"name":"testNonInterfaceProxyType","pass":true,"statements":[{"sl":81},{"sl":82},{"sl":83}]},"test_73":{"methods":[{"sl":60}],"name":"testIllegalBindingNonDeclaredInterface","pass":true,"statements":[{"sl":62},{"sl":63},{"sl":64},{"sl":66}]},"test_771":{"methods":[{"sl":92}],"name":"testObjectProperties","pass":true,"statements":[{"sl":94},{"sl":95},{"sl":96}]}}
+
+// JSON: { lines : [{tests : [testid1, testid2, testid3, ...]}, ...]};
+clover.srcFileLines = [[], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [2527], [], [2527], [], [], [2402], [], [2402], [2402], [2402], [2402], [2402], [], [2402], [], [], [73], [], [73], [73], [73], [], [73], [], [], [2956], [], [2956], [2956], [2956], [2956], [], [2956], [], [], [3801], [], [3801], [3801], [3801], [], [], [376], [], [376], [376], [], [], [771], [], [771], [771], [771], [], []]

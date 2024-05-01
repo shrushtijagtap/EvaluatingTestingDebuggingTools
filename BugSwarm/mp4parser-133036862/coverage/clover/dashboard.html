@@ -1,0 +1,1289 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+
+    
+    
+    <link rel="SHORTCUT ICON" href="img/clover.ico" />
+
+    <link rel="stylesheet" href="aui/css/aui.min.css" media="all"/>
+    <link rel="stylesheet" href="aui/css/aui-experimental.min.css" media="all"/>
+    <!--[if IE 9]><link rel="stylesheet" href="aui/css/aui-ie9.min.css" media="all"/><![endif]-->
+
+    <style type="text/css" media="all">
+        @import url('style.css');
+        @import url('tree.css');
+        
+    </style>
+
+    <script src="jquery-1.8.3.min.js" type="text/javascript"></script>
+    <script src="aui/js/aui.min.js" type="text/javascript"></script>
+    <script src="aui/js/aui-experimental.min.js" type="text/javascript"></script>
+    <script src="aui/js/aui-soy.min.js" type="text/javascript"></script>
+
+    <script src="package-nodes-tree.js" type="text/javascript"></script>
+    <script src="clover-tree.js" type="text/javascript"></script>
+    <script src="clover.js" type="text/javascript"></script>
+    <script src="clover-descriptions.js" type="text/javascript"></script>
+    <script src="cloud.js" type="text/javascript"></script>
+
+            <title>ISO Parser 1.1.20-SNAPSHOT</title>
+    </head>
+
+<body onresize="processTreeMapDashJson(treeMapJson);" >
+    <div id="page">
+        
+        
+
+
+<header id="header" role="banner">
+    <nav class="aui-header aui-dropdown2-trigger-group" role="navigation">
+        <div class="aui-header-inner">
+            <div class="aui-header-primary">
+                <h1 id="logo" class="aui-header-logo aui-header-logo-clover">
+                    <a href="https://openclover.org" title="Visit OpenClover home page"><span class="aui-header-logo-device">OpenClover</span></a>
+                </h1>
+                            </div>
+            <div class="aui-header-secondary">
+                <ul class="aui-nav">
+                    <li id="system-help-menu">
+                        <a class="aui-nav-link" title="Open online documentation" target="_blank"
+                           href="https://openclover.org/documentation">
+                            <span class="aui-icon aui-icon-small aui-iconfont-help">&#160;Help</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+        
+        <div class="aui-page-panel">
+            <div class="aui-page-panel-inner">
+                <div class="aui-page-panel-nav aui-page-panel-nav-clover">
+                    
+
+<div class="aui-page-header-inner" style="margin-bottom: 20px;">
+    <div class="aui-page-header-image">
+                    <a href="http://code.google.com/p/mp4parser/" target="_top">
+                <div class="aui-avatar aui-avatar-large aui-avatar-project">
+            <div class="aui-avatar-inner">
+                                    <img src="img/clover_logo_large.png" alt="Clover icon"/>
+                            </div>
+        </div>
+                    </a>
+            </div>
+    <div class="aui-page-header-main" >
+        <h1>
+                            <a href="http://code.google.com/p/mp4parser/" target="_top">
+                                        ISO Parser 1.1.20-SNAPSHOT
+                                        </a>
+                    </h1>
+    </div>
+</div>
+
+<nav class="aui-navgroup aui-navgroup-vertical">
+    <div class="aui-navgroup-inner">
+                                            <ul class="aui-nav">
+                <li class="aui-nav-selected">
+                    <a href="dashboard.html">Project overview</a>
+                </li>
+            </ul>
+        
+                <div class="aui-nav-heading packages-nav-heading">
+            <strong>Packages</strong>
+        </div>
+        <div class="aui-nav project-packages">
+            <form method="get" action="#" class="aui package-filter-container">
+                <input type="text" autocomplete="off" class="package-filter text"
+                       placeholder="Type to filter packages..." name="package-filter" id="package-filter"
+                       title="Start typing package name (or part of the name) to search through the tree. Use arrow keys and the Enter key to navigate."/>
+            </form>
+            <p class="package-filter-no-results-message hidden">
+                <small>No results found.</small>
+            </p>
+                                                  <div class="packages-tree-wrapper" data-root-relative="" data-package-name="">
+                <div class="packages-tree-container"></div>
+                <div class="clover-packages-lozenges"></div>
+            </div>
+        </div>
+        
+            </div>
+</nav>                </div>
+                <section class="aui-page-panel-content">
+                    <div class="aui-page-panel-content-clover">
+
+                    
+                    <ol class="aui-nav aui-nav-breadcrumbs">
+            
+        <li><a href="dashboard.html">Project Clover database Mon Apr 29 2024 22:48:09 CDT</a></li>
+    </ol>
+    
+<h1 class="aui-h2-clover">
+            Project overview
+    </h1>
+<div class="aui-tabs horizontal-tabs">
+        <ul class="tabs-menu">
+            <li class="menu-item active-tab">
+            <a href="dashboard.html">Dashboard</a>
+        </li>
+                <li class="menu-item ">
+            <a href="pkg-summary.html"><strong>Application code</strong></a>
+        </li>
+                <li class="menu-item ">
+            <a href="testsrc-pkg-summary.html"><strong>Test code</strong></a>
+        </li>
+        <li class="menu-item ">
+            <a href="test-pkg-summary.html"><strong>Test results</strong></a>
+        </li>
+                <li class="menu-item ">
+            <a href="top-risks.html"><strong>Top risks</strong></a>
+        </li>
+        <li class="menu-item ">
+            <a href="quick-wins.html"><strong>Quick wins</strong></a>
+        </li>
+                                                <li class="menu-item ">
+                <a href="treemap.html"><strong>Coverage tree map</strong></a>
+            </li>
+            </ul>
+    <div class="tabs-pane active-pane" id="tabs-first">
+
+        <div>&#160;</div>
+
+
+
+
+
+
+<div class="aui-group">
+    <div class="aui-item">
+        <div class="dashboard-widget">
+            <header class="dashboard-widget-header">
+                
+                <h3>
+                    Code coverage
+                    <small style="float:right; font-weight: normal">
+                        451 classes,
+                        10,708 /
+                        23,053 elements
+                    </small>
+                </h3>
+            </header>
+            <div class="dashboard-widget-content">
+                <div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">0.46449485</span>46.4%</div><div style="display: table-cell">
+ <div title="46.4% Covered"  style="min-width:200px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:46.4%"></div></div></div></div>
+                <p><a href="pkg-summary.html">See more</a></p>
+            </div>
+        </div>
+
+        <div class="dashboard-widget">
+            <header class="dashboard-widget-header">
+                <h3>
+                    Test results
+                    <small style="float:right; font-weight: normal">
+                        188 /
+                        194 tests
+                        8.21 secs
+                    </small>
+                </h3>
+            </header>
+            <div class="dashboard-widget-content">
+                                    
+
+<div style="display: table; width: 100%">
+            <div class="barGraphValue"><span class="sortValue">0.96907216</span>96.9%</div>         <div style="display: table-cell">
+            
+            <div title="0% Errors" style="min-width: 40px;" class="testBarError">
+                <div title="96.9% of tests passed&lt;br/&gt;3.1% of tests failed" class="testBarFail" style="width: 100%"><div class="testBarPass" style="width: 96.9%"></div></div>
+            </div>
+        </div>
+    </div>                                <p><a href="test-pkg-summary.html">See more</a></p>
+            </div>
+        </div>
+
+        <div class="dashboard-widget">
+            <header class="dashboard-widget-header">
+                <h3>Code metrics</h3>
+            </header>
+                         
+
+<div id="$statsId" class="aui-item" style="display: ${display}">
+<div style="display: table">
+    <div class="stats-box">
+        <div class="stats-box-label"><label title="Total number of branches in this project">Branches:</label></div>
+        <div class="stats-box-value">4,562</div>
+    </div>
+    <div class="stats-box">
+        <div class="stats-box-label"><label title="Total number of statements in this project">Statements:</label></div>
+        <div class="stats-box-value">15,077</div>
+    </div>
+    <div class="stats-box">
+        <div class="stats-box-label"><label title="Total number of methods in this project">Methods:</label></div>
+        <div class="stats-box-value">3,414</div>
+    </div>
+    <div class="stats-box">
+        <div class="stats-box-label"><label title="Total number of classes in this project">Classes:</label></div>
+        <div class="stats-box-value">451</div>
+    </div>
+            <div class="stats-box">
+            <div class="stats-box-label"><label title="Total number of files in this project">Files:</label></div>
+            <div class="stats-box-value">378</div>
+        </div>
+                <div class="stats-box">
+            <div class="stats-box-label"><label title="Total number of packages in this project">Packages:</label></div>
+            <div class="stats-box-value">50</div>
+        </div>
+        <div class="stats-box">
+        <div class="stats-box-label"><label title="Total number of lines of code in this project">LOC:</label></div>
+        <div class="stats-box-value">45,105</div>
+    </div>
+    <div class="stats-box">
+        <div class="stats-box-label"><label title="Total number of non-comment lines of code in this project">NCLOC:</label></div>
+        <div class="stats-box-value">30,903</div>
+    </div>
+    <div class="stats-box">
+        <div class="stats-box-label"><label title="Cyclomatic complexity is the number of paths in this project">Total complexity:</label></div>
+        <div class="stats-box-value">6,483</div>
+    </div>
+    <div class="stats-box">
+        <div class="stats-box-label">
+            <label title="Complexity density is the complexity divided by the number of statements in this project">Complexity density:</label>
+        </div>
+        <div class="stats-box-value">0.43</div>
+    </div>
+    <div class="stats-box">
+        <div class="stats-box-label"><label title="Number of statements per method.">Statements/Method:</label></div>
+        <div class="stats-box-value">4.42</div>
+    </div>
+    <div class="stats-box">
+        <div class="stats-box-label"><label title="Number of methods per class.">Methods/Class:</label></div>
+        <div class="stats-box-value">7.57</div>
+    </div>
+            <div class="stats-box">
+            <div class="stats-box-label"><label title="Number of classes per package.">Classes/Package:</label></div>
+            <div class="stats-box-value">9.02</div>
+        </div>
+        <div class="stats-box">
+        <div class="stats-box-label"><label title="Complexity divided by the number of methods in this project">Average method complexity:</label></div>
+        <div class="stats-box-value">1.9</div>
+    </div>
+</div>
+
+</div>        </div>
+
+                <div class="dashboard-widget">
+            <header class="dashboard-widget-header">
+                <h3>Class Coverage Distribution</h3>
+            </header>
+            <div class="dashboard-widget-content">
+                <div style="text-align: center">                     <img src="img/classDistrubutionChart.png" alt="img/classDistrubutionChart.png" usemap="#classDistrubutionChart.png"/>
+                </div>
+                <map id="classDistrubutionChart.png" name="classDistrubutionChart.png">
+<area shape="rect" coords="282,120,304,206" title="78 classes have 91-100% coverage" alt="" nohref="nohref"/>
+<area shape="rect" coords="258,156,280,206" title="45 classes have 81-90% coverage" alt="" nohref="nohref"/>
+<area shape="rect" coords="233,178,255,206" title="26 classes have 71-80% coverage" alt="" nohref="nohref"/>
+<area shape="rect" coords="209,173,231,206" title="30 classes have 61-70% coverage" alt="" nohref="nohref"/>
+<area shape="rect" coords="184,190,206,206" title="15 classes have 51-60% coverage" alt="" nohref="nohref"/>
+<area shape="rect" coords="160,183,182,206" title="21 classes have 41-50% coverage" alt="" nohref="nohref"/>
+<area shape="rect" coords="135,189,157,206" title="16 classes have 31-40% coverage" alt="" nohref="nohref"/>
+<area shape="rect" coords="111,201,133,206" title="5 classes have 21-30% coverage" alt="" nohref="nohref"/>
+<area shape="rect" coords="87,199,109,206" title="7 classes have 11-20% coverage" alt="" nohref="nohref"/>
+<area shape="rect" coords="62,203,84,206" title="3 classes have 1-10% coverage" alt="" nohref="nohref"/>
+<area shape="rect" coords="38,15,60,206" title="172 classes have 0% coverage" alt="" nohref="nohref"/>
+</map>
+            </div>
+        </div>
+        
+                <div class="dashboard-widget">
+            <header class="dashboard-widget-header">
+                <h3>Class Complexity</h3>
+            </header>
+            <div class="dashboard-widget-content">
+                <div style="text-align: center">
+                    <img src="img/classComplexityChart.png" alt="img/classComplexityChart.png" usemap="#classComplexityChart.png"/>
+                </div>
+                <map id="classComplexityChart.png" name="classComplexityChart.png">
+<area shape="poly" coords="54,206,51,209,49,206,51,204,54,206,54,206" title="Complexity: 4; Coverage: 0%; Class: UnknownDescriptor" alt="" href="com/googlecode/mp4parser/boxes/mp4/objectdescriptors/UnknownDescriptor.html#UnknownDescriptor"/>
+<area shape="poly" coords="178,200,176,203,173,200,176,198,178,200,178,200" title="Complexity: 13; Coverage: 51%; Class: SLConfigDescriptor" alt="" href="com/googlecode/mp4parser/boxes/mp4/objectdescriptors/SLConfigDescriptor.html#SLConfigDescriptor"/>
+<area shape="poly" coords="54,201,51,204,49,201,51,199,54,201,54,201" title="Complexity: 11; Coverage: 0%; Class: ProfileLevelIndicationDescriptor" alt="" href="com/googlecode/mp4parser/boxes/mp4/objectdescriptors/ProfileLevelIndicationDescriptor.html#ProfileLevelIndicationDescriptor"/>
+<area shape="poly" coords="137,204,134,206,132,204,134,201,137,204,137,204" title="Complexity: 8; Coverage: 34%; Class: ObjectDescriptorFactory" alt="" href="com/googlecode/mp4parser/boxes/mp4/objectdescriptors/ObjectDescriptorFactory.html#ObjectDescriptorFactory"/>
+<area shape="poly" coords="54,204,51,207,49,204,51,202,54,204,54,204" title="Complexity: 7; Coverage: 0%; Class: InitialObjectDescriptor" alt="" href="com/googlecode/mp4parser/boxes/mp4/objectdescriptors/InitialObjectDescriptor.html#InitialObjectDescriptor"/>
+<area shape="poly" coords="54,204,51,207,49,204,51,202,54,204,54,204" title="Complexity: 7; Coverage: 0%; Class: InitialObjectDescriptor" alt="" href="com/googlecode/mp4parser/boxes/mp4/objectdescriptors/InitialObjectDescriptor.html#InitialObjectDescriptor"/>
+<area shape="poly" coords="54,205,51,207,49,205,51,202,54,205,54,205" title="Complexity: 6; Coverage: 0%; Class: ExtensionDescriptor" alt="" href="com/googlecode/mp4parser/boxes/mp4/objectdescriptors/ExtensionDescriptor.html#ExtensionDescriptor"/>
+<area shape="poly" coords="134,162,132,164,129,162,132,159,134,162,134,162" title="Complexity: 69; Coverage: 33%; Class: ESDescriptor" alt="" href="com/googlecode/mp4parser/boxes/mp4/objectdescriptors/ESDescriptor.html#ESDescriptor"/>
+<area shape="poly" coords="169,199,166,202,164,199,166,197,169,199,169,199" title="Complexity: 14; Coverage: 47%; Class: DecoderSpecificInfo" alt="" href="com/googlecode/mp4parser/boxes/mp4/objectdescriptors/DecoderSpecificInfo.html#DecoderSpecificInfo"/>
+<area shape="poly" coords="227,185,225,188,222,185,225,183,227,185,227,185" title="Complexity: 35; Coverage: 71%; Class: DecoderConfigDescriptor" alt="" href="com/googlecode/mp4parser/boxes/mp4/objectdescriptors/DecoderConfigDescriptor.html#DecoderConfigDescriptor"/>
+<area shape="poly" coords="281,203,279,205,276,203,279,200,281,203,281,203" title="Complexity: 9; Coverage: 93%; Class: BitWriterBuffer" alt="" href="com/googlecode/mp4parser/boxes/mp4/objectdescriptors/BitWriterBuffer.html#BitWriterBuffer"/>
+<area shape="poly" coords="230,203,227,205,225,203,227,200,230,203,230,203" title="Complexity: 9; Coverage: 72%; Class: BitReaderBuffer" alt="" href="com/googlecode/mp4parser/boxes/mp4/objectdescriptors/BitReaderBuffer.html#BitReaderBuffer"/>
+<area shape="poly" coords="252,199,249,202,247,199,249,197,252,199,252,199" title="Complexity: 14; Coverage: 81%; Class: BaseDescriptor" alt="" href="com/googlecode/mp4parser/boxes/mp4/objectdescriptors/BaseDescriptor.html#BaseDescriptor"/>
+<area shape="poly" coords="54,207,51,209,49,207,51,204,54,207,54,207" title="Complexity: 3; Coverage: 0%; Class: AudioSpecificConfig.sbr_header" alt="" href="com/googlecode/mp4parser/boxes/mp4/objectdescriptors/AudioSpecificConfig.html#AudioSpecificConfig.sbr_header"/>
+<area shape="poly" coords="54,199,51,201,49,199,51,196,54,199,54,199" title="Complexity: 15; Coverage: 0%; Class: AudioSpecificConfig.ELDSpecificConfig" alt="" href="com/googlecode/mp4parser/boxes/mp4/objectdescriptors/AudioSpecificConfig.html#AudioSpecificConfig.ELDSpecificConfig"/>
+<area shape="poly" coords="107,18,105,20,102,18,105,15,107,18,107,18" title="Complexity: 280; Coverage: 22%; Class: AudioSpecificConfig" alt="" href="com/googlecode/mp4parser/boxes/mp4/objectdescriptors/AudioSpecificConfig.html#AudioSpecificConfig"/>
+<area shape="poly" coords="54,188,51,190,49,188,51,185,54,188,54,188" title="Complexity: 31; Coverage: 0%; Class: OneJpegPerIframe" alt="" href="com/googlecode/mp4parser/authoring/tracks/mjpeg/OneJpegPerIframe.html#OneJpegPerIframe"/>
+<area shape="poly" coords="267,204,264,207,262,204,264,202,267,204,267,204" title="Complexity: 7; Coverage: 87%; Class: Utf8AppleDataBox" alt="" href="com/googlecode/mp4parser/boxes/apple/Utf8AppleDataBox.html#Utf8AppleDataBox"/>
+<area shape="poly" coords="298,204,296,206,293,204,296,201,298,204,298,204" title="Complexity: 8; Coverage: 100%; Class: TrackProductionApertureDimensionsAtom" alt="" href="com/googlecode/mp4parser/boxes/apple/TrackProductionApertureDimensionsAtom.html#TrackProductionApertureDimensionsAtom"/>
+<area shape="poly" coords="117,201,115,203,112,201,115,198,117,201,117,201" title="Complexity: 12; Coverage: 26%; Class: TrackLoadSettingsAtom" alt="" href="com/googlecode/mp4parser/boxes/apple/TrackLoadSettingsAtom.html#TrackLoadSettingsAtom"/>
+<area shape="poly" coords="298,204,296,206,293,204,296,201,298,204,298,204" title="Complexity: 8; Coverage: 100%; Class: TrackProductionApertureDimensionsAtom" alt="" href="com/googlecode/mp4parser/boxes/apple/TrackProductionApertureDimensionsAtom.html#TrackProductionApertureDimensionsAtom"/>
+<area shape="poly" coords="54,208,51,211,49,208,51,206,54,208,54,208" title="Complexity: 1; Coverage: 0%; Class: TrackApertureModeDimensionAtom" alt="" href="com/googlecode/mp4parser/boxes/apple/TrackApertureModeDimensionAtom.html#TrackApertureModeDimensionAtom"/>
+<area shape="poly" coords="245,191,242,193,240,191,242,188,245,191,245,191" title="Complexity: 27; Coverage: 78%; Class: TimeCodeBox" alt="" href="com/googlecode/mp4parser/boxes/apple/TimeCodeBox.html#TimeCodeBox"/>
+<area shape="poly" coords="279,180,276,183,274,180,276,178,279,180,279,180" title="Complexity: 42; Coverage: 92%; Class: QuicktimeTextSampleEntry" alt="" href="com/googlecode/mp4parser/boxes/apple/QuicktimeTextSampleEntry.html#QuicktimeTextSampleEntry"/>
+<area shape="poly" coords="298,204,296,206,293,204,296,201,298,204,298,204" title="Complexity: 8; Coverage: 100%; Class: TrackProductionApertureDimensionsAtom" alt="" href="com/googlecode/mp4parser/boxes/apple/TrackProductionApertureDimensionsAtom.html#TrackProductionApertureDimensionsAtom"/>
+<area shape="poly" coords="127,194,125,196,122,194,125,191,127,194,127,194" title="Complexity: 22; Coverage: 30%; Class: GenericMediaHeaderTextAtom" alt="" href="com/googlecode/mp4parser/boxes/apple/GenericMediaHeaderTextAtom.html#GenericMediaHeaderTextAtom"/>
+<area shape="poly" coords="54,208,51,211,49,208,51,206,54,208,54,208" title="Complexity: 1; Coverage: 0%; Class: TrackApertureModeDimensionAtom" alt="" href="com/googlecode/mp4parser/boxes/apple/TrackApertureModeDimensionAtom.html#TrackApertureModeDimensionAtom"/>
+<area shape="poly" coords="298,204,296,206,293,204,296,201,298,204,298,204" title="Complexity: 8; Coverage: 100%; Class: TrackProductionApertureDimensionsAtom" alt="" href="com/googlecode/mp4parser/boxes/apple/TrackProductionApertureDimensionsAtom.html#TrackProductionApertureDimensionsAtom"/>
+<area shape="poly" coords="117,197,115,200,112,197,115,195,117,197,117,197" title="Complexity: 17; Coverage: 26%; Class: BaseMediaInfoAtom" alt="" href="com/googlecode/mp4parser/boxes/apple/BaseMediaInfoAtom.html#BaseMediaInfoAtom"/>
+<area shape="poly" coords="54,208,51,211,49,208,51,206,54,208,54,208" title="Complexity: 1; Coverage: 0%; Class: TrackApertureModeDimensionAtom" alt="" href="com/googlecode/mp4parser/boxes/apple/TrackApertureModeDimensionAtom.html#TrackApertureModeDimensionAtom"/>
+<area shape="poly" coords="298,208,296,211,293,208,296,206,298,208,298,208" title="Complexity: 1; Coverage: 100%; Class: Apple_geIDBox" alt="" href="com/googlecode/mp4parser/boxes/apple/Apple_geIDBox.html#Apple_geIDBox"/>
+<area shape="poly" coords="54,208,51,211,49,208,51,206,54,208,54,208" title="Complexity: 1; Coverage: 0%; Class: TrackApertureModeDimensionAtom" alt="" href="com/googlecode/mp4parser/boxes/apple/TrackApertureModeDimensionAtom.html#TrackApertureModeDimensionAtom"/>
+<area shape="poly" coords="54,208,51,211,49,208,51,206,54,208,54,208" title="Complexity: 1; Coverage: 0%; Class: TrackApertureModeDimensionAtom" alt="" href="com/googlecode/mp4parser/boxes/apple/TrackApertureModeDimensionAtom.html#TrackApertureModeDimensionAtom"/>
+<area shape="poly" coords="208,197,205,200,203,197,205,195,208,197,208,197" title="Complexity: 17; Coverage: 63%; Class: AppleVariableSignedIntegerBox" alt="" href="com/googlecode/mp4parser/boxes/apple/AppleVariableSignedIntegerBox.html#AppleVariableSignedIntegerBox"/>
+<area shape="poly" coords="54,204,51,206,49,204,51,201,54,204,54,204" title="Complexity: 8; Coverage: 0%; Class: AppleTrackNumberBox" alt="" href="com/googlecode/mp4parser/boxes/apple/AppleTrackNumberBox.html#AppleTrackNumberBox"/>
+<area shape="poly" coords="54,208,51,211,49,208,51,206,54,208,54,208" title="Complexity: 1; Coverage: 0%; Class: TrackApertureModeDimensionAtom" alt="" href="com/googlecode/mp4parser/boxes/apple/TrackApertureModeDimensionAtom.html#TrackApertureModeDimensionAtom"/>
+<area shape="poly" coords="54,208,51,211,49,208,51,206,54,208,54,208" title="Complexity: 1; Coverage: 0%; Class: TrackApertureModeDimensionAtom" alt="" href="com/googlecode/mp4parser/boxes/apple/TrackApertureModeDimensionAtom.html#TrackApertureModeDimensionAtom"/>
+<area shape="poly" coords="54,208,51,211,49,208,51,206,54,208,54,208" title="Complexity: 1; Coverage: 0%; Class: TrackApertureModeDimensionAtom" alt="" href="com/googlecode/mp4parser/boxes/apple/TrackApertureModeDimensionAtom.html#TrackApertureModeDimensionAtom"/>
+<area shape="poly" coords="54,208,51,211,49,208,51,206,54,208,54,208" title="Complexity: 1; Coverage: 0%; Class: TrackApertureModeDimensionAtom" alt="" href="com/googlecode/mp4parser/boxes/apple/TrackApertureModeDimensionAtom.html#TrackApertureModeDimensionAtom"/>
+<area shape="poly" coords="54,208,51,211,49,208,51,206,54,208,54,208" title="Complexity: 1; Coverage: 0%; Class: TrackApertureModeDimensionAtom" alt="" href="com/googlecode/mp4parser/boxes/apple/TrackApertureModeDimensionAtom.html#TrackApertureModeDimensionAtom"/>
+<area shape="poly" coords="54,208,51,211,49,208,51,206,54,208,54,208" title="Complexity: 1; Coverage: 0%; Class: TrackApertureModeDimensionAtom" alt="" href="com/googlecode/mp4parser/boxes/apple/TrackApertureModeDimensionAtom.html#TrackApertureModeDimensionAtom"/>
+<area shape="poly" coords="54,208,51,211,49,208,51,206,54,208,54,208" title="Complexity: 1; Coverage: 0%; Class: TrackApertureModeDimensionAtom" alt="" href="com/googlecode/mp4parser/boxes/apple/TrackApertureModeDimensionAtom.html#TrackApertureModeDimensionAtom"/>
+<area shape="poly" coords="54,208,51,211,49,208,51,206,54,208,54,208" title="Complexity: 1; Coverage: 0%; Class: TrackApertureModeDimensionAtom" alt="" href="com/googlecode/mp4parser/boxes/apple/TrackApertureModeDimensionAtom.html#TrackApertureModeDimensionAtom"/>
+<area shape="poly" coords="54,208,51,211,49,208,51,206,54,208,54,208" title="Complexity: 1; Coverage: 0%; Class: TrackApertureModeDimensionAtom" alt="" href="com/googlecode/mp4parser/boxes/apple/TrackApertureModeDimensionAtom.html#TrackApertureModeDimensionAtom"/>
+<area shape="poly" coords="54,203,51,205,49,203,51,200,54,203,54,203" title="Complexity: 9; Coverage: 0%; Class: AppleRecordingYearBox" alt="" href="com/googlecode/mp4parser/boxes/apple/AppleRecordingYearBox.html#AppleRecordingYearBox"/>
+<area shape="poly" coords="54,208,51,211,49,208,51,206,54,208,54,208" title="Complexity: 1; Coverage: 0%; Class: TrackApertureModeDimensionAtom" alt="" href="com/googlecode/mp4parser/boxes/apple/TrackApertureModeDimensionAtom.html#TrackApertureModeDimensionAtom"/>
+<area shape="poly" coords="54,208,51,211,49,208,51,206,54,208,54,208" title="Complexity: 1; Coverage: 0%; Class: TrackApertureModeDimensionAtom" alt="" href="com/googlecode/mp4parser/boxes/apple/TrackApertureModeDimensionAtom.html#TrackApertureModeDimensionAtom"/>
+<area shape="poly" coords="298,208,296,211,293,208,296,206,298,208,298,208" title="Complexity: 1; Coverage: 100%; Class: Apple_geIDBox" alt="" href="com/googlecode/mp4parser/boxes/apple/Apple_geIDBox.html#Apple_geIDBox"/>
+<area shape="poly" coords="54,208,51,211,49,208,51,206,54,208,54,208" title="Complexity: 1; Coverage: 0%; Class: TrackApertureModeDimensionAtom" alt="" href="com/googlecode/mp4parser/boxes/apple/TrackApertureModeDimensionAtom.html#TrackApertureModeDimensionAtom"/>
+<area shape="poly" coords="54,208,51,211,49,208,51,206,54,208,54,208" title="Complexity: 1; Coverage: 0%; Class: TrackApertureModeDimensionAtom" alt="" href="com/googlecode/mp4parser/boxes/apple/TrackApertureModeDimensionAtom.html#TrackApertureModeDimensionAtom"/>
+<area shape="poly" coords="54,208,51,211,49,208,51,206,54,208,54,208" title="Complexity: 1; Coverage: 0%; Class: TrackApertureModeDimensionAtom" alt="" href="com/googlecode/mp4parser/boxes/apple/TrackApertureModeDimensionAtom.html#TrackApertureModeDimensionAtom"/>
+<area shape="poly" coords="54,208,51,211,49,208,51,206,54,208,54,208" title="Complexity: 1; Coverage: 0%; Class: TrackApertureModeDimensionAtom" alt="" href="com/googlecode/mp4parser/boxes/apple/TrackApertureModeDimensionAtom.html#TrackApertureModeDimensionAtom"/>
+<area shape="poly" coords="54,208,51,211,49,208,51,206,54,208,54,208" title="Complexity: 1; Coverage: 0%; Class: TrackApertureModeDimensionAtom" alt="" href="com/googlecode/mp4parser/boxes/apple/TrackApertureModeDimensionAtom.html#TrackApertureModeDimensionAtom"/>
+<area shape="poly" coords="54,208,51,211,49,208,51,206,54,208,54,208" title="Complexity: 1; Coverage: 0%; Class: TrackApertureModeDimensionAtom" alt="" href="com/googlecode/mp4parser/boxes/apple/TrackApertureModeDimensionAtom.html#TrackApertureModeDimensionAtom"/>
+<area shape="poly" coords="54,208,51,211,49,208,51,206,54,208,54,208" title="Complexity: 1; Coverage: 0%; Class: TrackApertureModeDimensionAtom" alt="" href="com/googlecode/mp4parser/boxes/apple/TrackApertureModeDimensionAtom.html#TrackApertureModeDimensionAtom"/>
+<area shape="poly" coords="54,204,51,207,49,204,51,202,54,204,54,204" title="Complexity: 7; Coverage: 0%; Class: InitialObjectDescriptor" alt="" href="com/googlecode/mp4parser/boxes/mp4/objectdescriptors/InitialObjectDescriptor.html#InitialObjectDescriptor"/>
+<area shape="poly" coords="54,208,51,211,49,208,51,206,54,208,54,208" title="Complexity: 1; Coverage: 0%; Class: TrackApertureModeDimensionAtom" alt="" href="com/googlecode/mp4parser/boxes/apple/TrackApertureModeDimensionAtom.html#TrackApertureModeDimensionAtom"/>
+<area shape="poly" coords="54,204,51,206,49,204,51,201,54,204,54,204" title="Complexity: 8; Coverage: 0%; Class: AppleTrackNumberBox" alt="" href="com/googlecode/mp4parser/boxes/apple/AppleTrackNumberBox.html#AppleTrackNumberBox"/>
+<area shape="poly" coords="54,208,51,211,49,208,51,206,54,208,54,208" title="Complexity: 1; Coverage: 0%; Class: TrackApertureModeDimensionAtom" alt="" href="com/googlecode/mp4parser/boxes/apple/TrackApertureModeDimensionAtom.html#TrackApertureModeDimensionAtom"/>
+<area shape="poly" coords="262,198,259,201,257,198,259,196,262,198,262,198" title="Complexity: 16; Coverage: 85%; Class: AppleDataBox" alt="" href="com/googlecode/mp4parser/boxes/apple/AppleDataBox.html#AppleDataBox"/>
+<area shape="poly" coords="54,204,51,206,49,204,51,201,54,204,54,204" title="Complexity: 8; Coverage: 0%; Class: AppleTrackNumberBox" alt="" href="com/googlecode/mp4parser/boxes/apple/AppleTrackNumberBox.html#AppleTrackNumberBox"/>
+<area shape="poly" coords="54,208,51,211,49,208,51,206,54,208,54,208" title="Complexity: 1; Coverage: 0%; Class: TrackApertureModeDimensionAtom" alt="" href="com/googlecode/mp4parser/boxes/apple/TrackApertureModeDimensionAtom.html#TrackApertureModeDimensionAtom"/>
+<area shape="poly" coords="54,208,51,211,49,208,51,206,54,208,54,208" title="Complexity: 1; Coverage: 0%; Class: TrackApertureModeDimensionAtom" alt="" href="com/googlecode/mp4parser/boxes/apple/TrackApertureModeDimensionAtom.html#TrackApertureModeDimensionAtom"/>
+<area shape="poly" coords="54,208,51,211,49,208,51,206,54,208,54,208" title="Complexity: 1; Coverage: 0%; Class: TrackApertureModeDimensionAtom" alt="" href="com/googlecode/mp4parser/boxes/apple/TrackApertureModeDimensionAtom.html#TrackApertureModeDimensionAtom"/>
+<area shape="poly" coords="54,208,51,211,49,208,51,206,54,208,54,208" title="Complexity: 1; Coverage: 0%; Class: TrackApertureModeDimensionAtom" alt="" href="com/googlecode/mp4parser/boxes/apple/TrackApertureModeDimensionAtom.html#TrackApertureModeDimensionAtom"/>
+<area shape="poly" coords="54,208,51,211,49,208,51,206,54,208,54,208" title="Complexity: 1; Coverage: 0%; Class: TrackApertureModeDimensionAtom" alt="" href="com/googlecode/mp4parser/boxes/apple/TrackApertureModeDimensionAtom.html#TrackApertureModeDimensionAtom"/>
+<area shape="poly" coords="54,208,51,211,49,208,51,206,54,208,54,208" title="Complexity: 1; Coverage: 0%; Class: TrackApertureModeDimensionAtom" alt="" href="com/googlecode/mp4parser/boxes/apple/TrackApertureModeDimensionAtom.html#TrackApertureModeDimensionAtom"/>
+<area shape="poly" coords="54,208,51,211,49,208,51,206,54,208,54,208" title="Complexity: 1; Coverage: 0%; Class: TrackApertureModeDimensionAtom" alt="" href="com/googlecode/mp4parser/boxes/apple/TrackApertureModeDimensionAtom.html#TrackApertureModeDimensionAtom"/>
+<area shape="poly" coords="54,208,51,211,49,208,51,206,54,208,54,208" title="Complexity: 1; Coverage: 0%; Class: TrackApertureModeDimensionAtom" alt="" href="com/googlecode/mp4parser/boxes/apple/TrackApertureModeDimensionAtom.html#TrackApertureModeDimensionAtom"/>
+<area shape="poly" coords="54,207,51,209,49,207,51,204,54,207,54,207" title="Complexity: 3; Coverage: 0%; Class: AudioSpecificConfig.sbr_header" alt="" href="com/googlecode/mp4parser/boxes/mp4/objectdescriptors/AudioSpecificConfig.html#AudioSpecificConfig.sbr_header"/>
+<area shape="poly" coords="54,206,51,209,49,206,51,204,54,206,54,206" title="Complexity: 4; Coverage: 0%; Class: UnknownDescriptor" alt="" href="com/googlecode/mp4parser/boxes/mp4/objectdescriptors/UnknownDescriptor.html#UnknownDescriptor"/>
+<area shape="poly" coords="54,204,51,206,49,204,51,201,54,204,54,204" title="Complexity: 8; Coverage: 0%; Class: AppleTrackNumberBox" alt="" href="com/googlecode/mp4parser/boxes/apple/AppleTrackNumberBox.html#AppleTrackNumberBox"/>
+<area shape="poly" coords="54,204,51,207,49,204,51,202,54,204,54,204" title="Complexity: 7; Coverage: 0%; Class: InitialObjectDescriptor" alt="" href="com/googlecode/mp4parser/boxes/mp4/objectdescriptors/InitialObjectDescriptor.html#InitialObjectDescriptor"/>
+<area shape="poly" coords="54,204,51,207,49,204,51,202,54,204,54,204" title="Complexity: 7; Coverage: 0%; Class: InitialObjectDescriptor" alt="" href="com/googlecode/mp4parser/boxes/mp4/objectdescriptors/InitialObjectDescriptor.html#InitialObjectDescriptor"/>
+<area shape="poly" coords="54,206,51,209,49,206,51,204,54,206,54,206" title="Complexity: 4; Coverage: 0%; Class: UnknownDescriptor" alt="" href="com/googlecode/mp4parser/boxes/mp4/objectdescriptors/UnknownDescriptor.html#UnknownDescriptor"/>
+<area shape="poly" coords="134,205,132,207,129,205,132,202,134,205,134,205" title="Complexity: 6; Coverage: 33%; Class: WriteOnlyBox" alt="" href="com/mp4parser/streaming/WriteOnlyBox.html#WriteOnlyBox"/>
+<area shape="poly" coords="54,206,51,209,49,206,51,204,54,206,54,206" title="Complexity: 4; Coverage: 0%; Class: UnknownDescriptor" alt="" href="com/googlecode/mp4parser/boxes/mp4/objectdescriptors/UnknownDescriptor.html#UnknownDescriptor"/>
+<area shape="poly" coords="54,176,51,178,49,176,51,173,54,176,54,176" title="Complexity: 49; Coverage: 0%; Class: SingleTrackFragmentedMp4Writer" alt="" href="com/mp4parser/streaming/SingleTrackFragmentedMp4Writer.html#SingleTrackFragmentedMp4Writer"/>
+<area shape="poly" coords="54,206,51,208,49,206,51,203,54,206,54,206" title="Complexity: 5; Coverage: 0%; Class: MultiTrackFragmentedMp4Writer.ConsumeSamplesCallable" alt="" href="com/mp4parser/streaming/MultiTrackFragmentedMp4Writer.html#MultiTrackFragmentedMp4Writer.ConsumeSamplesCallable"/>
+<area shape="poly" coords="54,175,51,177,49,175,51,172,54,175,54,175" title="Complexity: 50; Coverage: 0%; Class: MultiTrackFragmentedMp4Writer" alt="" href="com/mp4parser/streaming/MultiTrackFragmentedMp4Writer.html#MultiTrackFragmentedMp4Writer"/>
+<area shape="poly" coords="54,204,51,206,49,204,51,201,54,204,54,204" title="Complexity: 8; Coverage: 0%; Class: AppleTrackNumberBox" alt="" href="com/googlecode/mp4parser/boxes/apple/AppleTrackNumberBox.html#AppleTrackNumberBox"/>
+<area shape="poly" coords="298,208,296,211,293,208,296,206,298,208,298,208" title="Complexity: 1; Coverage: 100%; Class: Apple_geIDBox" alt="" href="com/googlecode/mp4parser/boxes/apple/Apple_geIDBox.html#Apple_geIDBox"/>
+<area shape="poly" coords="269,197,267,199,264,197,267,194,269,197,269,197" title="Complexity: 18; Coverage: 88%; Class: ProtectionSystemSpecificHeaderBox" alt="" href="com/mp4parser/iso23001/part7/ProtectionSystemSpecificHeaderBox.html#ProtectionSystemSpecificHeaderBox"/>
+<area shape="poly" coords="181,204,178,207,176,204,178,202,181,204,181,204" title="Complexity: 7; Coverage: 52%; Class: CencSampleAuxiliaryDataFormat.AbstractPair" alt="" href="com/mp4parser/iso23001/part7/CencSampleAuxiliaryDataFormat.html#CencSampleAuxiliaryDataFormat.AbstractPair"/>
+<area shape="poly" coords="54,207,51,209,49,207,51,204,54,207,54,207" title="Complexity: 3; Coverage: 0%; Class: AudioSpecificConfig.sbr_header" alt="" href="com/googlecode/mp4parser/boxes/mp4/objectdescriptors/AudioSpecificConfig.html#AudioSpecificConfig.sbr_header"/>
+<area shape="poly" coords="54,207,51,209,49,207,51,204,54,207,54,207" title="Complexity: 3; Coverage: 0%; Class: AudioSpecificConfig.sbr_header" alt="" href="com/googlecode/mp4parser/boxes/mp4/objectdescriptors/AudioSpecificConfig.html#AudioSpecificConfig.sbr_header"/>
+<area shape="poly" coords="54,207,51,209,49,207,51,204,54,207,54,207" title="Complexity: 3; Coverage: 0%; Class: AudioSpecificConfig.sbr_header" alt="" href="com/googlecode/mp4parser/boxes/mp4/objectdescriptors/AudioSpecificConfig.html#AudioSpecificConfig.sbr_header"/>
+<area shape="poly" coords="54,207,51,209,49,207,51,204,54,207,54,207" title="Complexity: 3; Coverage: 0%; Class: AudioSpecificConfig.sbr_header" alt="" href="com/googlecode/mp4parser/boxes/mp4/objectdescriptors/AudioSpecificConfig.html#AudioSpecificConfig.sbr_header"/>
+<area shape="poly" coords="54,207,51,209,49,207,51,204,54,207,54,207" title="Complexity: 3; Coverage: 0%; Class: AudioSpecificConfig.sbr_header" alt="" href="com/googlecode/mp4parser/boxes/mp4/objectdescriptors/AudioSpecificConfig.html#AudioSpecificConfig.sbr_header"/>
+<area shape="poly" coords="54,207,51,209,49,207,51,204,54,207,54,207" title="Complexity: 3; Coverage: 0%; Class: AudioSpecificConfig.sbr_header" alt="" href="com/googlecode/mp4parser/boxes/mp4/objectdescriptors/AudioSpecificConfig.html#AudioSpecificConfig.sbr_header"/>
+<area shape="poly" coords="54,207,51,209,49,207,51,204,54,207,54,207" title="Complexity: 3; Coverage: 0%; Class: AudioSpecificConfig.sbr_header" alt="" href="com/googlecode/mp4parser/boxes/mp4/objectdescriptors/AudioSpecificConfig.html#AudioSpecificConfig.sbr_header"/>
+<area shape="poly" coords="298,207,296,209,293,207,296,204,298,207,298,207" title="Complexity: 3; Coverage: 100%; Class: CencSampleAuxiliaryDataFormat.ShortBytePair" alt="" href="com/mp4parser/iso23001/part7/CencSampleAuxiliaryDataFormat.html#CencSampleAuxiliaryDataFormat.ShortBytePair"/>
+<area shape="poly" coords="54,207,51,209,49,207,51,204,54,207,54,207" title="Complexity: 3; Coverage: 0%; Class: AudioSpecificConfig.sbr_header" alt="" href="com/googlecode/mp4parser/boxes/mp4/objectdescriptors/AudioSpecificConfig.html#AudioSpecificConfig.sbr_header"/>
+<area shape="poly" coords="298,207,296,209,293,207,296,204,298,207,298,207" title="Complexity: 3; Coverage: 100%; Class: CencSampleAuxiliaryDataFormat.ShortBytePair" alt="" href="com/mp4parser/iso23001/part7/CencSampleAuxiliaryDataFormat.html#CencSampleAuxiliaryDataFormat.ShortBytePair"/>
+<area shape="poly" coords="298,207,296,209,293,207,296,204,298,207,298,207" title="Complexity: 3; Coverage: 100%; Class: CencSampleAuxiliaryDataFormat.ShortBytePair" alt="" href="com/mp4parser/iso23001/part7/CencSampleAuxiliaryDataFormat.html#CencSampleAuxiliaryDataFormat.ShortBytePair"/>
+<area shape="poly" coords="298,207,296,209,293,207,296,204,298,207,298,207" title="Complexity: 3; Coverage: 100%; Class: CencSampleAuxiliaryDataFormat.ShortBytePair" alt="" href="com/mp4parser/iso23001/part7/CencSampleAuxiliaryDataFormat.html#CencSampleAuxiliaryDataFormat.ShortBytePair"/>
+<area shape="poly" coords="171,191,169,194,166,191,169,189,171,191,171,191" title="Complexity: 26; Coverage: 48%; Class: CencSampleAuxiliaryDataFormat" alt="" href="com/mp4parser/iso23001/part7/CencSampleAuxiliaryDataFormat.html#CencSampleAuxiliaryDataFormat"/>
+<area shape="poly" coords="240,183,237,186,235,183,237,181,240,183,240,183" title="Complexity: 38; Coverage: 76%; Class: FragmentedMp4SampleList" alt="" href="com/googlecode/mp4parser/authoring/samples/FragmentedMp4SampleList.html#FragmentedMp4SampleList"/>
+<area shape="poly" coords="230,204,227,206,225,204,227,201,230,204,230,204" title="Complexity: 8; Coverage: 72%; Class: DefaultMp4SampleList.SampleImpl" alt="" href="com/googlecode/mp4parser/authoring/samples/DefaultMp4SampleList.html#DefaultMp4SampleList.SampleImpl"/>
+<area shape="poly" coords="281,195,279,198,276,195,279,193,281,195,281,195" title="Complexity: 20; Coverage: 93%; Class: DefaultMp4SampleList" alt="" href="com/googlecode/mp4parser/authoring/samples/DefaultMp4SampleList.html#DefaultMp4SampleList"/>
+<area shape="poly" coords="54,208,51,210,49,208,51,205,54,208,54,208" title="Complexity: 2; Coverage: 0%; Class: Version" alt="" href="com/googlecode/mp4parser/Version.html#Version"/>
+<area shape="poly" coords="242,207,240,209,237,207,240,204,242,207,242,207" title="Complexity: 3; Coverage: 77%; Class: RequiresParseDetailAspect" alt="" href="com/googlecode/mp4parser/RequiresParseDetailAspect.html#RequiresParseDetailAspect"/>
+<area shape="poly" coords="137,197,134,200,132,197,134,195,137,197,137,197" title="Complexity: 17; Coverage: 34%; Class: MultiFileDataSourceImpl" alt="" href="com/googlecode/mp4parser/MultiFileDataSourceImpl.html#MultiFileDataSourceImpl"/>
+<area shape="poly" coords="242,201,240,203,237,201,240,198,242,201,242,201" title="Complexity: 12; Coverage: 77%; Class: MemoryDataSourceImpl" alt="" href="com/googlecode/mp4parser/MemoryDataSourceImpl.html#MemoryDataSourceImpl"/>
+<area shape="poly" coords="54,199,51,202,49,199,51,197,54,199,54,199" title="Complexity: 14; Coverage: 0%; Class: FullContainerBox" alt="" href="com/googlecode/mp4parser/FullContainerBox.html#FullContainerBox"/>
+<area shape="poly" coords="54,201,51,203,49,201,51,198,54,201,54,201" title="Complexity: 12; Coverage: 0%; Class: FileDataSourceViaHeapImpl" alt="" href="com/googlecode/mp4parser/FileDataSourceViaHeapImpl.html#FileDataSourceViaHeapImpl"/>
+<area shape="poly" coords="249,201,247,203,244,201,247,198,249,201,249,201" title="Complexity: 12; Coverage: 80%; Class: FileDataSourceImpl" alt="" href="com/googlecode/mp4parser/FileDataSourceImpl.html#FileDataSourceImpl"/>
+<area shape="poly" coords="203,199,200,202,198,199,200,197,203,199,203,199" title="Complexity: 14; Coverage: 61%; Class: DirectFileReadDataSource" alt="" href="com/googlecode/mp4parser/DirectFileReadDataSource.html#DirectFileReadDataSource"/>
+<area shape="poly" coords="281,172,279,175,276,172,279,170,281,172,281,172" title="Complexity: 54; Coverage: 93%; Class: BasicContainer" alt="" href="com/googlecode/mp4parser/BasicContainer.html#BasicContainer"/>
+<area shape="poly" coords="262,202,259,205,257,202,259,200,262,202,262,202" title="Complexity: 10; Coverage: 85%; Class: AbstractFullBox" alt="" href="com/googlecode/mp4parser/AbstractFullBox.html#AbstractFullBox"/>
+<area shape="poly" coords="264,198,262,201,259,198,262,196,264,198,264,198" title="Complexity: 16; Coverage: 86%; Class: AbstractContainerBox" alt="" href="com/googlecode/mp4parser/AbstractContainerBox.html#AbstractContainerBox"/>
+<area shape="poly" coords="223,181,220,183,218,181,220,178,223,181,223,181" title="Complexity: 41; Coverage: 69%; Class: AbstractBox" alt="" href="com/googlecode/mp4parser/AbstractBox.html#AbstractBox"/>
+<area shape="poly" coords="54,198,51,201,49,198,51,196,54,198,54,198" title="Complexity: 16; Coverage: 0%; Class: CAVLCWriter" alt="" href="com/googlecode/mp4parser/h264/write/CAVLCWriter.html#CAVLCWriter"/>
+<area shape="poly" coords="54,202,51,205,49,202,51,200,54,202,54,202" title="Complexity: 10; Coverage: 0%; Class: BitstreamWriter" alt="" href="com/googlecode/mp4parser/h264/write/BitstreamWriter.html#BitstreamWriter"/>
+<area shape="poly" coords="54,208,51,210,49,208,51,205,54,208,54,208" title="Complexity: 2; Coverage: 0%; Class: Version" alt="" href="com/googlecode/mp4parser/Version.html#Version"/>
+<area shape="poly" coords="54,197,51,199,49,197,51,194,54,197,54,197" title="Complexity: 18; Coverage: 0%; Class: SampleFlagsSampleExtension" alt="" href="com/mp4parser/streaming/extensions/SampleFlagsSampleExtension.html#SampleFlagsSampleExtension"/>
+<area shape="poly" coords="54,208,51,210,49,208,51,205,54,208,54,208" title="Complexity: 2; Coverage: 0%; Class: Version" alt="" href="com/googlecode/mp4parser/Version.html#Version"/>
+<area shape="poly" coords="54,207,51,209,49,207,51,204,54,207,54,207" title="Complexity: 3; Coverage: 0%; Class: AudioSpecificConfig.sbr_header" alt="" href="com/googlecode/mp4parser/boxes/mp4/objectdescriptors/AudioSpecificConfig.html#AudioSpecificConfig.sbr_header"/>
+<area shape="poly" coords="54,208,51,211,49,208,51,206,54,208,54,208" title="Complexity: 1; Coverage: 0%; Class: TrackApertureModeDimensionAtom" alt="" href="com/googlecode/mp4parser/boxes/apple/TrackApertureModeDimensionAtom.html#TrackApertureModeDimensionAtom"/>
+<area shape="poly" coords="54,208,51,211,49,208,51,206,54,208,54,208" title="Complexity: 1; Coverage: 0%; Class: TrackApertureModeDimensionAtom" alt="" href="com/googlecode/mp4parser/boxes/apple/TrackApertureModeDimensionAtom.html#TrackApertureModeDimensionAtom"/>
+<area shape="poly" coords="54,208,51,211,49,208,51,206,54,208,54,208" title="Complexity: 1; Coverage: 0%; Class: TrackApertureModeDimensionAtom" alt="" href="com/googlecode/mp4parser/boxes/apple/TrackApertureModeDimensionAtom.html#TrackApertureModeDimensionAtom"/>
+<area shape="poly" coords="54,191,51,194,49,191,51,189,54,191,54,191" title="Complexity: 26; Coverage: 0%; Class: AppleLosslessSpecificBox" alt="" href="com/coremedia/iso/boxes/apple/AppleLosslessSpecificBox.html#AppleLosslessSpecificBox"/>
+<area shape="poly" coords="54,208,51,211,49,208,51,206,54,208,54,208" title="Complexity: 1; Coverage: 0%; Class: TrackApertureModeDimensionAtom" alt="" href="com/googlecode/mp4parser/boxes/apple/TrackApertureModeDimensionAtom.html#TrackApertureModeDimensionAtom"/>
+<area shape="poly" coords="54,204,51,207,49,204,51,202,54,204,54,204" title="Complexity: 7; Coverage: 0%; Class: InitialObjectDescriptor" alt="" href="com/googlecode/mp4parser/boxes/mp4/objectdescriptors/InitialObjectDescriptor.html#InitialObjectDescriptor"/>
+<area shape="poly" coords="54,206,51,208,49,206,51,203,54,206,54,206" title="Complexity: 5; Coverage: 0%; Class: MultiTrackFragmentedMp4Writer.ConsumeSamplesCallable" alt="" href="com/mp4parser/streaming/MultiTrackFragmentedMp4Writer.html#MultiTrackFragmentedMp4Writer.ConsumeSamplesCallable"/>
+<area shape="poly" coords="298,207,296,209,293,207,296,204,298,207,298,207" title="Complexity: 3; Coverage: 100%; Class: CencSampleAuxiliaryDataFormat.ShortBytePair" alt="" href="com/mp4parser/iso23001/part7/CencSampleAuxiliaryDataFormat.html#CencSampleAuxiliaryDataFormat.ShortBytePair"/>
+<area shape="poly" coords="164,193,161,196,159,193,161,191,164,193,164,193" title="Complexity: 23; Coverage: 45%; Class: VTTCueBox" alt="" href="com/googlecode/mp4parser/authoring/tracks/webvtt/sampleboxes/VTTCueBox.html#VTTCueBox"/>
+<area shape="poly" coords="54,208,51,211,49,208,51,206,54,208,54,208" title="Complexity: 1; Coverage: 0%; Class: TrackApertureModeDimensionAtom" alt="" href="com/googlecode/mp4parser/boxes/apple/TrackApertureModeDimensionAtom.html#TrackApertureModeDimensionAtom"/>
+<area shape="poly" coords="54,208,51,211,49,208,51,206,54,208,54,208" title="Complexity: 1; Coverage: 0%; Class: TrackApertureModeDimensionAtom" alt="" href="com/googlecode/mp4parser/boxes/apple/TrackApertureModeDimensionAtom.html#TrackApertureModeDimensionAtom"/>
+<area shape="poly" coords="54,208,51,211,49,208,51,206,54,208,54,208" title="Complexity: 1; Coverage: 0%; Class: TrackApertureModeDimensionAtom" alt="" href="com/googlecode/mp4parser/boxes/apple/TrackApertureModeDimensionAtom.html#TrackApertureModeDimensionAtom"/>
+<area shape="poly" coords="54,208,51,211,49,208,51,206,54,208,54,208" title="Complexity: 1; Coverage: 0%; Class: TrackApertureModeDimensionAtom" alt="" href="com/googlecode/mp4parser/boxes/apple/TrackApertureModeDimensionAtom.html#TrackApertureModeDimensionAtom"/>
+<area shape="poly" coords="298,208,296,211,293,208,296,206,298,208,298,208" title="Complexity: 1; Coverage: 100%; Class: Apple_geIDBox" alt="" href="com/googlecode/mp4parser/boxes/apple/Apple_geIDBox.html#Apple_geIDBox"/>
+<area shape="poly" coords="54,208,51,211,49,208,51,206,54,208,54,208" title="Complexity: 1; Coverage: 0%; Class: TrackApertureModeDimensionAtom" alt="" href="com/googlecode/mp4parser/boxes/apple/TrackApertureModeDimensionAtom.html#TrackApertureModeDimensionAtom"/>
+<area shape="poly" coords="262,206,259,208,257,206,259,203,262,206,262,206" title="Complexity: 5; Coverage: 85%; Class: AbstractCueBox" alt="" href="com/googlecode/mp4parser/authoring/tracks/webvtt/sampleboxes/AbstractCueBox.html#AbstractCueBox"/>
+<area shape="poly" coords="54,200,51,203,49,200,51,198,54,200,54,200" title="Complexity: 13; Coverage: 0%; Class: AvcNalUnitStorageBox" alt="" href="com/googlecode/mp4parser/boxes/basemediaformat/AvcNalUnitStorageBox.html#AvcNalUnitStorageBox"/>
+<area shape="poly" coords="286,205,284,207,281,205,284,202,286,205,286,205" title="Complexity: 6; Coverage: 95%; Class: ActionMessageFormat0SampleEntryBox" alt="" href="com/googlecode/mp4parser/boxes/adobe/ActionMessageFormat0SampleEntryBox.html#ActionMessageFormat0SampleEntryBox"/>
+<area shape="poly" coords="267,204,264,207,262,204,264,202,267,204,267,204" title="Complexity: 7; Coverage: 87%; Class: Utf8AppleDataBox" alt="" href="com/googlecode/mp4parser/boxes/apple/Utf8AppleDataBox.html#Utf8AppleDataBox"/>
+<area shape="poly" coords="289,192,286,194,284,192,286,189,289,192,289,192" title="Complexity: 25; Coverage: 96%; Class: SampleAuxiliaryInformationSizesBox" alt="" href="com/mp4parser/iso14496/part12/SampleAuxiliaryInformationSizesBox.html#SampleAuxiliaryInformationSizesBox"/>
+<area shape="poly" coords="298,197,296,200,293,197,296,195,298,197,298,197" title="Complexity: 17; Coverage: 100%; Class: SampleAuxiliaryInformationOffsetsBox" alt="" href="com/mp4parser/iso14496/part12/SampleAuxiliaryInformationOffsetsBox.html#SampleAuxiliaryInformationOffsetsBox"/>
+<area shape="poly" coords="289,204,286,206,284,204,286,201,289,204,289,204" title="Complexity: 8; Coverage: 96%; Class: HintSampleEntry" alt="" href="com/mp4parser/iso14496/part12/HintSampleEntry.html#HintSampleEntry"/>
+<area shape="poly" coords="298,202,296,205,293,202,296,200,298,202,298,202" title="Complexity: 10; Coverage: 100%; Class: BitRateBox" alt="" href="com/mp4parser/iso14496/part12/BitRateBox.html#BitRateBox"/>
+<area shape="poly" coords="66,196,63,199,61,196,63,194,66,196,66,196" title="Complexity: 19; Coverage: 5%; Class: Debug" alt="" href="com/googlecode/mp4parser/h264/Debug.html#Debug"/>
+<area shape="poly" coords="198,204,196,206,193,204,196,201,198,204,198,204" title="Complexity: 8; Coverage: 59%; Class: CharCache" alt="" href="com/googlecode/mp4parser/h264/CharCache.html#CharCache"/>
+<area shape="poly" coords="54,204,51,206,49,204,51,201,54,204,54,204" title="Complexity: 8; Coverage: 0%; Class: AppleTrackNumberBox" alt="" href="com/googlecode/mp4parser/boxes/apple/AppleTrackNumberBox.html#AppleTrackNumberBox"/>
+<area shape="poly" coords="54,208,51,211,49,208,51,206,54,208,54,208" title="Complexity: 1; Coverage: 0%; Class: TrackApertureModeDimensionAtom" alt="" href="com/googlecode/mp4parser/boxes/apple/TrackApertureModeDimensionAtom.html#TrackApertureModeDimensionAtom"/>
+<area shape="poly" coords="210,199,208,201,205,199,208,196,210,199,210,199" title="Complexity: 15; Coverage: 64%; Class: ESDescriptorBox" alt="" href="com/googlecode/mp4parser/boxes/mp4/ESDescriptorBox.html#ESDescriptorBox"/>
+<area shape="poly" coords="205,201,203,204,200,201,203,199,205,201,205,201" title="Complexity: 11; Coverage: 62%; Class: AbstractDescriptorBox" alt="" href="com/googlecode/mp4parser/boxes/mp4/AbstractDescriptorBox.html#AbstractDescriptorBox"/>
+<area shape="poly" coords="298,191,296,194,293,191,296,189,298,191,298,191" title="Complexity: 26; Coverage: 100%; Class: TierInfoBox" alt="" href="com/mp4parser/iso14496/part15/TierInfoBox.html#TierInfoBox"/>
+<area shape="poly" coords="298,198,296,201,293,198,296,196,298,198,298,198" title="Complexity: 16; Coverage: 100%; Class: TierBitRateBox" alt="" href="com/mp4parser/iso14496/part15/TierBitRateBox.html#TierBitRateBox"/>
+<area shape="poly" coords="181,204,178,206,176,204,178,201,181,204,181,204" title="Complexity: 8; Coverage: 52%; Class: TemporalSubLayerSampleGroup" alt="" href="com/mp4parser/iso14496/part15/TemporalSubLayerSampleGroup.html#TemporalSubLayerSampleGroup"/>
+<area shape="poly" coords="183,178,181,181,178,178,181,176,183,178,183,178" title="Complexity: 45; Coverage: 53%; Class: TemporalLayerSampleGroup" alt="" href="com/mp4parser/iso14496/part15/TemporalLayerSampleGroup.html#TemporalLayerSampleGroup"/>
+<area shape="poly" coords="183,199,181,201,178,199,181,196,183,199,183,199" title="Complexity: 15; Coverage: 53%; Class: SyncSampleEntry" alt="" href="com/mp4parser/iso14496/part15/SyncSampleEntry.html#SyncSampleEntry"/>
+<area shape="poly" coords="181,204,178,206,176,204,178,201,181,204,181,204" title="Complexity: 8; Coverage: 52%; Class: TemporalSubLayerSampleGroup" alt="" href="com/mp4parser/iso14496/part15/TemporalSubLayerSampleGroup.html#TemporalSubLayerSampleGroup"/>
+<area shape="poly" coords="298,201,296,203,293,201,296,198,298,201,298,201" title="Complexity: 12; Coverage: 100%; Class: PriotityRangeBox" alt="" href="com/mp4parser/iso14496/part15/PriotityRangeBox.html#PriotityRangeBox"/>
+<area shape="poly" coords="169,197,166,200,164,197,166,195,169,197,169,197" title="Complexity: 17; Coverage: 47%; Class: HevcDecoderConfigurationRecord.Array" alt="" href="com/mp4parser/iso14496/part15/HevcDecoderConfigurationRecord.html#HevcDecoderConfigurationRecord.Array"/>
+<area shape="poly" coords="164,143,161,146,159,143,161,141,164,143,164,143" title="Complexity: 96; Coverage: 45%; Class: HevcDecoderConfigurationRecord" alt="" href="com/mp4parser/iso14496/part15/HevcDecoderConfigurationRecord.html#HevcDecoderConfigurationRecord"/>
+<area shape="poly" coords="83,187,80,190,78,187,80,185,83,187,83,187" title="Complexity: 32; Coverage: 12%; Class: HevcConfigurationBox" alt="" href="com/mp4parser/iso14496/part15/HevcConfigurationBox.html#HevcConfigurationBox"/>
+<area shape="poly" coords="208,188,205,190,203,188,205,185,208,188,208,188" title="Complexity: 31; Coverage: 63%; Class: AvcDecoderConfigurationRecord" alt="" href="com/mp4parser/iso14496/part15/AvcDecoderConfigurationRecord.html#AvcDecoderConfigurationRecord"/>
+<area shape="poly" coords="274,187,271,190,269,187,271,185,274,187,274,187" title="Complexity: 32; Coverage: 90%; Class: AvcConfigurationBox" alt="" href="com/mp4parser/iso14496/part15/AvcConfigurationBox.html#AvcConfigurationBox"/>
+<area shape="poly" coords="54,197,51,200,49,197,51,195,54,197,54,197" title="Complexity: 17; Coverage: 0%; Class: VisualRandomAccessEntry" alt="" href="com/googlecode/mp4parser/boxes/mp4/samplegrouping/VisualRandomAccessEntry.html#VisualRandomAccessEntry"/>
+<area shape="poly" coords="54,199,51,201,49,199,51,196,54,199,54,199" title="Complexity: 15; Coverage: 0%; Class: AudioSpecificConfig.ELDSpecificConfig" alt="" href="com/googlecode/mp4parser/boxes/mp4/objectdescriptors/AudioSpecificConfig.html#AudioSpecificConfig.ELDSpecificConfig"/>
+<area shape="poly" coords="54,199,51,201,49,199,51,196,54,199,54,199" title="Complexity: 15; Coverage: 0%; Class: AudioSpecificConfig.ELDSpecificConfig" alt="" href="com/googlecode/mp4parser/boxes/mp4/objectdescriptors/AudioSpecificConfig.html#AudioSpecificConfig.ELDSpecificConfig"/>
+<area shape="poly" coords="188,200,186,203,183,200,186,198,188,200,188,200" title="Complexity: 13; Coverage: 55%; Class: SampleToGroupBox.Entry" alt="" href="com/googlecode/mp4parser/boxes/mp4/samplegrouping/SampleToGroupBox.html#SampleToGroupBox.Entry"/>
+<area shape="poly" coords="298,199,296,202,293,199,296,197,298,199,298,199" title="Complexity: 14; Coverage: 100%; Class: SampleToGroupBox" alt="" href="com/googlecode/mp4parser/boxes/mp4/samplegrouping/SampleToGroupBox.html#SampleToGroupBox"/>
+<area shape="poly" coords="203,180,200,183,198,180,200,178,203,180,203,180" title="Complexity: 42; Coverage: 61%; Class: SampleGroupDescriptionBox" alt="" href="com/googlecode/mp4parser/boxes/mp4/samplegrouping/SampleGroupDescriptionBox.html#SampleGroupDescriptionBox"/>
+<area shape="poly" coords="54,201,51,204,49,201,51,199,54,201,54,201" title="Complexity: 11; Coverage: 0%; Class: ProfileLevelIndicationDescriptor" alt="" href="com/googlecode/mp4parser/boxes/mp4/objectdescriptors/ProfileLevelIndicationDescriptor.html#ProfileLevelIndicationDescriptor"/>
+<area shape="poly" coords="54,200,51,203,49,200,51,198,54,200,54,200" title="Complexity: 13; Coverage: 0%; Class: AvcNalUnitStorageBox" alt="" href="com/googlecode/mp4parser/boxes/basemediaformat/AvcNalUnitStorageBox.html#AvcNalUnitStorageBox"/>
+<area shape="poly" coords="54,187,51,190,49,187,51,185,54,187,54,187" title="Complexity: 32; Coverage: 0%; Class: RateShareEntry" alt="" href="com/googlecode/mp4parser/boxes/mp4/samplegrouping/RateShareEntry.html#RateShareEntry"/>
+<area shape="poly" coords="298,208,296,211,293,208,296,206,298,208,298,208" title="Complexity: 1; Coverage: 100%; Class: Apple_geIDBox" alt="" href="com/googlecode/mp4parser/boxes/apple/Apple_geIDBox.html#Apple_geIDBox"/>
+<area shape="poly" coords="245,193,242,196,240,193,242,191,245,193,245,193" title="Complexity: 23; Coverage: 78%; Class: CencSampleEncryptionInformationGroupEntry" alt="" href="com/googlecode/mp4parser/boxes/mp4/samplegrouping/CencSampleEncryptionInformationGroupEntry.html#CencSampleEncryptionInformationGroupEntry"/>
+<area shape="poly" coords="276,201,274,204,271,201,274,199,276,201,276,201" title="Complexity: 11; Coverage: 91%; Class: TrackRunBox.Entry" alt="" href="com/coremedia/iso/boxes/fragment/TrackRunBox.html#TrackRunBox.Entry"/>
+<area shape="poly" coords="259,173,257,175,254,173,257,170,259,173,259,173" title="Complexity: 53; Coverage: 84%; Class: TrackRunBox" alt="" href="com/coremedia/iso/boxes/fragment/TrackRunBox.html#TrackRunBox"/>
+<area shape="poly" coords="139,193,137,196,134,193,137,191,139,193,139,193" title="Complexity: 23; Coverage: 35%; Class: TrackFragmentRandomAccessBox.Entry" alt="" href="com/coremedia/iso/boxes/fragment/TrackFragmentRandomAccessBox.html#TrackFragmentRandomAccessBox.Entry"/>
+<area shape="poly" coords="267,195,264,197,262,195,264,192,267,195,267,195" title="Complexity: 21; Coverage: 87%; Class: TrackFragmentRandomAccessBox" alt="" href="com/coremedia/iso/boxes/fragment/TrackFragmentRandomAccessBox.html#TrackFragmentRandomAccessBox"/>
+<area shape="poly" coords="166,176,164,178,161,176,164,173,166,176,166,176" title="Complexity: 49; Coverage: 46%; Class: TrackFragmentHeaderBox" alt="" href="com/coremedia/iso/boxes/fragment/TrackFragmentHeaderBox.html#TrackFragmentHeaderBox"/>
+<area shape="poly" coords="242,207,240,209,237,207,240,204,242,207,242,207" title="Complexity: 3; Coverage: 77%; Class: RequiresParseDetailAspect" alt="" href="com/googlecode/mp4parser/RequiresParseDetailAspect.html#RequiresParseDetailAspect"/>
+<area shape="poly" coords="166,202,164,205,161,202,164,200,166,202,166,202" title="Complexity: 10; Coverage: 46%; Class: TrackFragmentBaseMediaDecodeTimeBox" alt="" href="com/coremedia/iso/boxes/fragment/TrackFragmentBaseMediaDecodeTimeBox.html#TrackFragmentBaseMediaDecodeTimeBox"/>
+<area shape="poly" coords="249,199,247,201,244,199,247,196,249,199,249,199" title="Complexity: 15; Coverage: 80%; Class: TrackExtendsBox" alt="" href="com/coremedia/iso/boxes/fragment/TrackExtendsBox.html#TrackExtendsBox"/>
+<area shape="poly" coords="54,200,51,203,49,200,51,198,54,200,54,200" title="Complexity: 13; Coverage: 0%; Class: AvcNalUnitStorageBox" alt="" href="com/googlecode/mp4parser/boxes/basemediaformat/AvcNalUnitStorageBox.html#AvcNalUnitStorageBox"/>
+<area shape="poly" coords="215,185,213,188,210,185,213,183,215,185,215,185" title="Complexity: 35; Coverage: 66%; Class: SampleFlags" alt="" href="com/coremedia/iso/boxes/fragment/SampleFlags.html#SampleFlags"/>
+<area shape="poly" coords="210,205,208,207,205,205,208,202,210,205,210,205" title="Complexity: 6; Coverage: 64%; Class: MovieFragmentRandomAccessOffsetBox" alt="" href="com/coremedia/iso/boxes/fragment/MovieFragmentRandomAccessOffsetBox.html#MovieFragmentRandomAccessOffsetBox"/>
+<area shape="poly" coords="298,208,296,211,293,208,296,206,298,208,298,208" title="Complexity: 1; Coverage: 100%; Class: Apple_geIDBox" alt="" href="com/googlecode/mp4parser/boxes/apple/Apple_geIDBox.html#Apple_geIDBox"/>
+<area shape="poly" coords="191,204,188,207,186,204,188,202,191,204,191,204" title="Complexity: 7; Coverage: 56%; Class: MovieFragmentHeaderBox" alt="" href="com/coremedia/iso/boxes/fragment/MovieFragmentHeaderBox.html#MovieFragmentHeaderBox"/>
+<area shape="poly" coords="85,203,83,205,80,203,83,200,85,203,85,203" title="Complexity: 9; Coverage: 13%; Class: MovieFragmentBox" alt="" href="com/coremedia/iso/boxes/fragment/MovieFragmentBox.html#MovieFragmentBox"/>
+<area shape="poly" coords="208,203,205,205,203,203,205,200,208,203,208,203" title="Complexity: 9; Coverage: 63%; Class: MovieExtendsHeaderBox" alt="" href="com/coremedia/iso/boxes/fragment/MovieExtendsHeaderBox.html#MovieExtendsHeaderBox"/>
+<area shape="poly" coords="298,208,296,211,293,208,296,206,298,208,298,208" title="Complexity: 1; Coverage: 100%; Class: Apple_geIDBox" alt="" href="com/googlecode/mp4parser/boxes/apple/Apple_geIDBox.html#Apple_geIDBox"/>
+<area shape="poly" coords="262,183,259,186,257,183,259,181,262,183,262,183" title="Complexity: 38; Coverage: 85%; Class: VisualSampleEntry" alt="" href="com/coremedia/iso/boxes/sampleentry/VisualSampleEntry.html#VisualSampleEntry"/>
+<area shape="poly" coords="147,197,144,200,142,197,144,195,147,197,147,197" title="Complexity: 17; Coverage: 38%; Class: TextSampleEntry.StyleRecord" alt="" href="com/coremedia/iso/boxes/sampleentry/TextSampleEntry.html#TextSampleEntry.StyleRecord"/>
+<area shape="poly" coords="164,199,161,202,159,199,161,197,164,199,164,199" title="Complexity: 14; Coverage: 45%; Class: TextSampleEntry.BoxRecord" alt="" href="com/coremedia/iso/boxes/sampleentry/TextSampleEntry.html#TextSampleEntry.BoxRecord"/>
+<area shape="poly" coords="142,184,139,186,137,184,139,181,142,184,142,184" title="Complexity: 37; Coverage: 36%; Class: TextSampleEntry" alt="" href="com/coremedia/iso/boxes/sampleentry/TextSampleEntry.html#TextSampleEntry"/>
+<area shape="poly" coords="289,204,286,206,284,204,286,201,289,204,289,204" title="Complexity: 8; Coverage: 96%; Class: HintSampleEntry" alt="" href="com/mp4parser/iso14496/part12/HintSampleEntry.html#HintSampleEntry"/>
+<area shape="poly" coords="269,204,267,206,264,204,267,201,269,204,269,204" title="Complexity: 8; Coverage: 88%; Class: MpegSampleEntry" alt="" href="com/coremedia/iso/boxes/sampleentry/MpegSampleEntry.html#MpegSampleEntry"/>
+<area shape="poly" coords="249,170,247,173,244,170,247,168,249,170,249,170" title="Complexity: 57; Coverage: 80%; Class: AudioSampleEntry" alt="" href="com/coremedia/iso/boxes/sampleentry/AudioSampleEntry.html#AudioSampleEntry"/>
+<area shape="poly" coords="298,202,296,205,293,202,296,200,298,202,298,202" title="Complexity: 10; Coverage: 100%; Class: BitRateBox" alt="" href="com/mp4parser/iso14496/part12/BitRateBox.html#BitRateBox"/>
+<area shape="poly" coords="298,207,296,209,293,207,296,204,298,207,298,207" title="Complexity: 3; Coverage: 100%; Class: CencSampleAuxiliaryDataFormat.ShortBytePair" alt="" href="com/mp4parser/iso23001/part7/CencSampleAuxiliaryDataFormat.html#CencSampleAuxiliaryDataFormat.ShortBytePair"/>
+<area shape="poly" coords="174,180,171,182,169,180,171,177,174,180,174,180" title="Complexity: 43; Coverage: 49%; Class: SyncSampleIntersectFinderImpl" alt="" href="com/googlecode/mp4parser/authoring/builder/SyncSampleIntersectFinderImpl.html#SyncSampleIntersectFinderImpl"/>
+<area shape="poly" coords="298,208,296,210,293,208,296,205,298,208,298,208" title="Complexity: 2; Coverage: 100%; Class: StaticFragmentIntersectionFinderImpl" alt="" href="com/googlecode/mp4parser/authoring/builder/StaticFragmentIntersectionFinderImpl.html#StaticFragmentIntersectionFinderImpl"/>
+<area shape="poly" coords="254,204,252,206,249,204,252,201,254,204,254,204" title="Complexity: 8; Coverage: 82%; Class: FragmentedMp4Builder.Mdat" alt="" href="com/googlecode/mp4parser/authoring/builder/FragmentedMp4Builder.html#FragmentedMp4Builder.Mdat"/>
+<area shape="poly" coords="274,135,271,138,269,135,271,133,274,135,274,135" title="Complexity: 108; Coverage: 90%; Class: FragmentedMp4Builder" alt="" href="com/googlecode/mp4parser/authoring/builder/FragmentedMp4Builder.html#FragmentedMp4Builder"/>
+<area shape="poly" coords="279,195,276,197,274,195,276,192,279,195,279,195" title="Complexity: 21; Coverage: 92%; Class: DefaultMp4Builder.InterleaveChunkMdat" alt="" href="com/googlecode/mp4parser/authoring/builder/DefaultMp4Builder.html#DefaultMp4Builder.InterleaveChunkMdat"/>
+<area shape="poly" coords="281,156,279,158,276,156,279,153,281,156,281,156" title="Complexity: 78; Coverage: 93%; Class: DefaultMp4Builder" alt="" href="com/googlecode/mp4parser/authoring/builder/DefaultMp4Builder.html#DefaultMp4Builder"/>
+<area shape="poly" coords="279,203,276,205,274,203,276,200,279,203,279,203" title="Complexity: 9; Coverage: 92%; Class: DefaultFragmenterImpl" alt="" href="com/googlecode/mp4parser/authoring/builder/DefaultFragmenterImpl.html#DefaultFragmenterImpl"/>
+<area shape="poly" coords="54,202,51,205,49,202,51,200,54,202,54,202" title="Complexity: 10; Coverage: 0%; Class: BitstreamWriter" alt="" href="com/googlecode/mp4parser/h264/write/BitstreamWriter.html#BitstreamWriter"/>
+<area shape="poly" coords="289,199,286,202,284,199,286,197,289,199,289,199" title="Complexity: 14; Coverage: 96%; Class: BetterFragmenter" alt="" href="com/googlecode/mp4parser/authoring/builder/BetterFragmenter.html#BetterFragmenter"/>
+<area shape="poly" coords="267,204,264,207,262,204,264,202,267,204,267,204" title="Complexity: 7; Coverage: 87%; Class: Utf8AppleDataBox" alt="" href="com/googlecode/mp4parser/boxes/apple/Utf8AppleDataBox.html#Utf8AppleDataBox"/>
+<area shape="poly" coords="262,202,259,205,257,202,259,200,262,202,262,202" title="Complexity: 10; Coverage: 85%; Class: AbstractFullBox" alt="" href="com/googlecode/mp4parser/AbstractFullBox.html#AbstractFullBox"/>
+<area shape="poly" coords="298,207,296,209,293,207,296,204,298,207,298,207" title="Complexity: 3; Coverage: 100%; Class: CencSampleAuxiliaryDataFormat.ShortBytePair" alt="" href="com/mp4parser/iso23001/part7/CencSampleAuxiliaryDataFormat.html#CencSampleAuxiliaryDataFormat.ShortBytePair"/>
+<area shape="poly" coords="54,204,51,207,49,204,51,202,54,204,54,204" title="Complexity: 7; Coverage: 0%; Class: InitialObjectDescriptor" alt="" href="com/googlecode/mp4parser/boxes/mp4/objectdescriptors/InitialObjectDescriptor.html#InitialObjectDescriptor"/>
+<area shape="poly" coords="267,204,264,207,262,204,264,202,267,204,267,204" title="Complexity: 7; Coverage: 87%; Class: Utf8AppleDataBox" alt="" href="com/googlecode/mp4parser/boxes/apple/Utf8AppleDataBox.html#Utf8AppleDataBox"/>
+<area shape="poly" coords="298,208,296,211,293,208,296,206,298,208,298,208" title="Complexity: 1; Coverage: 100%; Class: Apple_geIDBox" alt="" href="com/googlecode/mp4parser/boxes/apple/Apple_geIDBox.html#Apple_geIDBox"/>
+<area shape="poly" coords="274,179,271,181,269,179,271,176,274,179,274,179" title="Complexity: 44; Coverage: 90%; Class: TrackHeaderBox" alt="" href="com/coremedia/iso/boxes/TrackHeaderBox.html#TrackHeaderBox"/>
+<area shape="poly" coords="235,202,232,205,230,202,232,200,235,202,235,202" title="Complexity: 10; Coverage: 74%; Class: TrackBox" alt="" href="com/coremedia/iso/boxes/TrackBox.html#TrackBox"/>
+<area shape="poly" coords="54,203,51,205,49,203,51,200,54,203,54,203" title="Complexity: 9; Coverage: 0%; Class: AppleRecordingYearBox" alt="" href="com/googlecode/mp4parser/boxes/apple/AppleRecordingYearBox.html#AppleRecordingYearBox"/>
+<area shape="poly" coords="223,205,220,207,218,205,220,202,223,205,223,205" title="Complexity: 6; Coverage: 69%; Class: TimeToSampleBox.Entry" alt="" href="com/coremedia/iso/boxes/TimeToSampleBox.html#TimeToSampleBox.Entry"/>
+<area shape="poly" coords="257,200,254,203,252,200,254,198,257,200,257,200" title="Complexity: 13; Coverage: 83%; Class: TimeToSampleBox" alt="" href="com/coremedia/iso/boxes/TimeToSampleBox.html#TimeToSampleBox"/>
+<area shape="poly" coords="298,204,296,206,293,204,296,201,298,204,298,204" title="Complexity: 8; Coverage: 100%; Class: TrackProductionApertureDimensionsAtom" alt="" href="com/googlecode/mp4parser/boxes/apple/TrackProductionApertureDimensionsAtom.html#TrackProductionApertureDimensionsAtom"/>
+<area shape="poly" coords="54,206,51,208,49,206,51,203,54,206,54,206" title="Complexity: 5; Coverage: 0%; Class: MultiTrackFragmentedMp4Writer.ConsumeSamplesCallable" alt="" href="com/mp4parser/streaming/MultiTrackFragmentedMp4Writer.html#MultiTrackFragmentedMp4Writer.ConsumeSamplesCallable"/>
+<area shape="poly" coords="54,203,51,205,49,203,51,200,54,203,54,203" title="Complexity: 9; Coverage: 0%; Class: AppleRecordingYearBox" alt="" href="com/googlecode/mp4parser/boxes/apple/AppleRecordingYearBox.html#AppleRecordingYearBox"/>
+<area shape="poly" coords="54,206,51,208,49,206,51,203,54,206,54,206" title="Complexity: 5; Coverage: 0%; Class: MultiTrackFragmentedMp4Writer.ConsumeSamplesCallable" alt="" href="com/mp4parser/streaming/MultiTrackFragmentedMp4Writer.html#MultiTrackFragmentedMp4Writer.ConsumeSamplesCallable"/>
+<area shape="poly" coords="54,200,51,203,49,200,51,198,54,200,54,200" title="Complexity: 13; Coverage: 0%; Class: AvcNalUnitStorageBox" alt="" href="com/googlecode/mp4parser/boxes/basemediaformat/AvcNalUnitStorageBox.html#AvcNalUnitStorageBox"/>
+<area shape="poly" coords="298,204,296,207,293,204,296,202,298,204,298,204" title="Complexity: 7; Coverage: 100%; Class: StaticChunkOffsetBox" alt="" href="com/coremedia/iso/boxes/StaticChunkOffsetBox.html#StaticChunkOffsetBox"/>
+<area shape="poly" coords="298,205,296,207,293,205,296,202,298,205,298,205" title="Complexity: 6; Coverage: 100%; Class: SoundMediaHeaderBox" alt="" href="com/coremedia/iso/boxes/SoundMediaHeaderBox.html#SoundMediaHeaderBox"/>
+<area shape="poly" coords="186,198,183,201,181,198,183,196,186,198,186,198" title="Complexity: 16; Coverage: 54%; Class: SchemeTypeBox" alt="" href="com/coremedia/iso/boxes/SchemeTypeBox.html#SchemeTypeBox"/>
+<area shape="poly" coords="298,208,296,211,293,208,296,206,298,208,298,208" title="Complexity: 1; Coverage: 100%; Class: Apple_geIDBox" alt="" href="com/googlecode/mp4parser/boxes/apple/Apple_geIDBox.html#Apple_geIDBox"/>
+<area shape="poly" coords="176,198,174,201,171,198,174,196,176,198,176,198" title="Complexity: 16; Coverage: 50%; Class: SampleToChunkBox.Entry" alt="" href="com/coremedia/iso/boxes/SampleToChunkBox.html#SampleToChunkBox.Entry"/>
+<area shape="poly" coords="298,201,296,204,293,201,296,199,298,201,298,201" title="Complexity: 11; Coverage: 100%; Class: SampleToChunkBox" alt="" href="com/coremedia/iso/boxes/SampleToChunkBox.html#SampleToChunkBox"/>
+<area shape="poly" coords="267,197,264,199,262,197,264,194,267,197,267,197" title="Complexity: 18; Coverage: 87%; Class: SampleTableBox" alt="" href="com/coremedia/iso/boxes/SampleTableBox.html#SampleTableBox"/>
+<area shape="poly" coords="279,197,276,200,274,197,276,195,279,197,279,197" title="Complexity: 17; Coverage: 92%; Class: SampleSizeBox" alt="" href="com/coremedia/iso/boxes/SampleSizeBox.html#SampleSizeBox"/>
+<area shape="poly" coords="227,201,225,204,222,201,225,199,227,201,227,201" title="Complexity: 11; Coverage: 71%; Class: SampleDescriptionBox" alt="" href="com/coremedia/iso/boxes/SampleDescriptionBox.html#SampleDescriptionBox"/>
+<area shape="poly" coords="218,198,215,201,213,198,215,196,218,198,218,198" title="Complexity: 16; Coverage: 67%; Class: SampleDependencyTypeBox.Entry" alt="" href="com/coremedia/iso/boxes/SampleDependencyTypeBox.html#SampleDependencyTypeBox.Entry"/>
+<area shape="poly" coords="298,204,296,206,293,204,296,201,298,204,298,204" title="Complexity: 8; Coverage: 100%; Class: TrackProductionApertureDimensionsAtom" alt="" href="com/googlecode/mp4parser/boxes/apple/TrackProductionApertureDimensionsAtom.html#TrackProductionApertureDimensionsAtom"/>
+<area shape="poly" coords="54,205,51,207,49,205,51,202,54,205,54,205" title="Complexity: 6; Coverage: 0%; Class: ExtensionDescriptor" alt="" href="com/googlecode/mp4parser/boxes/mp4/objectdescriptors/ExtensionDescriptor.html#ExtensionDescriptor"/>
+<area shape="poly" coords="54,200,51,203,49,200,51,198,54,200,54,200" title="Complexity: 13; Coverage: 0%; Class: AvcNalUnitStorageBox" alt="" href="com/googlecode/mp4parser/boxes/basemediaformat/AvcNalUnitStorageBox.html#AvcNalUnitStorageBox"/>
+<area shape="poly" coords="298,208,296,211,293,208,296,206,298,208,298,208" title="Complexity: 1; Coverage: 100%; Class: Apple_geIDBox" alt="" href="com/googlecode/mp4parser/boxes/apple/Apple_geIDBox.html#Apple_geIDBox"/>
+<area shape="poly" coords="176,200,174,203,171,200,174,198,176,200,176,200" title="Complexity: 13; Coverage: 50%; Class: ProgressiveDownloadInformationBox.Entry" alt="" href="com/coremedia/iso/boxes/ProgressiveDownloadInformationBox.html#ProgressiveDownloadInformationBox.Entry"/>
+<area shape="poly" coords="276,204,274,206,271,204,274,201,276,204,276,204" title="Complexity: 8; Coverage: 91%; Class: ProgressiveDownloadInformationBox" alt="" href="com/coremedia/iso/boxes/ProgressiveDownloadInformationBox.html#ProgressiveDownloadInformationBox"/>
+<area shape="poly" coords="54,203,51,205,49,203,51,200,54,203,54,203" title="Complexity: 9; Coverage: 0%; Class: AppleRecordingYearBox" alt="" href="com/googlecode/mp4parser/boxes/apple/AppleRecordingYearBox.html#AppleRecordingYearBox"/>
+<area shape="poly" coords="252,204,249,206,247,204,249,201,252,204,252,204" title="Complexity: 8; Coverage: 81%; Class: OriginalFormatBox" alt="" href="com/coremedia/iso/boxes/OriginalFormatBox.html#OriginalFormatBox"/>
+<area shape="poly" coords="54,202,51,205,49,202,51,200,54,202,54,202" title="Complexity: 10; Coverage: 0%; Class: BitstreamWriter" alt="" href="com/googlecode/mp4parser/h264/write/BitstreamWriter.html#BitstreamWriter"/>
+<area shape="poly" coords="54,206,51,209,49,206,51,204,54,206,54,206" title="Complexity: 4; Coverage: 0%; Class: UnknownDescriptor" alt="" href="com/googlecode/mp4parser/boxes/mp4/objectdescriptors/UnknownDescriptor.html#UnknownDescriptor"/>
+<area shape="poly" coords="284,182,281,184,279,182,281,179,284,182,284,182" title="Complexity: 40; Coverage: 94%; Class: MovieHeaderBox" alt="" href="com/coremedia/iso/boxes/MovieHeaderBox.html#MovieHeaderBox"/>
+<area shape="poly" coords="272,205,269,207,267,205,269,202,272,205,272,205" title="Complexity: 6; Coverage: 89%; Class: MovieBox" alt="" href="com/coremedia/iso/boxes/MovieBox.html#MovieBox"/>
+<area shape="poly" coords="166,199,164,201,161,199,164,196,166,199,166,199" title="Complexity: 15; Coverage: 46%; Class: MetaBox" alt="" href="com/coremedia/iso/boxes/MetaBox.html#MetaBox"/>
+<area shape="poly" coords="176,206,174,208,171,206,174,203,176,206,176,206" title="Complexity: 5; Coverage: 50%; Class: MediaInformationBox" alt="" href="com/coremedia/iso/boxes/MediaInformationBox.html#MediaInformationBox"/>
+<area shape="poly" coords="254,196,252,199,249,196,252,194,254,196,254,196" title="Complexity: 19; Coverage: 82%; Class: MediaHeaderBox" alt="" href="com/coremedia/iso/boxes/MediaHeaderBox.html#MediaHeaderBox"/>
+<area shape="poly" coords="254,204,252,207,249,204,252,202,254,204,254,204" title="Complexity: 7; Coverage: 82%; Class: MediaBox" alt="" href="com/coremedia/iso/boxes/MediaBox.html#MediaBox"/>
+<area shape="poly" coords="54,201,51,204,49,201,51,199,54,201,54,201" title="Complexity: 11; Coverage: 0%; Class: ProfileLevelIndicationDescriptor" alt="" href="com/googlecode/mp4parser/boxes/mp4/objectdescriptors/ProfileLevelIndicationDescriptor.html#ProfileLevelIndicationDescriptor"/>
+<area shape="poly" coords="198,201,196,203,193,201,196,198,198,201,198,201" title="Complexity: 12; Coverage: 59%; Class: ItemProtectionBox" alt="" href="com/coremedia/iso/boxes/ItemProtectionBox.html#ItemProtectionBox"/>
+<area shape="poly" coords="188,197,186,199,183,197,186,194,188,197,188,197" title="Complexity: 18; Coverage: 55%; Class: ItemLocationBox.Extent" alt="" href="com/coremedia/iso/boxes/ItemLocationBox.html#ItemLocationBox.Extent"/>
+<area shape="poly" coords="218,193,215,195,213,193,215,190,218,193,218,193" title="Complexity: 24; Coverage: 67%; Class: ItemLocationBox.Item" alt="" href="com/coremedia/iso/boxes/ItemLocationBox.html#ItemLocationBox.Item"/>
+<area shape="poly" coords="286,195,284,197,281,195,284,192,286,195,286,195" title="Complexity: 21; Coverage: 95%; Class: ItemLocationBox" alt="" href="com/coremedia/iso/boxes/ItemLocationBox.html#ItemLocationBox"/>
+<area shape="poly" coords="54,205,51,207,49,205,51,202,54,205,54,205" title="Complexity: 6; Coverage: 0%; Class: ExtensionDescriptor" alt="" href="com/googlecode/mp4parser/boxes/mp4/objectdescriptors/ExtensionDescriptor.html#ExtensionDescriptor"/>
+<area shape="poly" coords="298,203,296,205,293,203,296,200,298,203,298,203" title="Complexity: 9; Coverage: 100%; Class: HintMediaHeaderBox" alt="" href="com/coremedia/iso/boxes/HintMediaHeaderBox.html#HintMediaHeaderBox"/>
+<area shape="poly" coords="203,197,200,200,198,197,200,195,203,197,203,197" title="Complexity: 17; Coverage: 61%; Class: HandlerBox" alt="" href="com/coremedia/iso/boxes/HandlerBox.html#HandlerBox"/>
+<area shape="poly" coords="54,203,51,205,49,203,51,200,54,203,54,203" title="Complexity: 9; Coverage: 0%; Class: AppleRecordingYearBox" alt="" href="com/googlecode/mp4parser/boxes/apple/AppleRecordingYearBox.html#AppleRecordingYearBox"/>
+<area shape="poly" coords="183,204,181,207,178,204,181,202,183,204,183,204" title="Complexity: 7; Coverage: 53%; Class: FreeSpaceBox" alt="" href="com/coremedia/iso/boxes/FreeSpaceBox.html#FreeSpaceBox"/>
+<area shape="poly" coords="247,193,245,196,242,193,245,191,247,193,247,193" title="Complexity: 23; Coverage: 79%; Class: FreeBox" alt="" href="com/coremedia/iso/boxes/FreeBox.html#FreeBox"/>
+<area shape="poly" coords="298,200,296,203,293,200,296,198,298,200,298,200" title="Complexity: 13; Coverage: 100%; Class: FileTypeBox" alt="" href="com/coremedia/iso/boxes/FileTypeBox.html#FileTypeBox"/>
+<area shape="poly" coords="225,196,222,199,220,196,222,194,225,196,225,196" title="Complexity: 19; Coverage: 70%; Class: EditListBox.Entry" alt="" href="com/coremedia/iso/boxes/EditListBox.html#EditListBox.Entry"/>
+<area shape="poly" coords="298,203,296,205,293,203,296,200,298,203,298,203" title="Complexity: 9; Coverage: 100%; Class: HintMediaHeaderBox" alt="" href="com/coremedia/iso/boxes/HintMediaHeaderBox.html#HintMediaHeaderBox"/>
+<area shape="poly" coords="298,208,296,211,293,208,296,206,298,208,298,208" title="Complexity: 1; Coverage: 100%; Class: Apple_geIDBox" alt="" href="com/googlecode/mp4parser/boxes/apple/Apple_geIDBox.html#Apple_geIDBox"/>
+<area shape="poly" coords="54,203,51,205,49,203,51,200,54,203,54,203" title="Complexity: 9; Coverage: 0%; Class: AppleRecordingYearBox" alt="" href="com/googlecode/mp4parser/boxes/apple/AppleRecordingYearBox.html#AppleRecordingYearBox"/>
+<area shape="poly" coords="225,202,222,205,220,202,222,200,225,202,225,202" title="Complexity: 10; Coverage: 70%; Class: DataReferenceBox" alt="" href="com/coremedia/iso/boxes/DataReferenceBox.html#DataReferenceBox"/>
+<area shape="poly" coords="298,208,296,211,293,208,296,206,298,208,298,208" title="Complexity: 1; Coverage: 100%; Class: Apple_geIDBox" alt="" href="com/googlecode/mp4parser/boxes/apple/Apple_geIDBox.html#Apple_geIDBox"/>
+<area shape="poly" coords="54,204,51,207,49,204,51,202,54,204,54,204" title="Complexity: 7; Coverage: 0%; Class: InitialObjectDescriptor" alt="" href="com/googlecode/mp4parser/boxes/mp4/objectdescriptors/InitialObjectDescriptor.html#InitialObjectDescriptor"/>
+<area shape="poly" coords="298,206,296,208,293,206,296,203,298,206,298,206" title="Complexity: 5; Coverage: 100%; Class: DataEntryUrlBox" alt="" href="com/coremedia/iso/boxes/DataEntryUrlBox.html#DataEntryUrlBox"/>
+<area shape="poly" coords="54,203,51,205,49,203,51,200,54,203,54,203" title="Complexity: 9; Coverage: 0%; Class: AppleRecordingYearBox" alt="" href="com/googlecode/mp4parser/boxes/apple/AppleRecordingYearBox.html#AppleRecordingYearBox"/>
+<area shape="poly" coords="223,205,220,207,218,205,220,202,223,205,223,205" title="Complexity: 6; Coverage: 69%; Class: TimeToSampleBox.Entry" alt="" href="com/coremedia/iso/boxes/TimeToSampleBox.html#TimeToSampleBox.Entry"/>
+<area shape="poly" coords="205,202,203,205,200,202,203,200,205,202,205,202" title="Complexity: 10; Coverage: 62%; Class: CompositionTimeToSample" alt="" href="com/coremedia/iso/boxes/CompositionTimeToSample.html#CompositionTimeToSample"/>
+<area shape="poly" coords="298,199,296,202,293,199,296,197,298,199,298,199" title="Complexity: 14; Coverage: 100%; Class: SampleToGroupBox" alt="" href="com/googlecode/mp4parser/boxes/mp4/samplegrouping/SampleToGroupBox.html#SampleToGroupBox"/>
+<area shape="poly" coords="54,200,51,203,49,200,51,198,54,200,54,200" title="Complexity: 13; Coverage: 0%; Class: AvcNalUnitStorageBox" alt="" href="com/googlecode/mp4parser/boxes/basemediaformat/AvcNalUnitStorageBox.html#AvcNalUnitStorageBox"/>
+<area shape="poly" coords="298,208,296,210,293,208,296,205,298,208,298,208" title="Complexity: 2; Coverage: 100%; Class: StaticFragmentIntersectionFinderImpl" alt="" href="com/googlecode/mp4parser/authoring/builder/StaticFragmentIntersectionFinderImpl.html#StaticFragmentIntersectionFinderImpl"/>
+<area shape="poly" coords="274,204,271,207,269,204,271,202,274,204,274,204" title="Complexity: 7; Coverage: 90%; Class: ChunkOffset64BitBox" alt="" href="com/coremedia/iso/boxes/ChunkOffset64BitBox.html#ChunkOffset64BitBox"/>
+<area shape="poly" coords="54,203,51,205,49,203,51,200,54,203,54,203" title="Complexity: 9; Coverage: 0%; Class: AppleRecordingYearBox" alt="" href="com/googlecode/mp4parser/boxes/apple/AppleRecordingYearBox.html#AppleRecordingYearBox"/>
+<area shape="poly" coords="54,199,51,201,49,199,51,196,54,199,54,199" title="Complexity: 15; Coverage: 0%; Class: AudioSpecificConfig.ELDSpecificConfig" alt="" href="com/googlecode/mp4parser/boxes/mp4/objectdescriptors/AudioSpecificConfig.html#AudioSpecificConfig.ELDSpecificConfig"/>
+<area shape="poly" coords="298,208,296,211,293,208,296,206,298,208,298,208" title="Complexity: 1; Coverage: 100%; Class: Apple_geIDBox" alt="" href="com/googlecode/mp4parser/boxes/apple/Apple_geIDBox.html#Apple_geIDBox"/>
+<area shape="poly" coords="54,204,51,207,49,204,51,202,54,204,54,204" title="Complexity: 7; Coverage: 0%; Class: InitialObjectDescriptor" alt="" href="com/googlecode/mp4parser/boxes/mp4/objectdescriptors/InitialObjectDescriptor.html#InitialObjectDescriptor"/>
+<area shape="poly" coords="54,204,51,206,49,204,51,201,54,204,54,204" title="Complexity: 8; Coverage: 0%; Class: AppleTrackNumberBox" alt="" href="com/googlecode/mp4parser/boxes/apple/AppleTrackNumberBox.html#AppleTrackNumberBox"/>
+<area shape="poly" coords="54,201,51,203,49,201,51,198,54,201,54,201" title="Complexity: 12; Coverage: 0%; Class: FileDataSourceViaHeapImpl" alt="" href="com/googlecode/mp4parser/FileDataSourceViaHeapImpl.html#FileDataSourceViaHeapImpl"/>
+<area shape="poly" coords="225,203,222,205,220,203,222,200,225,203,225,203" title="Complexity: 9; Coverage: 70%; Class: Utf8" alt="" href="com/coremedia/iso/Utf8.html#Utf8"/>
+<area shape="poly" coords="225,189,222,192,220,189,222,187,225,189,225,189" title="Complexity: 29; Coverage: 70%; Class: PropertyBoxParserImpl" alt="" href="com/coremedia/iso/PropertyBoxParserImpl.html#PropertyBoxParserImpl"/>
+<area shape="poly" coords="232,205,230,207,227,205,230,202,232,205,232,205" title="Complexity: 6; Coverage: 73%; Class: IsoTypeWriterVariable" alt="" href="com/coremedia/iso/IsoTypeWriterVariable.html#IsoTypeWriterVariable"/>
+<area shape="poly" coords="232,193,230,196,227,193,230,191,232,193,232,193" title="Complexity: 23; Coverage: 73%; Class: IsoTypeWriter" alt="" href="com/coremedia/iso/IsoTypeWriter.html#IsoTypeWriter"/>
+<area shape="poly" coords="227,205,225,207,222,205,225,202,227,205,227,205" title="Complexity: 6; Coverage: 71%; Class: IsoTypeReaderVariable" alt="" href="com/coremedia/iso/IsoTypeReaderVariable.html#IsoTypeReaderVariable"/>
+<area shape="poly" coords="254,193,252,196,249,193,252,191,254,193,254,193" title="Complexity: 23; Coverage: 82%; Class: IsoTypeReader" alt="" href="com/coremedia/iso/IsoTypeReader.html#IsoTypeReader"/>
+<area shape="poly" coords="262,199,259,201,257,199,259,196,262,199,262,199" title="Complexity: 15; Coverage: 85%; Class: IsoFile" alt="" href="com/coremedia/iso/IsoFile.html#IsoFile"/>
+<area shape="poly" coords="269,203,267,205,264,203,267,200,269,203,269,203" title="Complexity: 9; Coverage: 88%; Class: Hex" alt="" href="com/coremedia/iso/Hex.html#Hex"/>
+<area shape="poly" coords="54,208,51,210,49,208,51,205,54,208,54,208" title="Complexity: 2; Coverage: 0%; Class: Version" alt="" href="com/googlecode/mp4parser/Version.html#Version"/>
+<area shape="poly" coords="54,205,51,207,49,205,51,202,54,205,54,205" title="Complexity: 6; Coverage: 0%; Class: ExtensionDescriptor" alt="" href="com/googlecode/mp4parser/boxes/mp4/objectdescriptors/ExtensionDescriptor.html#ExtensionDescriptor"/>
+<area shape="poly" coords="237,201,235,204,232,201,235,199,237,201,237,201" title="Complexity: 11; Coverage: 75%; Class: AbstractBoxParser" alt="" href="com/coremedia/iso/AbstractBoxParser.html#AbstractBoxParser"/>
+<area shape="poly" coords="254,195,252,198,249,195,252,193,254,195,254,195" title="Complexity: 20; Coverage: 82%; Class: CencEncryptingSampleList.EncryptedSampleImpl" alt="" href="com/googlecode/mp4parser/boxes/cenc/CencEncryptingSampleList.html#CencEncryptingSampleList.EncryptedSampleImpl"/>
+<area shape="poly" coords="257,201,254,203,252,201,254,198,257,201,257,201" title="Complexity: 12; Coverage: 83%; Class: CencEncryptingSampleList" alt="" href="com/googlecode/mp4parser/boxes/cenc/CencEncryptingSampleList.html#CencEncryptingSampleList"/>
+<area shape="poly" coords="257,195,254,198,252,195,254,193,257,195,257,195" title="Complexity: 20; Coverage: 83%; Class: CencDecryptingSampleList" alt="" href="com/googlecode/mp4parser/boxes/cenc/CencDecryptingSampleList.html#CencDecryptingSampleList"/>
+<area shape="poly" coords="298,206,296,209,293,206,296,204,298,206,298,206" title="Complexity: 4; Coverage: 100%; Class: UUIDConverter" alt="" href="com/googlecode/mp4parser/util/UUIDConverter.html#UUIDConverter"/>
+<area shape="poly" coords="149,193,147,196,144,193,147,191,149,193,149,193" title="Complexity: 23; Coverage: 39%; Class: RangeStartMap" alt="" href="com/googlecode/mp4parser/util/RangeStartMap.html#RangeStartMap"/>
+<area shape="poly" coords="274,184,271,186,269,184,271,181,274,184,274,184" title="Complexity: 37; Coverage: 90%; Class: Path" alt="" href="com/googlecode/mp4parser/util/Path.html#Path"/>
+<area shape="poly" coords="176,202,174,205,171,202,174,200,176,202,176,202" title="Complexity: 10; Coverage: 50%; Class: Mp4Arrays" alt="" href="com/googlecode/mp4parser/util/Mp4Arrays.html#Mp4Arrays"/>
+<area shape="poly" coords="174,193,171,196,169,193,171,191,174,193,174,193" title="Complexity: 23; Coverage: 49%; Class: Matrix" alt="" href="com/googlecode/mp4parser/util/Matrix.html#Matrix"/>
+<area shape="poly" coords="144,204,142,206,139,204,142,201,144,204,144,204" title="Complexity: 8; Coverage: 37%; Class: Math" alt="" href="com/googlecode/mp4parser/util/Math.html#Math"/>
+<area shape="poly" coords="215,208,213,210,210,208,213,205,215,208,215,208" title="Complexity: 2; Coverage: 66%; Class: Logger" alt="" href="com/googlecode/mp4parser/util/Logger.html#Logger"/>
+<area shape="poly" coords="259,200,257,203,254,200,257,198,259,200,259,200" title="Complexity: 13; Coverage: 84%; Class: LazyList" alt="" href="com/googlecode/mp4parser/util/LazyList.html#LazyList"/>
+<area shape="poly" coords="176,206,174,209,171,206,174,204,176,206,176,206" title="Complexity: 4; Coverage: 50%; Class: JuliLogger" alt="" href="com/googlecode/mp4parser/util/JuliLogger.html#JuliLogger"/>
+<area shape="poly" coords="54,208,51,211,49,208,51,206,54,208,54,208" title="Complexity: 1; Coverage: 0%; Class: TrackApertureModeDimensionAtom" alt="" href="com/googlecode/mp4parser/boxes/apple/TrackApertureModeDimensionAtom.html#TrackApertureModeDimensionAtom"/>
+<area shape="poly" coords="54,186,51,189,49,186,51,184,54,186,54,186" title="Complexity: 33; Coverage: 0%; Class: IntHashMap" alt="" href="com/googlecode/mp4parser/util/IntHashMap.html#IntHashMap"/>
+<area shape="poly" coords="298,208,296,210,293,208,296,205,298,208,298,208" title="Complexity: 2; Coverage: 100%; Class: StaticFragmentIntersectionFinderImpl" alt="" href="com/googlecode/mp4parser/authoring/builder/StaticFragmentIntersectionFinderImpl.html#StaticFragmentIntersectionFinderImpl"/>
+<area shape="poly" coords="54,206,51,208,49,206,51,203,54,206,54,206" title="Complexity: 5; Coverage: 0%; Class: MultiTrackFragmentedMp4Writer.ConsumeSamplesCallable" alt="" href="com/mp4parser/streaming/MultiTrackFragmentedMp4Writer.html#MultiTrackFragmentedMp4Writer.ConsumeSamplesCallable"/>
+<area shape="poly" coords="215,207,213,209,210,207,213,204,215,207,215,207" title="Complexity: 3; Coverage: 66%; Class: CastUtils" alt="" href="com/googlecode/mp4parser/util/CastUtils.html#CastUtils"/>
+<area shape="poly" coords="134,205,132,207,129,205,132,202,134,205,134,205" title="Complexity: 6; Coverage: 33%; Class: WriteOnlyBox" alt="" href="com/mp4parser/streaming/WriteOnlyBox.html#WriteOnlyBox"/>
+<area shape="poly" coords="54,206,51,209,49,206,51,204,54,206,54,206" title="Complexity: 4; Coverage: 0%; Class: UnknownDescriptor" alt="" href="com/googlecode/mp4parser/boxes/mp4/objectdescriptors/UnknownDescriptor.html#UnknownDescriptor"/>
+<area shape="poly" coords="54,195,51,198,49,195,51,193,54,195,54,195" title="Complexity: 20; Coverage: 0%; Class: LocationInformationBox" alt="" href="com/coremedia/iso/boxes/threegpp26244/LocationInformationBox.html#LocationInformationBox"/>
+<area shape="poly" coords="54,201,51,203,49,201,51,198,54,201,54,201" title="Complexity: 12; Coverage: 0%; Class: FileDataSourceViaHeapImpl" alt="" href="com/googlecode/mp4parser/FileDataSourceViaHeapImpl.html#FileDataSourceViaHeapImpl"/>
+<area shape="poly" coords="54,208,51,211,49,208,51,206,54,208,54,208" title="Complexity: 1; Coverage: 0%; Class: TrackApertureModeDimensionAtom" alt="" href="com/googlecode/mp4parser/boxes/apple/TrackApertureModeDimensionAtom.html#TrackApertureModeDimensionAtom"/>
+<area shape="poly" coords="54,199,51,201,49,199,51,196,54,199,54,199" title="Complexity: 15; Coverage: 0%; Class: AudioSpecificConfig.ELDSpecificConfig" alt="" href="com/googlecode/mp4parser/boxes/mp4/objectdescriptors/AudioSpecificConfig.html#AudioSpecificConfig.ELDSpecificConfig"/>
+<area shape="poly" coords="115,171,112,174,110,171,112,169,115,171,115,171" title="Complexity: 55; Coverage: 25%; Class: DTSSpecificBox" alt="" href="com/googlecode/mp4parser/boxes/DTSSpecificBox.html#DTSSpecificBox"/>
+<area shape="poly" coords="230,196,227,199,225,196,227,194,230,196,230,196" title="Complexity: 19; Coverage: 72%; Class: AbstractTrackEncryptionBox" alt="" href="com/googlecode/mp4parser/boxes/AbstractTrackEncryptionBox.html#AbstractTrackEncryptionBox"/>
+<area shape="poly" coords="230,179,227,181,225,179,227,176,230,179,230,179" title="Complexity: 44; Coverage: 72%; Class: AbstractSampleEncryptionBox" alt="" href="com/googlecode/mp4parser/boxes/AbstractSampleEncryptionBox.html#AbstractSampleEncryptionBox"/>
+<area shape="poly" coords="232,196,230,199,227,196,230,194,232,196,232,196" title="Complexity: 19; Coverage: 73%; Class: AC3SpecificBox" alt="" href="com/googlecode/mp4parser/boxes/AC3SpecificBox.html#AC3SpecificBox"/>
+<area shape="poly" coords="54,182,51,184,49,182,51,179,54,182,54,182" title="Complexity: 40; Coverage: 0%; Class: TtmlTrackImpl" alt="" href="com/googlecode/mp4parser/authoring/tracks/ttml/TtmlTrackImpl.html#TtmlTrackImpl"/>
+<area shape="poly" coords="54,184,51,186,49,184,51,181,54,184,54,184" title="Complexity: 37; Coverage: 0%; Class: TtmlSegmenter" alt="" href="com/googlecode/mp4parser/authoring/tracks/ttml/TtmlSegmenter.html#TtmlSegmenter"/>
+<area shape="poly" coords="54,204,51,207,49,204,51,202,54,204,54,204" title="Complexity: 7; Coverage: 0%; Class: InitialObjectDescriptor" alt="" href="com/googlecode/mp4parser/boxes/mp4/objectdescriptors/InitialObjectDescriptor.html#InitialObjectDescriptor"/>
+<area shape="poly" coords="161,184,159,187,156,184,159,182,161,184,161,184" title="Complexity: 36; Coverage: 44%; Class: TtmlHelpers" alt="" href="com/googlecode/mp4parser/authoring/tracks/ttml/TtmlHelpers.html#TtmlHelpers"/>
+<area shape="poly" coords="298,208,296,211,293,208,296,206,298,208,298,208" title="Complexity: 1; Coverage: 100%; Class: Apple_geIDBox" alt="" href="com/googlecode/mp4parser/boxes/apple/Apple_geIDBox.html#Apple_geIDBox"/>
+<area shape="poly" coords="54,201,51,203,49,201,51,198,54,201,54,201" title="Complexity: 12; Coverage: 0%; Class: FileDataSourceViaHeapImpl" alt="" href="com/googlecode/mp4parser/FileDataSourceViaHeapImpl.html#FileDataSourceViaHeapImpl"/>
+<area shape="poly" coords="298,195,296,198,293,195,296,193,298,195,298,195" title="Complexity: 20; Coverage: 100%; Class: ContentInformationBox" alt="" href="com/googlecode/mp4parser/boxes/dece/ContentInformationBox.html#ContentInformationBox"/>
+<area shape="poly" coords="154,195,151,197,149,195,151,192,154,195,154,195" title="Complexity: 21; Coverage: 41%; Class: BaseLocationBox" alt="" href="com/googlecode/mp4parser/boxes/dece/BaseLocationBox.html#BaseLocationBox"/>
+<area shape="poly" coords="54,201,51,204,49,201,51,199,54,201,54,201" title="Complexity: 11; Coverage: 0%; Class: ProfileLevelIndicationDescriptor" alt="" href="com/googlecode/mp4parser/boxes/mp4/objectdescriptors/ProfileLevelIndicationDescriptor.html#ProfileLevelIndicationDescriptor"/>
+<area shape="poly" coords="267,199,264,201,262,199,264,196,267,199,267,199" title="Complexity: 15; Coverage: 87%; Class: AssetInformationBox" alt="" href="com/googlecode/mp4parser/boxes/dece/AssetInformationBox.html#AssetInformationBox"/>
+<area shape="poly" coords="298,208,296,211,293,208,296,206,298,208,298,208" title="Complexity: 1; Coverage: 100%; Class: Apple_geIDBox" alt="" href="com/googlecode/mp4parser/boxes/apple/Apple_geIDBox.html#Apple_geIDBox"/>
+<area shape="poly" coords="298,208,296,211,293,208,296,206,298,208,298,208" title="Complexity: 1; Coverage: 100%; Class: Apple_geIDBox" alt="" href="com/googlecode/mp4parser/boxes/apple/Apple_geIDBox.html#Apple_geIDBox"/>
+<area shape="poly" coords="129,164,127,166,124,164,127,161,129,164,129,164" title="Complexity: 66; Coverage: 31%; Class: SeqParameterSet" alt="" href="com/googlecode/mp4parser/h264/model/SeqParameterSet.html#SeqParameterSet"/>
+<area shape="poly" coords="215,207,213,209,210,207,213,204,215,207,215,207" title="Complexity: 3; Coverage: 66%; Class: CastUtils" alt="" href="com/googlecode/mp4parser/util/CastUtils.html#CastUtils"/>
+<area shape="poly" coords="54,203,51,205,49,203,51,200,54,203,54,203" title="Complexity: 9; Coverage: 0%; Class: AppleRecordingYearBox" alt="" href="com/googlecode/mp4parser/boxes/apple/AppleRecordingYearBox.html#AppleRecordingYearBox"/>
+<area shape="poly" coords="298,208,296,211,293,208,296,206,298,208,298,208" title="Complexity: 1; Coverage: 100%; Class: Apple_geIDBox" alt="" href="com/googlecode/mp4parser/boxes/apple/Apple_geIDBox.html#Apple_geIDBox"/>
+<area shape="poly" coords="76,155,73,157,71,155,73,152,76,155,76,155" title="Complexity: 79; Coverage: 9%; Class: PictureParameterSet" alt="" href="com/googlecode/mp4parser/h264/model/PictureParameterSet.html#PictureParameterSet"/>
+<area shape="poly" coords="54,208,51,211,49,208,51,206,54,208,54,208" title="Complexity: 1; Coverage: 0%; Class: TrackApertureModeDimensionAtom" alt="" href="com/googlecode/mp4parser/boxes/apple/TrackApertureModeDimensionAtom.html#TrackApertureModeDimensionAtom"/>
+<area shape="poly" coords="134,202,132,205,129,202,132,200,134,202,134,202" title="Complexity: 10; Coverage: 33%; Class: ChromaFormat" alt="" href="com/googlecode/mp4parser/h264/model/ChromaFormat.html#ChromaFormat"/>
+<area shape="poly" coords="152,206,149,208,147,206,149,203,152,206,152,206" title="Complexity: 5; Coverage: 40%; Class: AspectRatio" alt="" href="com/googlecode/mp4parser/h264/model/AspectRatio.html#AspectRatio"/>
+<area shape="poly" coords="152,206,149,209,147,206,149,204,152,206,152,206" title="Complexity: 4; Coverage: 40%; Class: TextTrackImpl.Line" alt="" href="com/googlecode/mp4parser/authoring/tracks/TextTrackImpl.html#TextTrackImpl.Line"/>
+<area shape="poly" coords="103,197,100,199,98,197,100,194,103,197,103,197" title="Complexity: 18; Coverage: 20%; Class: TextTrackImpl" alt="" href="com/googlecode/mp4parser/authoring/tracks/TextTrackImpl.html#TextTrackImpl"/>
+<area shape="poly" coords="54,197,51,200,49,197,51,195,54,197,54,197" title="Complexity: 17; Coverage: 0%; Class: VisualRandomAccessEntry" alt="" href="com/googlecode/mp4parser/boxes/mp4/samplegrouping/VisualRandomAccessEntry.html#VisualRandomAccessEntry"/>
+<area shape="poly" coords="54,207,51,209,49,207,51,204,54,207,54,207" title="Complexity: 3; Coverage: 0%; Class: AudioSpecificConfig.sbr_header" alt="" href="com/googlecode/mp4parser/boxes/mp4/objectdescriptors/AudioSpecificConfig.html#AudioSpecificConfig.sbr_header"/>
+<area shape="poly" coords="54,201,51,204,49,201,51,199,54,201,54,201" title="Complexity: 11; Coverage: 0%; Class: ProfileLevelIndicationDescriptor" alt="" href="com/googlecode/mp4parser/boxes/mp4/objectdescriptors/ProfileLevelIndicationDescriptor.html#ProfileLevelIndicationDescriptor"/>
+<area shape="poly" coords="54,196,51,199,49,196,51,194,54,196,54,196" title="Complexity: 19; Coverage: 0%; Class: MultiplyTimeScaleTrack" alt="" href="com/googlecode/mp4parser/authoring/tracks/MultiplyTimeScaleTrack.html#MultiplyTimeScaleTrack"/>
+<area shape="poly" coords="54,208,51,211,49,208,51,206,54,208,54,208" title="Complexity: 1; Coverage: 0%; Class: TrackApertureModeDimensionAtom" alt="" href="com/googlecode/mp4parser/boxes/apple/TrackApertureModeDimensionAtom.html#TrackApertureModeDimensionAtom"/>
+<area shape="poly" coords="54,191,51,193,49,191,51,188,54,191,54,191" title="Complexity: 27; Coverage: 0%; Class: MP3TrackImpl" alt="" href="com/googlecode/mp4parser/authoring/tracks/MP3TrackImpl.html#MP3TrackImpl"/>
+<area shape="poly" coords="54,184,51,187,49,184,51,182,54,184,54,184" title="Complexity: 36; Coverage: 0%; Class: H263TrackImpl" alt="" href="com/googlecode/mp4parser/authoring/tracks/H263TrackImpl.html#H263TrackImpl"/>
+<area shape="poly" coords="54,208,51,211,49,208,51,206,54,208,54,208" title="Complexity: 1; Coverage: 0%; Class: TrackApertureModeDimensionAtom" alt="" href="com/googlecode/mp4parser/boxes/apple/TrackApertureModeDimensionAtom.html#TrackApertureModeDimensionAtom"/>
+<area shape="poly" coords="54,150,51,153,49,150,51,148,54,150,54,150" title="Complexity: 86; Coverage: 0%; Class: EC3TrackImpl" alt="" href="com/googlecode/mp4parser/authoring/tracks/EC3TrackImpl.html#EC3TrackImpl"/>
+<area shape="poly" coords="54,196,51,199,49,196,51,194,54,196,54,196" title="Complexity: 19; Coverage: 0%; Class: MultiplyTimeScaleTrack" alt="" href="com/googlecode/mp4parser/authoring/tracks/MultiplyTimeScaleTrack.html#MultiplyTimeScaleTrack"/>
+<area shape="poly" coords="249,193,247,195,244,193,247,190,249,193,249,193" title="Complexity: 24; Coverage: 80%; Class: DTSTrackImpl.LookAhead" alt="" href="com/googlecode/mp4parser/authoring/tracks/DTSTrackImpl.html#DTSTrackImpl.LookAhead"/>
+<area shape="poly" coords="142,42,139,45,137,42,139,40,142,42,142,42" title="Complexity: 244; Coverage: 36%; Class: DTSTrackImpl" alt="" href="com/googlecode/mp4parser/authoring/tracks/DTSTrackImpl.html#DTSTrackImpl"/>
+<area shape="poly" coords="147,185,144,188,142,185,144,183,147,185,147,185" title="Complexity: 35; Coverage: 38%; Class: CroppedTrack" alt="" href="com/googlecode/mp4parser/authoring/tracks/CroppedTrack.html#CroppedTrack"/>
+<area shape="poly" coords="100,198,98,201,95,198,98,196,100,198,100,198" title="Complexity: 16; Coverage: 19%; Class: CleanInputStream" alt="" href="com/googlecode/mp4parser/authoring/tracks/CleanInputStream.html#CleanInputStream"/>
+<area shape="poly" coords="54,192,51,194,49,192,51,189,54,192,54,192" title="Complexity: 25; Coverage: 0%; Class: ChangeTimeScaleTrack" alt="" href="com/googlecode/mp4parser/authoring/tracks/ChangeTimeScaleTrack.html#ChangeTimeScaleTrack"/>
+<area shape="poly" coords="262,171,259,174,257,171,259,169,262,171,262,171" title="Complexity: 55; Coverage: 85%; Class: CencEncryptingTrackImpl" alt="" href="com/googlecode/mp4parser/authoring/tracks/CencEncryptingTrackImpl.html#CencEncryptingTrackImpl"/>
+<area shape="poly" coords="267,193,264,196,262,193,264,191,267,193,267,193" title="Complexity: 23; Coverage: 87%; Class: CencDecryptingTrackImpl" alt="" href="com/googlecode/mp4parser/authoring/tracks/CencDecryptingTrackImpl.html#CencDecryptingTrackImpl"/>
+<area shape="poly" coords="54,204,51,207,49,204,51,202,54,204,54,204" title="Complexity: 7; Coverage: 0%; Class: InitialObjectDescriptor" alt="" href="com/googlecode/mp4parser/boxes/mp4/objectdescriptors/InitialObjectDescriptor.html#InitialObjectDescriptor"/>
+<area shape="poly" coords="54,206,51,209,49,206,51,204,54,206,54,206" title="Complexity: 4; Coverage: 0%; Class: UnknownDescriptor" alt="" href="com/googlecode/mp4parser/boxes/mp4/objectdescriptors/UnknownDescriptor.html#UnknownDescriptor"/>
+<area shape="poly" coords="54,143,51,145,49,143,51,140,54,143,54,143" title="Complexity: 97; Coverage: 0%; Class: AppendTrack" alt="" href="com/googlecode/mp4parser/authoring/tracks/AppendTrack.html#AppendTrack"/>
+<area shape="poly" coords="54,201,51,203,49,201,51,198,54,201,54,201" title="Complexity: 12; Coverage: 0%; Class: FileDataSourceViaHeapImpl" alt="" href="com/googlecode/mp4parser/FileDataSourceViaHeapImpl.html#FileDataSourceViaHeapImpl"/>
+<area shape="poly" coords="274,201,271,203,269,201,271,198,274,201,274,201" title="Complexity: 12; Coverage: 90%; Class: AbstractH26XTrack.LookAhead" alt="" href="com/googlecode/mp4parser/authoring/tracks/AbstractH26XTrack.html#AbstractH26XTrack.LookAhead"/>
+<area shape="poly" coords="289,197,286,200,284,197,286,195,289,197,289,197" title="Complexity: 17; Coverage: 96%; Class: AbstractH26XTrack" alt="" href="com/googlecode/mp4parser/authoring/tracks/AbstractH26XTrack.html#AbstractH26XTrack"/>
+<area shape="poly" coords="276,206,274,208,271,206,274,203,276,206,276,206" title="Complexity: 5; Coverage: 91%; Class: AC3TrackImpl.SampleImpl" alt="" href="com/googlecode/mp4parser/authoring/tracks/AC3TrackImpl.html#AC3TrackImpl.SampleImpl"/>
+<area shape="poly" coords="264,181,262,183,259,181,262,178,264,181,264,181" title="Complexity: 41; Coverage: 86%; Class: AC3TrackImpl" alt="" href="com/googlecode/mp4parser/authoring/tracks/AC3TrackImpl.html#AC3TrackImpl"/>
+<area shape="poly" coords="237,208,235,210,232,208,235,205,237,208,237,208" title="Complexity: 2; Coverage: 75%; Class: AACTrackImpl.AdtsHeader" alt="" href="com/googlecode/mp4parser/authoring/tracks/AACTrackImpl.html#AACTrackImpl.AdtsHeader"/>
+<area shape="poly" coords="279,187,276,190,274,187,276,185,279,187,279,187" title="Complexity: 32; Coverage: 92%; Class: AACTrackImpl" alt="" href="com/googlecode/mp4parser/authoring/tracks/AACTrackImpl.html#AACTrackImpl"/>
+<area shape="poly" coords="298,197,296,199,293,197,296,194,298,197,298,197" title="Complexity: 18; Coverage: 100%; Class: EventMessageBox" alt="" href="com/mp4parser/iso23009/part1/EventMessageBox.html#EventMessageBox"/>
+<area shape="poly" coords="257,206,254,208,252,206,254,203,257,206,257,206" title="Complexity: 5; Coverage: 83%; Class: SrtParser" alt="" href="com/googlecode/mp4parser/srt/SrtParser.html#SrtParser"/>
+<area shape="poly" coords="213,191,210,193,208,191,210,188,213,191,213,191" title="Complexity: 27; Coverage: 65%; Class: SegmentIndexBox.Entry" alt="" href="com/googlecode/mp4parser/boxes/threegpp26244/SegmentIndexBox.html#SegmentIndexBox.Entry"/>
+<area shape="poly" coords="272,195,269,197,267,195,269,192,272,195,272,195" title="Complexity: 21; Coverage: 89%; Class: SegmentIndexBox" alt="" href="com/googlecode/mp4parser/boxes/threegpp26244/SegmentIndexBox.html#SegmentIndexBox"/>
+<area shape="poly" coords="54,201,51,203,49,201,51,198,54,201,54,201" title="Complexity: 12; Coverage: 0%; Class: FileDataSourceViaHeapImpl" alt="" href="com/googlecode/mp4parser/FileDataSourceViaHeapImpl.html#FileDataSourceViaHeapImpl"/>
+<area shape="poly" coords="54,202,51,205,49,202,51,200,54,202,54,202" title="Complexity: 10; Coverage: 0%; Class: BitstreamWriter" alt="" href="com/googlecode/mp4parser/h264/write/BitstreamWriter.html#BitstreamWriter"/>
+<area shape="poly" coords="54,207,51,209,49,207,51,204,54,207,54,207" title="Complexity: 3; Coverage: 0%; Class: AudioSpecificConfig.sbr_header" alt="" href="com/googlecode/mp4parser/boxes/mp4/objectdescriptors/AudioSpecificConfig.html#AudioSpecificConfig.sbr_header"/>
+<area shape="poly" coords="54,201,51,203,49,201,51,198,54,201,54,201" title="Complexity: 12; Coverage: 0%; Class: FileDataSourceViaHeapImpl" alt="" href="com/googlecode/mp4parser/FileDataSourceViaHeapImpl.html#FileDataSourceViaHeapImpl"/>
+<area shape="poly" coords="54,204,51,207,49,204,51,202,54,204,54,204" title="Complexity: 7; Coverage: 0%; Class: InitialObjectDescriptor" alt="" href="com/googlecode/mp4parser/boxes/mp4/objectdescriptors/InitialObjectDescriptor.html#InitialObjectDescriptor"/>
+<area shape="poly" coords="298,207,296,209,293,207,296,204,298,207,298,207" title="Complexity: 3; Coverage: 100%; Class: CencSampleAuxiliaryDataFormat.ShortBytePair" alt="" href="com/mp4parser/iso23001/part7/CencSampleAuxiliaryDataFormat.html#CencSampleAuxiliaryDataFormat.ShortBytePair"/>
+<area shape="poly" coords="215,201,213,204,210,201,213,199,215,201,215,201" title="Complexity: 11; Coverage: 66%; Class: PiffSampleEncryptionBox" alt="" href="com/googlecode/mp4parser/boxes/piff/PiffSampleEncryptionBox.html#PiffSampleEncryptionBox"/>
+<area shape="poly" coords="200,191,198,193,195,191,198,188,200,191,200,191" title="Complexity: 27; Coverage: 60%; Class: CAVLCReader" alt="" href="com/googlecode/mp4parser/h264/read/CAVLCReader.html#CAVLCReader"/>
+<area shape="poly" coords="164,191,161,194,159,191,161,189,164,191,164,191" title="Complexity: 26; Coverage: 45%; Class: BitstreamReader" alt="" href="com/googlecode/mp4parser/h264/read/BitstreamReader.html#BitstreamReader"/>
+<area shape="poly" coords="264,206,262,208,259,206,262,203,264,206,264,206" title="Complexity: 5; Coverage: 86%; Class: SampleList" alt="" href="com/coremedia/iso/boxes/mdat/SampleList.html#SampleList"/>
+<area shape="poly" coords="259,202,257,205,254,202,257,200,259,202,259,202" title="Complexity: 10; Coverage: 84%; Class: MediaDataBox" alt="" href="com/coremedia/iso/boxes/mdat/MediaDataBox.html#MediaDataBox"/>
+<area shape="poly" coords="291,201,289,203,286,201,289,198,291,201,291,201" title="Complexity: 12; Coverage: 97%; Class: XMLSubtitleSampleEntry" alt="" href="com/mp4parser/iso14496/part30/XMLSubtitleSampleEntry.html#XMLSubtitleSampleEntry"/>
+<area shape="poly" coords="298,205,296,207,293,205,296,202,298,205,298,205" title="Complexity: 6; Coverage: 100%; Class: SoundMediaHeaderBox" alt="" href="com/coremedia/iso/boxes/SoundMediaHeaderBox.html#SoundMediaHeaderBox"/>
+<area shape="poly" coords="208,206,205,208,203,206,205,203,208,206,208,206" title="Complexity: 5; Coverage: 63%; Class: WebVTTSampleEntry" alt="" href="com/mp4parser/iso14496/part30/WebVTTSampleEntry.html#WebVTTSampleEntry"/>
+<area shape="poly" coords="298,205,296,207,293,205,296,202,298,205,298,205" title="Complexity: 6; Coverage: 100%; Class: SoundMediaHeaderBox" alt="" href="com/coremedia/iso/boxes/SoundMediaHeaderBox.html#SoundMediaHeaderBox"/>
+<area shape="poly" coords="205,206,203,208,200,206,203,203,205,206,205,206" title="Complexity: 5; Coverage: 62%; Class: WebVttTrack.BoxBearingSample" alt="" href="com/googlecode/mp4parser/authoring/tracks/webvtt/WebVttTrack.html#WebVttTrack.BoxBearingSample"/>
+<area shape="poly" coords="208,188,205,190,203,188,205,185,208,188,208,188" title="Complexity: 31; Coverage: 63%; Class: AvcDecoderConfigurationRecord" alt="" href="com/mp4parser/iso14496/part15/AvcDecoderConfigurationRecord.html#AvcDecoderConfigurationRecord"/>
+<area shape="poly" coords="298,206,296,208,293,206,296,203,298,206,298,206" title="Complexity: 5; Coverage: 100%; Class: DataEntryUrlBox" alt="" href="com/coremedia/iso/boxes/DataEntryUrlBox.html#DataEntryUrlBox"/>
+<area shape="poly" coords="98,205,95,207,93,205,95,202,98,205,98,205" title="Complexity: 6; Coverage: 18%; Class: FontTableBox.FontRecord" alt="" href="com/googlecode/mp4parser/boxes/threegpp26245/FontTableBox.html#FontTableBox.FontRecord"/>
+<area shape="poly" coords="95,204,93,207,90,204,93,202,95,204,95,204" title="Complexity: 7; Coverage: 17%; Class: FontTableBox" alt="" href="com/googlecode/mp4parser/boxes/threegpp26245/FontTableBox.html#FontTableBox"/>
+<area shape="poly" coords="171,193,169,195,166,193,169,190,171,193,171,193" title="Complexity: 24; Coverage: 48%; Class: SliceHeader" alt="" href="com/googlecode/mp4parser/authoring/tracks/h264/SliceHeader.html#SliceHeader"/>
+<area shape="poly" coords="63,183,61,186,58,183,61,181,63,183,63,183" title="Complexity: 38; Coverage: 4%; Class: H264TrackImpl.SEIMessage" alt="" href="com/googlecode/mp4parser/authoring/tracks/h264/H264TrackImpl.html#H264TrackImpl.SEIMessage"/>
+<area shape="poly" coords="176,206,174,208,171,206,174,203,176,206,176,206" title="Complexity: 5; Coverage: 50%; Class: MediaInformationBox" alt="" href="com/coremedia/iso/boxes/MediaInformationBox.html#MediaInformationBox"/>
+<area shape="poly" coords="100,195,98,198,95,195,98,193,100,195,100,195" title="Complexity: 20; Coverage: 19%; Class: H264TrackImpl.FirstVclNalDetector" alt="" href="com/googlecode/mp4parser/authoring/tracks/h264/H264TrackImpl.html#H264TrackImpl.FirstVclNalDetector"/>
+<area shape="poly" coords="203,137,200,140,198,137,200,135,203,137,203,137" title="Complexity: 105; Coverage: 61%; Class: H264TrackImpl" alt="" href="com/googlecode/mp4parser/authoring/tracks/h264/H264TrackImpl.html#H264TrackImpl"/>
+<area shape="poly" coords="54,182,51,185,49,182,51,180,54,182,54,182" title="Complexity: 39; Coverage: 0%; Class: VideoParameterSet" alt="" href="com/googlecode/mp4parser/authoring/tracks/h265/VideoParameterSet.html#VideoParameterSet"/>
+<area shape="poly" coords="54,190,51,192,49,190,51,187,54,190,54,190" title="Complexity: 28; Coverage: 0%; Class: SequenceParameterSetRbsp" alt="" href="com/googlecode/mp4parser/authoring/tracks/h265/SequenceParameterSetRbsp.html#SequenceParameterSetRbsp"/>
+<area shape="poly" coords="54,207,51,209,49,207,51,204,54,207,54,207" title="Complexity: 3; Coverage: 0%; Class: AudioSpecificConfig.sbr_header" alt="" href="com/googlecode/mp4parser/boxes/mp4/objectdescriptors/AudioSpecificConfig.html#AudioSpecificConfig.sbr_header"/>
+<area shape="poly" coords="54,208,51,211,49,208,51,206,54,208,54,208" title="Complexity: 1; Coverage: 0%; Class: TrackApertureModeDimensionAtom" alt="" href="com/googlecode/mp4parser/boxes/apple/TrackApertureModeDimensionAtom.html#TrackApertureModeDimensionAtom"/>
+<area shape="poly" coords="54,201,51,203,49,201,51,198,54,201,54,201" title="Complexity: 12; Coverage: 0%; Class: FileDataSourceViaHeapImpl" alt="" href="com/googlecode/mp4parser/FileDataSourceViaHeapImpl.html#FileDataSourceViaHeapImpl"/>
+<area shape="poly" coords="54,145,51,148,49,145,51,143,54,145,54,145" title="Complexity: 93; Coverage: 0%; Class: H265TrackImplOld" alt="" href="com/googlecode/mp4parser/authoring/tracks/h265/H265TrackImplOld.html#H265TrackImplOld"/>
+<area shape="poly" coords="54,177,51,179,49,177,51,174,54,177,54,177" title="Complexity: 47; Coverage: 0%; Class: H265TrackImpl" alt="" href="com/googlecode/mp4parser/authoring/tracks/h265/H265TrackImpl.html#H265TrackImpl"/>
+<area shape="poly" coords="54,189,51,192,49,189,51,187,54,189,54,189" title="Complexity: 29; Coverage: 0%; Class: XtraBox.XtraValue" alt="" href="com/googlecode/mp4parser/boxes/microsoft/XtraBox.html#XtraBox.XtraValue"/>
+<area shape="poly" coords="54,201,51,204,49,201,51,199,54,201,54,201" title="Complexity: 11; Coverage: 0%; Class: ProfileLevelIndicationDescriptor" alt="" href="com/googlecode/mp4parser/boxes/mp4/objectdescriptors/ProfileLevelIndicationDescriptor.html#ProfileLevelIndicationDescriptor"/>
+<area shape="poly" coords="54,178,51,181,49,178,51,176,54,178,54,178" title="Complexity: 45; Coverage: 0%; Class: XtraBox" alt="" href="com/googlecode/mp4parser/boxes/microsoft/XtraBox.html#XtraBox"/>
+<area shape="poly" coords="54,199,51,201,49,199,51,196,54,199,54,199" title="Complexity: 15; Coverage: 0%; Class: AudioSpecificConfig.ELDSpecificConfig" alt="" href="com/googlecode/mp4parser/boxes/mp4/objectdescriptors/AudioSpecificConfig.html#AudioSpecificConfig.ELDSpecificConfig"/>
+<area shape="poly" coords="257,193,254,195,252,193,254,190,257,193,257,193" title="Complexity: 24; Coverage: 83%; Class: TrackMetaData" alt="" href="com/googlecode/mp4parser/authoring/TrackMetaData.html#TrackMetaData"/>
+<area shape="poly" coords="188,201,186,203,183,201,186,198,188,201,188,201" title="Complexity: 12; Coverage: 55%; Class: SampleImpl" alt="" href="com/googlecode/mp4parser/authoring/SampleImpl.html#SampleImpl"/>
+<area shape="poly" coords="249,178,247,180,244,178,247,175,249,178,249,178" title="Complexity: 46; Coverage: 80%; Class: Mp4TrackImpl" alt="" href="com/googlecode/mp4parser/authoring/Mp4TrackImpl.html#Mp4TrackImpl"/>
+<area shape="poly" coords="281,198,279,201,276,198,279,196,281,198,281,198" title="Complexity: 16; Coverage: 93%; Class: Movie" alt="" href="com/googlecode/mp4parser/authoring/Movie.html#Movie"/>
+<area shape="poly" coords="298,206,296,208,293,206,296,203,298,206,298,206" title="Complexity: 5; Coverage: 100%; Class: DataEntryUrlBox" alt="" href="com/coremedia/iso/boxes/DataEntryUrlBox.html#DataEntryUrlBox"/>
+<area shape="poly" coords="205,197,203,199,200,197,203,194,205,197,205,197" title="Complexity: 18; Coverage: 62%; Class: CencMp4TrackImplImpl.FindSaioSaizPair" alt="" href="com/googlecode/mp4parser/authoring/CencMp4TrackImplImpl.html#CencMp4TrackImplImpl.FindSaioSaizPair"/>
+<area shape="poly" coords="242,187,240,190,237,187,240,185,242,187,242,187" title="Complexity: 32; Coverage: 77%; Class: CencMp4TrackImplImpl" alt="" href="com/googlecode/mp4parser/authoring/CencMp4TrackImplImpl.html#CencMp4TrackImplImpl"/>
+<area shape="poly" coords="274,203,271,205,269,203,271,200,274,203,274,203" title="Complexity: 9; Coverage: 90%; Class: AbstractTrack" alt="" href="com/googlecode/mp4parser/authoring/AbstractTrack.html#AbstractTrack"/>
+<area shape="poly" coords="54,204,51,207,49,204,51,202,54,204,54,204" title="Complexity: 7; Coverage: 0%; Class: InitialObjectDescriptor" alt="" href="com/googlecode/mp4parser/boxes/mp4/objectdescriptors/InitialObjectDescriptor.html#InitialObjectDescriptor"/>
+<area shape="poly" coords="54,204,51,207,49,204,51,202,54,204,54,204" title="Complexity: 7; Coverage: 0%; Class: InitialObjectDescriptor" alt="" href="com/googlecode/mp4parser/boxes/mp4/objectdescriptors/InitialObjectDescriptor.html#InitialObjectDescriptor"/>
+<area shape="poly" coords="54,204,51,207,49,204,51,202,54,204,54,204" title="Complexity: 7; Coverage: 0%; Class: InitialObjectDescriptor" alt="" href="com/googlecode/mp4parser/boxes/mp4/objectdescriptors/InitialObjectDescriptor.html#InitialObjectDescriptor"/>
+<area shape="poly" coords="54,203,51,205,49,203,51,200,54,203,54,203" title="Complexity: 9; Coverage: 0%; Class: AppleRecordingYearBox" alt="" href="com/googlecode/mp4parser/boxes/apple/AppleRecordingYearBox.html#AppleRecordingYearBox"/>
+</map>
+            </div>
+        </div>
+        
+                    <div class="dashboard-widget">
+                <header class="dashboard-widget-header">
+                    <h3>Coverage tree map</h3>
+                </header>
+                <div class="dashboard-widget-content">
+                    <div id="infovis" style="width:100%; height:250px;">
+                        <div id="treemap-loader" style="position:relative;top:50px;">
+                            <p>
+                                Generating Coverage Tree Map. Please wait...
+                            </p>
+                            <p>
+                                <img src="img/ajax-loader.gif" alt="Loading Treemap"/>
+                            </p>
+                        </div>
+                    </div>
+                    <p><a href="treemap.html">See more</a></p>
+                </div>
+
+            </div>
+            </div>
+
+
+    <div class="aui-item">
+        <div class="dashboard-widget">
+            <header class="dashboard-widget-header">
+                <h3>Top 20 project risks</h3>
+            </header>
+            <div class="dashboard-widget-content">
+                
+                                                                <a class="tag" href="com/googlecode/mp4parser/authoring/builder/BetterFragmenter.html"
+                            style="font-size: 17px;color:#89c495"
+                            title="Average Method Complexity - 7 , Coverage - 96.8% ">BetterFragmenter</a>
+                                    
+                                                                <a class="tag" href="com/googlecode/mp4parser/authoring/samples/DefaultMp4SampleList.html"
+                            style="font-size: 16px;color:#89c495"
+                            title="Average Method Complexity - 5 , Coverage - 93% ">DefaultMp4SampleList</a>
+                                    
+                                                                <a class="tag" href="com/googlecode/mp4parser/authoring/builder/DefaultFragmenterImpl.html"
+                            style="font-size: 15px;color:#89c495"
+                            title="Average Method Complexity - 4.5 , Coverage - 92.6% ">DefaultFragmenterImpl</a>
+                                    
+                                                                <a class="tag" href="com/googlecode/mp4parser/authoring/builder/DefaultMp4Builder.html"
+                            style="font-size: 14px;color:#89c495"
+                            title="Average Method Complexity - 3.12 , Coverage - 93.1% ">DefaultMp4Builder</a>
+                                    
+                                                                <a class="tag" href="com/googlecode/mp4parser/BasicContainer.html"
+                            style="font-size: 14px;color:#89c495"
+                            title="Average Method Complexity - 3 , Coverage - 93.7% ">BasicContainer</a>
+                                    
+                                                                <a class="tag" href="com/googlecode/mp4parser/boxes/mp4/objectdescriptors/BitWriterBuffer.html"
+                            style="font-size: 14px;color:#89c495"
+                            title="Average Method Complexity - 3 , Coverage - 93.1% ">BitWriterBuffer</a>
+                                    
+                                                                <a class="tag" href="com/coremedia/iso/Hex.html"
+                            style="font-size: 14px;color:#14892c"
+                            title="Average Method Complexity - 3 , Coverage - 88% ">Hex</a>
+                                    
+                                                                <a class="tag" href="com/googlecode/mp4parser/util/Path.html"
+                            style="font-size: 14px;color:#14892c"
+                            title="Average Method Complexity - 2.846 , Coverage - 90.1% ">Path</a>
+                                    
+                                                                <a class="tag" href="com/googlecode/mp4parser/authoring/builder/FragmentedMp4Builder.html"
+                            style="font-size: 14px;color:#14892c"
+                            title="Average Method Complexity - 2.769 , Coverage - 90% ">FragmentedMp4Builder</a>
+                                    
+                                                                <a class="tag" href="com/googlecode/mp4parser/boxes/cenc/CencEncryptingSampleList.html"
+                            style="font-size: 16px;color:#14892c"
+                            title="Average Method Complexity - 5 , Coverage - 82.9% ">CencEncryptingSampleList.EncryptedSampleImpl</a>
+                                    
+                                                                <a class="tag" href="com/googlecode/mp4parser/boxes/cenc/CencDecryptingSampleList.html"
+                            style="font-size: 15px;color:#14892c"
+                            title="Average Method Complexity - 4 , Coverage - 83.7% ">CencDecryptingSampleList</a>
+                                    
+                                                                <a class="tag" href="com/coremedia/iso/IsoTypeWriterVariable.html"
+                            style="font-size: 17px;color:#fae1a0"
+                            title="Average Method Complexity - 6 , Coverage - 73.7% ">IsoTypeWriterVariable</a>
+                                    
+                                                                <a class="tag" href="com/googlecode/mp4parser/authoring/tracks/CencDecryptingTrackImpl.html"
+                            style="font-size: 14px;color:#14892c"
+                            title="Average Method Complexity - 2.556 , Coverage - 87.4% ">CencDecryptingTrackImpl</a>
+                                    
+                                                                <a class="tag" href="com/coremedia/iso/AbstractBoxParser.html"
+                            style="font-size: 16px;color:#fae1a0"
+                            title="Average Method Complexity - 5.5 , Coverage - 75.9% ">AbstractBoxParser</a>
+                                    
+                                                                <a class="tag" href="com/googlecode/mp4parser/authoring/Mp4TrackImpl.html"
+                            style="font-size: 15px;color:#fae1a0"
+                            title="Average Method Complexity - 3.833 , Coverage - 80.2% ">Mp4TrackImpl</a>
+                                    
+                                                                <a class="tag" href="com/googlecode/mp4parser/authoring/CencMp4TrackImplImpl.html"
+                            style="font-size: 15px;color:#fae1a0"
+                            title="Average Method Complexity - 4.571 , Coverage - 77.5% ">CencMp4TrackImplImpl</a>
+                                    
+                                                                <a class="tag" href="com/googlecode/mp4parser/authoring/samples/FragmentedMp4SampleList.html"
+                            style="font-size: 16px;color:#fae1a0"
+                            title="Average Method Complexity - 4.75 , Coverage - 76.3% ">FragmentedMp4SampleList</a>
+                                    
+                                                                <a class="tag" href="com/coremedia/iso/PropertyBoxParserImpl.html"
+                            style="font-size: 18px;color:#f6c342"
+                            title="Average Method Complexity - 7.25 , Coverage - 70.1% ">PropertyBoxParserImpl</a>
+                                    
+                                                                <a class="tag" href="com/googlecode/mp4parser/authoring/tracks/AC3TrackImpl.html"
+                            style="font-size: 14px;color:#14892c"
+                            title="Average Method Complexity - 2.562 , Coverage - 86.6% ">AC3TrackImpl</a>
+                                    
+                                                                <a class="tag" href="com/coremedia/iso/IsoTypeReaderVariable.html"
+                            style="font-size: 17px;color:#fae1a0"
+                            title="Average Method Complexity - 6 , Coverage - 71.4% ">IsoTypeReaderVariable</a>
+                                                    <p><a href="top-risks.html">See more</a></p>
+            </div>
+        </div>
+
+        <div class="dashboard-widget">
+            <header class="dashboard-widget-header">
+                <h3>Most complex packages</h3>
+            </header>
+            <div class="dashboard-widget-content">
+                
+                <table class="aui">
+                                            
+                                                <tr>
+                            <td>1. </td>
+                            <td><div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">0.37010777</span>37%</div><div style="display: table-cell">
+ <div title="37% Covered"  style="min-width:40px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:37%"></div></div></div></div></td>
+                            <td>
+                                <a href="com/googlecode/mp4parser/authoring/tracks/pkg-summary.html">com.googlecode.mp4parser.authoring.tracks</a>
+                                <span class="aui-badge" title="Package complexity">893</span>
+                            </td>
+                        </tr>
+                                            
+                                                <tr>
+                            <td>2. </td>
+                            <td><div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">0.6321265</span>63.2%</div><div style="display: table-cell">
+ <div title="63.2% Covered"  style="min-width:40px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:63.2%"></div></div></div></div></td>
+                            <td>
+                                <a href="com/coremedia/iso/boxes/pkg-summary.html">com.coremedia.iso.boxes</a>
+                                <span class="aui-badge" title="Package complexity">765</span>
+                            </td>
+                        </tr>
+                                            
+                                                <tr>
+                            <td>3. </td>
+                            <td><div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">0.30123875</span>30.1%</div><div style="display: table-cell">
+ <div title="30.1% Covered"  style="min-width:40px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:30.1%"></div></div></div></div></td>
+                            <td>
+                                <a href="com/googlecode/mp4parser/boxes/mp4/objectdescriptors/pkg-summary.html">com.googlecode.mp4parser.boxes.mp4.objectdescriptors</a>
+                                <span class="aui-badge" title="Package complexity">504</span>
+                            </td>
+                        </tr>
+                                            
+                                                <tr>
+                            <td>4. </td>
+                            <td><div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">0.57864076</span>57.9%</div><div style="display: table-cell">
+ <div title="57.9% Covered"  style="min-width:40px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:57.9%"></div></div></div></div></td>
+                            <td>
+                                <a href="com/mp4parser/iso14496/part15/pkg-summary.html">com.mp4parser.iso14496.part15</a>
+                                <span class="aui-badge" title="Package complexity">338</span>
+                            </td>
+                        </tr>
+                                            
+                                                <tr>
+                            <td>5. </td>
+                            <td><div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">0.8467049</span>84.7%</div><div style="display: table-cell">
+ <div title="84.7% Covered"  style="min-width:40px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:84.7%"></div></div></div></div></td>
+                            <td>
+                                <a href="com/googlecode/mp4parser/authoring/builder/pkg-summary.html">com.googlecode.mp4parser.authoring.builder</a>
+                                <span class="aui-badge" title="Package complexity">293</span>
+                            </td>
+                        </tr>
+                                    </table>
+            </div>
+        </div>
+
+        <div class="dashboard-widget">
+            <header class="dashboard-widget-header">
+                <h3>Most complex classes</h3>
+            </header>
+            <div class="dashboard-widget-content">
+                <table class="aui">
+                                            
+                                                <tr>
+                            <td>1. </td>
+                            <td><div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">0.227957</span>22.8%</div><div style="display: table-cell">
+ <div title="22.8% Covered"  style="min-width:40px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:22.8%"></div></div></div></div></td>
+                            <td>
+                                <a  href="com/googlecode/mp4parser/boxes/mp4/objectdescriptors/AudioSpecificConfig.html"  title="com.googlecode.mp4parser.boxes.mp4.objectdescriptors.AudioSpecificConfig">AudioSpecificConfig</a>
+                                <span class="aui-badge" title="Class complexity">280</span>
+                            </td>
+                        </tr>
+                                            
+                                                <tr>
+                            <td>2. </td>
+                            <td><div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">0.36894587</span>36.9%</div><div style="display: table-cell">
+ <div title="36.9% Covered"  style="min-width:40px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:36.9%"></div></div></div></div></td>
+                            <td>
+                                <a  href="com/googlecode/mp4parser/authoring/tracks/DTSTrackImpl.html"  title="com.googlecode.mp4parser.authoring.tracks.DTSTrackImpl">DTSTrackImpl</a>
+                                <span class="aui-badge" title="Class complexity">244</span>
+                            </td>
+                        </tr>
+                                            
+                                                <tr>
+                            <td>3. </td>
+                            <td><div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">0.9</span>90%</div><div style="display: table-cell">
+ <div title="90% Covered"  style="min-width:40px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:90%"></div></div></div></div></td>
+                            <td>
+                                <a  href="com/googlecode/mp4parser/authoring/builder/FragmentedMp4Builder.html"  title="com.googlecode.mp4parser.authoring.builder.FragmentedMp4Builder">FragmentedMp4Builder</a>
+                                <span class="aui-badge" title="Class complexity">108</span>
+                            </td>
+                        </tr>
+                                            
+                                                <tr>
+                            <td>4. </td>
+                            <td><div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">0.61728394</span>61.7%</div><div style="display: table-cell">
+ <div title="61.7% Covered"  style="min-width:40px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:61.7%"></div></div></div></div></td>
+                            <td>
+                                <a  href="com/googlecode/mp4parser/authoring/tracks/h264/H264TrackImpl.html"  title="com.googlecode.mp4parser.authoring.tracks.h264.H264TrackImpl">H264TrackImpl</a>
+                                <span class="aui-badge" title="Class complexity">105</span>
+                            </td>
+                        </tr>
+                                            
+                                                <tr>
+                            <td>5. </td>
+                            <td><div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">0.0</span>0%</div><div style="display: table-cell">
+ <div title="0% Covered"  style="min-width:40px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:0%"></div></div></div></div></td>
+                            <td>
+                                <a  href="com/googlecode/mp4parser/authoring/tracks/AppendTrack.html"  title="com.googlecode.mp4parser.authoring.tracks.AppendTrack">AppendTrack</a>
+                                <span class="aui-badge" title="Class complexity">97</span>
+                            </td>
+                        </tr>
+                                    </table>
+            </div>
+        </div>
+
+                <div class="dashboard-widget">
+            <header class="dashboard-widget-header">
+                <h3>Least tested methods</h3>
+            </header>
+            <div class="dashboard-widget-content">
+                <table class="aui">
+                                            
+
+                    <tr>
+                        <td align="right">1.</td>
+                        <td align="right"><div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">0.0</span>0%</div><div style="display: table-cell">
+ <div title="0% Covered"  style="min-width:40px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:0%"></div></div></div></div></td>
+                        <td>
+                              <!-- normal method -->
+                                                      <a title="EC3TrackImpl.readVariables()&#160;:&#160;BitStreamInfo" href="com/googlecode/mp4parser/authoring/tracks/EC3TrackImpl.html?line=158#src-158">EC3TrackImpl.readVariables()&#160;:&#160;BitStreamInfo</a>
+                            <span class="aui-badge" title="Method complexity">60</span>
+
+                        </td>
+                    </tr>
+                                            
+
+                    <tr>
+                        <td align="right">2.</td>
+                        <td align="right"><div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">0.0</span>0%</div><div style="display: table-cell">
+ <div title="0% Covered"  style="min-width:40px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:0%"></div></div></div></div></td>
+                        <td>
+                              <!-- normal method -->
+                                                      <a title="AudioSpecificConfig.equals(Object)&#160;:&#160;boolean" href="com/googlecode/mp4parser/boxes/mp4/objectdescriptors/AudioSpecificConfig.html?line=1291#src-1291">AudioSpecificConfig.equals(Object)&#160;:&#160;boolean</a>
+                            <span class="aui-badge" title="Method complexity">47</span>
+
+                        </td>
+                    </tr>
+                                            
+
+                    <tr>
+                        <td align="right">3.</td>
+                        <td align="right"><div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">0.0</span>0%</div><div style="display: table-cell">
+ <div title="0% Covered"  style="min-width:40px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:0%"></div></div></div></div></td>
+                        <td>
+                              <!-- normal method -->
+                                                      <a title="PictureParameterSet.equals(Object)&#160;:&#160;boolean" href="com/googlecode/mp4parser/h264/model/PictureParameterSet.html?line=317#src-317">PictureParameterSet.equals(Object)&#160;:&#160;boolean</a>
+                            <span class="aui-badge" title="Method complexity">29</span>
+
+                        </td>
+                    </tr>
+                                            
+
+                    <tr>
+                        <td align="right">4.</td>
+                        <td align="right"><div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">0.0</span>0%</div><div style="display: table-cell">
+ <div title="0% Covered"  style="min-width:40px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:0%"></div></div></div></div></td>
+                        <td>
+                              <!-- normal method -->
+                                                      <a title="AppendTrack.mergeDescriptors(BaseDescriptor,BaseDescriptor)&#160;:&#160;ESDescriptor" href="com/googlecode/mp4parser/authoring/tracks/AppendTrack.html?line=306#src-306">AppendTrack.mergeDescriptors(BaseDescriptor,BaseDescriptor)&#160;:&#160;ESDescriptor</a>
+                            <span class="aui-badge" title="Method complexity">32</span>
+
+                        </td>
+                    </tr>
+                                            
+
+                    <tr>
+                        <td align="right">5.</td>
+                        <td align="right"><div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">0.0</span>0%</div><div style="display: table-cell">
+ <div title="0% Covered"  style="min-width:40px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:0%"></div></div></div></div></td>
+                        <td>
+                              <!-- normal method -->
+                                                      <a title="DTSSpecificBox.getDashAudioChannelConfiguration()&#160;:&#160;int[]" href="com/googlecode/mp4parser/boxes/DTSSpecificBox.html?line=217#src-217">DTSSpecificBox.getDashAudioChannelConfiguration()&#160;:&#160;int[]</a>
+                            <span class="aui-badge" title="Method complexity">19</span>
+
+                        </td>
+                    </tr>
+                                            
+
+                    <tr>
+                        <td align="right">6.</td>
+                        <td align="right"><div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">0.0</span>0%</div><div style="display: table-cell">
+ <div title="0% Covered"  style="min-width:40px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:0%"></div></div></div></div></td>
+                        <td>
+                              <!-- normal method -->
+                                                      <a title="H265TrackImpl.H265TrackImpl(DataSource)" href="com/googlecode/mp4parser/authoring/tracks/h265/H265TrackImpl.html?line=39#src-39">H265TrackImpl.H265TrackImpl(DataSource)</a>
+                            <span class="aui-badge" title="Method complexity">38</span>
+
+                        </td>
+                    </tr>
+                                            
+
+                    <tr>
+                        <td align="right">7.</td>
+                        <td align="right"><div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">0.0</span>0%</div><div style="display: table-cell">
+ <div title="0% Covered"  style="min-width:40px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:0%"></div></div></div></div></td>
+                        <td>
+                              <!-- normal method -->
+                                                      <a title="PictureParameterSet.write(OutputStream)&#160;:&#160;void" href="com/googlecode/mp4parser/h264/model/PictureParameterSet.html?line=189#src-189">PictureParameterSet.write(OutputStream)&#160;:&#160;void</a>
+                            <span class="aui-badge" title="Method complexity">20</span>
+
+                        </td>
+                    </tr>
+                                            
+
+                    <tr>
+                        <td align="right">8.</td>
+                        <td align="right"><div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">0.0</span>0%</div><div style="display: table-cell">
+ <div title="0% Covered"  style="min-width:40px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:0%"></div></div></div></div></td>
+                        <td>
+                              <!-- normal method -->
+                                                      <a title="AppendTrack.mergeAudioSampleEntries(AudioSampleEntry,AudioSampleEntry)&#160;:&#160;AudioSampleEntry" href="com/googlecode/mp4parser/authoring/tracks/AppendTrack.html?line=213#src-213">AppendTrack.mergeAudioSampleEntries(AudioSampleEntry,AudioSampleEntry)&#160;:&#160;AudioSampleEntry</a>
+                            <span class="aui-badge" title="Method complexity">18</span>
+
+                        </td>
+                    </tr>
+                                            
+
+                    <tr>
+                        <td align="right">9.</td>
+                        <td align="right"><div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">0.0</span>0%</div><div style="display: table-cell">
+ <div title="0% Covered"  style="min-width:40px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:0%"></div></div></div></div></td>
+                        <td>
+                              <!-- normal method -->
+                                                      <a title="H263TrackImpl.H263TrackImpl(DataSource)" href="com/googlecode/mp4parser/authoring/tracks/H263TrackImpl.html?line=55#src-55">H263TrackImpl.H263TrackImpl(DataSource)</a>
+                            <span class="aui-badge" title="Method complexity">15</span>
+
+                        </td>
+                    </tr>
+                                            
+
+                    <tr>
+                        <td align="right">10.</td>
+                        <td align="right"><div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">0.0</span>0%</div><div style="display: table-cell">
+ <div title="0% Covered"  style="min-width:40px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:0%"></div></div></div></div></td>
+                        <td>
+                              <!-- normal method -->
+                                                      <a title="DTSTrackImpl.getBitRate(int)&#160;:&#160;int" href="com/googlecode/mp4parser/authoring/tracks/DTSTrackImpl.html?line=676#src-676">DTSTrackImpl.getBitRate(int)&#160;:&#160;int</a>
+                            <span class="aui-badge" title="Method complexity">27</span>
+
+                        </td>
+                    </tr>
+                                            
+
+                    <tr>
+                        <td align="right">11.</td>
+                        <td align="right"><div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">0.0</span>0%</div><div style="display: table-cell">
+ <div title="0% Covered"  style="min-width:40px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:0%"></div></div></div></div></td>
+                        <td>
+                              <!-- normal method -->
+                                                      <a title="SeqParameterSet.write(OutputStream)&#160;:&#160;void" href="com/googlecode/mp4parser/h264/model/SeqParameterSet.html?line=324#src-324">SeqParameterSet.write(OutputStream)&#160;:&#160;void</a>
+                            <span class="aui-badge" title="Method complexity">17</span>
+
+                        </td>
+                    </tr>
+                                            
+
+                    <tr>
+                        <td align="right">12.</td>
+                        <td align="right"><div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">0.0</span>0%</div><div style="display: table-cell">
+ <div title="0% Covered"  style="min-width:40px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:0%"></div></div></div></div></td>
+                        <td>
+                              <!-- normal method -->
+                                                      <a title="OneJpegPerIframe.OneJpegPerIframe(String,File[],Track)" href="com/googlecode/mp4parser/authoring/tracks/mjpeg/OneJpegPerIframe.html?line=35#src-35">OneJpegPerIframe.OneJpegPerIframe(String,File[],Track)</a>
+                            <span class="aui-badge" title="Method complexity">17</span>
+
+                        </td>
+                    </tr>
+                                            
+
+                    <tr>
+                        <td align="right">13.</td>
+                        <td align="right"><div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">0.0</span>0%</div><div style="display: table-cell">
+ <div title="0% Covered"  style="min-width:40px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:0%"></div></div></div></div></td>
+                        <td>
+                              <!-- normal method -->
+                                                      <a title="AppendTrack.mergeVisualSampleEntry(VisualSampleEntry,VisualSampleEntry)&#160;:&#160;VisualSampleEntry" href="com/googlecode/mp4parser/authoring/tracks/AppendTrack.html?line=134#src-134">AppendTrack.mergeVisualSampleEntry(VisualSampleEntry,VisualSampleEntry)&#160;:&#160;VisualSampleEntry</a>
+                            <span class="aui-badge" title="Method complexity">14</span>
+
+                        </td>
+                    </tr>
+                                            
+
+                    <tr>
+                        <td align="right">14.</td>
+                        <td align="right"><div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">0.0</span>0%</div><div style="display: table-cell">
+ <div title="0% Covered"  style="min-width:40px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:0%"></div></div></div></div></td>
+                        <td>
+                              <!-- normal method -->
+                                                      <a title="ESDescriptor.equals(Object)&#160;:&#160;boolean" href="com/googlecode/mp4parser/boxes/mp4/objectdescriptors/ESDescriptor.html?line=288#src-288">ESDescriptor.equals(Object)&#160;:&#160;boolean</a>
+                            <span class="aui-badge" title="Method complexity">21</span>
+
+                        </td>
+                    </tr>
+                                            
+
+                    <tr>
+                        <td align="right">15.</td>
+                        <td align="right"><div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">0.0</span>0%</div><div style="display: table-cell">
+ <div title="0% Covered"  style="min-width:40px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:0%"></div></div></div></div></td>
+                        <td>
+                              <!-- normal method -->
+                                                      <a title="H265TrackImplOld.getFrameRate(ByteBuffer)&#160;:&#160;int" href="com/googlecode/mp4parser/authoring/tracks/h265/H265TrackImplOld.html?line=207#src-207">H265TrackImplOld.getFrameRate(ByteBuffer)&#160;:&#160;int</a>
+                            <span class="aui-badge" title="Method complexity">14</span>
+
+                        </td>
+                    </tr>
+                                            
+
+                    <tr>
+                        <td align="right">16.</td>
+                        <td align="right"><div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">0.0</span>0%</div><div style="display: table-cell">
+ <div title="0% Covered"  style="min-width:40px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:0%"></div></div></div></div></td>
+                        <td>
+                              <!-- normal method -->
+                                                      <a title="VideoParameterSet.VideoParameterSet(ByteBuffer)" href="com/googlecode/mp4parser/authoring/tracks/h265/VideoParameterSet.html?line=15#src-15">VideoParameterSet.VideoParameterSet(ByteBuffer)</a>
+                            <span class="aui-badge" title="Method complexity">14</span>
+
+                        </td>
+                    </tr>
+                                            
+
+                    <tr>
+                        <td align="right">17.</td>
+                        <td align="right"><div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">0.0</span>0%</div><div style="display: table-cell">
+ <div title="0% Covered"  style="min-width:40px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:0%"></div></div></div></div></td>
+                        <td>
+                              <!-- normal method -->
+                                                      <a title="EC3TrackImpl.EC3TrackImpl(DataSource)" href="com/googlecode/mp4parser/authoring/tracks/EC3TrackImpl.html?line=40#src-40">EC3TrackImpl.EC3TrackImpl(DataSource)</a>
+                            <span class="aui-badge" title="Method complexity">9</span>
+
+                        </td>
+                    </tr>
+                                            
+
+                    <tr>
+                        <td align="right">18.</td>
+                        <td align="right"><div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">0.0</span>0%</div><div style="display: table-cell">
+ <div title="0% Covered"  style="min-width:40px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:0%"></div></div></div></div></td>
+                        <td>
+                              <!-- normal method -->
+                                                      <a title="SeqParameterSet.writeVUIParameters(VUIParameters,CAVLCWriter)&#160;:&#160;void" href="com/googlecode/mp4parser/h264/model/SeqParameterSet.html?line=415#src-415">SeqParameterSet.writeVUIParameters(VUIParameters,CAVLCWriter)&#160;:&#160;void</a>
+                            <span class="aui-badge" title="Method complexity">13</span>
+
+                        </td>
+                    </tr>
+                                            
+
+                    <tr>
+                        <td align="right">19.</td>
+                        <td align="right"><div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">0.0</span>0%</div><div style="display: table-cell">
+ <div title="0% Covered"  style="min-width:40px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:0%"></div></div></div></div></td>
+                        <td>
+                              <!-- normal method -->
+                                                      <a title="SequenceParameterSetRbsp.SequenceParameterSetRbsp(InputStream)" href="com/googlecode/mp4parser/authoring/tracks/h265/SequenceParameterSetRbsp.html?line=13#src-13">SequenceParameterSetRbsp.SequenceParameterSetRbsp(InputStream)</a>
+                            <span class="aui-badge" title="Method complexity">9</span>
+
+                        </td>
+                    </tr>
+                                            
+
+                    <tr>
+                        <td align="right">20.</td>
+                        <td align="right"><div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">0.0</span>0%</div><div style="display: table-cell">
+ <div title="0% Covered"  style="min-width:40px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:0%"></div></div></div></div></td>
+                        <td>
+                              <!-- normal method -->
+                                                      <a title="SequenceParameterSetRbsp.profile_tier_level(int,CAVLCReader)&#160;:&#160;void" href="com/googlecode/mp4parser/authoring/tracks/h265/SequenceParameterSetRbsp.html?line=108#src-108">SequenceParameterSetRbsp.profile_tier_level(int,CAVLCReader)&#160;:&#160;void</a>
+                            <span class="aui-badge" title="Method complexity">9</span>
+
+                        </td>
+                    </tr>
+                                    </table>
+            </div>
+        </div>
+        
+    </div>
+</div>
+                            </div> <!-- tabs-pane active-pane -->
+                        </div>
+
+    <script type="text/javascript" src="jit.js" ></script>
+    <script type="text/javascript" src="treemap-dash-json.js" ></script>
+
+                        </div> <!-- class="aui-page-panel-content-clover" -->
+                    <footer id="footer" role="contentinfo">
+    <section class="footer-body">
+        <ul>
+            <li>
+                Report generated by <a target="_new" href="https://openclover.org">OpenClover</a> v 4.5.2
+                on Mon Apr 29 2024 22:50:27 CDT using coverage data from Mon Apr 29 2024 22:49:51 CDT.
+            </li>
+        </ul>
+        <ul>
+            <li>OpenClover is free and open-source software. </li>
+        </ul>
+    </section>
+</footer>                </section> <!-- class="aui-page-panel-content" -->
+            </div> <!-- class="aui-page-panel-inner" -->
+        </div> <!-- class="aui-page-panel" -->
+    </div> <!-- id="page" -->
+</body>
+</html>

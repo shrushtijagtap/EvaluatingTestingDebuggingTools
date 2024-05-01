@@ -1,0 +1,10 @@
+var clover = new Object();
+
+// JSON: {classes : [{name, id, sl, el,  methods : [{sl, el}, ...]}, ...]}
+clover.pageData = {"classes":[{"el":79,"id":50126,"methods":[{"el":35,"sc":5,"sl":32},{"el":43,"sc":5,"sl":37},{"el":48,"sc":5,"sl":45},{"el":53,"sc":5,"sl":50},{"el":58,"sc":5,"sl":55},{"el":63,"sc":5,"sl":60},{"el":68,"sc":5,"sl":65},{"el":73,"sc":5,"sl":70},{"el":78,"sc":5,"sl":75}],"name":"InheritanceUtilsTest","sl":30}]}
+
+// JSON: {test_ID : {"methods": [ID1, ID2, ID3...], "name" : "testXXX() void"}, ...};
+clover.testTargets = {"test_1437":{"methods":[{"sl":45}],"name":"testDistanceEqual","pass":true,"statements":[{"sl":47}]},"test_1750":{"methods":[{"sl":55}],"name":"testDistanceNullChild","pass":true,"statements":[{"sl":57}]},"test_1946":{"methods":[{"sl":70}],"name":"testDistanceDisjoint","pass":true,"statements":[{"sl":72}]},"test_27":{"methods":[{"sl":60}],"name":"testDistanceNullParent","pass":true,"statements":[{"sl":62}]},"test_2754":{"methods":[{"sl":65}],"name":"testDistanceNullParentNullChild","pass":true,"statements":[{"sl":67}]},"test_2818":{"methods":[{"sl":37}],"name":"testDistanceGreaterThanZero","pass":true,"statements":[{"sl":39},{"sl":40},{"sl":41},{"sl":42}]},"test_3247":{"methods":[{"sl":50}],"name":"testDistanceEqualObject","pass":true,"statements":[{"sl":52}]},"test_3372":{"methods":[{"sl":75}],"name":"testDistanceReverseParentChild","pass":true,"statements":[{"sl":77}]},"test_3764":{"methods":[{"sl":32}],"name":"testConstructor","pass":true,"statements":[{"sl":34}]}}
+
+// JSON: { lines : [{tests : [testid1, testid2, testid3, ...]}, ...]};
+clover.srcFileLines = [[], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [3764], [], [3764], [], [], [2818], [], [2818], [2818], [2818], [2818], [], [], [1437], [], [1437], [], [], [3247], [], [3247], [], [], [1750], [], [1750], [], [], [27], [], [27], [], [], [2754], [], [2754], [], [], [1946], [], [1946], [], [], [3372], [], [3372], [], []]

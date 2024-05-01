@@ -1,0 +1,2346 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+
+    
+    
+    <link rel="SHORTCUT ICON" href="img/clover.ico" />
+
+    <link rel="stylesheet" href="aui/css/aui.min.css" media="all"/>
+    <link rel="stylesheet" href="aui/css/aui-experimental.min.css" media="all"/>
+    <!--[if IE 9]><link rel="stylesheet" href="aui/css/aui-ie9.min.css" media="all"/><![endif]-->
+
+    <style type="text/css" media="all">
+        @import url('style.css');
+        @import url('tree.css');
+        
+    </style>
+
+    <script src="jquery-1.8.3.min.js" type="text/javascript"></script>
+    <script src="aui/js/aui.min.js" type="text/javascript"></script>
+    <script src="aui/js/aui-experimental.min.js" type="text/javascript"></script>
+    <script src="aui/js/aui-soy.min.js" type="text/javascript"></script>
+
+    <script src="package-nodes-tree.js" type="text/javascript"></script>
+    <script src="clover-tree.js" type="text/javascript"></script>
+    <script src="clover.js" type="text/javascript"></script>
+    <script src="clover-descriptions.js" type="text/javascript"></script>
+    <script src="cloud.js" type="text/javascript"></script>
+
+            <title>ISO Parser 1.1.18-SNAPSHOT</title>
+    </head>
+
+<body  >
+    <div id="page">
+        
+        
+
+
+<header id="header" role="banner">
+    <nav class="aui-header aui-dropdown2-trigger-group" role="navigation">
+        <div class="aui-header-inner">
+            <div class="aui-header-primary">
+                <h1 id="logo" class="aui-header-logo aui-header-logo-clover">
+                    <a href="https://openclover.org" title="Visit OpenClover home page"><span class="aui-header-logo-device">OpenClover</span></a>
+                </h1>
+                            </div>
+            <div class="aui-header-secondary">
+                <ul class="aui-nav">
+                    <li id="system-help-menu">
+                        <a class="aui-nav-link" title="Open online documentation" target="_blank"
+                           href="https://openclover.org/documentation">
+                            <span class="aui-icon aui-icon-small aui-iconfont-help">&#160;Help</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+        
+        <div class="aui-page-panel">
+            <div class="aui-page-panel-inner">
+                <div class="aui-page-panel-nav aui-page-panel-nav-clover">
+                    
+
+<div class="aui-page-header-inner" style="margin-bottom: 20px;">
+    <div class="aui-page-header-image">
+                    <a href="http://code.google.com/p/mp4parser/" target="_top">
+                <div class="aui-avatar aui-avatar-large aui-avatar-project">
+            <div class="aui-avatar-inner">
+                                    <img src="img/clover_logo_large.png" alt="Clover icon"/>
+                            </div>
+        </div>
+                    </a>
+            </div>
+    <div class="aui-page-header-main" >
+        <h1>
+                            <a href="http://code.google.com/p/mp4parser/" target="_top">
+                                        ISO Parser 1.1.18-SNAPSHOT
+                                        </a>
+                    </h1>
+    </div>
+</div>
+
+<nav class="aui-navgroup aui-navgroup-vertical">
+    <div class="aui-navgroup-inner">
+                                            <ul class="aui-nav">
+                <li class="aui-nav-selected">
+                    <a href="dashboard.html">Project overview</a>
+                </li>
+            </ul>
+        
+                <div class="aui-nav-heading packages-nav-heading">
+            <strong>Packages</strong>
+        </div>
+        <div class="aui-nav project-packages">
+            <form method="get" action="#" class="aui package-filter-container">
+                <input type="text" autocomplete="off" class="package-filter text"
+                       placeholder="Type to filter packages..." name="package-filter" id="package-filter"
+                       title="Start typing package name (or part of the name) to search through the tree. Use arrow keys and the Enter key to navigate."/>
+            </form>
+            <p class="package-filter-no-results-message hidden">
+                <small>No results found.</small>
+            </p>
+                                                  <div class="packages-tree-wrapper" data-root-relative="" data-package-name="">
+                <div class="packages-tree-container"></div>
+                <div class="clover-packages-lozenges"></div>
+            </div>
+        </div>
+        
+            </div>
+</nav>                </div>
+                <section class="aui-page-panel-content">
+                    <div class="aui-page-panel-content-clover">
+
+                    
+                    <ol class="aui-nav aui-nav-breadcrumbs">
+            
+        <li><a href="dashboard.html">Project Clover database Mon Apr 29 2024 12:54:46 CDT</a></li>
+    </ol>
+    
+<h1 class="aui-h2-clover">
+            Project overview
+    </h1>
+<div class="aui-tabs horizontal-tabs">
+
+            <ul class="tabs-menu">
+            <li class="menu-item ">
+            <a href="dashboard.html">Dashboard</a>
+        </li>
+                <li class="menu-item active-tab">
+            <a href="pkg-summary.html"><strong>Application code</strong></a>
+        </li>
+                <li class="menu-item ">
+            <a href="testsrc-pkg-summary.html"><strong>Test code</strong></a>
+        </li>
+        <li class="menu-item ">
+            <a href="test-pkg-summary.html"><strong>Test results</strong></a>
+        </li>
+                <li class="menu-item ">
+            <a href="top-risks.html"><strong>Top risks</strong></a>
+        </li>
+        <li class="menu-item ">
+            <a href="quick-wins.html"><strong>Quick wins</strong></a>
+        </li>
+                                                <li class="menu-item ">
+                <a href="treemap.html"><strong>Coverage tree map</strong></a>
+            </li>
+            </ul>
+    <div class="tabs-pane active-pane" id="tabs-first">
+
+        <div>&#160;</div>
+
+            <div class="dashboard-widget">
+        <header class="dashboard-widget-header">
+            <h3>Code metrics</h3>
+        </header>
+        <div class="dashboard-widget-content">
+                        
+
+<div id="td-header-stats" class="aui-item" style="display: ">
+<div style="display: table">
+    <div class="stats-box">
+        <div class="stats-box-label"><label title="Total number of branches in this project">Branches:</label></div>
+        <div class="stats-box-value">4,526</div>
+    </div>
+    <div class="stats-box">
+        <div class="stats-box-label"><label title="Total number of statements in this project">Statements:</label></div>
+        <div class="stats-box-value">15,021</div>
+    </div>
+    <div class="stats-box">
+        <div class="stats-box-label"><label title="Total number of methods in this project">Methods:</label></div>
+        <div class="stats-box-value">3,411</div>
+    </div>
+    <div class="stats-box">
+        <div class="stats-box-label"><label title="Total number of classes in this project">Classes:</label></div>
+        <div class="stats-box-value">450</div>
+    </div>
+            <div class="stats-box">
+            <div class="stats-box-label"><label title="Total number of files in this project">Files:</label></div>
+            <div class="stats-box-value">377</div>
+        </div>
+                <div class="stats-box">
+            <div class="stats-box-label"><label title="Total number of packages in this project">Packages:</label></div>
+            <div class="stats-box-value">50</div>
+        </div>
+        <div class="stats-box">
+        <div class="stats-box-label"><label title="Total number of lines of code in this project">LOC:</label></div>
+        <div class="stats-box-value">44,986</div>
+    </div>
+    <div class="stats-box">
+        <div class="stats-box-label"><label title="Total number of non-comment lines of code in this project">NCLOC:</label></div>
+        <div class="stats-box-value">30,807</div>
+    </div>
+    <div class="stats-box">
+        <div class="stats-box-label"><label title="Cyclomatic complexity is the number of paths in this project">Total complexity:</label></div>
+        <div class="stats-box-value">6,461</div>
+    </div>
+    <div class="stats-box">
+        <div class="stats-box-label">
+            <label title="Complexity density is the complexity divided by the number of statements in this project">Complexity density:</label>
+        </div>
+        <div class="stats-box-value">0.43</div>
+    </div>
+    <div class="stats-box">
+        <div class="stats-box-label"><label title="Number of statements per method.">Statements/Method:</label></div>
+        <div class="stats-box-value">4.4</div>
+    </div>
+    <div class="stats-box">
+        <div class="stats-box-label"><label title="Number of methods per class.">Methods/Class:</label></div>
+        <div class="stats-box-value">7.58</div>
+    </div>
+            <div class="stats-box">
+            <div class="stats-box-label"><label title="Number of classes per package.">Classes/Package:</label></div>
+            <div class="stats-box-value">9</div>
+        </div>
+        <div class="stats-box">
+        <div class="stats-box-label"><label title="Complexity divided by the number of methods in this project">Average method complexity:</label></div>
+        <div class="stats-box-value">1.89</div>
+    </div>
+</div>
+
+</div>
+                        
+
+<div id="td-filtered-header-stats" class="aui-item" style="display: none">
+<div style="display: table">
+    <div class="stats-box">
+        <div class="stats-box-label"><label title="Total number of branches in this project">Branches:</label></div>
+        <div class="stats-box-value">4,526</div>
+    </div>
+    <div class="stats-box">
+        <div class="stats-box-label"><label title="Total number of statements in this project">Statements:</label></div>
+        <div class="stats-box-value">15,021</div>
+    </div>
+    <div class="stats-box">
+        <div class="stats-box-label"><label title="Total number of methods in this project">Methods:</label></div>
+        <div class="stats-box-value">3,411</div>
+    </div>
+    <div class="stats-box">
+        <div class="stats-box-label"><label title="Total number of classes in this project">Classes:</label></div>
+        <div class="stats-box-value">450</div>
+    </div>
+            <div class="stats-box">
+            <div class="stats-box-label"><label title="Total number of files in this project">Files:</label></div>
+            <div class="stats-box-value">377</div>
+        </div>
+                <div class="stats-box">
+            <div class="stats-box-label"><label title="Total number of packages in this project">Packages:</label></div>
+            <div class="stats-box-value">50</div>
+        </div>
+        <div class="stats-box">
+        <div class="stats-box-label"><label title="Total number of lines of code in this project">LOC:</label></div>
+        <div class="stats-box-value">44,986</div>
+    </div>
+    <div class="stats-box">
+        <div class="stats-box-label"><label title="Total number of non-comment lines of code in this project">NCLOC:</label></div>
+        <div class="stats-box-value">30,807</div>
+    </div>
+    <div class="stats-box">
+        <div class="stats-box-label"><label title="Cyclomatic complexity is the number of paths in this project">Total complexity:</label></div>
+        <div class="stats-box-value">6,461</div>
+    </div>
+    <div class="stats-box">
+        <div class="stats-box-label">
+            <label title="Complexity density is the complexity divided by the number of statements in this project">Complexity density:</label>
+        </div>
+        <div class="stats-box-value">0.43</div>
+    </div>
+    <div class="stats-box">
+        <div class="stats-box-label"><label title="Number of statements per method.">Statements/Method:</label></div>
+        <div class="stats-box-value">4.4</div>
+    </div>
+    <div class="stats-box">
+        <div class="stats-box-label"><label title="Number of methods per class.">Methods/Class:</label></div>
+        <div class="stats-box-value">7.58</div>
+    </div>
+            <div class="stats-box">
+            <div class="stats-box-label"><label title="Number of classes per package.">Classes/Package:</label></div>
+            <div class="stats-box-value">9</div>
+        </div>
+        <div class="stats-box">
+        <div class="stats-box-label"><label title="Complexity divided by the number of methods in this project">Average method complexity:</label></div>
+        <div class="stats-box-value">1.89</div>
+    </div>
+</div>
+
+</div>        </div>
+    </div>
+        
+
+
+        
+        <table id="projectSummaryTable" class="aui">
+                        <thead>
+    <tr>
+        <th width="30%">Project</th>
+                    <th colspan="1">
+                <label >Packages</label>
+            </th>
+                    <th colspan="1">
+                <label  title="The percentage of elements that have been filtered from this report.">% Filtered</label>
+            </th>
+                    <th colspan="1">
+                <label  title="The average number of paths per method.">Average Method Complexity</label>
+            </th>
+                    <th colspan="1">
+                <label  title="The number of statements and branches that were not covered during testing.">Uncovered Elements</label>
+            </th>
+                    <th colspan="2">
+                <label  title="The amount of code that was hit at least once during testing.">TOTAL Coverage</label>
+            </th>
+            </tr>
+</thead>
+            <tbody>
+                                <tr>
+    <td>
+                <span class="sortValue">Clover&#160;database&#160;Mon&#160;Apr&#160;29&#160;2024&#160;12:54:46&#160;CDT</span>
+                    Clover&#160;database&#160;Mon&#160;Apr&#160;29&#160;2024&#160;12:54:46&#160;CDT
+                    </td>
+
+                
+        <td class=" " align="right">
+            <span class="sortValue">50.0</span>
+            50
+        </td>
+        
+            
+        <td class=" " align="right">
+            <span class="sortValue">0.0</span>
+            0%
+        </td>
+        
+            
+        <td class=" " align="right">
+            <span class="sortValue">1.894166</span>
+            1.89
+        </td>
+        
+            
+        <td class=" " align="right">
+            <span class="sortValue">12756.0</span>
+            12,756
+        </td>
+        
+            
+        <td class=" " align="right">
+            <span class="sortValue">0.44437668</span>
+            <div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">0.44437668</span>44.4%</div><div style="display: table-cell">
+ <div title="44.4% Covered"  style="min-width:200px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:44.4%"></div></div></div></div>
+        </td>
+        
+    </tr>
+            </tbody>
+        </table>
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            
+                            <div>&#160;</div>
+                        <div>
+    Metrics from sub-packages:
+            <p class="aui-buttons">
+        <a href="pkg-summary.html"
+           class="aui-button active"
+           id="simple-tooltip"
+           title="Calculate code metrics from sub-packages separately">
+            Separated
+        </a>
+        <a href="agg-pkgs.html"
+           class="aui-button"
+           id="simple-tooltip"
+           title="Calculate a sum of metrics from a given package and all its sub-packages">
+            Aggregated
+        </a>
+    </p>
+</div>
+            <table id="projectPackagesTable" class="aui aui-table-sortable">
+                                <thead>
+    <tr>
+        <th width="30%">Package</th>
+                            <th colspan="1">
+                <label >
+                    Files
+                </label>
+            </th>
+                                <th colspan="1">
+                <label  title="The percentage of elements that have been filtered from this report.">
+                    % Filtered
+                </label>
+            </th>
+                                <th colspan="1">
+                <label  title="The average number of paths per method.">
+                    Average Method Complexity
+                </label>
+            </th>
+                                <th colspan="1">
+                <label  title="The number of statements and branches that were not covered during testing.">
+                    Uncovered Elements
+                </label>
+            </th>
+                                <th colspan="2">
+                <label  title="The amount of code that was hit at least once during testing.">
+                    TOTAL Coverage
+                </label>
+            </th>
+                        </tr>
+</thead>
+                <tbody>
+                    
+                                                                                                                                        <tr>
+    <td>
+                <span class="sortValue">com.coremedia.iso.boxes.dece</span>
+                    <a href="com/coremedia/iso/boxes/dece/pkg-summary.html" title="com.coremedia.iso.boxes.dece">com.coremedia.iso.boxes.dece</a>
+                    </td>
+
+                
+        <td class=" " align="right">
+            <span class="sortValue">1.0</span>
+            1
+        </td>
+        
+            
+        <td class=" " align="right">
+            <span class="sortValue">0.0</span>
+            0%
+        </td>
+        
+            
+        <td class=" " align="right">
+            <span class="sortValue">1.0714285</span>
+            1.07
+        </td>
+        
+            
+        <td class=" " align="right">
+            <span class="sortValue">43.0</span>
+            43
+        </td>
+        
+            
+        <td class=" " align="right">
+            <span class="sortValue">0.0</span>
+            <div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">0.0</span>0%</div><div style="display: table-cell">
+ <div title="0% Covered"  style="min-width:200px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:0%"></div></div></div></div>
+        </td>
+        
+    </tr>
+                                                                                                <tr>
+    <td>
+                <span class="sortValue">com.coremedia.iso.boxes.threegpp26244</span>
+                    <a href="com/coremedia/iso/boxes/threegpp26244/pkg-summary.html" title="com.coremedia.iso.boxes.threegpp26244">com.coremedia.iso.boxes.threegpp26244</a>
+                    </td>
+
+                
+        <td class=" " align="right">
+            <span class="sortValue">1.0</span>
+            1
+        </td>
+        
+            
+        <td class=" " align="right">
+            <span class="sortValue">0.0</span>
+            0%
+        </td>
+        
+            
+        <td class=" " align="right">
+            <span class="sortValue">1.0</span>
+            1
+        </td>
+        
+            
+        <td class=" " align="right">
+            <span class="sortValue">59.0</span>
+            59
+        </td>
+        
+            
+        <td class=" " align="right">
+            <span class="sortValue">0.0</span>
+            <div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">0.0</span>0%</div><div style="display: table-cell">
+ <div title="0% Covered"  style="min-width:200px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:0%"></div></div></div></div>
+        </td>
+        
+    </tr>
+                                                                                                <tr>
+    <td>
+                <span class="sortValue">com.coremedia.iso.boxes.vodafone</span>
+                    <a href="com/coremedia/iso/boxes/vodafone/pkg-summary.html" title="com.coremedia.iso.boxes.vodafone">com.coremedia.iso.boxes.vodafone</a>
+                    </td>
+
+                
+        <td class=" " align="right">
+            <span class="sortValue">4.0</span>
+            4
+        </td>
+        
+            
+        <td class=" " align="right">
+            <span class="sortValue">0.0</span>
+            0%
+        </td>
+        
+            
+        <td class=" " align="right">
+            <span class="sortValue">1.0</span>
+            1
+        </td>
+        
+            
+        <td class=" " align="right">
+            <span class="sortValue">76.0</span>
+            76
+        </td>
+        
+            
+        <td class=" " align="right">
+            <span class="sortValue">0.0</span>
+            <div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">0.0</span>0%</div><div style="display: table-cell">
+ <div title="0% Covered"  style="min-width:200px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:0%"></div></div></div></div>
+        </td>
+        
+    </tr>
+                                                                                                <tr>
+    <td>
+                <span class="sortValue">com.googlecode.mp4parser.authoring.tracks.h265</span>
+                    <a href="com/googlecode/mp4parser/authoring/tracks/h265/pkg-summary.html" title="com.googlecode.mp4parser.authoring.tracks.h265">com.googlecode.mp4parser.authoring.tracks.h265</a>
+                    </td>
+
+                
+        <td class=" " align="right">
+            <span class="sortValue">8.0</span>
+            8
+        </td>
+        
+            
+        <td class=" " align="right">
+            <span class="sortValue">0.0</span>
+            0%
+        </td>
+        
+            
+        <td class=" " align="right">
+            <span class="sortValue">6.027027</span>
+            6.03
+        </td>
+        
+            
+        <td class=" " align="right">
+            <span class="sortValue">964.0</span>
+            964
+        </td>
+        
+            
+        <td class=" " align="right">
+            <span class="sortValue">0.0</span>
+            <div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">0.0</span>0%</div><div style="display: table-cell">
+ <div title="0% Covered"  style="min-width:200px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:0%"></div></div></div></div>
+        </td>
+        
+    </tr>
+                                                                                                <tr>
+    <td>
+                <span class="sortValue">com.googlecode.mp4parser.authoring.tracks.mjpeg</span>
+                    <a href="com/googlecode/mp4parser/authoring/tracks/mjpeg/pkg-summary.html" title="com.googlecode.mp4parser.authoring.tracks.mjpeg">com.googlecode.mp4parser.authoring.tracks.mjpeg</a>
+                    </td>
+
+                
+        <td class=" " align="right">
+            <span class="sortValue">1.0</span>
+            1
+        </td>
+        
+            
+        <td class=" " align="right">
+            <span class="sortValue">0.0</span>
+            0%
+        </td>
+        
+            
+        <td class=" " align="right">
+            <span class="sortValue">2.3846154</span>
+            2.38
+        </td>
+        
+            
+        <td class=" " align="right">
+            <span class="sortValue">111.0</span>
+            111
+        </td>
+        
+            
+        <td class=" " align="right">
+            <span class="sortValue">0.0</span>
+            <div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">0.0</span>0%</div><div style="display: table-cell">
+ <div title="0% Covered"  style="min-width:200px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:0%"></div></div></div></div>
+        </td>
+        
+    </tr>
+                                                                                                <tr>
+    <td>
+                <span class="sortValue">com.googlecode.mp4parser.boxes.basemediaformat</span>
+                    <a href="com/googlecode/mp4parser/boxes/basemediaformat/pkg-summary.html" title="com.googlecode.mp4parser.boxes.basemediaformat">com.googlecode.mp4parser.boxes.basemediaformat</a>
+                    </td>
+
+                
+        <td class=" " align="right">
+            <span class="sortValue">1.0</span>
+            1
+        </td>
+        
+            
+        <td class=" " align="right">
+            <span class="sortValue">0.0</span>
+            0%
+        </td>
+        
+            
+        <td class=" " align="right">
+            <span class="sortValue">1.0</span>
+            1
+        </td>
+        
+            
+        <td class=" " align="right">
+            <span class="sortValue">27.0</span>
+            27
+        </td>
+        
+            
+        <td class=" " align="right">
+            <span class="sortValue">0.0</span>
+            <div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">0.0</span>0%</div><div style="display: table-cell">
+ <div title="0% Covered"  style="min-width:200px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:0%"></div></div></div></div>
+        </td>
+        
+    </tr>
+                                                                                                <tr>
+    <td>
+                <span class="sortValue">com.googlecode.mp4parser.boxes.microsoft</span>
+                    <a href="com/googlecode/mp4parser/boxes/microsoft/pkg-summary.html" title="com.googlecode.mp4parser.boxes.microsoft">com.googlecode.mp4parser.boxes.microsoft</a>
+                    </td>
+
+                
+        <td class=" " align="right">
+            <span class="sortValue">1.0</span>
+            1
+        </td>
+        
+            
+        <td class=" " align="right">
+            <span class="sortValue">0.0</span>
+            0%
+        </td>
+        
+            
+        <td class=" " align="right">
+            <span class="sortValue">2.1794872</span>
+            2.18
+        </td>
+        
+            
+        <td class=" " align="right">
+            <span class="sortValue">311.0</span>
+            311
+        </td>
+        
+            
+        <td class=" " align="right">
+            <span class="sortValue">0.0</span>
+            <div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">0.0</span>0%</div><div style="display: table-cell">
+ <div title="0% Covered"  style="min-width:200px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:0%"></div></div></div></div>
+        </td>
+        
+    </tr>
+                                                                                                <tr>
+    <td>
+                <span class="sortValue">com.googlecode.mp4parser.contentprotection</span>
+                    <a href="com/googlecode/mp4parser/contentprotection/pkg-summary.html" title="com.googlecode.mp4parser.contentprotection">com.googlecode.mp4parser.contentprotection</a>
+                    </td>
+
+                
+        <td class=" " align="right">
+            <span class="sortValue">2.0</span>
+            2
+        </td>
+        
+            
+        <td class=" " align="right">
+            <span class="sortValue">0.0</span>
+            0%
+        </td>
+        
+            
+        <td class=" " align="right">
+            <span class="sortValue">1.2222222</span>
+            1.22
+        </td>
+        
+            
+        <td class=" " align="right">
+            <span class="sortValue">118.0</span>
+            118
+        </td>
+        
+            
+        <td class=" " align="right">
+            <span class="sortValue">0.0</span>
+            <div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">0.0</span>0%</div><div style="display: table-cell">
+ <div title="0% Covered"  style="min-width:200px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:0%"></div></div></div></div>
+        </td>
+        
+    </tr>
+                                                                                                <tr>
+    <td>
+                <span class="sortValue">com.googlecode.mp4parser.h264.write</span>
+                    <a href="com/googlecode/mp4parser/h264/write/pkg-summary.html" title="com.googlecode.mp4parser.h264.write">com.googlecode.mp4parser.h264.write</a>
+                    </td>
+
+                
+        <td class=" " align="right">
+            <span class="sortValue">2.0</span>
+            2
+        </td>
+        
+            
+        <td class=" " align="right">
+            <span class="sortValue">0.0</span>
+            0%
+        </td>
+        
+            
+        <td class=" " align="right">
+            <span class="sortValue">1.5294118</span>
+            1.53
+        </td>
+        
+            
+        <td class=" " align="right">
+            <span class="sortValue">83.0</span>
+            83
+        </td>
+        
+            
+        <td class=" " align="right">
+            <span class="sortValue">0.0</span>
+            <div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">0.0</span>0%</div><div style="display: table-cell">
+ <div title="0% Covered"  style="min-width:200px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:0%"></div></div></div></div>
+        </td>
+        
+    </tr>
+                                                                                                <tr>
+    <td>
+                <span class="sortValue">com.mp4parser.streaming.extensions</span>
+                    <a href="com/mp4parser/streaming/extensions/pkg-summary.html" title="com.mp4parser.streaming.extensions">com.mp4parser.streaming.extensions</a>
+                    </td>
+
+                
+        <td class=" " align="right">
+            <span class="sortValue">8.0</span>
+            8
+        </td>
+        
+            
+        <td class=" " align="right">
+            <span class="sortValue">0.0</span>
+            0%
+        </td>
+        
+            
+        <td class=" " align="right">
+            <span class="sortValue">1.1363636</span>
+            1.14
+        </td>
+        
+            
+        <td class=" " align="right">
+            <span class="sortValue">72.0</span>
+            72
+        </td>
+        
+            
+        <td class=" " align="right">
+            <span class="sortValue">0.0</span>
+            <div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">0.0</span>0%</div><div style="display: table-cell">
+ <div title="0% Covered"  style="min-width:200px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:0%"></div></div></div></div>
+        </td>
+        
+    </tr>
+                                                                                                <tr>
+    <td>
+                <span class="sortValue">com.mp4parser.streaming.rawformats</span>
+                    <a href="com/mp4parser/streaming/rawformats/pkg-summary.html" title="com.mp4parser.streaming.rawformats">com.mp4parser.streaming.rawformats</a>
+                    </td>
+
+                
+        <td class=" " align="right">
+            <span class="sortValue">1.0</span>
+            1
+        </td>
+        
+            
+        <td class=" " align="right">
+            <span class="sortValue">0.0</span>
+            0%
+        </td>
+        
+            
+        <td class=" " align="right">
+            <span class="sortValue">1.2</span>
+            1.2
+        </td>
+        
+            
+        <td class=" " align="right">
+            <span class="sortValue">36.0</span>
+            36
+        </td>
+        
+            
+        <td class=" " align="right">
+            <span class="sortValue">0.0</span>
+            <div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">0.0</span>0%</div><div style="display: table-cell">
+ <div title="0% Covered"  style="min-width:200px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:0%"></div></div></div></div>
+        </td>
+        
+    </tr>
+                                                                                                <tr>
+    <td>
+                <span class="sortValue">com.mp4parser.streaming</span>
+                    <a href="com/mp4parser/streaming/pkg-summary.html" title="com.mp4parser.streaming">com.mp4parser.streaming</a>
+                    </td>
+
+                
+        <td class=" " align="right">
+            <span class="sortValue">10.0</span>
+            10
+        </td>
+        
+            
+        <td class=" " align="right">
+            <span class="sortValue">0.0</span>
+            0%
+        </td>
+        
+            
+        <td class=" " align="right">
+            <span class="sortValue">1.7941177</span>
+            1.79
+        </td>
+        
+            
+        <td class=" " align="right">
+            <span class="sortValue">570.0</span>
+            570
+        </td>
+        
+            
+        <td class=" " align="right">
+            <span class="sortValue">0.006968641</span>
+            <div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">0.006968641</span>0.7%</div><div style="display: table-cell">
+ <div title="0.7% Covered"  style="min-width:200px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:0.7%"></div></div></div></div>
+        </td>
+        
+    </tr>
+                                                                                                <tr>
+    <td>
+                <span class="sortValue">com.googlecode.mp4parser.authoring.tracks.h264</span>
+                    <a href="com/googlecode/mp4parser/authoring/tracks/h264/pkg-summary.html" title="com.googlecode.mp4parser.authoring.tracks.h264">com.googlecode.mp4parser.authoring.tracks.h264</a>
+                    </td>
+
+                
+        <td class=" " align="right">
+            <span class="sortValue">4.0</span>
+            4
+        </td>
+        
+            
+        <td class=" " align="right">
+            <span class="sortValue">0.0</span>
+            0%
+        </td>
+        
+            
+        <td class=" " align="right">
+            <span class="sortValue">6.857143</span>
+            6.86
+        </td>
+        
+            
+        <td class=" " align="right">
+            <span class="sortValue">697.0</span>
+            697
+        </td>
+        
+            
+        <td class=" " align="right">
+            <span class="sortValue">0.008534851</span>
+            <div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">0.008534851</span>0.9%</div><div style="display: table-cell">
+ <div title="0.9% Covered"  style="min-width:200px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:0.9%"></div></div></div></div>
+        </td>
+        
+    </tr>
+                                                                                                <tr>
+    <td>
+                <span class="sortValue">com.coremedia.iso.boxes.apple</span>
+                    <a href="com/coremedia/iso/boxes/apple/pkg-summary.html" title="com.coremedia.iso.boxes.apple">com.coremedia.iso.boxes.apple</a>
+                    </td>
+
+                
+        <td class=" " align="right">
+            <span class="sortValue">7.0</span>
+            7
+        </td>
+        
+            
+        <td class=" " align="right">
+            <span class="sortValue">0.0</span>
+            0%
+        </td>
+        
+            
+        <td class=" " align="right">
+            <span class="sortValue">1.0</span>
+            1
+        </td>
+        
+            
+        <td class=" " align="right">
+            <span class="sortValue">112.0</span>
+            112
+        </td>
+        
+            
+        <td class=" " align="right">
+            <span class="sortValue">0.01754386</span>
+            <div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">0.01754386</span>1.8%</div><div style="display: table-cell">
+ <div title="1.8% Covered"  style="min-width:200px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:1.8%"></div></div></div></div>
+        </td>
+        
+    </tr>
+                                                                                                <tr>
+    <td>
+                <span class="sortValue">com.googlecode.mp4parser.boxes.piff</span>
+                    <a href="com/googlecode/mp4parser/boxes/piff/pkg-summary.html" title="com.googlecode.mp4parser.boxes.piff">com.googlecode.mp4parser.boxes.piff</a>
+                    </td>
+
+                
+        <td class=" " align="right">
+            <span class="sortValue">6.0</span>
+            6
+        </td>
+        
+            
+        <td class=" " align="right">
+            <span class="sortValue">0.0</span>
+            0%
+        </td>
+        
+            
+        <td class=" " align="right">
+            <span class="sortValue">1.2608696</span>
+            1.26
+        </td>
+        
+            
+        <td class=" " align="right">
+            <span class="sortValue">162.0</span>
+            162
+        </td>
+        
+            
+        <td class=" " align="right">
+            <span class="sortValue">0.11956522</span>
+            <div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">0.11956522</span>12%</div><div style="display: table-cell">
+ <div title="12% Covered"  style="min-width:200px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:12%"></div></div></div></div>
+        </td>
+        
+    </tr>
+                                                                                                <tr>
+    <td>
+                <span class="sortValue">com.googlecode.mp4parser.authoring.tracks.ttml</span>
+                    <a href="com/googlecode/mp4parser/authoring/tracks/ttml/pkg-summary.html" title="com.googlecode.mp4parser.authoring.tracks.ttml">com.googlecode.mp4parser.authoring.tracks.ttml</a>
+                    </td>
+
+                
+        <td class=" " align="right">
+            <span class="sortValue">3.0</span>
+            3
+        </td>
+        
+            
+        <td class=" " align="right">
+            <span class="sortValue">0.0</span>
+            0%
+        </td>
+        
+            
+        <td class=" " align="right">
+            <span class="sortValue">3.0</span>
+            3
+        </td>
+        
+            
+        <td class=" " align="right">
+            <span class="sortValue">420.0</span>
+            420
+        </td>
+        
+            
+        <td class=" " align="right">
+            <span class="sortValue">0.13402061</span>
+            <div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">0.13402061</span>13.4%</div><div style="display: table-cell">
+ <div title="13.4% Covered"  style="min-width:200px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:13.4%"></div></div></div></div>
+        </td>
+        
+    </tr>
+                                                                                                <tr>
+    <td>
+                <span class="sortValue">com.googlecode.mp4parser.h264</span>
+                    <a href="com/googlecode/mp4parser/h264/pkg-summary.html" title="com.googlecode.mp4parser.h264">com.googlecode.mp4parser.h264</a>
+                    </td>
+
+                
+        <td class=" " align="right">
+            <span class="sortValue">3.0</span>
+            3
+        </td>
+        
+            
+        <td class=" " align="right">
+            <span class="sortValue">0.0</span>
+            0%
+        </td>
+        
+            
+        <td class=" " align="right">
+            <span class="sortValue">2.0588236</span>
+            2.06
+        </td>
+        
+            
+        <td class=" " align="right">
+            <span class="sortValue">94.0</span>
+            94
+        </td>
+        
+            
+        <td class=" " align="right">
+            <span class="sortValue">0.14545454</span>
+            <div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">0.14545454</span>14.5%</div><div style="display: table-cell">
+ <div title="14.5% Covered"  style="min-width:200px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:14.5%"></div></div></div></div>
+        </td>
+        
+    </tr>
+                                                                                                <tr>
+    <td>
+                <span class="sortValue">com.googlecode.mp4parser.h264.model</span>
+                    <a href="com/googlecode/mp4parser/h264/model/pkg-summary.html" title="com.googlecode.mp4parser.h264.model">com.googlecode.mp4parser.h264.model</a>
+                    </td>
+
+                
+        <td class=" " align="right">
+            <span class="sortValue">9.0</span>
+            9
+        </td>
+        
+            
+        <td class=" " align="right">
+            <span class="sortValue">0.0</span>
+            0%
+        </td>
+        
+            
+        <td class=" " align="right">
+            <span class="sortValue">5.3333335</span>
+            5.33
+        </td>
+        
+            
+        <td class=" " align="right">
+            <span class="sortValue">632.0</span>
+            632
+        </td>
+        
+            
+        <td class=" " align="right">
+            <span class="sortValue">0.20603015</span>
+            <div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">0.20603015</span>20.6%</div><div style="display: table-cell">
+ <div title="20.6% Covered"  style="min-width:200px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:20.6%"></div></div></div></div>
+        </td>
+        
+    </tr>
+                                                                                                <tr>
+    <td>
+                <span class="sortValue">com.googlecode.mp4parser.authoring.tracks</span>
+                    <a href="com/googlecode/mp4parser/authoring/tracks/pkg-summary.html" title="com.googlecode.mp4parser.authoring.tracks">com.googlecode.mp4parser.authoring.tracks</a>
+                    </td>
+
+                
+        <td class=" " align="right">
+            <span class="sortValue">21.0</span>
+            21
+        </td>
+        
+            
+        <td class=" " align="right">
+            <span class="sortValue">0.0</span>
+            0%
+        </td>
+        
+            
+        <td class=" " align="right">
+            <span class="sortValue">2.808176</span>
+            2.81
+        </td>
+        
+            
+        <td class=" " align="right">
+            <span class="sortValue">2658.0</span>
+            2,658
+        </td>
+        
+            
+        <td class=" " align="right">
+            <span class="sortValue">0.2461713</span>
+            <div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">0.2461713</span>24.6%</div><div style="display: table-cell">
+ <div title="24.6% Covered"  style="min-width:200px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:24.6%"></div></div></div></div>
+        </td>
+        
+    </tr>
+                                                                                                <tr>
+    <td>
+                <span class="sortValue">com.googlecode.mp4parser.boxes.mp4.samplegrouping</span>
+                    <a href="com/googlecode/mp4parser/boxes/mp4/samplegrouping/pkg-summary.html" title="com.googlecode.mp4parser.boxes.mp4.samplegrouping">com.googlecode.mp4parser.boxes.mp4.samplegrouping</a>
+                    </td>
+
+                
+        <td class=" " align="right">
+            <span class="sortValue">9.0</span>
+            9
+        </td>
+        
+            
+        <td class=" " align="right">
+            <span class="sortValue">0.0</span>
+            0%
+        </td>
+        
+            
+        <td class=" " align="right">
+            <span class="sortValue">1.8846154</span>
+            1.88
+        </td>
+        
+            
+        <td class=" " align="right">
+            <span class="sortValue">396.0</span>
+            396
+        </td>
+        
+            
+        <td class=" " align="right">
+            <span class="sortValue">0.34219268</span>
+            <div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">0.34219268</span>34.2%</div><div style="display: table-cell">
+ <div title="34.2% Covered"  style="min-width:200px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:34.2%"></div></div></div></div>
+        </td>
+        
+    </tr>
+                                                                                                <tr>
+    <td>
+                <span class="sortValue">com.googlecode.mp4parser.boxes.mp4.objectdescriptors</span>
+                    <a href="com/googlecode/mp4parser/boxes/mp4/objectdescriptors/pkg-summary.html" title="com.googlecode.mp4parser.boxes.mp4.objectdescriptors">com.googlecode.mp4parser.boxes.mp4.objectdescriptors</a>
+                    </td>
+
+                
+        <td class=" " align="right">
+            <span class="sortValue">16.0</span>
+            16
+        </td>
+        
+            
+        <td class=" " align="right">
+            <span class="sortValue">0.0</span>
+            0%
+        </td>
+        
+            
+        <td class=" " align="right">
+            <span class="sortValue">3.475862</span>
+            3.48
+        </td>
+        
+            
+        <td class=" " align="right">
+            <span class="sortValue">1163.0</span>
+            1,163
+        </td>
+        
+            
+        <td class=" " align="right">
+            <span class="sortValue">0.34515765</span>
+            <div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">0.34515765</span>34.5%</div><div style="display: table-cell">
+ <div title="34.5% Covered"  style="min-width:200px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:34.5%"></div></div></div></div>
+        </td>
+        
+    </tr>
+                                                                                                <tr>
+    <td>
+                <span class="sortValue">com.googlecode.mp4parser.boxes</span>
+                    <a href="com/googlecode/mp4parser/boxes/pkg-summary.html" title="com.googlecode.mp4parser.boxes">com.googlecode.mp4parser.boxes</a>
+                    </td>
+
+                
+        <td class=" " align="right">
+            <span class="sortValue">6.0</span>
+            6
+        </td>
+        
+            
+        <td class=" " align="right">
+            <span class="sortValue">0.0</span>
+            0%
+        </td>
+        
+            
+        <td class=" " align="right">
+            <span class="sortValue">1.5277778</span>
+            1.53
+        </td>
+        
+            
+        <td class=" " align="right">
+            <span class="sortValue">366.0</span>
+            366
+        </td>
+        
+            
+        <td class=" " align="right">
+            <span class="sortValue">0.37221268</span>
+            <div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">0.37221268</span>37.2%</div><div style="display: table-cell">
+ <div title="37.2% Covered"  style="min-width:200px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:37.2%"></div></div></div></div>
+        </td>
+        
+    </tr>
+                                                                                                <tr>
+    <td>
+                <span class="sortValue">com.googlecode.mp4parser.util</span>
+                    <a href="com/googlecode/mp4parser/util/pkg-summary.html" title="com.googlecode.mp4parser.util">com.googlecode.mp4parser.util</a>
+                    </td>
+
+                
+        <td class=" " align="right">
+            <span class="sortValue">15.0</span>
+            15
+        </td>
+        
+            
+        <td class=" " align="right">
+            <span class="sortValue">0.0</span>
+            0%
+        </td>
+        
+            
+        <td class=" " align="right">
+            <span class="sortValue">2.0227273</span>
+            2.02
+        </td>
+        
+            
+        <td class=" " align="right">
+            <span class="sortValue">348.0</span>
+            348
+        </td>
+        
+            
+        <td class=" " align="right">
+            <span class="sortValue">0.44936708</span>
+            <div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">0.44936708</span>44.9%</div><div style="display: table-cell">
+ <div title="44.9% Covered"  style="min-width:200px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:44.9%"></div></div></div></div>
+        </td>
+        
+    </tr>
+                                                                                                <tr>
+    <td>
+                <span class="sortValue">com.googlecode.mp4parser.h264.read</span>
+                    <a href="com/googlecode/mp4parser/h264/read/pkg-summary.html" title="com.googlecode.mp4parser.h264.read">com.googlecode.mp4parser.h264.read</a>
+                    </td>
+
+                
+        <td class=" " align="right">
+            <span class="sortValue">2.0</span>
+            2
+        </td>
+        
+            
+        <td class=" " align="right">
+            <span class="sortValue">0.0</span>
+            0%
+        </td>
+        
+            
+        <td class=" " align="right">
+            <span class="sortValue">1.8275862</span>
+            1.83
+        </td>
+        
+            
+        <td class=" " align="right">
+            <span class="sortValue">95.0</span>
+            95
+        </td>
+        
+            
+        <td class=" " align="right">
+            <span class="sortValue">0.5177665</span>
+            <div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">0.5177665</span>51.8%</div><div style="display: table-cell">
+ <div title="51.8% Covered"  style="min-width:200px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:51.8%"></div></div></div></div>
+        </td>
+        
+    </tr>
+                                                                                                <tr>
+    <td>
+                <span class="sortValue">com.googlecode.mp4parser.authoring.tracks.webvtt.sampleboxes</span>
+                    <a href="com/googlecode/mp4parser/authoring/tracks/webvtt/sampleboxes/pkg-summary.html" title="com.googlecode.mp4parser.authoring.tracks.webvtt.sampleboxes">com.googlecode.mp4parser.authoring.tracks.webvtt.sampleboxes</a>
+                    </td>
+
+                
+        <td class=" " align="right">
+            <span class="sortValue">9.0</span>
+            9
+        </td>
+        
+            
+        <td class=" " align="right">
+            <span class="sortValue">0.0</span>
+            0%
+        </td>
+        
+            
+        <td class=" " align="right">
+            <span class="sortValue">1.3703704</span>
+            1.37
+        </td>
+        
+            
+        <td class=" " align="right">
+            <span class="sortValue">44.0</span>
+            44
+        </td>
+        
+            
+        <td class=" " align="right">
+            <span class="sortValue">0.5319149</span>
+            <div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">0.5319149</span>53.2%</div><div style="display: table-cell">
+ <div title="53.2% Covered"  style="min-width:200px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:53.2%"></div></div></div></div>
+        </td>
+        
+    </tr>
+                                                                                                <tr>
+    <td>
+                <span class="sortValue">com.mp4parser.iso23001.part7</span>
+                    <a href="com/mp4parser/iso23001/part7/pkg-summary.html" title="com.mp4parser.iso23001.part7">com.mp4parser.iso23001.part7</a>
+                    </td>
+
+                
+        <td class=" " align="right">
+            <span class="sortValue">3.0</span>
+            3
+        </td>
+        
+            
+        <td class=" " align="right">
+            <span class="sortValue">0.0</span>
+            0%
+        </td>
+        
+            
+        <td class=" " align="right">
+            <span class="sortValue">1.6</span>
+            1.6
+        </td>
+        
+            
+        <td class=" " align="right">
+            <span class="sortValue">117.0</span>
+            117
+        </td>
+        
+            
+        <td class=" " align="right">
+            <span class="sortValue">0.53571427</span>
+            <div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">0.53571427</span>53.6%</div><div style="display: table-cell">
+ <div title="53.6% Covered"  style="min-width:200px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:53.6%"></div></div></div></div>
+        </td>
+        
+    </tr>
+                                                                                                <tr>
+    <td>
+                <span class="sortValue">com.googlecode.mp4parser.boxes.dece</span>
+                    <a href="com/googlecode/mp4parser/boxes/dece/pkg-summary.html" title="com.googlecode.mp4parser.boxes.dece">com.googlecode.mp4parser.boxes.dece</a>
+                    </td>
+
+                
+        <td class=" " align="right">
+            <span class="sortValue">4.0</span>
+            4
+        </td>
+        
+            
+        <td class=" " align="right">
+            <span class="sortValue">0.0</span>
+            0%
+        </td>
+        
+            
+        <td class=" " align="right">
+            <span class="sortValue">1.6326531</span>
+            1.63
+        </td>
+        
+            
+        <td class=" " align="right">
+            <span class="sortValue">112.0</span>
+            112
+        </td>
+        
+            
+        <td class=" " align="right">
+            <span class="sortValue">0.5555556</span>
+            <div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">0.5555556</span>55.6%</div><div style="display: table-cell">
+ <div title="55.6% Covered"  style="min-width:200px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:55.6%"></div></div></div></div>
+        </td>
+        
+    </tr>
+                                                                                                <tr>
+    <td>
+                <span class="sortValue">com.mp4parser.iso14496.part15</span>
+                    <a href="com/mp4parser/iso14496/part15/pkg-summary.html" title="com.mp4parser.iso14496.part15">com.mp4parser.iso14496.part15</a>
+                    </td>
+
+                
+        <td class=" " align="right">
+            <span class="sortValue">11.0</span>
+            11
+        </td>
+        
+            
+        <td class=" " align="right">
+            <span class="sortValue">0.0</span>
+            0%
+        </td>
+        
+            
+        <td class=" " align="right">
+            <span class="sortValue">1.4955752</span>
+            1.5
+        </td>
+        
+            
+        <td class=" " align="right">
+            <span class="sortValue">454.0</span>
+            454
+        </td>
+        
+            
+        <td class=" " align="right">
+            <span class="sortValue">0.5592233</span>
+            <div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">0.5592233</span>55.9%</div><div style="display: table-cell">
+ <div title="55.9% Covered"  style="min-width:200px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:55.9%"></div></div></div></div>
+        </td>
+        
+    </tr>
+                                                                                                <tr>
+    <td>
+                <span class="sortValue">com.googlecode.mp4parser.boxes.mp4</span>
+                    <a href="com/googlecode/mp4parser/boxes/mp4/pkg-summary.html" title="com.googlecode.mp4parser.boxes.mp4">com.googlecode.mp4parser.boxes.mp4</a>
+                    </td>
+
+                
+        <td class=" " align="right">
+            <span class="sortValue">3.0</span>
+            3
+        </td>
+        
+            
+        <td class=" " align="right">
+            <span class="sortValue">0.0</span>
+            0%
+        </td>
+        
+            
+        <td class=" " align="right">
+            <span class="sortValue">1.5882353</span>
+            1.59
+        </td>
+        
+            
+        <td class=" " align="right">
+            <span class="sortValue">27.0</span>
+            27
+        </td>
+        
+            
+        <td class=" " align="right">
+            <span class="sortValue">0.6197183</span>
+            <div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">0.6197183</span>62%</div><div style="display: table-cell">
+ <div title="62% Covered"  style="min-width:200px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:62%"></div></div></div></div>
+        </td>
+        
+    </tr>
+                                                                                                <tr>
+    <td>
+                <span class="sortValue">com.coremedia.iso.boxes.fragment</span>
+                    <a href="com/coremedia/iso/boxes/fragment/pkg-summary.html" title="com.coremedia.iso.boxes.fragment">com.coremedia.iso.boxes.fragment</a>
+                    </td>
+
+                
+        <td class=" " align="right">
+            <span class="sortValue">14.0</span>
+            14
+        </td>
+        
+            
+        <td class=" " align="right">
+            <span class="sortValue">0.0</span>
+            0%
+        </td>
+        
+            
+        <td class=" " align="right">
+            <span class="sortValue">1.4636872</span>
+            1.46
+        </td>
+        
+            
+        <td class=" " align="right">
+            <span class="sortValue">317.0</span>
+            317
+        </td>
+        
+            
+        <td class=" " align="right">
+            <span class="sortValue">0.6203593</span>
+            <div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">0.6203593</span>62%</div><div style="display: table-cell">
+ <div title="62% Covered"  style="min-width:200px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:62%"></div></div></div></div>
+        </td>
+        
+    </tr>
+                                                                                                <tr>
+    <td>
+                <span class="sortValue">com.googlecode.mp4parser.authoring.tracks.webvtt</span>
+                    <a href="com/googlecode/mp4parser/authoring/tracks/webvtt/pkg-summary.html" title="com.googlecode.mp4parser.authoring.tracks.webvtt">com.googlecode.mp4parser.authoring.tracks.webvtt</a>
+                    </td>
+
+                
+        <td class=" " align="right">
+            <span class="sortValue">1.0</span>
+            1
+        </td>
+        
+            
+        <td class=" " align="right">
+            <span class="sortValue">0.0</span>
+            0%
+        </td>
+        
+            
+        <td class=" " align="right">
+            <span class="sortValue">2.25</span>
+            2.25
+        </td>
+        
+            
+        <td class=" " align="right">
+            <span class="sortValue">55.0</span>
+            55
+        </td>
+        
+            
+        <td class=" " align="right">
+            <span class="sortValue">0.6357616</span>
+            <div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">0.6357616</span>63.6%</div><div style="display: table-cell">
+ <div title="63.6% Covered"  style="min-width:200px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:63.6%"></div></div></div></div>
+        </td>
+        
+    </tr>
+                                                                                                <tr>
+    <td>
+                <span class="sortValue">com.coremedia.iso.boxes</span>
+                    <a href="com/coremedia/iso/boxes/pkg-summary.html" title="com.coremedia.iso.boxes">com.coremedia.iso.boxes</a>
+                    </td>
+
+                
+        <td class=" " align="right">
+            <span class="sortValue">65.0</span>
+            65
+        </td>
+        
+            
+        <td class=" " align="right">
+            <span class="sortValue">0.0</span>
+            0%
+        </td>
+        
+            
+        <td class=" " align="right">
+            <span class="sortValue">1.2725753</span>
+            1.27
+        </td>
+        
+            
+        <td class=" " align="right">
+            <span class="sortValue">855.0</span>
+            855
+        </td>
+        
+            
+        <td class=" " align="right">
+            <span class="sortValue">0.6416597</span>
+            <div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">0.6416597</span>64.2%</div><div style="display: table-cell">
+ <div title="64.2% Covered"  style="min-width:200px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:64.2%"></div></div></div></div>
+        </td>
+        
+    </tr>
+                                                                                                <tr>
+    <td>
+                <span class="sortValue">com.googlecode.mp4parser</span>
+                    <a href="com/googlecode/mp4parser/pkg-summary.html" title="com.googlecode.mp4parser">com.googlecode.mp4parser</a>
+                    </td>
+
+                
+        <td class=" " align="right">
+            <span class="sortValue">13.0</span>
+            13
+        </td>
+        
+            
+        <td class=" " align="right">
+            <span class="sortValue">0.0</span>
+            0%
+        </td>
+        
+            
+        <td class=" " align="right">
+            <span class="sortValue">1.7692307</span>
+            1.77
+        </td>
+        
+            
+        <td class=" " align="right">
+            <span class="sortValue">226.0</span>
+            226
+        </td>
+        
+            
+        <td class=" " align="right">
+            <span class="sortValue">0.6560122</span>
+            <div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">0.6560122</span>65.6%</div><div style="display: table-cell">
+ <div title="65.6% Covered"  style="min-width:200px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:65.6%"></div></div></div></div>
+        </td>
+        
+    </tr>
+                                                                                                <tr>
+    <td>
+                <span class="sortValue">com.coremedia.iso</span>
+                    <a href="com/coremedia/iso/pkg-summary.html" title="com.coremedia.iso">com.coremedia.iso</a>
+                    </td>
+
+                
+        <td class=" " align="right">
+            <span class="sortValue">12.0</span>
+            12
+        </td>
+        
+            
+        <td class=" " align="right">
+            <span class="sortValue">0.0</span>
+            0%
+        </td>
+        
+            
+        <td class=" " align="right">
+            <span class="sortValue">2.3965516</span>
+            2.4
+        </td>
+        
+            
+        <td class=" " align="right">
+            <span class="sortValue">145.0</span>
+            145
+        </td>
+        
+            
+        <td class=" " align="right">
+            <span class="sortValue">0.71343875</span>
+            <div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">0.71343875</span>71.3%</div><div style="display: table-cell">
+ <div title="71.3% Covered"  style="min-width:200px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:71.3%"></div></div></div></div>
+        </td>
+        
+    </tr>
+                                                                                                <tr>
+    <td>
+                <span class="sortValue">com.googlecode.mp4parser.authoring</span>
+                    <a href="com/googlecode/mp4parser/authoring/pkg-summary.html" title="com.googlecode.mp4parser.authoring">com.googlecode.mp4parser.authoring</a>
+                    </td>
+
+                
+        <td class=" " align="right">
+            <span class="sortValue">10.0</span>
+            10
+        </td>
+        
+            
+        <td class=" " align="right">
+            <span class="sortValue">0.0</span>
+            0%
+        </td>
+        
+            
+        <td class=" " align="right">
+            <span class="sortValue">1.84375</span>
+            1.84
+        </td>
+        
+            
+        <td class=" " align="right">
+            <span class="sortValue">147.0</span>
+            147
+        </td>
+        
+            
+        <td class=" " align="right">
+            <span class="sortValue">0.7533557</span>
+            <div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">0.7533557</span>75.3%</div><div style="display: table-cell">
+ <div title="75.3% Covered"  style="min-width:200px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:75.3%"></div></div></div></div>
+        </td>
+        
+    </tr>
+                                                                                                <tr>
+    <td>
+                <span class="sortValue">com.googlecode.mp4parser.boxes.threegpp26244</span>
+                    <a href="com/googlecode/mp4parser/boxes/threegpp26244/pkg-summary.html" title="com.googlecode.mp4parser.boxes.threegpp26244">com.googlecode.mp4parser.boxes.threegpp26244</a>
+                    </td>
+
+                
+        <td class=" " align="right">
+            <span class="sortValue">1.0</span>
+            1
+        </td>
+        
+            
+        <td class=" " align="right">
+            <span class="sortValue">0.0</span>
+            0%
+        </td>
+        
+            
+        <td class=" " align="right">
+            <span class="sortValue">1.4117647</span>
+            1.41
+        </td>
+        
+            
+        <td class=" " align="right">
+            <span class="sortValue">36.0</span>
+            36
+        </td>
+        
+            
+        <td class=" " align="right">
+            <span class="sortValue">0.78313255</span>
+            <div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">0.78313255</span>78.3%</div><div style="display: table-cell">
+ <div title="78.3% Covered"  style="min-width:200px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:78.3%"></div></div></div></div>
+        </td>
+        
+    </tr>
+                                                                                                <tr>
+    <td>
+                <span class="sortValue">com.coremedia.iso.boxes.sampleentry</span>
+                    <a href="com/coremedia/iso/boxes/sampleentry/pkg-summary.html" title="com.coremedia.iso.boxes.sampleentry">com.coremedia.iso.boxes.sampleentry</a>
+                    </td>
+
+                
+        <td class=" " align="right">
+            <span class="sortValue">8.0</span>
+            8
+        </td>
+        
+            
+        <td class=" " align="right">
+            <span class="sortValue">0.0</span>
+            0%
+        </td>
+        
+            
+        <td class=" " align="right">
+            <span class="sortValue">1.4328358</span>
+            1.43
+        </td>
+        
+            
+        <td class=" " align="right">
+            <span class="sortValue">129.0</span>
+            129
+        </td>
+        
+            
+        <td class=" " align="right">
+            <span class="sortValue">0.80123264</span>
+            <div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">0.80123264</span>80.1%</div><div style="display: table-cell">
+ <div title="80.1% Covered"  style="min-width:200px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:80.1%"></div></div></div></div>
+        </td>
+        
+    </tr>
+                                                                                                <tr>
+    <td>
+                <span class="sortValue">com.googlecode.mp4parser.boxes.apple</span>
+                    <a href="com/googlecode/mp4parser/boxes/apple/pkg-summary.html" title="com.googlecode.mp4parser.boxes.apple">com.googlecode.mp4parser.boxes.apple</a>
+                    </td>
+
+                
+        <td class=" " align="right">
+            <span class="sortValue">52.0</span>
+            52
+        </td>
+        
+            
+        <td class=" " align="right">
+            <span class="sortValue">0.0</span>
+            0%
+        </td>
+        
+            
+        <td class=" " align="right">
+            <span class="sortValue">1.0809717</span>
+            1.08
+        </td>
+        
+            
+        <td class=" " align="right">
+            <span class="sortValue">146.0</span>
+            146
+        </td>
+        
+            
+        <td class=" " align="right">
+            <span class="sortValue">0.81772786</span>
+            <div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">0.81772786</span>81.8%</div><div style="display: table-cell">
+ <div title="81.8% Covered"  style="min-width:200px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:81.8%"></div></div></div></div>
+        </td>
+        
+    </tr>
+                                                                                                <tr>
+    <td>
+                <span class="sortValue">com.googlecode.mp4parser.authoring.samples</span>
+                    <a href="com/googlecode/mp4parser/authoring/samples/pkg-summary.html" title="com.googlecode.mp4parser.authoring.samples">com.googlecode.mp4parser.authoring.samples</a>
+                    </td>
+
+                
+        <td class=" " align="right">
+            <span class="sortValue">2.0</span>
+            2
+        </td>
+        
+            
+        <td class=" " align="right">
+            <span class="sortValue">0.0</span>
+            0%
+        </td>
+        
+            
+        <td class=" " align="right">
+            <span class="sortValue">3.8823528</span>
+            3.88
+        </td>
+        
+            
+        <td class=" " align="right">
+            <span class="sortValue">60.0</span>
+            60
+        </td>
+        
+            
+        <td class=" " align="right">
+            <span class="sortValue">0.8181818</span>
+            <div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">0.8181818</span>81.8%</div><div style="display: table-cell">
+ <div title="81.8% Covered"  style="min-width:200px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:81.8%"></div></div></div></div>
+        </td>
+        
+    </tr>
+                                                                                                <tr>
+    <td>
+                <span class="sortValue">com.googlecode.mp4parser.boxes.cenc</span>
+                    <a href="com/googlecode/mp4parser/boxes/cenc/pkg-summary.html" title="com.googlecode.mp4parser.boxes.cenc">com.googlecode.mp4parser.boxes.cenc</a>
+                    </td>
+
+                
+        <td class=" " align="right">
+            <span class="sortValue">2.0</span>
+            2
+        </td>
+        
+            
+        <td class=" " align="right">
+            <span class="sortValue">0.0</span>
+            0%
+        </td>
+        
+            
+        <td class=" " align="right">
+            <span class="sortValue">3.7142856</span>
+            3.71
+        </td>
+        
+            
+        <td class=" " align="right">
+            <span class="sortValue">33.0</span>
+            33
+        </td>
+        
+            
+        <td class=" " align="right">
+            <span class="sortValue">0.8333333</span>
+            <div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">0.8333333</span>83.3%</div><div style="display: table-cell">
+ <div title="83.3% Covered"  style="min-width:200px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:83.3%"></div></div></div></div>
+        </td>
+        
+    </tr>
+                                                                                                <tr>
+    <td>
+                <span class="sortValue">com.googlecode.mp4parser.srt</span>
+                    <a href="com/googlecode/mp4parser/srt/pkg-summary.html" title="com.googlecode.mp4parser.srt">com.googlecode.mp4parser.srt</a>
+                    </td>
+
+                
+        <td class=" " align="right">
+            <span class="sortValue">1.0</span>
+            1
+        </td>
+        
+            
+        <td class=" " align="right">
+            <span class="sortValue">0.0</span>
+            0%
+        </td>
+        
+            
+        <td class=" " align="right">
+            <span class="sortValue">2.5</span>
+            2.5
+        </td>
+        
+            
+        <td class=" " align="right">
+            <span class="sortValue">4.0</span>
+            4
+        </td>
+        
+            
+        <td class=" " align="right">
+            <span class="sortValue">0.8333333</span>
+            <div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">0.8333333</span>83.3%</div><div style="display: table-cell">
+ <div title="83.3% Covered"  style="min-width:200px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:83.3%"></div></div></div></div>
+        </td>
+        
+    </tr>
+                                                                                                <tr>
+    <td>
+                <span class="sortValue">com.googlecode.mp4parser.authoring.builder</span>
+                    <a href="com/googlecode/mp4parser/authoring/builder/pkg-summary.html" title="com.googlecode.mp4parser.authoring.builder">com.googlecode.mp4parser.authoring.builder</a>
+                    </td>
+
+                
+        <td class=" " align="right">
+            <span class="sortValue">8.0</span>
+            8
+        </td>
+        
+            
+        <td class=" " align="right">
+            <span class="sortValue">0.0</span>
+            0%
+        </td>
+        
+            
+        <td class=" " align="right">
+            <span class="sortValue">2.968085</span>
+            2.97
+        </td>
+        
+            
+        <td class=" " align="right">
+            <span class="sortValue">216.0</span>
+            216
+        </td>
+        
+            
+        <td class=" " align="right">
+            <span class="sortValue">0.83808094</span>
+            <div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">0.83808094</span>83.8%</div><div style="display: table-cell">
+ <div title="83.8% Covered"  style="min-width:200px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:83.8%"></div></div></div></div>
+        </td>
+        
+    </tr>
+                                                                                                <tr>
+    <td>
+                <span class="sortValue">com.coremedia.iso.boxes.mdat</span>
+                    <a href="com/coremedia/iso/boxes/mdat/pkg-summary.html" title="com.coremedia.iso.boxes.mdat">com.coremedia.iso.boxes.mdat</a>
+                    </td>
+
+                
+        <td class=" " align="right">
+            <span class="sortValue">2.0</span>
+            2
+        </td>
+        
+            
+        <td class=" " align="right">
+            <span class="sortValue">0.0</span>
+            0%
+        </td>
+        
+            
+        <td class=" " align="right">
+            <span class="sortValue">1.25</span>
+            1.25
+        </td>
+        
+            
+        <td class=" " align="right">
+            <span class="sortValue">6.0</span>
+            6
+        </td>
+        
+            
+        <td class=" " align="right">
+            <span class="sortValue">0.85365856</span>
+            <div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">0.85365856</span>85.4%</div><div style="display: table-cell">
+ <div title="85.4% Covered"  style="min-width:200px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:85.4%"></div></div></div></div>
+        </td>
+        
+    </tr>
+                                                                                                <tr>
+    <td>
+                <span class="sortValue">com.mp4parser.iso14496.part30</span>
+                    <a href="com/mp4parser/iso14496/part30/pkg-summary.html" title="com.mp4parser.iso14496.part30">com.mp4parser.iso14496.part30</a>
+                    </td>
+
+                
+        <td class=" " align="right">
+            <span class="sortValue">4.0</span>
+            4
+        </td>
+        
+            
+        <td class=" " align="right">
+            <span class="sortValue">0.0</span>
+            0%
+        </td>
+        
+            
+        <td class=" " align="right">
+            <span class="sortValue">1.074074</span>
+            1.07
+        </td>
+        
+            
+        <td class=" " align="right">
+            <span class="sortValue">5.0</span>
+            5
+        </td>
+        
+            
+        <td class=" " align="right">
+            <span class="sortValue">0.9390244</span>
+            <div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">0.9390244</span>93.9%</div><div style="display: table-cell">
+ <div title="93.9% Covered"  style="min-width:200px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:93.9%"></div></div></div></div>
+        </td>
+        
+    </tr>
+                                                                                                <tr>
+    <td>
+                <span class="sortValue">com.googlecode.mp4parser.boxes.threegpp26245</span>
+                    <a href="com/googlecode/mp4parser/boxes/threegpp26245/pkg-summary.html" title="com.googlecode.mp4parser.boxes.threegpp26245">com.googlecode.mp4parser.boxes.threegpp26245</a>
+                    </td>
+
+                
+        <td class=" " align="right">
+            <span class="sortValue">1.0</span>
+            1
+        </td>
+        
+            
+        <td class=" " align="right">
+            <span class="sortValue">0.0</span>
+            0%
+        </td>
+        
+            
+        <td class=" " align="right">
+            <span class="sortValue">1.0833334</span>
+            1.08
+        </td>
+        
+            
+        <td class=" " align="right">
+            <span class="sortValue">2.0</span>
+            2
+        </td>
+        
+            
+        <td class=" " align="right">
+            <span class="sortValue">0.94871795</span>
+            <div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">0.94871795</span>94.9%</div><div style="display: table-cell">
+ <div title="94.9% Covered"  style="min-width:200px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:94.9%"></div></div></div></div>
+        </td>
+        
+    </tr>
+                                                                                                <tr>
+    <td>
+                <span class="sortValue">com.googlecode.mp4parser.boxes.adobe</span>
+                    <a href="com/googlecode/mp4parser/boxes/adobe/pkg-summary.html" title="com.googlecode.mp4parser.boxes.adobe">com.googlecode.mp4parser.boxes.adobe</a>
+                    </td>
+
+                
+        <td class=" " align="right">
+            <span class="sortValue">1.0</span>
+            1
+        </td>
+        
+            
+        <td class=" " align="right">
+            <span class="sortValue">0.0</span>
+            0%
+        </td>
+        
+            
+        <td class=" " align="right">
+            <span class="sortValue">1.5</span>
+            1.5
+        </td>
+        
+            
+        <td class=" " align="right">
+            <span class="sortValue">1.0</span>
+            1
+        </td>
+        
+            
+        <td class=" " align="right">
+            <span class="sortValue">0.95238096</span>
+            <div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">0.95238096</span>95.2%</div><div style="display: table-cell">
+ <div title="95.2% Covered"  style="min-width:200px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:95.2%"></div></div></div></div>
+        </td>
+        
+    </tr>
+                                                                                                <tr>
+    <td>
+                <span class="sortValue">com.mp4parser.iso14496.part12</span>
+                    <a href="com/mp4parser/iso14496/part12/pkg-summary.html" title="com.mp4parser.iso14496.part12">com.mp4parser.iso14496.part12</a>
+                    </td>
+
+                
+        <td class=" " align="right">
+            <span class="sortValue">5.0</span>
+            5
+        </td>
+        
+            
+        <td class=" " align="right">
+            <span class="sortValue">0.0</span>
+            0%
+        </td>
+        
+            
+        <td class=" " align="right">
+            <span class="sortValue">1.3958334</span>
+            1.4
+        </td>
+        
+            
+        <td class=" " align="right">
+            <span class="sortValue">6.0</span>
+            6
+        </td>
+        
+            
+        <td class=" " align="right">
+            <span class="sortValue">0.9692308</span>
+            <div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">0.9692308</span>96.9%</div><div style="display: table-cell">
+ <div title="96.9% Covered"  style="min-width:200px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:96.9%"></div></div></div></div>
+        </td>
+        
+    </tr>
+                                                                                                <tr>
+    <td>
+                <span class="sortValue">com.googlecode.mp4parser.authoring.container.mp4</span>
+                    <a href="com/googlecode/mp4parser/authoring/container/mp4/pkg-summary.html" title="com.googlecode.mp4parser.authoring.container.mp4">com.googlecode.mp4parser.authoring.container.mp4</a>
+                    </td>
+
+                
+        <td class=" " align="right">
+            <span class="sortValue">1.0</span>
+            1
+        </td>
+        
+            
+        <td class=" " align="right">
+            <span class="sortValue">0.0</span>
+            0%
+        </td>
+        
+            
+        <td class=" " align="right">
+            <span class="sortValue">2.5</span>
+            2.5
+        </td>
+        
+            
+        <td class=" " align="right">
+            <span class="sortValue">0.0</span>
+            0
+        </td>
+        
+            
+        <td class=" " align="right">
+            <span class="sortValue">1.0</span>
+            <div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">1.0</span>100%</div><div style="display: table-cell">
+ <div title="100% Covered"  style="min-width:200px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:100%"></div></div></div></div>
+        </td>
+        
+    </tr>
+                                                                                                <tr>
+    <td>
+                <span class="sortValue">com.mp4parser.iso23009.part1</span>
+                    <a href="com/mp4parser/iso23009/part1/pkg-summary.html" title="com.mp4parser.iso23009.part1">com.mp4parser.iso23009.part1</a>
+                    </td>
+
+                
+        <td class=" " align="right">
+            <span class="sortValue">1.0</span>
+            1
+        </td>
+        
+            
+        <td class=" " align="right">
+            <span class="sortValue">0.0</span>
+            0%
+        </td>
+        
+            
+        <td class=" " align="right">
+            <span class="sortValue">1.0</span>
+            1
+        </td>
+        
+            
+        <td class=" " align="right">
+            <span class="sortValue">0.0</span>
+            0
+        </td>
+        
+            
+        <td class=" " align="right">
+            <span class="sortValue">1.0</span>
+            <div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">1.0</span>100%</div><div style="display: table-cell">
+ <div title="100% Covered"  style="min-width:200px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:100%"></div></div></div></div>
+        </td>
+        
+    </tr>
+                                                            </tbody>
+            </table>
+        
+    </div> <!-- tabs-pane active-pane -->
+</div> <!-- aui-tabs horizontal-tabs -->
+
+                        </div> <!-- class="aui-page-panel-content-clover" -->
+                    <footer id="footer" role="contentinfo">
+    <section class="footer-body">
+        <ul>
+            <li>
+                Report generated by <a target="_new" href="https://openclover.org">OpenClover</a> v 4.5.2
+                on Mon Apr 29 2024 12:56:06 CDT using coverage data from Mon Apr 29 2024 12:55:50 CDT.
+            </li>
+        </ul>
+        <ul>
+            <li>OpenClover is free and open-source software. </li>
+        </ul>
+    </section>
+</footer>                </section> <!-- class="aui-page-panel-content" -->
+            </div> <!-- class="aui-page-panel-inner" -->
+        </div> <!-- class="aui-page-panel" -->
+    </div> <!-- id="page" -->
+</body>
+</html>

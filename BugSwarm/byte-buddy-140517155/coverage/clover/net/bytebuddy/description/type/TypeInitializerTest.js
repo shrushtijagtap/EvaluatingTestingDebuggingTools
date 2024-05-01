@@ -1,0 +1,10 @@
+var clover = new Object();
+
+// JSON: {classes : [{name, id, sl, el,  methods : [{sl, el}, ...]}, ...]}
+clover.pageData = {"classes":[{"el":90,"id":37023,"methods":[{"el":41,"sc":5,"sl":37},{"el":46,"sc":5,"sl":43},{"el":51,"sc":5,"sl":48},{"el":56,"sc":5,"sl":53},{"el":62,"sc":5,"sl":58},{"el":72,"sc":5,"sl":64},{"el":83,"sc":5,"sl":74},{"el":89,"sc":5,"sl":85}],"name":"TypeInitializerTest","sl":20}]}
+
+// JSON: {test_ID : {"methods": [ID1, ID2, ID3...], "name" : "testXXX() void"}, ...};
+clover.testTargets = {"test_101":{"methods":[{"sl":64}],"name":"testSimpleApplication","pass":true,"statements":[{"sl":66},{"sl":67},{"sl":68},{"sl":69},{"sl":70},{"sl":71}]},"test_1996":{"methods":[{"sl":48}],"name":"testNoneThrowsExceptionOnApplication","pass":true,"statements":[{"sl":50}]},"test_2247":{"methods":[{"sl":37}],"name":"testNoneExpansion","pass":true,"statements":[{"sl":39}]},"test_2380":{"methods":[{"sl":74}],"name":"testSimpleApplicationAfterTermination","pass":true,"statements":[{"sl":76},{"sl":77},{"sl":78},{"sl":79},{"sl":80},{"sl":81},{"sl":82}]},"test_2482":{"methods":[{"sl":43}],"name":"testNoneDefined","pass":true,"statements":[{"sl":45}]},"test_489":{"methods":[{"sl":53}],"name":"testNoneThrowsExceptionOnTermination","pass":true,"statements":[{"sl":55}]},"test_5273":{"methods":[{"sl":58}],"name":"testSimpleExpansion","pass":true,"statements":[{"sl":60}]},"test_5651":{"methods":[{"sl":85}],"name":"testObjectProperties","pass":true,"statements":[{"sl":87},{"sl":88}]}}
+
+// JSON: { lines : [{tests : [testid1, testid2, testid3, ...]}, ...]};
+clover.srcFileLines = [[], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [2247], [], [2247], [], [], [], [2482], [], [2482], [], [], [1996], [], [1996], [], [], [489], [], [489], [], [], [5273], [], [5273], [], [], [], [101], [], [101], [101], [101], [101], [101], [101], [], [], [2380], [], [2380], [2380], [2380], [2380], [2380], [2380], [2380], [], [], [5651], [], [5651], [5651], [], []]

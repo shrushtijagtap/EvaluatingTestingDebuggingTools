@@ -1,0 +1,10 @@
+var clover = new Object();
+
+// JSON: {classes : [{name, id, sl, el,  methods : [{sl, el}, ...]}, ...]}
+clover.pageData = {"classes":[{"el":63,"id":38875,"methods":[{"el":17,"sc":5,"sl":14},{"el":22,"sc":5,"sl":19},{"el":27,"sc":5,"sl":24},{"el":32,"sc":5,"sl":29},{"el":37,"sc":5,"sl":34},{"el":42,"sc":5,"sl":39},{"el":47,"sc":5,"sl":44},{"el":52,"sc":5,"sl":49},{"el":57,"sc":5,"sl":54},{"el":62,"sc":5,"sl":59}],"name":"PackageDefinitionStrategyTypeTrivialTest","sl":12}]}
+
+// JSON: {test_ID : {"methods": [ID1, ID2, ID3...], "name" : "testXXX() void"}, ...};
+clover.testTargets = {"test_1058":{"methods":[{"sl":39}],"name":"testImplementationVersion","pass":true,"statements":[{"sl":41}]},"test_109":{"methods":[{"sl":34}],"name":"testImplementationTitle","pass":true,"statements":[{"sl":36}]},"test_1507":{"methods":[{"sl":19}],"name":"testSpecificationTitle","pass":true,"statements":[{"sl":21}]},"test_2237":{"methods":[{"sl":44}],"name":"testImplementationVendor","pass":true,"statements":[{"sl":46}]},"test_333":{"methods":[{"sl":29}],"name":"testSpecificationVendor","pass":true,"statements":[{"sl":31}]},"test_3543":{"methods":[{"sl":14}],"name":"testIsDefined","pass":true,"statements":[{"sl":16}]},"test_3863":{"methods":[{"sl":59}],"name":"testObjectProperties","pass":true,"statements":[{"sl":61}]},"test_4800":{"methods":[{"sl":49}],"name":"testSealBase","pass":true,"statements":[{"sl":51}]},"test_4994":{"methods":[{"sl":54}],"name":"testIsCompatibleTo","pass":true,"statements":[{"sl":56}]},"test_5752":{"methods":[{"sl":24}],"name":"testSpecificationVersion","pass":true,"statements":[{"sl":26}]}}
+
+// JSON: { lines : [{tests : [testid1, testid2, testid3, ...]}, ...]};
+clover.srcFileLines = [[], [], [], [], [], [], [], [], [], [], [], [], [], [], [3543], [], [3543], [], [], [1507], [], [1507], [], [], [5752], [], [5752], [], [], [333], [], [333], [], [], [109], [], [109], [], [], [1058], [], [1058], [], [], [2237], [], [2237], [], [], [4800], [], [4800], [], [], [4994], [], [4994], [], [], [3863], [], [3863], [], []]

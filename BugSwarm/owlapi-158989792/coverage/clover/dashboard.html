@@ -1,0 +1,1334 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+
+    
+    
+    <link rel="SHORTCUT ICON" href="img/clover.ico" />
+
+    <link rel="stylesheet" href="aui/css/aui.min.css" media="all"/>
+    <link rel="stylesheet" href="aui/css/aui-experimental.min.css" media="all"/>
+    <!--[if IE 9]><link rel="stylesheet" href="aui/css/aui-ie9.min.css" media="all"/><![endif]-->
+
+    <style type="text/css" media="all">
+        @import url('style.css');
+        @import url('tree.css');
+        
+    </style>
+
+    <script src="jquery-1.8.3.min.js" type="text/javascript"></script>
+    <script src="aui/js/aui.min.js" type="text/javascript"></script>
+    <script src="aui/js/aui-experimental.min.js" type="text/javascript"></script>
+    <script src="aui/js/aui-soy.min.js" type="text/javascript"></script>
+
+    <script src="package-nodes-tree.js" type="text/javascript"></script>
+    <script src="clover-tree.js" type="text/javascript"></script>
+    <script src="clover.js" type="text/javascript"></script>
+    <script src="clover-descriptions.js" type="text/javascript"></script>
+    <script src="cloud.js" type="text/javascript"></script>
+
+            <title>parsers 4.2.5</title>
+    </head>
+
+<body onresize="processTreeMapDashJson(treeMapJson);" >
+    <div id="page">
+        
+        
+
+
+<header id="header" role="banner">
+    <nav class="aui-header aui-dropdown2-trigger-group" role="navigation">
+        <div class="aui-header-inner">
+            <div class="aui-header-primary">
+                <h1 id="logo" class="aui-header-logo aui-header-logo-clover">
+                    <a href="https://openclover.org" title="Visit OpenClover home page"><span class="aui-header-logo-device">OpenClover</span></a>
+                </h1>
+                            </div>
+            <div class="aui-header-secondary">
+                <ul class="aui-nav">
+                    <li id="system-help-menu">
+                        <a class="aui-nav-link" title="Open online documentation" target="_blank"
+                           href="https://openclover.org/documentation">
+                            <span class="aui-icon aui-icon-small aui-iconfont-help">&#160;Help</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+        
+        <div class="aui-page-panel">
+            <div class="aui-page-panel-inner">
+                <div class="aui-page-panel-nav aui-page-panel-nav-clover">
+                    
+
+<div class="aui-page-header-inner" style="margin-bottom: 20px;">
+    <div class="aui-page-header-image">
+                    <a href="http://owlcs.github.io/owlapi/owlapi-parsers/" target="_top">
+                <div class="aui-avatar aui-avatar-large aui-avatar-project">
+            <div class="aui-avatar-inner">
+                                    <img src="img/clover_logo_large.png" alt="Clover icon"/>
+                            </div>
+        </div>
+                    </a>
+            </div>
+    <div class="aui-page-header-main" >
+        <h1>
+                            <a href="http://owlcs.github.io/owlapi/owlapi-parsers/" target="_top">
+                                        parsers 4.2.5
+                                        </a>
+                    </h1>
+    </div>
+</div>
+
+<nav class="aui-navgroup aui-navgroup-vertical">
+    <div class="aui-navgroup-inner">
+                                            <ul class="aui-nav">
+                <li class="aui-nav-selected">
+                    <a href="dashboard.html">Project overview</a>
+                </li>
+            </ul>
+        
+                <div class="aui-nav-heading packages-nav-heading">
+            <strong>Packages</strong>
+        </div>
+        <div class="aui-nav project-packages">
+            <form method="get" action="#" class="aui package-filter-container">
+                <input type="text" autocomplete="off" class="package-filter text"
+                       placeholder="Type to filter packages..." name="package-filter" id="package-filter"
+                       title="Start typing package name (or part of the name) to search through the tree. Use arrow keys and the Enter key to navigate."/>
+            </form>
+            <p class="package-filter-no-results-message hidden">
+                <small>No results found.</small>
+            </p>
+                                                  <div class="packages-tree-wrapper" data-root-relative="" data-package-name="">
+                <div class="packages-tree-container"></div>
+                <div class="clover-packages-lozenges"></div>
+            </div>
+        </div>
+        
+            </div>
+</nav>                </div>
+                <section class="aui-page-panel-content">
+                    <div class="aui-page-panel-content-clover">
+
+                    
+                    <ol class="aui-nav aui-nav-breadcrumbs">
+            
+        <li><a href="dashboard.html">Project Clover database Sat Apr 27 2024 12:01:29 CDT</a></li>
+    </ol>
+    
+<h1 class="aui-h2-clover">
+            Project overview
+    </h1>
+<div class="aui-tabs horizontal-tabs">
+        <ul class="tabs-menu">
+            <li class="menu-item active-tab">
+            <a href="dashboard.html">Dashboard</a>
+        </li>
+                <li class="menu-item ">
+            <a href="pkg-summary.html"><strong>Application code</strong></a>
+        </li>
+                <li class="menu-item ">
+            <a href="testsrc-pkg-summary.html"><strong>Test code</strong></a>
+        </li>
+        <li class="menu-item ">
+            <a href="test-pkg-summary.html"><strong>Test results</strong></a>
+        </li>
+                <li class="menu-item ">
+            <a href="top-risks.html"><strong>Top risks</strong></a>
+        </li>
+        <li class="menu-item ">
+            <a href="quick-wins.html"><strong>Quick wins</strong></a>
+        </li>
+                                                <li class="menu-item ">
+                <a href="treemap.html"><strong>Coverage tree map</strong></a>
+            </li>
+            </ul>
+    <div class="tabs-pane active-pane" id="tabs-first">
+
+        <div>&#160;</div>
+
+
+
+
+
+
+<div class="aui-group">
+    <div class="aui-item">
+        <div class="dashboard-widget">
+            <header class="dashboard-widget-header">
+                
+                <h3>
+                    Code coverage
+                    <small style="float:right; font-weight: normal">
+                        496 classes,
+                        17,893 /
+                        41,007 elements
+                    </small>
+                </h3>
+            </header>
+            <div class="dashboard-widget-content">
+                <div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">0.43634012</span>43.6%</div><div style="display: table-cell">
+ <div title="43.6% Covered"  style="min-width:200px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:43.6%"></div></div></div></div>
+                <p><a href="pkg-summary.html">See more</a></p>
+            </div>
+        </div>
+
+        <div class="dashboard-widget">
+            <header class="dashboard-widget-header">
+                <h3>
+                    Test results
+                    <small style="float:right; font-weight: normal">
+                        5 /
+                        5 tests
+                        0.14 secs
+                    </small>
+                </h3>
+            </header>
+            <div class="dashboard-widget-content">
+                                    
+
+<div style="display: table; width: 100%">
+            <div class="barGraphValue"><span class="sortValue">1.0</span>100%</div>         <div style="display: table-cell">
+            
+            <div title="0% Errors" style="min-width: 40px;" class="testBarError">
+                <div title="100% of tests passed&lt;br/&gt;0% of tests failed" class="testBarFail" style="width: 100%"><div class="testBarPass" style="width: 100%"></div></div>
+            </div>
+        </div>
+    </div>                                <p><a href="test-pkg-summary.html">See more</a></p>
+            </div>
+        </div>
+
+        <div class="dashboard-widget">
+            <header class="dashboard-widget-header">
+                <h3>Code metrics</h3>
+            </header>
+                         
+
+<div id="$statsId" class="aui-item" style="display: ${display}">
+<div style="display: table">
+    <div class="stats-box">
+        <div class="stats-box-label"><label title="Total number of branches in this project">Branches:</label></div>
+        <div class="stats-box-value">8,660</div>
+    </div>
+    <div class="stats-box">
+        <div class="stats-box-label"><label title="Total number of statements in this project">Statements:</label></div>
+        <div class="stats-box-value">28,026</div>
+    </div>
+    <div class="stats-box">
+        <div class="stats-box-label"><label title="Total number of methods in this project">Methods:</label></div>
+        <div class="stats-box-value">4,321</div>
+    </div>
+    <div class="stats-box">
+        <div class="stats-box-label"><label title="Total number of classes in this project">Classes:</label></div>
+        <div class="stats-box-value">496</div>
+    </div>
+            <div class="stats-box">
+            <div class="stats-box-label"><label title="Total number of files in this project">Files:</label></div>
+            <div class="stats-box-value">173</div>
+        </div>
+                <div class="stats-box">
+            <div class="stats-box-label"><label title="Total number of packages in this project">Packages:</label></div>
+            <div class="stats-box-value">19</div>
+        </div>
+        <div class="stats-box">
+        <div class="stats-box-label"><label title="Total number of lines of code in this project">LOC:</label></div>
+        <div class="stats-box-value">65,145</div>
+    </div>
+    <div class="stats-box">
+        <div class="stats-box-label"><label title="Total number of non-comment lines of code in this project">NCLOC:</label></div>
+        <div class="stats-box-value">51,474</div>
+    </div>
+    <div class="stats-box">
+        <div class="stats-box-label"><label title="Cyclomatic complexity is the number of paths in this project">Total complexity:</label></div>
+        <div class="stats-box-value">11,830</div>
+    </div>
+    <div class="stats-box">
+        <div class="stats-box-label">
+            <label title="Complexity density is the complexity divided by the number of statements in this project">Complexity density:</label>
+        </div>
+        <div class="stats-box-value">0.42</div>
+    </div>
+    <div class="stats-box">
+        <div class="stats-box-label"><label title="Number of statements per method.">Statements/Method:</label></div>
+        <div class="stats-box-value">6.49</div>
+    </div>
+    <div class="stats-box">
+        <div class="stats-box-label"><label title="Number of methods per class.">Methods/Class:</label></div>
+        <div class="stats-box-value">8.71</div>
+    </div>
+            <div class="stats-box">
+            <div class="stats-box-label"><label title="Number of classes per package.">Classes/Package:</label></div>
+            <div class="stats-box-value">26.11</div>
+        </div>
+        <div class="stats-box">
+        <div class="stats-box-label"><label title="Complexity divided by the number of methods in this project">Average method complexity:</label></div>
+        <div class="stats-box-value">2.74</div>
+    </div>
+</div>
+
+</div>        </div>
+
+                <div class="dashboard-widget">
+            <header class="dashboard-widget-header">
+                <h3>Class Coverage Distribution</h3>
+            </header>
+            <div class="dashboard-widget-content">
+                <div style="text-align: center">                     <img src="img/classDistrubutionChart.png" alt="img/classDistrubutionChart.png" usemap="#classDistrubutionChart.png"/>
+                </div>
+                <map id="classDistrubutionChart.png" name="classDistrubutionChart.png">
+<area shape="rect" coords="282,15,304,206" title="239 classes have 91-100% coverage" alt="" nohref="nohref"/>
+<area shape="rect" coords="258,167,280,206" title="49 classes have 81-90% coverage" alt="" nohref="nohref"/>
+<area shape="rect" coords="233,179,255,206" title="34 classes have 71-80% coverage" alt="" nohref="nohref"/>
+<area shape="rect" coords="209,182,231,206" title="30 classes have 61-70% coverage" alt="" nohref="nohref"/>
+<area shape="rect" coords="184,196,206,206" title="13 classes have 51-60% coverage" alt="" nohref="nohref"/>
+<area shape="rect" coords="160,201,182,206" title="7 classes have 41-50% coverage" alt="" nohref="nohref"/>
+<area shape="rect" coords="135,197,157,206" title="12 classes have 31-40% coverage" alt="" nohref="nohref"/>
+<area shape="rect" coords="111,202,133,206" title="6 classes have 21-30% coverage" alt="" nohref="nohref"/>
+<area shape="rect" coords="87,205,109,206" title="2 classes have 11-20% coverage" alt="" nohref="nohref"/>
+<area shape="rect" coords="62,201,84,206" title="7 classes have 1-10% coverage" alt="" nohref="nohref"/>
+<area shape="rect" coords="38,155,60,206" title="64 classes have 0% coverage" alt="" nohref="nohref"/>
+</map>
+            </div>
+        </div>
+        
+                <div class="dashboard-widget">
+            <header class="dashboard-widget-header">
+                <h3>Class Complexity</h3>
+            </header>
+            <div class="dashboard-widget-content">
+                <div style="text-align: center">
+                    <img src="img/classComplexityChart.png" alt="img/classComplexityChart.png" usemap="#classComplexityChart.png"/>
+                </div>
+                <map id="classComplexityChart.png" name="classComplexityChart.png">
+<area shape="poly" coords="53,206,50,208,48,206,50,203,53,206,53,206" title="Complexity: 19; Coverage: 0%; Class: TokenMgrError" alt="" href="org/semanticweb/owlapi/functional/parser/TokenMgrError.html#TokenMgrError"/>
+<area shape="poly" coords="200,208,197,210,195,208,197,205,200,208,200,208" title="Complexity: 7; Coverage: 62%; Class: Token" alt="" href="org/semanticweb/owlapi/functional/parser/Token.html#Token"/>
+<area shape="poly" coords="115,197,112,200,110,197,112,195,115,197,115,197" title="Complexity: 71; Coverage: 26%; Class: SimpleCharStream" alt="" href="org/semanticweb/owlapi/functional/parser/SimpleCharStream.html#SimpleCharStream"/>
+<area shape="poly" coords="212,205,209,207,207,205,209,202,212,205,212,205" title="Complexity: 25; Coverage: 67%; Class: ParseException" alt="" href="org/semanticweb/owlapi/functional/parser/ParseException.html#ParseException"/>
+<area shape="poly" coords="69,18,67,20,64,18,67,15,69,18,69,18" title="Complexity: 1,157; Coverage: 7%; Class: OWLFunctionalSyntaxParserTokenManager" alt="" href="org/semanticweb/owlapi/functional/parser/OWLFunctionalSyntaxParserTokenManager.html#OWLFunctionalSyntaxParserTokenManager"/>
+<area shape="poly" coords="247,115,245,117,242,115,245,112,247,115,247,115" title="Complexity: 571; Coverage: 82%; Class: OWLFunctionalSyntaxParser" alt="" href="org/semanticweb/owlapi/functional/parser/OWLFunctionalSyntaxParser.html#OWLFunctionalSyntaxParser"/>
+<area shape="poly" coords="290,209,288,211,285,209,288,206,290,209,290,209" title="Complexity: 2; Coverage: 100%; Class: OWLFunctionalSyntaxOWLParserFactory" alt="" href="org/semanticweb/owlapi/functional/parser/OWLFunctionalSyntaxOWLParserFactory.html#OWLFunctionalSyntaxOWLParserFactory"/>
+<area shape="poly" coords="245,208,243,210,240,208,243,205,245,208,245,208" title="Complexity: 9; Coverage: 81%; Class: OWLFunctionalSyntaxOWLParser" alt="" href="org/semanticweb/owlapi/functional/parser/OWLFunctionalSyntaxOWLParser.html#OWLFunctionalSyntaxOWLParser"/>
+<area shape="poly" coords="257,183,254,185,252,183,254,180,257,183,257,183" title="Complexity: 159; Coverage: 86%; Class: CustomTokenizer" alt="" href="org/semanticweb/owlapi/functional/parser/CustomTokenizer.html#CustomTokenizer"/>
+<area shape="poly" coords="153,208,150,210,148,208,150,205,153,208,153,208" title="Complexity: 7; Coverage: 42%; Class: LatexWriter" alt="" href="org/semanticweb/owlapi/latex/renderer/LatexWriter.html#LatexWriter"/>
+<area shape="poly" coords="290,209,288,211,285,209,288,206,290,209,290,209" title="Complexity: 2; Coverage: 100%; Class: OWLFunctionalSyntaxOWLParserFactory" alt="" href="org/semanticweb/owlapi/functional/parser/OWLFunctionalSyntaxOWLParserFactory.html#OWLFunctionalSyntaxOWLParserFactory"/>
+<area shape="poly" coords="255,209,252,211,250,209,252,206,255,209,255,209" title="Complexity: 3; Coverage: 85%; Class: LatexStorer" alt="" href="org/semanticweb/owlapi/latex/renderer/LatexStorer.html#LatexStorer"/>
+<area shape="poly" coords="53,209,50,211,48,209,50,206,53,209,53,209" title="Complexity: 1; Coverage: 0%; Class: LatexRendererIOException" alt="" href="org/semanticweb/owlapi/latex/renderer/LatexRendererIOException.html#LatexRendererIOException"/>
+<area shape="poly" coords="53,209,50,211,48,209,50,206,53,209,53,209" title="Complexity: 3; Coverage: 0%; Class: LatexRendererException" alt="" href="org/semanticweb/owlapi/latex/renderer/LatexRendererException.html#LatexRendererException"/>
+<area shape="poly" coords="100,209,98,211,95,209,98,206,100,209,100,209" title="Complexity: 2; Coverage: 20%; Class: LatexRenderer.OWLAxiomComparator" alt="" href="org/semanticweb/owlapi/latex/renderer/LatexRenderer.html#LatexRenderer.OWLAxiomComparator"/>
+<area shape="poly" coords="212,207,209,210,207,207,209,205,212,207,212,207" title="Complexity: 12; Coverage: 67%; Class: LatexRenderer" alt="" href="org/semanticweb/owlapi/latex/renderer/LatexRenderer.html#LatexRenderer"/>
+<area shape="poly" coords="60,186,57,189,55,186,57,184,60,186,60,186" title="Complexity: 139; Coverage: 3%; Class: LatexObjectVisitor" alt="" href="org/semanticweb/owlapi/latex/renderer/LatexObjectVisitor.html#LatexObjectVisitor"/>
+<area shape="poly" coords="53,209,50,211,48,209,50,206,53,209,53,209" title="Complexity: 3; Coverage: 0%; Class: LatexRendererException" alt="" href="org/semanticweb/owlapi/latex/renderer/LatexRendererException.html#LatexRendererException"/>
+<area shape="poly" coords="53,205,50,208,48,205,50,203,53,205,53,205" title="Complexity: 22; Coverage: 0%; Class: LatexBracketChecker" alt="" href="org/semanticweb/owlapi/latex/renderer/LatexBracketChecker.html#LatexBracketChecker"/>
+<area shape="poly" coords="53,206,50,209,48,206,50,204,53,206,53,206" title="Complexity: 18; Coverage: 0%; Class: TokenMgrError" alt="" href="org/semanticweb/owlapi/dlsyntax/parser/TokenMgrError.html#TokenMgrError"/>
+<area shape="poly" coords="53,208,50,210,48,208,50,205,53,208,53,208" title="Complexity: 7; Coverage: 0%; Class: Token" alt="" href="org/semanticweb/owlapi/dlsyntax/parser/Token.html#Token"/>
+<area shape="poly" coords="53,205,50,207,48,205,50,202,53,205,53,205" title="Complexity: 25; Coverage: 0%; Class: ParseException" alt="" href="org/semanticweb/owlapi/dlsyntax/parser/ParseException.html#ParseException"/>
+<area shape="poly" coords="53,192,50,194,48,192,50,189,53,192,53,192" title="Complexity: 105; Coverage: 0%; Class: JavaCharStream" alt="" href="org/semanticweb/owlapi/dlsyntax/parser/JavaCharStream.html#JavaCharStream"/>
+<area shape="poly" coords="53,136,50,138,48,136,50,133,53,136,53,136" title="Complexity: 442; Coverage: 0%; Class: DLSyntaxParserTokenManager" alt="" href="org/semanticweb/owlapi/dlsyntax/parser/DLSyntaxParserTokenManager.html#DLSyntaxParserTokenManager"/>
+<area shape="poly" coords="53,209,50,211,48,209,50,206,53,209,53,209" title="Complexity: 1; Coverage: 0%; Class: LatexRendererIOException" alt="" href="org/semanticweb/owlapi/latex/renderer/LatexRendererIOException.html#LatexRendererIOException"/>
+<area shape="poly" coords="53,113,50,116,48,113,50,111,53,113,53,113" title="Complexity: 580; Coverage: 0%; Class: DLSyntaxParser" alt="" href="org/semanticweb/owlapi/dlsyntax/parser/DLSyntaxParser.html#DLSyntaxParser"/>
+<area shape="poly" coords="53,209,50,211,48,209,50,206,53,209,53,209" title="Complexity: 2; Coverage: 0%; Class: DLSyntaxOWLParserFactory" alt="" href="org/semanticweb/owlapi/dlsyntax/parser/DLSyntaxOWLParserFactory.html#DLSyntaxOWLParserFactory"/>
+<area shape="poly" coords="53,208,50,210,48,208,50,205,53,208,53,208" title="Complexity: 8; Coverage: 0%; Class: DLSyntaxOWLParser" alt="" href="org/semanticweb/owlapi/dlsyntax/parser/DLSyntaxOWLParser.html#DLSyntaxOWLParser"/>
+<area shape="poly" coords="290,209,288,211,285,209,288,206,290,209,290,209" title="Complexity: 2; Coverage: 100%; Class: OWLFunctionalSyntaxOWLParserFactory" alt="" href="org/semanticweb/owlapi/functional/parser/OWLFunctionalSyntaxOWLParserFactory.html#OWLFunctionalSyntaxOWLParserFactory"/>
+<area shape="poly" coords="290,209,288,211,285,209,288,206,290,209,290,209" title="Complexity: 2; Coverage: 100%; Class: OWLFunctionalSyntaxOWLParserFactory" alt="" href="org/semanticweb/owlapi/functional/parser/OWLFunctionalSyntaxOWLParserFactory.html#OWLFunctionalSyntaxOWLParserFactory"/>
+<area shape="poly" coords="255,209,252,211,250,209,252,206,255,209,255,209" title="Complexity: 3; Coverage: 85%; Class: LatexStorer" alt="" href="org/semanticweb/owlapi/latex/renderer/LatexStorer.html#LatexStorer"/>
+<area shape="poly" coords="269,194,266,197,264,194,266,192,269,194,269,194" title="Complexity: 90; Coverage: 91%; Class: TurtleRenderer" alt="" href="org/semanticweb/owlapi/rdf/turtle/renderer/TurtleRenderer.html#TurtleRenderer"/>
+<area shape="poly" coords="53,206,50,209,48,206,50,204,53,206,53,206" title="Complexity: 18; Coverage: 0%; Class: TokenMgrError" alt="" href="org/semanticweb/owlapi/dlsyntax/parser/TokenMgrError.html#TokenMgrError"/>
+<area shape="poly" coords="172,208,169,210,167,208,169,205,172,208,172,208" title="Complexity: 7; Coverage: 50%; Class: Token" alt="" href="org/semanticweb/owlapi/krss2/parser/Token.html#Token"/>
+<area shape="poly" coords="193,205,190,207,188,205,190,202,193,205,193,205" title="Complexity: 25; Coverage: 59%; Class: ParseException" alt="" href="org/semanticweb/owlapi/krss2/parser/ParseException.html#ParseException"/>
+<area shape="poly" coords="74,95,72,98,69,95,72,93,74,95,74,95" title="Complexity: 688; Coverage: 9%; Class: KRSS2ParserTokenManager" alt="" href="org/semanticweb/owlapi/krss2/parser/KRSS2ParserTokenManager.html#KRSS2ParserTokenManager"/>
+<area shape="poly" coords="290,209,288,211,285,209,288,206,290,209,290,209" title="Complexity: 1; Coverage: 100%; Class: KRSS2Parser.LookaheadSuccess" alt="" href="org/semanticweb/owlapi/krss2/parser/KRSS2Parser.html#KRSS2Parser.LookaheadSuccess"/>
+<area shape="poly" coords="86,82,84,84,81,82,84,79,86,82,86,82" title="Complexity: 769; Coverage: 14%; Class: KRSS2Parser" alt="" href="org/semanticweb/owlapi/krss2/parser/KRSS2Parser.html#KRSS2Parser"/>
+<area shape="poly" coords="290,209,288,211,285,209,288,206,290,209,290,209" title="Complexity: 2; Coverage: 100%; Class: OWLFunctionalSyntaxOWLParserFactory" alt="" href="org/semanticweb/owlapi/functional/parser/OWLFunctionalSyntaxOWLParserFactory.html#OWLFunctionalSyntaxOWLParserFactory"/>
+<area shape="poly" coords="290,209,288,211,285,209,288,206,290,209,290,209" title="Complexity: 1; Coverage: 100%; Class: KRSS2Parser.LookaheadSuccess" alt="" href="org/semanticweb/owlapi/krss2/parser/KRSS2Parser.html#KRSS2Parser.LookaheadSuccess"/>
+<area shape="poly" coords="190,208,188,210,185,208,188,205,190,208,190,208" title="Complexity: 8; Coverage: 58%; Class: KRSS2OWLParser" alt="" href="org/semanticweb/owlapi/krss2/parser/KRSS2OWLParser.html#KRSS2OWLParser"/>
+<area shape="poly" coords="103,192,100,194,98,192,100,189,103,192,103,192" title="Complexity: 105; Coverage: 21%; Class: JavaCharStream" alt="" href="org/semanticweb/owlapi/krss2/parser/JavaCharStream.html#JavaCharStream"/>
+<area shape="poly" coords="53,209,50,211,48,209,50,206,53,209,53,209" title="Complexity: 3; Coverage: 0%; Class: LatexRendererException" alt="" href="org/semanticweb/owlapi/latex/renderer/LatexRendererException.html#LatexRendererException"/>
+<area shape="poly" coords="53,209,50,211,48,209,50,206,53,209,53,209" title="Complexity: 2; Coverage: 0%; Class: DLSyntaxOWLParserFactory" alt="" href="org/semanticweb/owlapi/dlsyntax/parser/DLSyntaxOWLParserFactory.html#DLSyntaxOWLParserFactory"/>
+<area shape="poly" coords="53,209,50,211,48,209,50,206,53,209,53,209" title="Complexity: 2; Coverage: 0%; Class: DLSyntaxOWLParserFactory" alt="" href="org/semanticweb/owlapi/dlsyntax/parser/DLSyntaxOWLParserFactory.html#DLSyntaxOWLParserFactory"/>
+<area shape="poly" coords="53,209,50,211,48,209,50,206,53,209,53,209" title="Complexity: 2; Coverage: 0%; Class: DLSyntaxOWLParserFactory" alt="" href="org/semanticweb/owlapi/dlsyntax/parser/DLSyntaxOWLParserFactory.html#DLSyntaxOWLParserFactory"/>
+<area shape="poly" coords="53,195,50,198,48,195,50,193,53,195,53,195" title="Complexity: 82; Coverage: 0%; Class: KRSSObjectRenderer" alt="" href="org/semanticweb/owlapi/krss2/renderer/KRSSObjectRenderer.html#KRSSObjectRenderer"/>
+<area shape="poly" coords="53,209,50,211,48,209,50,206,53,209,53,209" title="Complexity: 3; Coverage: 0%; Class: LatexRendererException" alt="" href="org/semanticweb/owlapi/latex/renderer/LatexRendererException.html#LatexRendererException"/>
+<area shape="poly" coords="53,209,50,211,48,209,50,206,53,209,53,209" title="Complexity: 2; Coverage: 0%; Class: DLSyntaxOWLParserFactory" alt="" href="org/semanticweb/owlapi/dlsyntax/parser/DLSyntaxOWLParserFactory.html#DLSyntaxOWLParserFactory"/>
+<area shape="poly" coords="53,209,50,211,48,209,50,206,53,209,53,209" title="Complexity: 3; Coverage: 0%; Class: LatexRendererException" alt="" href="org/semanticweb/owlapi/latex/renderer/LatexRendererException.html#LatexRendererException"/>
+<area shape="poly" coords="53,197,50,199,48,197,50,194,53,197,53,197" title="Complexity: 73; Coverage: 0%; Class: KRSS2ObjectRenderer" alt="" href="org/semanticweb/owlapi/krss2/renderer/KRSS2ObjectRenderer.html#KRSS2ObjectRenderer"/>
+<area shape="poly" coords="290,209,288,211,285,209,288,206,290,209,290,209" title="Complexity: 2; Coverage: 100%; Class: OWLFunctionalSyntaxOWLParserFactory" alt="" href="org/semanticweb/owlapi/functional/parser/OWLFunctionalSyntaxOWLParserFactory.html#OWLFunctionalSyntaxOWLParserFactory"/>
+<area shape="poly" coords="172,209,169,211,167,209,169,206,172,209,172,209" title="Complexity: 2; Coverage: 50%; Class: KRSS2OWLSyntaxStorer" alt="" href="org/semanticweb/owlapi/krss2/renderer/KRSS2OWLSyntaxStorer.html#KRSS2OWLSyntaxStorer"/>
+<area shape="poly" coords="53,209,50,211,48,209,50,206,53,209,53,209" title="Complexity: 3; Coverage: 0%; Class: LatexRendererException" alt="" href="org/semanticweb/owlapi/latex/renderer/LatexRendererException.html#LatexRendererException"/>
+<area shape="poly" coords="53,198,50,201,48,198,50,196,53,198,53,198" title="Complexity: 66; Coverage: 0%; Class: KRSS2OWLObjectRenderer" alt="" href="org/semanticweb/owlapi/krss2/renderer/KRSS2OWLObjectRenderer.html#KRSS2OWLObjectRenderer"/>
+<area shape="poly" coords="53,206,50,209,48,206,50,204,53,206,53,206" title="Complexity: 18; Coverage: 0%; Class: TokenMgrError" alt="" href="org/semanticweb/owlapi/dlsyntax/parser/TokenMgrError.html#TokenMgrError"/>
+<area shape="poly" coords="53,208,50,210,48,208,50,205,53,208,53,208" title="Complexity: 7; Coverage: 0%; Class: Token" alt="" href="org/semanticweb/owlapi/dlsyntax/parser/Token.html#Token"/>
+<area shape="poly" coords="53,205,50,207,48,205,50,202,53,205,53,205" title="Complexity: 25; Coverage: 0%; Class: ParseException" alt="" href="org/semanticweb/owlapi/dlsyntax/parser/ParseException.html#ParseException"/>
+<area shape="poly" coords="53,141,50,143,48,141,50,138,53,141,53,141" title="Complexity: 411; Coverage: 0%; Class: KRSSParserTokenManager" alt="" href="org/semanticweb/owlapi/krss1/parser/KRSSParserTokenManager.html#KRSSParserTokenManager"/>
+<area shape="poly" coords="53,209,50,211,48,209,50,206,53,209,53,209" title="Complexity: 1; Coverage: 0%; Class: LatexRendererIOException" alt="" href="org/semanticweb/owlapi/latex/renderer/LatexRendererIOException.html#LatexRendererIOException"/>
+<area shape="poly" coords="53,154,50,157,48,154,50,152,53,154,53,154" title="Complexity: 332; Coverage: 0%; Class: KRSSParser" alt="" href="org/semanticweb/owlapi/krss1/parser/KRSSParser.html#KRSSParser"/>
+<area shape="poly" coords="53,209,50,211,48,209,50,206,53,209,53,209" title="Complexity: 2; Coverage: 0%; Class: DLSyntaxOWLParserFactory" alt="" href="org/semanticweb/owlapi/dlsyntax/parser/DLSyntaxOWLParserFactory.html#DLSyntaxOWLParserFactory"/>
+<area shape="poly" coords="53,209,50,211,48,209,50,206,53,209,53,209" title="Complexity: 2; Coverage: 0%; Class: DLSyntaxOWLParserFactory" alt="" href="org/semanticweb/owlapi/dlsyntax/parser/DLSyntaxOWLParserFactory.html#DLSyntaxOWLParserFactory"/>
+<area shape="poly" coords="74,208,72,211,69,208,72,206,74,208,74,208" title="Complexity: 6; Coverage: 9%; Class: KRSSOWLParser" alt="" href="org/semanticweb/owlapi/krss1/parser/KRSSOWLParser.html#KRSSOWLParser"/>
+<area shape="poly" coords="53,192,50,194,48,192,50,189,53,192,53,192" title="Complexity: 105; Coverage: 0%; Class: JavaCharStream" alt="" href="org/semanticweb/owlapi/dlsyntax/parser/JavaCharStream.html#JavaCharStream"/>
+<area shape="poly" coords="174,114,171,116,169,114,171,111,174,114,174,114" title="Complexity: 577; Coverage: 51%; Class: TurtleParserTokenManager" alt="" href="org/semanticweb/owlapi/rdf/turtle/parser/TurtleParserTokenManager.html#TurtleParserTokenManager"/>
+<area shape="poly" coords="131,209,129,211,126,209,129,206,131,209,131,209" title="Complexity: 3; Coverage: 33%; Class: TurtleParserException" alt="" href="org/semanticweb/owlapi/rdf/turtle/parser/TurtleParserException.html#TurtleParserException"/>
+<area shape="poly" coords="224,133,221,136,219,133,221,131,224,133,224,133" title="Complexity: 459; Coverage: 72%; Class: TurtleParser" alt="" href="org/semanticweb/owlapi/rdf/turtle/parser/TurtleParser.html#TurtleParser"/>
+<area shape="poly" coords="290,209,288,211,285,209,288,206,290,209,290,209" title="Complexity: 2; Coverage: 100%; Class: OWLFunctionalSyntaxOWLParserFactory" alt="" href="org/semanticweb/owlapi/functional/parser/OWLFunctionalSyntaxOWLParserFactory.html#OWLFunctionalSyntaxOWLParserFactory"/>
+<area shape="poly" coords="207,208,205,210,202,208,205,205,207,208,207,208" title="Complexity: 9; Coverage: 65%; Class: TurtleOntologyParser" alt="" href="org/semanticweb/owlapi/rdf/turtle/parser/TurtleOntologyParser.html#TurtleOntologyParser"/>
+<area shape="poly" coords="53,206,50,209,48,206,50,204,53,206,53,206" title="Complexity: 18; Coverage: 0%; Class: TokenMgrError" alt="" href="org/semanticweb/owlapi/dlsyntax/parser/TokenMgrError.html#TokenMgrError"/>
+<area shape="poly" coords="172,208,169,210,167,208,169,205,172,208,172,208" title="Complexity: 7; Coverage: 50%; Class: Token" alt="" href="org/semanticweb/owlapi/krss2/parser/Token.html#Token"/>
+<area shape="poly" coords="110,205,107,207,105,205,107,202,110,205,110,205" title="Complexity: 25; Coverage: 24%; Class: ParseException" alt="" href="org/semanticweb/owlapi/rdf/turtle/parser/ParseException.html#ParseException"/>
+<area shape="poly" coords="274,208,271,210,269,208,271,205,274,208,274,208" title="Complexity: 9; Coverage: 93%; Class: OWLRDFConsumerAdapter" alt="" href="org/semanticweb/owlapi/rdf/turtle/parser/OWLRDFConsumerAdapter.html#OWLRDFConsumerAdapter"/>
+<area shape="poly" coords="53,208,50,210,48,208,50,205,53,208,53,208" title="Complexity: 8; Coverage: 0%; Class: DLSyntaxOWLParser" alt="" href="org/semanticweb/owlapi/dlsyntax/parser/DLSyntaxOWLParser.html#DLSyntaxOWLParser"/>
+<area shape="poly" coords="138,192,136,194,133,192,136,189,138,192,138,192" title="Complexity: 105; Coverage: 36%; Class: JavaCharStream" alt="" href="org/semanticweb/owlapi/rdf/turtle/parser/JavaCharStream.html#JavaCharStream"/>
+<area shape="poly" coords="53,208,50,210,48,208,50,205,53,208,53,208" title="Complexity: 8; Coverage: 0%; Class: DLSyntaxOWLParser" alt="" href="org/semanticweb/owlapi/dlsyntax/parser/DLSyntaxOWLParser.html#DLSyntaxOWLParser"/>
+<area shape="poly" coords="162,206,160,208,157,206,160,203,162,206,162,206" title="Complexity: 20; Coverage: 46%; Class: TripleLogger" alt="" href="org/semanticweb/owlapi/rdf/rdfxml/parser/TripleLogger.html#TripleLogger"/>
+<area shape="poly" coords="290,209,288,211,285,209,288,206,290,209,290,209" title="Complexity: 3; Coverage: 100%; Class: TripleHandlers.TypeTransitivePropertyHandler" alt="" href="org/semanticweb/owlapi/rdf/rdfxml/parser/TripleHandlers.html#TripleHandlers.TypeTransitivePropertyHandler"/>
+<area shape="poly" coords="274,208,271,211,269,208,271,206,274,208,274,208" title="Complexity: 5; Coverage: 93%; Class: TripleHandlers.TypeSymmetricPropertyHandler" alt="" href="org/semanticweb/owlapi/rdf/rdfxml/parser/TripleHandlers.html#TripleHandlers.TypeSymmetricPropertyHandler"/>
+<area shape="poly" coords="131,209,129,211,126,209,129,206,131,209,131,209" title="Complexity: 2; Coverage: 33%; Class: TripleHandlers.TypeSelfRestrictionHandler" alt="" href="org/semanticweb/owlapi/rdf/rdfxml/parser/TripleHandlers.html#TripleHandlers.TypeSelfRestrictionHandler"/>
+<area shape="poly" coords="290,209,288,211,285,209,288,206,290,209,290,209" title="Complexity: 2; Coverage: 100%; Class: OWLFunctionalSyntaxOWLParserFactory" alt="" href="org/semanticweb/owlapi/functional/parser/OWLFunctionalSyntaxOWLParserFactory.html#OWLFunctionalSyntaxOWLParserFactory"/>
+<area shape="poly" coords="290,209,288,211,285,209,288,206,290,209,290,209" title="Complexity: 2; Coverage: 100%; Class: OWLFunctionalSyntaxOWLParserFactory" alt="" href="org/semanticweb/owlapi/functional/parser/OWLFunctionalSyntaxOWLParserFactory.html#OWLFunctionalSyntaxOWLParserFactory"/>
+<area shape="poly" coords="290,209,288,211,285,209,288,206,290,209,290,209" title="Complexity: 2; Coverage: 100%; Class: OWLFunctionalSyntaxOWLParserFactory" alt="" href="org/semanticweb/owlapi/functional/parser/OWLFunctionalSyntaxOWLParserFactory.html#OWLFunctionalSyntaxOWLParserFactory"/>
+<area shape="poly" coords="290,209,288,211,285,209,288,206,290,209,290,209" title="Complexity: 2; Coverage: 100%; Class: OWLFunctionalSyntaxOWLParserFactory" alt="" href="org/semanticweb/owlapi/functional/parser/OWLFunctionalSyntaxOWLParserFactory.html#OWLFunctionalSyntaxOWLParserFactory"/>
+<area shape="poly" coords="290,209,288,211,285,209,288,206,290,209,290,209" title="Complexity: 2; Coverage: 100%; Class: OWLFunctionalSyntaxOWLParserFactory" alt="" href="org/semanticweb/owlapi/functional/parser/OWLFunctionalSyntaxOWLParserFactory.html#OWLFunctionalSyntaxOWLParserFactory"/>
+<area shape="poly" coords="290,209,288,211,285,209,288,206,290,209,290,209" title="Complexity: 2; Coverage: 100%; Class: OWLFunctionalSyntaxOWLParserFactory" alt="" href="org/semanticweb/owlapi/functional/parser/OWLFunctionalSyntaxOWLParserFactory.html#OWLFunctionalSyntaxOWLParserFactory"/>
+<area shape="poly" coords="290,209,288,211,285,209,288,206,290,209,290,209" title="Complexity: 2; Coverage: 100%; Class: OWLFunctionalSyntaxOWLParserFactory" alt="" href="org/semanticweb/owlapi/functional/parser/OWLFunctionalSyntaxOWLParserFactory.html#OWLFunctionalSyntaxOWLParserFactory"/>
+<area shape="poly" coords="290,209,288,211,285,209,288,206,290,209,290,209" title="Complexity: 2; Coverage: 100%; Class: OWLFunctionalSyntaxOWLParserFactory" alt="" href="org/semanticweb/owlapi/functional/parser/OWLFunctionalSyntaxOWLParserFactory.html#OWLFunctionalSyntaxOWLParserFactory"/>
+<area shape="poly" coords="290,209,288,211,285,209,288,206,290,209,290,209" title="Complexity: 2; Coverage: 100%; Class: OWLFunctionalSyntaxOWLParserFactory" alt="" href="org/semanticweb/owlapi/functional/parser/OWLFunctionalSyntaxOWLParserFactory.html#OWLFunctionalSyntaxOWLParserFactory"/>
+<area shape="poly" coords="290,209,288,211,285,209,288,206,290,209,290,209" title="Complexity: 2; Coverage: 100%; Class: OWLFunctionalSyntaxOWLParserFactory" alt="" href="org/semanticweb/owlapi/functional/parser/OWLFunctionalSyntaxOWLParserFactory.html#OWLFunctionalSyntaxOWLParserFactory"/>
+<area shape="poly" coords="290,209,288,211,285,209,288,206,290,209,290,209" title="Complexity: 2; Coverage: 100%; Class: OWLFunctionalSyntaxOWLParserFactory" alt="" href="org/semanticweb/owlapi/functional/parser/OWLFunctionalSyntaxOWLParserFactory.html#OWLFunctionalSyntaxOWLParserFactory"/>
+<area shape="poly" coords="290,209,288,211,285,209,288,206,290,209,290,209" title="Complexity: 2; Coverage: 100%; Class: OWLFunctionalSyntaxOWLParserFactory" alt="" href="org/semanticweb/owlapi/functional/parser/OWLFunctionalSyntaxOWLParserFactory.html#OWLFunctionalSyntaxOWLParserFactory"/>
+<area shape="poly" coords="266,208,264,211,261,208,264,206,266,208,266,208" title="Complexity: 4; Coverage: 90%; Class: TripleHandlers.TypeReflexivePropertyHandler" alt="" href="org/semanticweb/owlapi/rdf/rdfxml/parser/TripleHandlers.html#TripleHandlers.TypeReflexivePropertyHandler"/>
+<area shape="poly" coords="262,209,259,211,257,209,259,206,262,209,262,209" title="Complexity: 3; Coverage: 88%; Class: TripleHandlers.TypeRDFSClassHandler" alt="" href="org/semanticweb/owlapi/rdf/rdfxml/parser/TripleHandlers.html#TripleHandlers.TypeRDFSClassHandler"/>
+<area shape="poly" coords="290,209,288,211,285,209,288,206,290,209,290,209" title="Complexity: 2; Coverage: 100%; Class: OWLFunctionalSyntaxOWLParserFactory" alt="" href="org/semanticweb/owlapi/functional/parser/OWLFunctionalSyntaxOWLParserFactory.html#OWLFunctionalSyntaxOWLParserFactory"/>
+<area shape="poly" coords="290,209,288,211,285,209,288,206,290,209,290,209" title="Complexity: 2; Coverage: 100%; Class: OWLFunctionalSyntaxOWLParserFactory" alt="" href="org/semanticweb/owlapi/functional/parser/OWLFunctionalSyntaxOWLParserFactory.html#OWLFunctionalSyntaxOWLParserFactory"/>
+<area shape="poly" coords="271,208,269,211,266,208,269,206,271,208,271,208" title="Complexity: 5; Coverage: 92%; Class: TripleHandlers.TypeOntologyHandler" alt="" href="org/semanticweb/owlapi/rdf/rdfxml/parser/TripleHandlers.html#TripleHandlers.TypeOntologyHandler"/>
+<area shape="poly" coords="290,209,288,211,285,209,288,206,290,209,290,209" title="Complexity: 3; Coverage: 100%; Class: TripleHandlers.TypeTransitivePropertyHandler" alt="" href="org/semanticweb/owlapi/rdf/rdfxml/parser/TripleHandlers.html#TripleHandlers.TypeTransitivePropertyHandler"/>
+<area shape="poly" coords="243,206,240,208,238,206,240,203,243,206,243,206" title="Complexity: 19; Coverage: 80%; Class: TripleHandlers.TypeNegativePropertyAssertionHandler" alt="" href="org/semanticweb/owlapi/rdf/rdfxml/parser/TripleHandlers.html#TripleHandlers.TypeNegativePropertyAssertionHandler"/>
+<area shape="poly" coords="62,207,60,210,57,207,60,205,62,207,62,207" title="Complexity: 12; Coverage: 4%; Class: TripleHandlers.TypeNegativeDataPropertyAssertionHandler" alt="" href="org/semanticweb/owlapi/rdf/rdfxml/parser/TripleHandlers.html#TripleHandlers.TypeNegativeDataPropertyAssertionHandler"/>
+<area shape="poly" coords="290,209,288,211,285,209,288,206,290,209,290,209" title="Complexity: 3; Coverage: 100%; Class: TripleHandlers.TypeTransitivePropertyHandler" alt="" href="org/semanticweb/owlapi/rdf/rdfxml/parser/TripleHandlers.html#TripleHandlers.TypeTransitivePropertyHandler"/>
+<area shape="poly" coords="290,209,288,211,285,209,288,206,290,209,290,209" title="Complexity: 2; Coverage: 100%; Class: OWLFunctionalSyntaxOWLParserFactory" alt="" href="org/semanticweb/owlapi/functional/parser/OWLFunctionalSyntaxOWLParserFactory.html#OWLFunctionalSyntaxOWLParserFactory"/>
+<area shape="poly" coords="266,208,264,211,261,208,264,206,266,208,266,208" title="Complexity: 4; Coverage: 90%; Class: TripleHandlers.TypeReflexivePropertyHandler" alt="" href="org/semanticweb/owlapi/rdf/rdfxml/parser/TripleHandlers.html#TripleHandlers.TypeReflexivePropertyHandler"/>
+<area shape="poly" coords="269,208,266,211,264,208,266,206,269,208,269,208" title="Complexity: 4; Coverage: 91%; Class: TripleHandlers.TypeInverseFunctionalPropertyHandler" alt="" href="org/semanticweb/owlapi/rdf/rdfxml/parser/TripleHandlers.html#TripleHandlers.TypeInverseFunctionalPropertyHandler"/>
+<area shape="poly" coords="290,208,288,211,285,208,288,206,290,208,290,208" title="Complexity: 5; Coverage: 100%; Class: TripleHandlers.TypeFunctionalPropertyHandler" alt="" href="org/semanticweb/owlapi/rdf/rdfxml/parser/TripleHandlers.html#TripleHandlers.TypeFunctionalPropertyHandler"/>
+<area shape="poly" coords="290,209,288,211,285,209,288,206,290,209,290,209" title="Complexity: 2; Coverage: 100%; Class: OWLFunctionalSyntaxOWLParserFactory" alt="" href="org/semanticweb/owlapi/functional/parser/OWLFunctionalSyntaxOWLParserFactory.html#OWLFunctionalSyntaxOWLParserFactory"/>
+<area shape="poly" coords="290,209,288,211,285,209,288,206,290,209,290,209" title="Complexity: 2; Coverage: 100%; Class: OWLFunctionalSyntaxOWLParserFactory" alt="" href="org/semanticweb/owlapi/functional/parser/OWLFunctionalSyntaxOWLParserFactory.html#OWLFunctionalSyntaxOWLParserFactory"/>
+<area shape="poly" coords="290,209,288,211,285,209,288,206,290,209,290,209" title="Complexity: 3; Coverage: 100%; Class: TripleHandlers.TypeTransitivePropertyHandler" alt="" href="org/semanticweb/owlapi/rdf/rdfxml/parser/TripleHandlers.html#TripleHandlers.TypeTransitivePropertyHandler"/>
+<area shape="poly" coords="119,209,117,211,114,209,117,206,119,209,119,209" title="Complexity: 3; Coverage: 28%; Class: TripleHandlers.TypeDataRangeHandler" alt="" href="org/semanticweb/owlapi/rdf/rdfxml/parser/TripleHandlers.html#TripleHandlers.TypeDataRangeHandler"/>
+<area shape="poly" coords="266,209,264,211,261,209,264,206,266,209,266,209" title="Complexity: 3; Coverage: 90%; Class: TripleHandlers.TypeDataPropertyHandler" alt="" href="org/semanticweb/owlapi/rdf/rdfxml/parser/TripleHandlers.html#TripleHandlers.TypeDataPropertyHandler"/>
+<area shape="poly" coords="290,209,288,211,285,209,288,206,290,209,290,209" title="Complexity: 3; Coverage: 100%; Class: TripleHandlers.TypeTransitivePropertyHandler" alt="" href="org/semanticweb/owlapi/rdf/rdfxml/parser/TripleHandlers.html#TripleHandlers.TypeTransitivePropertyHandler"/>
+<area shape="poly" coords="238,205,235,208,233,205,235,203,238,205,238,205" title="Complexity: 24; Coverage: 78%; Class: TripleHandlers.TypeAxiomHandler" alt="" href="org/semanticweb/owlapi/rdf/rdfxml/parser/TripleHandlers.html#TripleHandlers.TypeAxiomHandler"/>
+<area shape="poly" coords="266,208,264,211,261,208,264,206,266,208,266,208" title="Complexity: 4; Coverage: 90%; Class: TripleHandlers.TypeReflexivePropertyHandler" alt="" href="org/semanticweb/owlapi/rdf/rdfxml/parser/TripleHandlers.html#TripleHandlers.TypeReflexivePropertyHandler"/>
+<area shape="poly" coords="266,209,264,211,261,209,264,206,266,209,266,209" title="Complexity: 3; Coverage: 90%; Class: TripleHandlers.TypeDataPropertyHandler" alt="" href="org/semanticweb/owlapi/rdf/rdfxml/parser/TripleHandlers.html#TripleHandlers.TypeDataPropertyHandler"/>
+<area shape="poly" coords="290,209,288,211,285,209,288,206,290,209,290,209" title="Complexity: 2; Coverage: 100%; Class: OWLFunctionalSyntaxOWLParserFactory" alt="" href="org/semanticweb/owlapi/functional/parser/OWLFunctionalSyntaxOWLParserFactory.html#OWLFunctionalSyntaxOWLParserFactory"/>
+<area shape="poly" coords="250,208,247,211,245,208,247,206,250,208,250,208" title="Complexity: 5; Coverage: 83%; Class: TripleHandlers.TypeAllDisjointPropertiesHandler" alt="" href="org/semanticweb/owlapi/rdf/rdfxml/parser/TripleHandlers.html#TripleHandlers.TypeAllDisjointPropertiesHandler"/>
+<area shape="poly" coords="243,208,240,211,238,208,240,206,243,208,243,208" title="Complexity: 5; Coverage: 80%; Class: TripleHandlers.TypeAllDisjointClassesHandler" alt="" href="org/semanticweb/owlapi/rdf/rdfxml/parser/TripleHandlers.html#TripleHandlers.TypeAllDisjointClassesHandler"/>
+<area shape="poly" coords="238,208,235,211,233,208,235,206,238,208,238,208" title="Complexity: 5; Coverage: 78%; Class: TripleHandlers.TypeAllDifferentHandler" alt="" href="org/semanticweb/owlapi/rdf/rdfxml/parser/TripleHandlers.html#TripleHandlers.TypeAllDifferentHandler"/>
+<area shape="poly" coords="290,209,288,211,285,209,288,206,290,209,290,209" title="Complexity: 3; Coverage: 100%; Class: TripleHandlers.TypeTransitivePropertyHandler" alt="" href="org/semanticweb/owlapi/rdf/rdfxml/parser/TripleHandlers.html#TripleHandlers.TypeTransitivePropertyHandler"/>
+<area shape="poly" coords="266,208,264,210,261,208,264,205,266,208,266,208" title="Complexity: 7; Coverage: 90%; Class: TripleHandlers.TPVersionIRIHandler" alt="" href="org/semanticweb/owlapi/rdf/rdfxml/parser/TripleHandlers.html#TripleHandlers.TPVersionIRIHandler"/>
+<area shape="poly" coords="290,209,288,211,285,209,288,206,290,209,290,209" title="Complexity: 2; Coverage: 100%; Class: OWLFunctionalSyntaxOWLParserFactory" alt="" href="org/semanticweb/owlapi/functional/parser/OWLFunctionalSyntaxOWLParserFactory.html#OWLFunctionalSyntaxOWLParserFactory"/>
+<area shape="poly" coords="266,208,264,210,261,208,264,205,266,208,266,208" title="Complexity: 7; Coverage: 90%; Class: TripleHandlers.TPVersionIRIHandler" alt="" href="org/semanticweb/owlapi/rdf/rdfxml/parser/TripleHandlers.html#TripleHandlers.TPVersionIRIHandler"/>
+<area shape="poly" coords="264,205,262,208,259,205,262,203,264,205,264,205" title="Complexity: 23; Coverage: 89%; Class: TripleHandlers.TPSubPropertyOfHandler" alt="" href="org/semanticweb/owlapi/rdf/rdfxml/parser/TripleHandlers.html#TripleHandlers.TPSubPropertyOfHandler"/>
+<area shape="poly" coords="240,207,238,210,235,207,238,205,240,207,240,207" title="Complexity: 11; Coverage: 79%; Class: TripleHandlers.TPSubClassOfHandler" alt="" href="org/semanticweb/owlapi/rdf/rdfxml/parser/TripleHandlers.html#TripleHandlers.TPSubClassOfHandler"/>
+<area shape="poly" coords="290,208,288,211,285,208,288,206,290,208,290,208" title="Complexity: 5; Coverage: 100%; Class: TripleHandlers.TypeFunctionalPropertyHandler" alt="" href="org/semanticweb/owlapi/rdf/rdfxml/parser/TripleHandlers.html#TripleHandlers.TypeFunctionalPropertyHandler"/>
+<area shape="poly" coords="290,209,288,211,285,209,288,206,290,209,290,209" title="Complexity: 3; Coverage: 100%; Class: TripleHandlers.TypeTransitivePropertyHandler" alt="" href="org/semanticweb/owlapi/rdf/rdfxml/parser/TripleHandlers.html#TripleHandlers.TypeTransitivePropertyHandler"/>
+<area shape="poly" coords="290,208,288,211,285,208,288,206,290,208,290,208" title="Complexity: 4; Coverage: 100%; Class: TripleHandlers.TPRestHandler" alt="" href="org/semanticweb/owlapi/rdf/rdfxml/parser/TripleHandlers.html#TripleHandlers.TPRestHandler"/>
+<area shape="poly" coords="198,205,195,207,193,205,195,202,198,205,198,205" title="Complexity: 25; Coverage: 61%; Class: TripleHandlers.TPPropertyRangeHandler" alt="" href="org/semanticweb/owlapi/rdf/rdfxml/parser/TripleHandlers.html#TripleHandlers.TPPropertyRangeHandler"/>
+<area shape="poly" coords="281,207,278,209,276,207,278,204,281,207,281,207" title="Complexity: 14; Coverage: 96%; Class: TripleHandlers.TPPropertyDomainHandler" alt="" href="org/semanticweb/owlapi/rdf/rdfxml/parser/TripleHandlers.html#TripleHandlers.TPPropertyDomainHandler"/>
+<area shape="poly" coords="290,208,288,210,285,208,288,205,290,208,290,208" title="Complexity: 8; Coverage: 100%; Class: TripleHandlers.TPPropertyDisjointWithHandler" alt="" href="org/semanticweb/owlapi/rdf/rdfxml/parser/TripleHandlers.html#TripleHandlers.TPPropertyDisjointWithHandler"/>
+<area shape="poly" coords="290,209,288,211,285,209,288,206,290,209,290,209" title="Complexity: 3; Coverage: 100%; Class: TripleHandlers.TypeTransitivePropertyHandler" alt="" href="org/semanticweb/owlapi/rdf/rdfxml/parser/TripleHandlers.html#TripleHandlers.TypeTransitivePropertyHandler"/>
+<area shape="poly" coords="290,209,288,211,285,209,288,206,290,209,290,209" title="Complexity: 2; Coverage: 100%; Class: OWLFunctionalSyntaxOWLParserFactory" alt="" href="org/semanticweb/owlapi/functional/parser/OWLFunctionalSyntaxOWLParserFactory.html#OWLFunctionalSyntaxOWLParserFactory"/>
+<area shape="poly" coords="250,209,247,211,245,209,247,206,250,209,250,209" title="Complexity: 3; Coverage: 83%; Class: TripleHandlers.TPOnPropertyHandler" alt="" href="org/semanticweb/owlapi/rdf/rdfxml/parser/TripleHandlers.html#TripleHandlers.TPOnPropertyHandler"/>
+<area shape="poly" coords="200,208,197,211,195,208,197,206,200,208,200,208" title="Complexity: 4; Coverage: 62%; Class: TripleHandlers.TPOnDataRangeHandler" alt="" href="org/semanticweb/owlapi/rdf/rdfxml/parser/TripleHandlers.html#TripleHandlers.TPOnDataRangeHandler"/>
+<area shape="poly" coords="200,208,197,211,195,208,197,206,200,208,200,208" title="Complexity: 4; Coverage: 62%; Class: TripleHandlers.TPOnDataRangeHandler" alt="" href="org/semanticweb/owlapi/rdf/rdfxml/parser/TripleHandlers.html#TripleHandlers.TPOnDataRangeHandler"/>
+<area shape="poly" coords="262,208,259,210,257,208,259,205,262,208,262,208" title="Complexity: 9; Coverage: 88%; Class: TripleHandlers.TPInverseOfHandler" alt="" href="org/semanticweb/owlapi/rdf/rdfxml/parser/TripleHandlers.html#TripleHandlers.TPInverseOfHandler"/>
+<area shape="poly" coords="245,208,243,210,240,208,243,205,245,208,245,208" title="Complexity: 7; Coverage: 81%; Class: TripleHandlers.TPIntersectionOfHandler" alt="" href="org/semanticweb/owlapi/rdf/rdfxml/parser/TripleHandlers.html#TripleHandlers.TPIntersectionOfHandler"/>
+<area shape="poly" coords="233,207,231,210,228,207,231,205,233,207,233,207" title="Complexity: 10; Coverage: 76%; Class: TripleHandlers.TPImportsHandler" alt="" href="org/semanticweb/owlapi/rdf/rdfxml/parser/TripleHandlers.html#TripleHandlers.TPImportsHandler"/>
+<area shape="poly" coords="53,209,50,211,48,209,50,206,53,209,53,209" title="Complexity: 3; Coverage: 0%; Class: LatexRendererException" alt="" href="org/semanticweb/owlapi/latex/renderer/LatexRendererException.html#LatexRendererException"/>
+<area shape="poly" coords="271,208,269,211,266,208,269,206,271,208,271,208" title="Complexity: 4; Coverage: 92%; Class: TripleHandlers.TPHasKeyHandler" alt="" href="org/semanticweb/owlapi/rdf/rdfxml/parser/TripleHandlers.html#TripleHandlers.TPHasKeyHandler"/>
+<area shape="poly" coords="290,209,288,211,285,209,288,206,290,209,290,209" title="Complexity: 3; Coverage: 100%; Class: TripleHandlers.TypeTransitivePropertyHandler" alt="" href="org/semanticweb/owlapi/rdf/rdfxml/parser/TripleHandlers.html#TripleHandlers.TypeTransitivePropertyHandler"/>
+<area shape="poly" coords="290,208,288,211,285,208,288,206,290,208,290,208" title="Complexity: 4; Coverage: 100%; Class: TripleHandlers.TPRestHandler" alt="" href="org/semanticweb/owlapi/rdf/rdfxml/parser/TripleHandlers.html#TripleHandlers.TPRestHandler"/>
+<area shape="poly" coords="290,208,288,210,285,208,288,205,290,208,290,208" title="Complexity: 7; Coverage: 100%; Class: TripleHandlers.TPEquivalentPropertyHandler" alt="" href="org/semanticweb/owlapi/rdf/rdfxml/parser/TripleHandlers.html#TripleHandlers.TPEquivalentPropertyHandler"/>
+<area shape="poly" coords="231,207,228,209,226,207,228,204,231,207,231,207" title="Complexity: 15; Coverage: 75%; Class: TripleHandlers.TPEquivalentClassHandler" alt="" href="org/semanticweb/owlapi/rdf/rdfxml/parser/TripleHandlers.html#TripleHandlers.TPEquivalentClassHandler"/>
+<area shape="poly" coords="290,209,288,211,285,209,288,206,290,209,290,209" title="Complexity: 3; Coverage: 100%; Class: TripleHandlers.TypeTransitivePropertyHandler" alt="" href="org/semanticweb/owlapi/rdf/rdfxml/parser/TripleHandlers.html#TripleHandlers.TypeTransitivePropertyHandler"/>
+<area shape="poly" coords="290,208,288,211,285,208,288,206,290,208,290,208" title="Complexity: 4; Coverage: 100%; Class: TripleHandlers.TPRestHandler" alt="" href="org/semanticweb/owlapi/rdf/rdfxml/parser/TripleHandlers.html#TripleHandlers.TPRestHandler"/>
+<area shape="poly" coords="274,208,271,211,269,208,271,206,274,208,274,208" title="Complexity: 5; Coverage: 93%; Class: TripleHandlers.TypeSymmetricPropertyHandler" alt="" href="org/semanticweb/owlapi/rdf/rdfxml/parser/TripleHandlers.html#TripleHandlers.TypeSymmetricPropertyHandler"/>
+<area shape="poly" coords="290,209,288,211,285,209,288,206,290,209,290,209" title="Complexity: 3; Coverage: 100%; Class: TripleHandlers.TypeTransitivePropertyHandler" alt="" href="org/semanticweb/owlapi/rdf/rdfxml/parser/TripleHandlers.html#TripleHandlers.TypeTransitivePropertyHandler"/>
+<area shape="poly" coords="74,208,72,210,69,208,72,205,74,208,74,208" title="Complexity: 7; Coverage: 9%; Class: TripleHandlers.TPDeclaredAsHandler" alt="" href="org/semanticweb/owlapi/rdf/rdfxml/parser/TripleHandlers.html#TripleHandlers.TPDeclaredAsHandler"/>
+<area shape="poly" coords="262,208,259,211,257,208,259,206,262,208,262,208" title="Complexity: 4; Coverage: 88%; Class: TripleHandlers.TPDatatypeComplementOfHandler" alt="" href="org/semanticweb/owlapi/rdf/rdfxml/parser/TripleHandlers.html#TripleHandlers.TPDatatypeComplementOfHandler"/>
+<area shape="poly" coords="290,209,288,211,285,209,288,206,290,209,290,209" title="Complexity: 3; Coverage: 100%; Class: TripleHandlers.TypeTransitivePropertyHandler" alt="" href="org/semanticweb/owlapi/rdf/rdfxml/parser/TripleHandlers.html#TripleHandlers.TypeTransitivePropertyHandler"/>
+<area shape="poly" coords="255,209,252,211,250,209,252,206,255,209,255,209" title="Complexity: 3; Coverage: 85%; Class: LatexStorer" alt="" href="org/semanticweb/owlapi/latex/renderer/LatexStorer.html#LatexStorer"/>
+<area shape="poly" coords="290,209,288,211,285,209,288,206,290,209,290,209" title="Complexity: 3; Coverage: 100%; Class: TripleHandlers.TypeTransitivePropertyHandler" alt="" href="org/semanticweb/owlapi/rdf/rdfxml/parser/TripleHandlers.html#TripleHandlers.TypeTransitivePropertyHandler"/>
+<area shape="poly" coords="290,209,288,211,285,209,288,206,290,209,290,209" title="Complexity: 3; Coverage: 100%; Class: TripleHandlers.TypeTransitivePropertyHandler" alt="" href="org/semanticweb/owlapi/rdf/rdfxml/parser/TripleHandlers.html#TripleHandlers.TypeTransitivePropertyHandler"/>
+<area shape="poly" coords="290,208,288,210,285,208,288,205,290,208,290,208" title="Complexity: 8; Coverage: 100%; Class: TripleHandlers.TPPropertyDisjointWithHandler" alt="" href="org/semanticweb/owlapi/rdf/rdfxml/parser/TripleHandlers.html#TripleHandlers.TPPropertyDisjointWithHandler"/>
+<area shape="poly" coords="53,209,50,211,48,209,50,206,53,209,53,209" title="Complexity: 2; Coverage: 0%; Class: DLSyntaxOWLParserFactory" alt="" href="org/semanticweb/owlapi/dlsyntax/parser/DLSyntaxOWLParserFactory.html#DLSyntaxOWLParserFactory"/>
+<area shape="poly" coords="53,208,50,211,48,208,50,206,53,208,53,208" title="Complexity: 4; Coverage: 0%; Class: TripleHandlers.GTPResourceTripleHandler" alt="" href="org/semanticweb/owlapi/rdf/rdfxml/parser/TripleHandlers.html#TripleHandlers.GTPResourceTripleHandler"/>
+<area shape="poly" coords="274,208,271,211,269,208,271,206,274,208,274,208" title="Complexity: 6; Coverage: 93%; Class: TripleHandlers.GTPObjectPropertyAssertionHandler" alt="" href="org/semanticweb/owlapi/rdf/rdfxml/parser/TripleHandlers.html#TripleHandlers.GTPObjectPropertyAssertionHandler"/>
+<area shape="poly" coords="53,208,50,210,48,208,50,205,53,208,53,208" title="Complexity: 7; Coverage: 0%; Class: Token" alt="" href="org/semanticweb/owlapi/dlsyntax/parser/Token.html#Token"/>
+<area shape="poly" coords="290,208,288,211,285,208,288,206,290,208,290,208" title="Complexity: 5; Coverage: 100%; Class: TripleHandlers.TypeFunctionalPropertyHandler" alt="" href="org/semanticweb/owlapi/rdf/rdfxml/parser/TripleHandlers.html#TripleHandlers.TypeFunctionalPropertyHandler"/>
+<area shape="poly" coords="274,208,271,210,269,208,271,205,274,208,274,208" title="Complexity: 8; Coverage: 93%; Class: TripleHandlers.GTPAnnotationResourceTripleHandler" alt="" href="org/semanticweb/owlapi/rdf/rdfxml/parser/TripleHandlers.html#TripleHandlers.GTPAnnotationResourceTripleHandler"/>
+<area shape="poly" coords="250,207,247,209,245,207,247,204,250,207,250,207" title="Complexity: 15; Coverage: 83%; Class: TripleHandlers.GTPAnnotationLiteralHandler" alt="" href="org/semanticweb/owlapi/rdf/rdfxml/parser/TripleHandlers.html#TripleHandlers.GTPAnnotationLiteralHandler"/>
+<area shape="poly" coords="290,208,288,211,285,208,288,206,290,208,290,208" title="Complexity: 4; Coverage: 100%; Class: TripleHandlers.TPRestHandler" alt="" href="org/semanticweb/owlapi/rdf/rdfxml/parser/TripleHandlers.html#TripleHandlers.TPRestHandler"/>
+<area shape="poly" coords="131,209,129,211,126,209,129,206,131,209,131,209" title="Complexity: 2; Coverage: 33%; Class: TripleHandlers.TypeSelfRestrictionHandler" alt="" href="org/semanticweb/owlapi/rdf/rdfxml/parser/TripleHandlers.html#TripleHandlers.TypeSelfRestrictionHandler"/>
+<area shape="poly" coords="131,209,129,211,126,209,129,206,131,209,131,209" title="Complexity: 2; Coverage: 33%; Class: TripleHandlers.TypeSelfRestrictionHandler" alt="" href="org/semanticweb/owlapi/rdf/rdfxml/parser/TripleHandlers.html#TripleHandlers.TypeSelfRestrictionHandler"/>
+<area shape="poly" coords="131,209,129,211,126,209,129,206,131,209,131,209" title="Complexity: 2; Coverage: 33%; Class: TripleHandlers.TypeSelfRestrictionHandler" alt="" href="org/semanticweb/owlapi/rdf/rdfxml/parser/TripleHandlers.html#TripleHandlers.TypeSelfRestrictionHandler"/>
+<area shape="poly" coords="115,200,112,202,110,200,112,197,115,200,115,200" title="Complexity: 55; Coverage: 26%; Class: TripleHandlers.AbstractTripleHandler" alt="" href="org/semanticweb/owlapi/rdf/rdfxml/parser/TripleHandlers.html#TripleHandlers.AbstractTripleHandler"/>
+<area shape="poly" coords="290,207,288,210,285,207,288,205,290,207,290,207" title="Complexity: 10; Coverage: 100%; Class: TripleHandlers.AbstractResourceTripleHandler" alt="" href="org/semanticweb/owlapi/rdf/rdfxml/parser/TripleHandlers.html#TripleHandlers.AbstractResourceTripleHandler"/>
+<area shape="poly" coords="290,208,288,211,285,208,288,206,290,208,290,208" title="Complexity: 4; Coverage: 100%; Class: TripleHandlers.TPRestHandler" alt="" href="org/semanticweb/owlapi/rdf/rdfxml/parser/TripleHandlers.html#TripleHandlers.TPRestHandler"/>
+<area shape="poly" coords="290,200,288,202,285,200,288,197,290,200,290,200" title="Complexity: 55; Coverage: 100%; Class: TripleHandlers.HandlerAccessor" alt="" href="org/semanticweb/owlapi/rdf/rdfxml/parser/TripleHandlers.html#TripleHandlers.HandlerAccessor"/>
+<area shape="poly" coords="53,209,50,211,48,209,50,206,53,209,53,209" title="Complexity: 1; Coverage: 0%; Class: LatexRendererIOException" alt="" href="org/semanticweb/owlapi/latex/renderer/LatexRendererIOException.html#LatexRendererIOException"/>
+<area shape="poly" coords="148,209,145,211,143,209,145,206,148,209,148,209" title="Complexity: 2; Coverage: 40%; Class: Translators.TypedConstantListItemTranslator" alt="" href="org/semanticweb/owlapi/rdf/rdfxml/parser/Translators.html#Translators.TypedConstantListItemTranslator"/>
+<area shape="poly" coords="259,208,257,210,254,208,257,205,259,208,259,208" title="Complexity: 8; Coverage: 87%; Class: Translators.SWRLRuleTranslator" alt="" href="org/semanticweb/owlapi/rdf/rdfxml/parser/Translators.html#Translators.SWRLRuleTranslator"/>
+<area shape="poly" coords="290,209,288,211,285,209,288,206,290,209,290,209" title="Complexity: 3; Coverage: 100%; Class: TripleHandlers.TypeTransitivePropertyHandler" alt="" href="org/semanticweb/owlapi/rdf/rdfxml/parser/TripleHandlers.html#TripleHandlers.TypeTransitivePropertyHandler"/>
+<area shape="poly" coords="243,205,240,208,238,205,240,203,243,205,243,205" title="Complexity: 23; Coverage: 80%; Class: Translators.SWRLAtomListItemTranslator" alt="" href="org/semanticweb/owlapi/rdf/rdfxml/parser/Translators.html#Translators.SWRLAtomListItemTranslator"/>
+<area shape="poly" coords="217,208,214,211,212,208,214,206,217,208,217,208" title="Complexity: 5; Coverage: 69%; Class: Translators.ObjectUnionOfTranslator" alt="" href="org/semanticweb/owlapi/rdf/rdfxml/parser/Translators.html#Translators.ObjectUnionOfTranslator"/>
+<area shape="poly" coords="233,208,231,211,228,208,231,206,233,208,233,208" title="Complexity: 6; Coverage: 76%; Class: Translators.ObjectSomeValuesFromTranslator" alt="" href="org/semanticweb/owlapi/rdf/rdfxml/parser/Translators.html#Translators.ObjectSomeValuesFromTranslator"/>
+<area shape="poly" coords="233,208,231,211,228,208,231,206,233,208,233,208" title="Complexity: 6; Coverage: 76%; Class: Translators.ObjectSomeValuesFromTranslator" alt="" href="org/semanticweb/owlapi/rdf/rdfxml/parser/Translators.html#Translators.ObjectSomeValuesFromTranslator"/>
+<area shape="poly" coords="200,209,197,211,195,209,197,206,200,209,200,209" title="Complexity: 3; Coverage: 62%; Class: Translators.ObjectPropertyListItemTranslator" alt="" href="org/semanticweb/owlapi/rdf/rdfxml/parser/Translators.html#Translators.ObjectPropertyListItemTranslator"/>
+<area shape="poly" coords="217,208,214,211,212,208,214,206,217,208,217,208" title="Complexity: 5; Coverage: 69%; Class: Translators.ObjectUnionOfTranslator" alt="" href="org/semanticweb/owlapi/rdf/rdfxml/parser/Translators.html#Translators.ObjectUnionOfTranslator"/>
+<area shape="poly" coords="233,208,231,211,228,208,231,206,233,208,233,208" title="Complexity: 6; Coverage: 76%; Class: Translators.ObjectSomeValuesFromTranslator" alt="" href="org/semanticweb/owlapi/rdf/rdfxml/parser/Translators.html#Translators.ObjectSomeValuesFromTranslator"/>
+<area shape="poly" coords="219,208,216,210,214,208,216,205,219,208,219,208" title="Complexity: 7; Coverage: 70%; Class: Translators.ObjectMinCardinalityTranslator" alt="" href="org/semanticweb/owlapi/rdf/rdfxml/parser/Translators.html#Translators.ObjectMinCardinalityTranslator"/>
+<area shape="poly" coords="233,208,231,211,228,208,231,206,233,208,233,208" title="Complexity: 6; Coverage: 76%; Class: Translators.ObjectSomeValuesFromTranslator" alt="" href="org/semanticweb/owlapi/rdf/rdfxml/parser/Translators.html#Translators.ObjectSomeValuesFromTranslator"/>
+<area shape="poly" coords="219,208,216,210,214,208,216,205,219,208,219,208" title="Complexity: 7; Coverage: 70%; Class: Translators.ObjectMinCardinalityTranslator" alt="" href="org/semanticweb/owlapi/rdf/rdfxml/parser/Translators.html#Translators.ObjectMinCardinalityTranslator"/>
+<area shape="poly" coords="217,208,214,211,212,208,214,206,217,208,217,208" title="Complexity: 5; Coverage: 69%; Class: Translators.ObjectUnionOfTranslator" alt="" href="org/semanticweb/owlapi/rdf/rdfxml/parser/Translators.html#Translators.ObjectUnionOfTranslator"/>
+<area shape="poly" coords="231,208,228,211,226,208,228,206,231,208,231,208" title="Complexity: 6; Coverage: 75%; Class: Translators.ObjectHasValueTranslator" alt="" href="org/semanticweb/owlapi/rdf/rdfxml/parser/Translators.html#Translators.ObjectHasValueTranslator"/>
+<area shape="poly" coords="205,208,202,211,200,208,202,206,205,208,205,208" title="Complexity: 6; Coverage: 64%; Class: Translators.ObjectHasSelfTranslator" alt="" href="org/semanticweb/owlapi/rdf/rdfxml/parser/Translators.html#Translators.ObjectHasSelfTranslator"/>
+<area shape="poly" coords="217,208,214,211,212,208,214,206,217,208,217,208" title="Complexity: 5; Coverage: 69%; Class: Translators.ObjectUnionOfTranslator" alt="" href="org/semanticweb/owlapi/rdf/rdfxml/parser/Translators.html#Translators.ObjectUnionOfTranslator"/>
+<area shape="poly" coords="219,208,216,210,214,208,216,205,219,208,219,208" title="Complexity: 7; Coverage: 70%; Class: Translators.ObjectMinCardinalityTranslator" alt="" href="org/semanticweb/owlapi/rdf/rdfxml/parser/Translators.html#Translators.ObjectMinCardinalityTranslator"/>
+<area shape="poly" coords="233,208,231,211,228,208,231,206,233,208,233,208" title="Complexity: 6; Coverage: 76%; Class: Translators.ObjectSomeValuesFromTranslator" alt="" href="org/semanticweb/owlapi/rdf/rdfxml/parser/Translators.html#Translators.ObjectSomeValuesFromTranslator"/>
+<area shape="poly" coords="53,209,50,211,48,209,50,206,53,209,53,209" title="Complexity: 3; Coverage: 0%; Class: LatexRendererException" alt="" href="org/semanticweb/owlapi/latex/renderer/LatexRendererException.html#LatexRendererException"/>
+<area shape="poly" coords="231,208,228,211,226,208,228,206,231,208,231,208" title="Complexity: 4; Coverage: 75%; Class: Translators.OWLFacetRestrictionListItemTranslator" alt="" href="org/semanticweb/owlapi/rdf/rdfxml/parser/Translators.html#Translators.OWLFacetRestrictionListItemTranslator"/>
+<area shape="poly" coords="231,208,228,211,226,208,228,206,231,208,231,208" title="Complexity: 4; Coverage: 75%; Class: Translators.OWLFacetRestrictionListItemTranslator" alt="" href="org/semanticweb/owlapi/rdf/rdfxml/parser/Translators.html#Translators.OWLFacetRestrictionListItemTranslator"/>
+<area shape="poly" coords="188,209,186,211,183,209,186,206,188,209,188,209" title="Complexity: 3; Coverage: 57%; Class: Translators.IndividualListItemTranslator" alt="" href="org/semanticweb/owlapi/rdf/rdfxml/parser/Translators.html#Translators.IndividualListItemTranslator"/>
+<area shape="poly" coords="186,207,183,210,181,207,183,205,186,207,186,207" title="Complexity: 11; Coverage: 56%; Class: Translators.HasKeyListItemTranslator" alt="" href="org/semanticweb/owlapi/rdf/rdfxml/parser/Translators.html#Translators.HasKeyListItemTranslator"/>
+<area shape="poly" coords="233,208,231,211,228,208,231,206,233,208,233,208" title="Complexity: 6; Coverage: 76%; Class: Translators.ObjectSomeValuesFromTranslator" alt="" href="org/semanticweb/owlapi/rdf/rdfxml/parser/Translators.html#Translators.ObjectSomeValuesFromTranslator"/>
+<area shape="poly" coords="209,209,207,211,204,209,207,206,209,209,209,209" title="Complexity: 3; Coverage: 66%; Class: Translators.DataRangeListItemTranslator" alt="" href="org/semanticweb/owlapi/rdf/rdfxml/parser/Translators.html#Translators.DataRangeListItemTranslator"/>
+<area shape="poly" coords="236,208,233,211,231,208,233,206,236,208,236,208" title="Complexity: 6; Coverage: 77%; Class: Translators.DataQualifiedCardinalityTranslator" alt="" href="org/semanticweb/owlapi/rdf/rdfxml/parser/Translators.html#Translators.DataQualifiedCardinalityTranslator"/>
+<area shape="poly" coords="221,209,219,211,216,209,219,206,221,209,221,209" title="Complexity: 3; Coverage: 71%; Class: Translators.DataPropertyListItemTranslator" alt="" href="org/semanticweb/owlapi/rdf/rdfxml/parser/Translators.html#Translators.DataPropertyListItemTranslator"/>
+<area shape="poly" coords="236,208,233,211,231,208,233,206,236,208,236,208" title="Complexity: 6; Coverage: 77%; Class: Translators.DataQualifiedCardinalityTranslator" alt="" href="org/semanticweb/owlapi/rdf/rdfxml/parser/Translators.html#Translators.DataQualifiedCardinalityTranslator"/>
+<area shape="poly" coords="219,208,216,210,214,208,216,205,219,208,219,208" title="Complexity: 7; Coverage: 70%; Class: Translators.ObjectMinCardinalityTranslator" alt="" href="org/semanticweb/owlapi/rdf/rdfxml/parser/Translators.html#Translators.ObjectMinCardinalityTranslator"/>
+<area shape="poly" coords="236,208,233,211,231,208,233,206,236,208,236,208" title="Complexity: 6; Coverage: 77%; Class: Translators.DataQualifiedCardinalityTranslator" alt="" href="org/semanticweb/owlapi/rdf/rdfxml/parser/Translators.html#Translators.DataQualifiedCardinalityTranslator"/>
+<area shape="poly" coords="219,208,216,210,214,208,216,205,219,208,219,208" title="Complexity: 7; Coverage: 70%; Class: Translators.ObjectMinCardinalityTranslator" alt="" href="org/semanticweb/owlapi/rdf/rdfxml/parser/Translators.html#Translators.ObjectMinCardinalityTranslator"/>
+<area shape="poly" coords="231,208,228,211,226,208,228,206,231,208,231,208" title="Complexity: 6; Coverage: 75%; Class: Translators.ObjectHasValueTranslator" alt="" href="org/semanticweb/owlapi/rdf/rdfxml/parser/Translators.html#Translators.ObjectHasValueTranslator"/>
+<area shape="poly" coords="219,208,216,210,214,208,216,205,219,208,219,208" title="Complexity: 7; Coverage: 70%; Class: Translators.ObjectMinCardinalityTranslator" alt="" href="org/semanticweb/owlapi/rdf/rdfxml/parser/Translators.html#Translators.ObjectMinCardinalityTranslator"/>
+<area shape="poly" coords="233,208,231,211,228,208,231,206,233,208,233,208" title="Complexity: 6; Coverage: 76%; Class: Translators.ObjectSomeValuesFromTranslator" alt="" href="org/semanticweb/owlapi/rdf/rdfxml/parser/Translators.html#Translators.ObjectSomeValuesFromTranslator"/>
+<area shape="poly" coords="231,209,228,211,226,209,228,206,231,209,231,209" title="Complexity: 3; Coverage: 75%; Class: Translators.ClassExpressionListItemTranslator" alt="" href="org/semanticweb/owlapi/rdf/rdfxml/parser/Translators.html#Translators.ClassExpressionListItemTranslator"/>
+<area shape="poly" coords="131,209,129,211,126,209,129,206,131,209,131,209" title="Complexity: 2; Coverage: 33%; Class: TripleHandlers.TypeSelfRestrictionHandler" alt="" href="org/semanticweb/owlapi/rdf/rdfxml/parser/TripleHandlers.html#TripleHandlers.TypeSelfRestrictionHandler"/>
+<area shape="poly" coords="131,209,129,211,126,209,129,206,131,209,131,209" title="Complexity: 2; Coverage: 33%; Class: TripleHandlers.TypeSelfRestrictionHandler" alt="" href="org/semanticweb/owlapi/rdf/rdfxml/parser/TripleHandlers.html#TripleHandlers.TypeSelfRestrictionHandler"/>
+<area shape="poly" coords="131,209,129,211,126,209,129,206,131,209,131,209" title="Complexity: 2; Coverage: 33%; Class: TripleHandlers.TypeSelfRestrictionHandler" alt="" href="org/semanticweb/owlapi/rdf/rdfxml/parser/TripleHandlers.html#TripleHandlers.TypeSelfRestrictionHandler"/>
+<area shape="poly" coords="145,202,143,204,140,202,143,199,145,202,145,202" title="Complexity: 43; Coverage: 39%; Class: Translators.AbstractClassExpressionTranslator" alt="" href="org/semanticweb/owlapi/rdf/rdfxml/parser/Translators.html#Translators.AbstractClassExpressionTranslator"/>
+<area shape="poly" coords="269,206,266,209,264,206,266,204,269,206,269,206" title="Complexity: 18; Coverage: 91%; Class: Translators.TranslatorAccessor" alt="" href="org/semanticweb/owlapi/rdf/rdfxml/parser/Translators.html#Translators.TranslatorAccessor"/>
+<area shape="poly" coords="209,209,207,211,204,209,207,206,209,209,209,209" title="Complexity: 2; Coverage: 66%; Class: Translators" alt="" href="org/semanticweb/owlapi/rdf/rdfxml/parser/Translators.html#Translators"/>
+<area shape="poly" coords="53,209,50,211,48,209,50,206,53,209,53,209" title="Complexity: 2; Coverage: 0%; Class: DLSyntaxOWLParserFactory" alt="" href="org/semanticweb/owlapi/dlsyntax/parser/DLSyntaxOWLParserFactory.html#DLSyntaxOWLParserFactory"/>
+<area shape="poly" coords="53,209,50,211,48,209,50,206,53,209,53,209" title="Complexity: 2; Coverage: 0%; Class: DLSyntaxOWLParserFactory" alt="" href="org/semanticweb/owlapi/dlsyntax/parser/DLSyntaxOWLParserFactory.html#DLSyntaxOWLParserFactory"/>
+<area shape="poly" coords="53,209,50,211,48,209,50,206,53,209,53,209" title="Complexity: 3; Coverage: 0%; Class: LatexRendererException" alt="" href="org/semanticweb/owlapi/latex/renderer/LatexRendererException.html#LatexRendererException"/>
+<area shape="poly" coords="290,209,288,211,285,209,288,206,290,209,290,209" title="Complexity: 1; Coverage: 100%; Class: KRSS2Parser.LookaheadSuccess" alt="" href="org/semanticweb/owlapi/krss2/parser/KRSS2Parser.html#KRSS2Parser.LookaheadSuccess"/>
+<area shape="poly" coords="274,207,271,210,269,207,271,205,274,207,274,207" title="Complexity: 10; Coverage: 93%; Class: PropertyElementList" alt="" href="org/semanticweb/owlapi/rdf/rdfxml/parser/StartRDF.html#PropertyElementList"/>
+<area shape="poly" coords="255,208,252,211,250,208,252,206,255,208,255,208" title="Complexity: 4; Coverage: 85%; Class: ParseTypeResourceElement" alt="" href="org/semanticweb/owlapi/rdf/rdfxml/parser/StartRDF.html#ParseTypeResourceElement"/>
+<area shape="poly" coords="290,207,288,210,285,207,288,205,290,207,290,207" title="Complexity: 10; Coverage: 100%; Class: TripleHandlers.AbstractResourceTripleHandler" alt="" href="org/semanticweb/owlapi/rdf/rdfxml/parser/TripleHandlers.html#TripleHandlers.AbstractResourceTripleHandler"/>
+<area shape="poly" coords="290,208,288,210,285,208,288,205,290,208,290,208" title="Complexity: 8; Coverage: 100%; Class: TripleHandlers.TPPropertyDisjointWithHandler" alt="" href="org/semanticweb/owlapi/rdf/rdfxml/parser/TripleHandlers.html#TripleHandlers.TPPropertyDisjointWithHandler"/>
+<area shape="poly" coords="276,207,273,210,271,207,273,205,276,207,276,207" title="Complexity: 10; Coverage: 94%; Class: ParseTypeCollectionElement" alt="" href="org/semanticweb/owlapi/rdf/rdfxml/parser/StartRDF.html#ParseTypeCollectionElement"/>
+<area shape="poly" coords="290,208,288,211,285,208,288,206,290,208,290,208" title="Complexity: 4; Coverage: 100%; Class: TripleHandlers.TPRestHandler" alt="" href="org/semanticweb/owlapi/rdf/rdfxml/parser/TripleHandlers.html#TripleHandlers.TPRestHandler"/>
+<area shape="poly" coords="259,206,257,209,254,206,257,204,259,206,259,206" title="Complexity: 18; Coverage: 87%; Class: NodeElement" alt="" href="org/semanticweb/owlapi/rdf/rdfxml/parser/StartRDF.html#NodeElement"/>
+<area shape="poly" coords="243,208,240,211,238,208,240,206,243,208,243,208" title="Complexity: 6; Coverage: 80%; Class: EmptyPropertyElement" alt="" href="org/semanticweb/owlapi/rdf/rdfxml/parser/StartRDF.html#EmptyPropertyElement"/>
+<area shape="poly" coords="257,208,254,211,252,208,254,206,257,208,257,208" title="Complexity: 5; Coverage: 86%; Class: StartRDF" alt="" href="org/semanticweb/owlapi/rdf/rdfxml/parser/StartRDF.html#StartRDF"/>
+<area shape="poly" coords="259,204,257,207,254,204,257,202,259,204,259,204" title="Complexity: 30; Coverage: 87%; Class: AbstractState" alt="" href="org/semanticweb/owlapi/rdf/rdfxml/parser/StartRDF.html#AbstractState"/>
+<area shape="poly" coords="290,209,288,211,285,209,288,206,290,209,290,209" title="Complexity: 2; Coverage: 100%; Class: OWLFunctionalSyntaxOWLParserFactory" alt="" href="org/semanticweb/owlapi/functional/parser/OWLFunctionalSyntaxOWLParserFactory.html#OWLFunctionalSyntaxOWLParserFactory"/>
+<area shape="poly" coords="259,207,257,210,254,207,257,205,259,207,259,207" title="Complexity: 12; Coverage: 87%; Class: RDFXMLParser" alt="" href="org/semanticweb/owlapi/rdf/rdfxml/parser/RDFXMLParser.html#RDFXMLParser"/>
+<area shape="poly" coords="190,208,188,210,185,208,188,205,190,208,190,208" title="Complexity: 9; Coverage: 58%; Class: RDFParserException" alt="" href="org/semanticweb/owlapi/rdf/rdfxml/parser/RDFParserException.html#RDFParserException"/>
+<area shape="poly" coords="212,200,209,202,207,200,209,197,212,200,212,200" title="Complexity: 55; Coverage: 67%; Class: RDFParser" alt="" href="org/semanticweb/owlapi/rdf/rdfxml/parser/RDFParser.html#RDFParser"/>
+<area shape="poly" coords="257,207,254,209,252,207,254,204,257,207,257,207" title="Complexity: 13; Coverage: 86%; Class: OptimisedListTranslator" alt="" href="org/semanticweb/owlapi/rdf/rdfxml/parser/OptimisedListTranslator.html#OptimisedListTranslator"/>
+<area shape="poly" coords="53,209,50,211,48,209,50,206,53,209,53,209" title="Complexity: 3; Coverage: 0%; Class: LatexRendererException" alt="" href="org/semanticweb/owlapi/latex/renderer/LatexRendererException.html#LatexRendererException"/>
+<area shape="poly" coords="131,209,129,211,126,209,129,206,131,209,131,209" title="Complexity: 3; Coverage: 33%; Class: TurtleParserException" alt="" href="org/semanticweb/owlapi/rdf/turtle/parser/TurtleParserException.html#TurtleParserException"/>
+<area shape="poly" coords="240,161,238,163,235,161,238,158,240,161,240,161" title="Complexity: 293; Coverage: 79%; Class: OWLRDFConsumer" alt="" href="org/semanticweb/owlapi/rdf/rdfxml/parser/OWLRDFConsumer.html#OWLRDFConsumer"/>
+<area shape="poly" coords="53,209,50,211,48,209,50,206,53,209,53,209" title="Complexity: 1; Coverage: 0%; Class: LatexRendererIOException" alt="" href="org/semanticweb/owlapi/latex/renderer/LatexRendererIOException.html#LatexRendererIOException"/>
+<area shape="poly" coords="250,209,247,211,245,209,247,206,250,209,250,209" title="Complexity: 2; Coverage: 83%; Class: OWLFunctionalSyntaxRenderer" alt="" href="org/semanticweb/owlapi/functional/renderer/OWLFunctionalSyntaxRenderer.html#OWLFunctionalSyntaxRenderer"/>
+<area shape="poly" coords="290,209,288,211,285,209,288,206,290,209,290,209" title="Complexity: 2; Coverage: 100%; Class: OWLFunctionalSyntaxOWLParserFactory" alt="" href="org/semanticweb/owlapi/functional/parser/OWLFunctionalSyntaxOWLParserFactory.html#OWLFunctionalSyntaxOWLParserFactory"/>
+<area shape="poly" coords="255,209,252,211,250,209,252,206,255,209,255,209" title="Complexity: 3; Coverage: 85%; Class: LatexStorer" alt="" href="org/semanticweb/owlapi/latex/renderer/LatexStorer.html#LatexStorer"/>
+<area shape="poly" coords="276,175,273,177,271,175,273,172,276,175,276,175" title="Complexity: 206; Coverage: 94%; Class: FunctionalSyntaxObjectRenderer" alt="" href="org/semanticweb/owlapi/functional/renderer/FunctionalSyntaxObjectRenderer.html#FunctionalSyntaxObjectRenderer"/>
+<area shape="poly" coords="247,202,245,204,242,202,245,199,247,202,247,202" title="Complexity: 44; Coverage: 82%; Class: OWLXMLWriter" alt="" href="org/semanticweb/owlapi/owlxml/renderer/OWLXMLWriter.html#OWLXMLWriter"/>
+<area shape="poly" coords="290,209,288,211,285,209,288,206,290,209,290,209" title="Complexity: 2; Coverage: 100%; Class: OWLFunctionalSyntaxOWLParserFactory" alt="" href="org/semanticweb/owlapi/functional/parser/OWLFunctionalSyntaxOWLParserFactory.html#OWLFunctionalSyntaxOWLParserFactory"/>
+<area shape="poly" coords="290,209,288,211,285,209,288,206,290,209,290,209" title="Complexity: 2; Coverage: 100%; Class: OWLFunctionalSyntaxOWLParserFactory" alt="" href="org/semanticweb/owlapi/functional/parser/OWLFunctionalSyntaxOWLParserFactory.html#OWLFunctionalSyntaxOWLParserFactory"/>
+<area shape="poly" coords="200,207,197,210,195,207,197,205,200,207,200,207" title="Complexity: 10; Coverage: 62%; Class: OWLXMLRenderer" alt="" href="org/semanticweb/owlapi/owlxml/renderer/OWLXMLRenderer.html#OWLXMLRenderer"/>
+<area shape="poly" coords="53,209,50,211,48,209,50,206,53,209,53,209" title="Complexity: 3; Coverage: 0%; Class: LatexRendererException" alt="" href="org/semanticweb/owlapi/latex/renderer/LatexRendererException.html#LatexRendererException"/>
+<area shape="poly" coords="285,192,283,195,280,192,283,190,285,192,285,192" title="Complexity: 101; Coverage: 98%; Class: OWLXMLObjectRenderer" alt="" href="org/semanticweb/owlapi/owlxml/renderer/OWLXMLObjectRenderer.html#OWLXMLObjectRenderer"/>
+<area shape="poly" coords="245,208,243,211,240,208,243,206,245,208,245,208" title="Complexity: 4; Coverage: 81%; Class: OWLImportsHandler" alt="" href="org/semanticweb/owlapi/owlxml/parser/PARSER_OWLXMLVocabulary.html#OWLImportsHandler"/>
+<area shape="poly" coords="247,207,245,209,242,207,245,204,247,207,247,207" title="Complexity: 14; Coverage: 82%; Class: OWLOntologyHandler" alt="" href="org/semanticweb/owlapi/owlxml/parser/PARSER_OWLXMLVocabulary.html#OWLOntologyHandler"/>
+<area shape="poly" coords="290,208,288,211,285,208,288,206,290,208,290,208" title="Complexity: 4; Coverage: 100%; Class: TripleHandlers.TPRestHandler" alt="" href="org/semanticweb/owlapi/rdf/rdfxml/parser/TripleHandlers.html#TripleHandlers.TPRestHandler"/>
+<area shape="poly" coords="269,208,266,210,264,208,266,205,269,208,269,208" title="Complexity: 8; Coverage: 91%; Class: SWRLSameIndividualAtomElementHandler" alt="" href="org/semanticweb/owlapi/owlxml/parser/PARSER_OWLXMLVocabulary.html#SWRLSameIndividualAtomElementHandler"/>
+<area shape="poly" coords="271,208,269,211,266,208,269,206,271,208,271,208" title="Complexity: 5; Coverage: 92%; Class: TripleHandlers.TypeOntologyHandler" alt="" href="org/semanticweb/owlapi/rdf/rdfxml/parser/TripleHandlers.html#TripleHandlers.TypeOntologyHandler"/>
+<area shape="poly" coords="195,208,193,210,190,208,193,205,195,208,195,208" title="Complexity: 9; Coverage: 60%; Class: SWRLObjectPropertyAtomElementHandler" alt="" href="org/semanticweb/owlapi/owlxml/parser/PARSER_OWLXMLVocabulary.html#SWRLObjectPropertyAtomElementHandler"/>
+<area shape="poly" coords="269,208,266,210,264,208,266,205,269,208,269,208" title="Complexity: 8; Coverage: 91%; Class: SWRLSameIndividualAtomElementHandler" alt="" href="org/semanticweb/owlapi/owlxml/parser/PARSER_OWLXMLVocabulary.html#SWRLSameIndividualAtomElementHandler"/>
+<area shape="poly" coords="245,208,243,211,240,208,243,206,245,208,245,208" title="Complexity: 5; Coverage: 81%; Class: SWRLDataRangeAtomElementHandler" alt="" href="org/semanticweb/owlapi/owlxml/parser/PARSER_OWLXMLVocabulary.html#SWRLDataRangeAtomElementHandler"/>
+<area shape="poly" coords="236,208,233,210,231,208,233,205,236,208,236,208" title="Complexity: 9; Coverage: 77%; Class: SWRLDataPropertyAtomElementHandler" alt="" href="org/semanticweb/owlapi/owlxml/parser/PARSER_OWLXMLVocabulary.html#SWRLDataPropertyAtomElementHandler"/>
+<area shape="poly" coords="290,208,288,211,285,208,288,206,290,208,290,208" title="Complexity: 5; Coverage: 100%; Class: TripleHandlers.TypeFunctionalPropertyHandler" alt="" href="org/semanticweb/owlapi/rdf/rdfxml/parser/TripleHandlers.html#TripleHandlers.TypeFunctionalPropertyHandler"/>
+<area shape="poly" coords="290,208,288,211,285,208,288,206,290,208,290,208" title="Complexity: 5; Coverage: 100%; Class: TripleHandlers.TypeFunctionalPropertyHandler" alt="" href="org/semanticweb/owlapi/rdf/rdfxml/parser/TripleHandlers.html#TripleHandlers.TypeFunctionalPropertyHandler"/>
+<area shape="poly" coords="290,208,288,211,285,208,288,206,290,208,290,208" title="Complexity: 4; Coverage: 100%; Class: TripleHandlers.TPRestHandler" alt="" href="org/semanticweb/owlapi/rdf/rdfxml/parser/TripleHandlers.html#TripleHandlers.TPRestHandler"/>
+<area shape="poly" coords="290,209,288,211,285,209,288,206,290,209,290,209" title="Complexity: 3; Coverage: 100%; Class: TripleHandlers.TypeTransitivePropertyHandler" alt="" href="org/semanticweb/owlapi/rdf/rdfxml/parser/TripleHandlers.html#TripleHandlers.TypeTransitivePropertyHandler"/>
+<area shape="poly" coords="290,209,288,211,285,209,288,206,290,209,290,209" title="Complexity: 2; Coverage: 100%; Class: OWLFunctionalSyntaxOWLParserFactory" alt="" href="org/semanticweb/owlapi/functional/parser/OWLFunctionalSyntaxOWLParserFactory.html#OWLFunctionalSyntaxOWLParserFactory"/>
+<area shape="poly" coords="290,209,288,211,285,209,288,206,290,209,290,209" title="Complexity: 2; Coverage: 100%; Class: OWLFunctionalSyntaxOWLParserFactory" alt="" href="org/semanticweb/owlapi/functional/parser/OWLFunctionalSyntaxOWLParserFactory.html#OWLFunctionalSyntaxOWLParserFactory"/>
+<area shape="poly" coords="250,207,247,210,245,207,247,205,250,207,250,207" title="Complexity: 11; Coverage: 83%; Class: OWLSubObjectPropertyOfAxiomElementHandler" alt="" href="org/semanticweb/owlapi/owlxml/parser/PARSER_OWLXMLVocabulary.html#OWLSubObjectPropertyOfAxiomElementHandler"/>
+<area shape="poly" coords="290,208,288,211,285,208,288,206,290,208,290,208" title="Complexity: 4; Coverage: 100%; Class: TripleHandlers.TPRestHandler" alt="" href="org/semanticweb/owlapi/rdf/rdfxml/parser/TripleHandlers.html#TripleHandlers.TPRestHandler"/>
+<area shape="poly" coords="255,208,252,211,250,208,252,206,255,208,255,208" title="Complexity: 5; Coverage: 85%; Class: OWLSubDataPropertyOfAxiomElementHandler" alt="" href="org/semanticweb/owlapi/owlxml/parser/PARSER_OWLXMLVocabulary.html#OWLSubDataPropertyOfAxiomElementHandler"/>
+<area shape="poly" coords="276,208,273,211,271,208,273,206,276,208,276,208" title="Complexity: 6; Coverage: 94%; Class: OWLSubClassAxiomElementHandler" alt="" href="org/semanticweb/owlapi/owlxml/parser/PARSER_OWLXMLVocabulary.html#OWLSubClassAxiomElementHandler"/>
+<area shape="poly" coords="259,208,257,211,254,208,257,206,259,208,259,208" title="Complexity: 5; Coverage: 87%; Class: OWLSubAnnotationPropertyOfElementHandler" alt="" href="org/semanticweb/owlapi/owlxml/parser/PARSER_OWLXMLVocabulary.html#OWLSubAnnotationPropertyOfElementHandler"/>
+<area shape="poly" coords="290,209,288,211,285,209,288,206,290,209,290,209" title="Complexity: 2; Coverage: 100%; Class: OWLFunctionalSyntaxOWLParserFactory" alt="" href="org/semanticweb/owlapi/functional/parser/OWLFunctionalSyntaxOWLParserFactory.html#OWLFunctionalSyntaxOWLParserFactory"/>
+<area shape="poly" coords="290,209,288,211,285,209,288,206,290,209,290,209" title="Complexity: 2; Coverage: 100%; Class: OWLFunctionalSyntaxOWLParserFactory" alt="" href="org/semanticweb/owlapi/functional/parser/OWLFunctionalSyntaxOWLParserFactory.html#OWLFunctionalSyntaxOWLParserFactory"/>
+<area shape="poly" coords="290,209,288,211,285,209,288,206,290,209,290,209" title="Complexity: 2; Coverage: 100%; Class: OWLFunctionalSyntaxOWLParserFactory" alt="" href="org/semanticweb/owlapi/functional/parser/OWLFunctionalSyntaxOWLParserFactory.html#OWLFunctionalSyntaxOWLParserFactory"/>
+<area shape="poly" coords="290,209,288,211,285,209,288,206,290,209,290,209" title="Complexity: 2; Coverage: 100%; Class: OWLFunctionalSyntaxOWLParserFactory" alt="" href="org/semanticweb/owlapi/functional/parser/OWLFunctionalSyntaxOWLParserFactory.html#OWLFunctionalSyntaxOWLParserFactory"/>
+<area shape="poly" coords="290,208,288,211,285,208,288,206,290,208,290,208" title="Complexity: 4; Coverage: 100%; Class: TripleHandlers.TPRestHandler" alt="" href="org/semanticweb/owlapi/rdf/rdfxml/parser/TripleHandlers.html#TripleHandlers.TPRestHandler"/>
+<area shape="poly" coords="290,209,288,211,285,209,288,206,290,209,290,209" title="Complexity: 3; Coverage: 100%; Class: TripleHandlers.TypeTransitivePropertyHandler" alt="" href="org/semanticweb/owlapi/rdf/rdfxml/parser/TripleHandlers.html#TripleHandlers.TypeTransitivePropertyHandler"/>
+<area shape="poly" coords="290,208,288,211,285,208,288,206,290,208,290,208" title="Complexity: 4; Coverage: 100%; Class: TripleHandlers.TPRestHandler" alt="" href="org/semanticweb/owlapi/rdf/rdfxml/parser/TripleHandlers.html#TripleHandlers.TPRestHandler"/>
+<area shape="poly" coords="290,209,288,211,285,209,288,206,290,209,290,209" title="Complexity: 2; Coverage: 100%; Class: OWLFunctionalSyntaxOWLParserFactory" alt="" href="org/semanticweb/owlapi/functional/parser/OWLFunctionalSyntaxOWLParserFactory.html#OWLFunctionalSyntaxOWLParserFactory"/>
+<area shape="poly" coords="243,208,240,211,238,208,240,206,243,208,243,208" title="Complexity: 4; Coverage: 80%; Class: OWLObjectOneOfElementHandler" alt="" href="org/semanticweb/owlapi/owlxml/parser/PARSER_OWLXMLVocabulary.html#OWLObjectOneOfElementHandler"/>
+<area shape="poly" coords="290,209,288,211,285,209,288,206,290,209,290,209" title="Complexity: 2; Coverage: 100%; Class: OWLFunctionalSyntaxOWLParserFactory" alt="" href="org/semanticweb/owlapi/functional/parser/OWLFunctionalSyntaxOWLParserFactory.html#OWLFunctionalSyntaxOWLParserFactory"/>
+<area shape="poly" coords="290,209,288,211,285,209,288,206,290,209,290,209" title="Complexity: 2; Coverage: 100%; Class: OWLFunctionalSyntaxOWLParserFactory" alt="" href="org/semanticweb/owlapi/functional/parser/OWLFunctionalSyntaxOWLParserFactory.html#OWLFunctionalSyntaxOWLParserFactory"/>
+<area shape="poly" coords="290,209,288,211,285,209,288,206,290,209,290,209" title="Complexity: 2; Coverage: 100%; Class: OWLFunctionalSyntaxOWLParserFactory" alt="" href="org/semanticweb/owlapi/functional/parser/OWLFunctionalSyntaxOWLParserFactory.html#OWLFunctionalSyntaxOWLParserFactory"/>
+<area shape="poly" coords="290,208,288,211,285,208,288,206,290,208,290,208" title="Complexity: 4; Coverage: 100%; Class: TripleHandlers.TPRestHandler" alt="" href="org/semanticweb/owlapi/rdf/rdfxml/parser/TripleHandlers.html#TripleHandlers.TPRestHandler"/>
+<area shape="poly" coords="290,209,288,211,285,209,288,206,290,209,290,209" title="Complexity: 3; Coverage: 100%; Class: TripleHandlers.TypeTransitivePropertyHandler" alt="" href="org/semanticweb/owlapi/rdf/rdfxml/parser/TripleHandlers.html#TripleHandlers.TypeTransitivePropertyHandler"/>
+<area shape="poly" coords="290,209,288,211,285,209,288,206,290,209,290,209" title="Complexity: 2; Coverage: 100%; Class: OWLFunctionalSyntaxOWLParserFactory" alt="" href="org/semanticweb/owlapi/functional/parser/OWLFunctionalSyntaxOWLParserFactory.html#OWLFunctionalSyntaxOWLParserFactory"/>
+<area shape="poly" coords="290,209,288,211,285,209,288,206,290,209,290,209" title="Complexity: 3; Coverage: 100%; Class: TripleHandlers.TypeTransitivePropertyHandler" alt="" href="org/semanticweb/owlapi/rdf/rdfxml/parser/TripleHandlers.html#TripleHandlers.TypeTransitivePropertyHandler"/>
+<area shape="poly" coords="290,209,288,211,285,209,288,206,290,209,290,209" title="Complexity: 2; Coverage: 100%; Class: OWLFunctionalSyntaxOWLParserFactory" alt="" href="org/semanticweb/owlapi/functional/parser/OWLFunctionalSyntaxOWLParserFactory.html#OWLFunctionalSyntaxOWLParserFactory"/>
+<area shape="poly" coords="290,209,288,211,285,209,288,206,290,209,290,209" title="Complexity: 2; Coverage: 100%; Class: OWLFunctionalSyntaxOWLParserFactory" alt="" href="org/semanticweb/owlapi/functional/parser/OWLFunctionalSyntaxOWLParserFactory.html#OWLFunctionalSyntaxOWLParserFactory"/>
+<area shape="poly" coords="290,209,288,211,285,209,288,206,290,209,290,209" title="Complexity: 2; Coverage: 100%; Class: OWLFunctionalSyntaxOWLParserFactory" alt="" href="org/semanticweb/owlapi/functional/parser/OWLFunctionalSyntaxOWLParserFactory.html#OWLFunctionalSyntaxOWLParserFactory"/>
+<area shape="poly" coords="281,207,278,210,276,207,278,205,281,207,281,207" title="Complexity: 10; Coverage: 96%; Class: OWLLiteralElementHandler" alt="" href="org/semanticweb/owlapi/owlxml/parser/PARSER_OWLXMLVocabulary.html#OWLLiteralElementHandler"/>
+<area shape="poly" coords="290,209,288,211,285,209,288,206,290,209,290,209" title="Complexity: 2; Coverage: 100%; Class: OWLFunctionalSyntaxOWLParserFactory" alt="" href="org/semanticweb/owlapi/functional/parser/OWLFunctionalSyntaxOWLParserFactory.html#OWLFunctionalSyntaxOWLParserFactory"/>
+<area shape="poly" coords="290,209,288,211,285,209,288,206,290,209,290,209" title="Complexity: 3; Coverage: 100%; Class: TripleHandlers.TypeTransitivePropertyHandler" alt="" href="org/semanticweb/owlapi/rdf/rdfxml/parser/TripleHandlers.html#TripleHandlers.TypeTransitivePropertyHandler"/>
+<area shape="poly" coords="221,208,219,210,216,208,219,205,221,208,221,208" title="Complexity: 7; Coverage: 71%; Class: OWLInverseObjectPropertiesAxiomElementHandler" alt="" href="org/semanticweb/owlapi/owlxml/parser/PARSER_OWLXMLVocabulary.html#OWLInverseObjectPropertiesAxiomElementHandler"/>
+<area shape="poly" coords="290,209,288,211,285,209,288,206,290,209,290,209" title="Complexity: 2; Coverage: 100%; Class: OWLFunctionalSyntaxOWLParserFactory" alt="" href="org/semanticweb/owlapi/functional/parser/OWLFunctionalSyntaxOWLParserFactory.html#OWLFunctionalSyntaxOWLParserFactory"/>
+<area shape="poly" coords="290,208,288,211,285,208,288,206,290,208,290,208" title="Complexity: 4; Coverage: 100%; Class: TripleHandlers.TPRestHandler" alt="" href="org/semanticweb/owlapi/rdf/rdfxml/parser/TripleHandlers.html#TripleHandlers.TPRestHandler"/>
+<area shape="poly" coords="290,208,288,211,285,208,288,206,290,208,290,208" title="Complexity: 6; Coverage: 100%; Class: OWLHasKeyElementHandler" alt="" href="org/semanticweb/owlapi/owlxml/parser/PARSER_OWLXMLVocabulary.html#OWLHasKeyElementHandler"/>
+<area shape="poly" coords="290,209,288,211,285,209,288,206,290,209,290,209" title="Complexity: 2; Coverage: 100%; Class: OWLFunctionalSyntaxOWLParserFactory" alt="" href="org/semanticweb/owlapi/functional/parser/OWLFunctionalSyntaxOWLParserFactory.html#OWLFunctionalSyntaxOWLParserFactory"/>
+<area shape="poly" coords="290,209,288,211,285,209,288,206,290,209,290,209" title="Complexity: 3; Coverage: 100%; Class: TripleHandlers.TypeTransitivePropertyHandler" alt="" href="org/semanticweb/owlapi/rdf/rdfxml/parser/TripleHandlers.html#TripleHandlers.TypeTransitivePropertyHandler"/>
+<area shape="poly" coords="290,209,288,211,285,209,288,206,290,209,290,209" title="Complexity: 2; Coverage: 100%; Class: OWLFunctionalSyntaxOWLParserFactory" alt="" href="org/semanticweb/owlapi/functional/parser/OWLFunctionalSyntaxOWLParserFactory.html#OWLFunctionalSyntaxOWLParserFactory"/>
+<area shape="poly" coords="290,209,288,211,285,209,288,206,290,209,290,209" title="Complexity: 2; Coverage: 100%; Class: OWLFunctionalSyntaxOWLParserFactory" alt="" href="org/semanticweb/owlapi/functional/parser/OWLFunctionalSyntaxOWLParserFactory.html#OWLFunctionalSyntaxOWLParserFactory"/>
+<area shape="poly" coords="290,209,288,211,285,209,288,206,290,209,290,209" title="Complexity: 2; Coverage: 100%; Class: OWLFunctionalSyntaxOWLParserFactory" alt="" href="org/semanticweb/owlapi/functional/parser/OWLFunctionalSyntaxOWLParserFactory.html#OWLFunctionalSyntaxOWLParserFactory"/>
+<area shape="poly" coords="53,208,50,211,48,208,50,206,53,208,53,208" title="Complexity: 4; Coverage: 0%; Class: TripleHandlers.GTPResourceTripleHandler" alt="" href="org/semanticweb/owlapi/rdf/rdfxml/parser/TripleHandlers.html#TripleHandlers.GTPResourceTripleHandler"/>
+<area shape="poly" coords="290,209,288,211,285,209,288,206,290,209,290,209" title="Complexity: 2; Coverage: 100%; Class: OWLFunctionalSyntaxOWLParserFactory" alt="" href="org/semanticweb/owlapi/functional/parser/OWLFunctionalSyntaxOWLParserFactory.html#OWLFunctionalSyntaxOWLParserFactory"/>
+<area shape="poly" coords="290,209,288,211,285,209,288,206,290,209,290,209" title="Complexity: 2; Coverage: 100%; Class: OWLFunctionalSyntaxOWLParserFactory" alt="" href="org/semanticweb/owlapi/functional/parser/OWLFunctionalSyntaxOWLParserFactory.html#OWLFunctionalSyntaxOWLParserFactory"/>
+<area shape="poly" coords="290,209,288,211,285,209,288,206,290,209,290,209" title="Complexity: 2; Coverage: 100%; Class: OWLFunctionalSyntaxOWLParserFactory" alt="" href="org/semanticweb/owlapi/functional/parser/OWLFunctionalSyntaxOWLParserFactory.html#OWLFunctionalSyntaxOWLParserFactory"/>
+<area shape="poly" coords="290,209,288,211,285,209,288,206,290,209,290,209" title="Complexity: 2; Coverage: 100%; Class: OWLFunctionalSyntaxOWLParserFactory" alt="" href="org/semanticweb/owlapi/functional/parser/OWLFunctionalSyntaxOWLParserFactory.html#OWLFunctionalSyntaxOWLParserFactory"/>
+<area shape="poly" coords="271,207,269,210,266,207,269,205,271,207,271,207" title="Complexity: 11; Coverage: 92%; Class: OWLDeclarationAxiomElementHandler" alt="" href="org/semanticweb/owlapi/owlxml/parser/PARSER_OWLXMLVocabulary.html#OWLDeclarationAxiomElementHandler"/>
+<area shape="poly" coords="269,208,266,211,264,208,266,206,269,208,269,208" title="Complexity: 5; Coverage: 91%; Class: OWLDatatypeRestrictionElementHandler" alt="" href="org/semanticweb/owlapi/owlxml/parser/PARSER_OWLXMLVocabulary.html#OWLDatatypeRestrictionElementHandler"/>
+<area shape="poly" coords="271,208,269,211,266,208,269,206,271,208,271,208" title="Complexity: 6; Coverage: 92%; Class: OWLDatatypeFacetRestrictionElementHandler" alt="" href="org/semanticweb/owlapi/owlxml/parser/PARSER_OWLXMLVocabulary.html#OWLDatatypeFacetRestrictionElementHandler"/>
+<area shape="poly" coords="290,209,288,211,285,209,288,206,290,209,290,209" title="Complexity: 3; Coverage: 100%; Class: TripleHandlers.TypeTransitivePropertyHandler" alt="" href="org/semanticweb/owlapi/rdf/rdfxml/parser/TripleHandlers.html#TripleHandlers.TypeTransitivePropertyHandler"/>
+<area shape="poly" coords="290,208,288,211,285,208,288,206,290,208,290,208" title="Complexity: 5; Coverage: 100%; Class: TripleHandlers.TypeFunctionalPropertyHandler" alt="" href="org/semanticweb/owlapi/rdf/rdfxml/parser/TripleHandlers.html#TripleHandlers.TypeFunctionalPropertyHandler"/>
+<area shape="poly" coords="290,209,288,211,285,209,288,206,290,209,290,209" title="Complexity: 3; Coverage: 100%; Class: TripleHandlers.TypeTransitivePropertyHandler" alt="" href="org/semanticweb/owlapi/rdf/rdfxml/parser/TripleHandlers.html#TripleHandlers.TypeTransitivePropertyHandler"/>
+<area shape="poly" coords="290,209,288,211,285,209,288,206,290,209,290,209" title="Complexity: 2; Coverage: 100%; Class: OWLFunctionalSyntaxOWLParserFactory" alt="" href="org/semanticweb/owlapi/functional/parser/OWLFunctionalSyntaxOWLParserFactory.html#OWLFunctionalSyntaxOWLParserFactory"/>
+<area shape="poly" coords="53,208,50,211,48,208,50,206,53,208,53,208" title="Complexity: 6; Coverage: 0%; Class: OWLDataRestrictionElementHandler" alt="" href="org/semanticweb/owlapi/owlxml/parser/PARSER_OWLXMLVocabulary.html#OWLDataRestrictionElementHandler"/>
+<area shape="poly" coords="290,208,288,211,285,208,288,206,290,208,290,208" title="Complexity: 4; Coverage: 100%; Class: TripleHandlers.TPRestHandler" alt="" href="org/semanticweb/owlapi/rdf/rdfxml/parser/TripleHandlers.html#TripleHandlers.TPRestHandler"/>
+<area shape="poly" coords="290,208,288,211,285,208,288,206,290,208,290,208" title="Complexity: 4; Coverage: 100%; Class: TripleHandlers.TPRestHandler" alt="" href="org/semanticweb/owlapi/rdf/rdfxml/parser/TripleHandlers.html#TripleHandlers.TPRestHandler"/>
+<area shape="poly" coords="290,208,288,211,285,208,288,206,290,208,290,208" title="Complexity: 4; Coverage: 100%; Class: TripleHandlers.TPRestHandler" alt="" href="org/semanticweb/owlapi/rdf/rdfxml/parser/TripleHandlers.html#TripleHandlers.TPRestHandler"/>
+<area shape="poly" coords="290,209,288,211,285,209,288,206,290,209,290,209" title="Complexity: 2; Coverage: 100%; Class: OWLFunctionalSyntaxOWLParserFactory" alt="" href="org/semanticweb/owlapi/functional/parser/OWLFunctionalSyntaxOWLParserFactory.html#OWLFunctionalSyntaxOWLParserFactory"/>
+<area shape="poly" coords="243,208,240,211,238,208,240,206,243,208,243,208" title="Complexity: 4; Coverage: 80%; Class: OWLObjectOneOfElementHandler" alt="" href="org/semanticweb/owlapi/owlxml/parser/PARSER_OWLXMLVocabulary.html#OWLObjectOneOfElementHandler"/>
+<area shape="poly" coords="290,209,288,211,285,209,288,206,290,209,290,209" title="Complexity: 2; Coverage: 100%; Class: OWLFunctionalSyntaxOWLParserFactory" alt="" href="org/semanticweb/owlapi/functional/parser/OWLFunctionalSyntaxOWLParserFactory.html#OWLFunctionalSyntaxOWLParserFactory"/>
+<area shape="poly" coords="290,209,288,211,285,209,288,206,290,209,290,209" title="Complexity: 2; Coverage: 100%; Class: OWLFunctionalSyntaxOWLParserFactory" alt="" href="org/semanticweb/owlapi/functional/parser/OWLFunctionalSyntaxOWLParserFactory.html#OWLFunctionalSyntaxOWLParserFactory"/>
+<area shape="poly" coords="290,209,288,211,285,209,288,206,290,209,290,209" title="Complexity: 3; Coverage: 100%; Class: TripleHandlers.TypeTransitivePropertyHandler" alt="" href="org/semanticweb/owlapi/rdf/rdfxml/parser/TripleHandlers.html#TripleHandlers.TypeTransitivePropertyHandler"/>
+<area shape="poly" coords="290,209,288,211,285,209,288,206,290,209,290,209" title="Complexity: 3; Coverage: 100%; Class: TripleHandlers.TypeTransitivePropertyHandler" alt="" href="org/semanticweb/owlapi/rdf/rdfxml/parser/TripleHandlers.html#TripleHandlers.TypeTransitivePropertyHandler"/>
+<area shape="poly" coords="290,209,288,211,285,209,288,206,290,209,290,209" title="Complexity: 2; Coverage: 100%; Class: OWLFunctionalSyntaxOWLParserFactory" alt="" href="org/semanticweb/owlapi/functional/parser/OWLFunctionalSyntaxOWLParserFactory.html#OWLFunctionalSyntaxOWLParserFactory"/>
+<area shape="poly" coords="290,209,288,211,285,209,288,206,290,209,290,209" title="Complexity: 3; Coverage: 100%; Class: TripleHandlers.TypeTransitivePropertyHandler" alt="" href="org/semanticweb/owlapi/rdf/rdfxml/parser/TripleHandlers.html#TripleHandlers.TypeTransitivePropertyHandler"/>
+<area shape="poly" coords="290,209,288,211,285,209,288,206,290,209,290,209" title="Complexity: 2; Coverage: 100%; Class: OWLFunctionalSyntaxOWLParserFactory" alt="" href="org/semanticweb/owlapi/functional/parser/OWLFunctionalSyntaxOWLParserFactory.html#OWLFunctionalSyntaxOWLParserFactory"/>
+<area shape="poly" coords="290,209,288,211,285,209,288,206,290,209,290,209" title="Complexity: 3; Coverage: 100%; Class: TripleHandlers.TypeTransitivePropertyHandler" alt="" href="org/semanticweb/owlapi/rdf/rdfxml/parser/TripleHandlers.html#TripleHandlers.TypeTransitivePropertyHandler"/>
+<area shape="poly" coords="259,208,257,210,254,208,257,205,259,208,259,208" title="Complexity: 7; Coverage: 87%; Class: OWLClassAssertionAxiomElementHandler" alt="" href="org/semanticweb/owlapi/owlxml/parser/PARSER_OWLXMLVocabulary.html#OWLClassAssertionAxiomElementHandler"/>
+<area shape="poly" coords="290,209,288,211,285,209,288,206,290,209,290,209" title="Complexity: 2; Coverage: 100%; Class: OWLFunctionalSyntaxOWLParserFactory" alt="" href="org/semanticweb/owlapi/functional/parser/OWLFunctionalSyntaxOWLParserFactory.html#OWLFunctionalSyntaxOWLParserFactory"/>
+<area shape="poly" coords="53,209,50,211,48,209,50,206,53,209,53,209" title="Complexity: 2; Coverage: 0%; Class: DLSyntaxOWLParserFactory" alt="" href="org/semanticweb/owlapi/dlsyntax/parser/DLSyntaxOWLParserFactory.html#DLSyntaxOWLParserFactory"/>
+<area shape="poly" coords="250,208,247,211,245,208,247,206,250,208,250,208" title="Complexity: 5; Coverage: 83%; Class: TripleHandlers.TypeAllDisjointPropertiesHandler" alt="" href="org/semanticweb/owlapi/rdf/rdfxml/parser/TripleHandlers.html#TripleHandlers.TypeAllDisjointPropertiesHandler"/>
+<area shape="poly" coords="290,208,288,211,285,208,288,206,290,208,290,208" title="Complexity: 4; Coverage: 100%; Class: TripleHandlers.TPRestHandler" alt="" href="org/semanticweb/owlapi/rdf/rdfxml/parser/TripleHandlers.html#TripleHandlers.TPRestHandler"/>
+<area shape="poly" coords="290,208,288,211,285,208,288,206,290,208,290,208" title="Complexity: 4; Coverage: 100%; Class: TripleHandlers.TPRestHandler" alt="" href="org/semanticweb/owlapi/rdf/rdfxml/parser/TripleHandlers.html#TripleHandlers.TPRestHandler"/>
+<area shape="poly" coords="290,208,288,211,285,208,288,206,290,208,290,208" title="Complexity: 4; Coverage: 100%; Class: TripleHandlers.TPRestHandler" alt="" href="org/semanticweb/owlapi/rdf/rdfxml/parser/TripleHandlers.html#TripleHandlers.TPRestHandler"/>
+<area shape="poly" coords="205,207,202,210,200,207,202,205,205,207,205,207" title="Complexity: 11; Coverage: 64%; Class: OWLAnnotationElementHandler" alt="" href="org/semanticweb/owlapi/owlxml/parser/PARSER_OWLXMLVocabulary.html#OWLAnnotationElementHandler"/>
+<area shape="poly" coords="290,208,288,210,285,208,288,205,290,208,290,208" title="Complexity: 8; Coverage: 100%; Class: TripleHandlers.TPPropertyDisjointWithHandler" alt="" href="org/semanticweb/owlapi/rdf/rdfxml/parser/TripleHandlers.html#TripleHandlers.TPPropertyDisjointWithHandler"/>
+<area shape="poly" coords="53,208,50,210,48,208,50,205,53,208,53,208" title="Complexity: 8; Coverage: 0%; Class: DLSyntaxOWLParser" alt="" href="org/semanticweb/owlapi/dlsyntax/parser/DLSyntaxOWLParser.html#DLSyntaxOWLParser"/>
+<area shape="poly" coords="53,208,50,211,48,208,50,206,53,208,53,208" title="Complexity: 4; Coverage: 0%; Class: TripleHandlers.GTPResourceTripleHandler" alt="" href="org/semanticweb/owlapi/rdf/rdfxml/parser/TripleHandlers.html#TripleHandlers.GTPResourceTripleHandler"/>
+<area shape="poly" coords="290,208,288,211,285,208,288,206,290,208,290,208" title="Complexity: 4; Coverage: 100%; Class: TripleHandlers.TPRestHandler" alt="" href="org/semanticweb/owlapi/rdf/rdfxml/parser/TripleHandlers.html#TripleHandlers.TPRestHandler"/>
+<area shape="poly" coords="290,208,288,211,285,208,288,206,290,208,290,208" title="Complexity: 4; Coverage: 100%; Class: TripleHandlers.TPRestHandler" alt="" href="org/semanticweb/owlapi/rdf/rdfxml/parser/TripleHandlers.html#TripleHandlers.TPRestHandler"/>
+<area shape="poly" coords="290,208,288,211,285,208,288,206,290,208,290,208" title="Complexity: 6; Coverage: 100%; Class: OWLHasKeyElementHandler" alt="" href="org/semanticweb/owlapi/owlxml/parser/PARSER_OWLXMLVocabulary.html#OWLHasKeyElementHandler"/>
+<area shape="poly" coords="290,208,288,211,285,208,288,206,290,208,290,208" title="Complexity: 4; Coverage: 100%; Class: TripleHandlers.TPRestHandler" alt="" href="org/semanticweb/owlapi/rdf/rdfxml/parser/TripleHandlers.html#TripleHandlers.TPRestHandler"/>
+<area shape="poly" coords="290,209,288,211,285,209,288,206,290,209,290,209" title="Complexity: 2; Coverage: 100%; Class: OWLFunctionalSyntaxOWLParserFactory" alt="" href="org/semanticweb/owlapi/functional/parser/OWLFunctionalSyntaxOWLParserFactory.html#OWLFunctionalSyntaxOWLParserFactory"/>
+<area shape="poly" coords="290,208,288,211,285,208,288,206,290,208,290,208" title="Complexity: 4; Coverage: 100%; Class: TripleHandlers.TPRestHandler" alt="" href="org/semanticweb/owlapi/rdf/rdfxml/parser/TripleHandlers.html#TripleHandlers.TPRestHandler"/>
+<area shape="poly" coords="290,209,288,211,285,209,288,206,290,209,290,209" title="Complexity: 2; Coverage: 100%; Class: OWLFunctionalSyntaxOWLParserFactory" alt="" href="org/semanticweb/owlapi/functional/parser/OWLFunctionalSyntaxOWLParserFactory.html#OWLFunctionalSyntaxOWLParserFactory"/>
+<area shape="poly" coords="266,208,264,210,261,208,264,205,266,208,266,208" title="Complexity: 8; Coverage: 90%; Class: AbstractOWLObjectPropertyAssertionAxiomElementHandler" alt="" href="org/semanticweb/owlapi/owlxml/parser/PARSER_OWLXMLVocabulary.html#AbstractOWLObjectPropertyAssertionAxiomElementHandler"/>
+<area shape="poly" coords="271,208,269,211,266,208,269,206,271,208,271,208" title="Complexity: 6; Coverage: 92%; Class: OWLDatatypeFacetRestrictionElementHandler" alt="" href="org/semanticweb/owlapi/owlxml/parser/PARSER_OWLXMLVocabulary.html#OWLDatatypeFacetRestrictionElementHandler"/>
+<area shape="poly" coords="290,209,288,211,285,209,288,206,290,209,290,209" title="Complexity: 3; Coverage: 100%; Class: TripleHandlers.TypeTransitivePropertyHandler" alt="" href="org/semanticweb/owlapi/rdf/rdfxml/parser/TripleHandlers.html#TripleHandlers.TypeTransitivePropertyHandler"/>
+<area shape="poly" coords="290,208,288,211,285,208,288,206,290,208,290,208" title="Complexity: 4; Coverage: 100%; Class: TripleHandlers.TPRestHandler" alt="" href="org/semanticweb/owlapi/rdf/rdfxml/parser/TripleHandlers.html#TripleHandlers.TPRestHandler"/>
+<area shape="poly" coords="290,209,288,211,285,209,288,206,290,209,290,209" title="Complexity: 2; Coverage: 100%; Class: OWLFunctionalSyntaxOWLParserFactory" alt="" href="org/semanticweb/owlapi/functional/parser/OWLFunctionalSyntaxOWLParserFactory.html#OWLFunctionalSyntaxOWLParserFactory"/>
+<area shape="poly" coords="290,208,288,211,285,208,288,206,290,208,290,208" title="Complexity: 5; Coverage: 100%; Class: TripleHandlers.TypeFunctionalPropertyHandler" alt="" href="org/semanticweb/owlapi/rdf/rdfxml/parser/TripleHandlers.html#TripleHandlers.TypeFunctionalPropertyHandler"/>
+<area shape="poly" coords="290,208,288,211,285,208,288,206,290,208,290,208" title="Complexity: 6; Coverage: 100%; Class: OWLHasKeyElementHandler" alt="" href="org/semanticweb/owlapi/owlxml/parser/PARSER_OWLXMLVocabulary.html#OWLHasKeyElementHandler"/>
+<area shape="poly" coords="290,208,288,211,285,208,288,206,290,208,290,208" title="Complexity: 4; Coverage: 100%; Class: TripleHandlers.TPRestHandler" alt="" href="org/semanticweb/owlapi/rdf/rdfxml/parser/TripleHandlers.html#TripleHandlers.TPRestHandler"/>
+<area shape="poly" coords="290,208,288,211,285,208,288,206,290,208,290,208" title="Complexity: 4; Coverage: 100%; Class: TripleHandlers.TPRestHandler" alt="" href="org/semanticweb/owlapi/rdf/rdfxml/parser/TripleHandlers.html#TripleHandlers.TPRestHandler"/>
+<area shape="poly" coords="290,209,288,211,285,209,288,206,290,209,290,209" title="Complexity: 2; Coverage: 100%; Class: OWLFunctionalSyntaxOWLParserFactory" alt="" href="org/semanticweb/owlapi/functional/parser/OWLFunctionalSyntaxOWLParserFactory.html#OWLFunctionalSyntaxOWLParserFactory"/>
+<area shape="poly" coords="290,209,288,211,285,209,288,206,290,209,290,209" title="Complexity: 2; Coverage: 100%; Class: OWLFunctionalSyntaxOWLParserFactory" alt="" href="org/semanticweb/owlapi/functional/parser/OWLFunctionalSyntaxOWLParserFactory.html#OWLFunctionalSyntaxOWLParserFactory"/>
+<area shape="poly" coords="290,209,288,211,285,209,288,206,290,209,290,209" title="Complexity: 1; Coverage: 100%; Class: KRSS2Parser.LookaheadSuccess" alt="" href="org/semanticweb/owlapi/krss2/parser/KRSS2Parser.html#KRSS2Parser.LookaheadSuccess"/>
+<area shape="poly" coords="179,208,176,211,174,208,176,206,179,208,179,208" title="Complexity: 5; Coverage: 53%; Class: AbstractNaryBooleanClassExpressionElementHandler" alt="" href="org/semanticweb/owlapi/owlxml/parser/PARSER_OWLXMLVocabulary.html#AbstractNaryBooleanClassExpressionElementHandler"/>
+<area shape="poly" coords="290,209,288,211,285,209,288,206,290,209,290,209" title="Complexity: 2; Coverage: 100%; Class: OWLFunctionalSyntaxOWLParserFactory" alt="" href="org/semanticweb/owlapi/functional/parser/OWLFunctionalSyntaxOWLParserFactory.html#OWLFunctionalSyntaxOWLParserFactory"/>
+<area shape="poly" coords="269,208,266,211,264,208,266,206,269,208,269,208" title="Complexity: 5; Coverage: 91%; Class: OWLDatatypeRestrictionElementHandler" alt="" href="org/semanticweb/owlapi/owlxml/parser/PARSER_OWLXMLVocabulary.html#OWLDatatypeRestrictionElementHandler"/>
+<area shape="poly" coords="290,209,288,211,285,209,288,206,290,209,290,209" title="Complexity: 2; Coverage: 100%; Class: OWLFunctionalSyntaxOWLParserFactory" alt="" href="org/semanticweb/owlapi/functional/parser/OWLFunctionalSyntaxOWLParserFactory.html#OWLFunctionalSyntaxOWLParserFactory"/>
+<area shape="poly" coords="290,209,288,211,285,209,288,206,290,209,290,209" title="Complexity: 2; Coverage: 100%; Class: OWLFunctionalSyntaxOWLParserFactory" alt="" href="org/semanticweb/owlapi/functional/parser/OWLFunctionalSyntaxOWLParserFactory.html#OWLFunctionalSyntaxOWLParserFactory"/>
+<area shape="poly" coords="290,208,288,211,285,208,288,206,290,208,290,208" title="Complexity: 4; Coverage: 100%; Class: TripleHandlers.TPRestHandler" alt="" href="org/semanticweb/owlapi/rdf/rdfxml/parser/TripleHandlers.html#TripleHandlers.TPRestHandler"/>
+<area shape="poly" coords="174,203,171,205,169,203,171,200,174,203,174,203" title="Complexity: 37; Coverage: 51%; Class: OWLElementHandler" alt="" href="org/semanticweb/owlapi/owlxml/parser/PARSER_OWLXMLVocabulary.html#OWLElementHandler"/>
+<area shape="poly" coords="276,194,273,196,271,194,273,191,276,194,276,194" title="Complexity: 92; Coverage: 94%; Class: PARSER_OWLXMLVocabulary" alt="" href="org/semanticweb/owlapi/owlxml/parser/PARSER_OWLXMLVocabulary.html#PARSER_OWLXMLVocabulary"/>
+<area shape="poly" coords="266,201,264,203,261,201,264,198,266,201,266,201" title="Complexity: 50; Coverage: 90%; Class: OWLXMLParserHandler" alt="" href="org/semanticweb/owlapi/owlxml/parser/OWLXMLParserHandler.html#OWLXMLParserHandler"/>
+<area shape="poly" coords="290,209,288,211,285,209,288,206,290,209,290,209" title="Complexity: 2; Coverage: 100%; Class: OWLFunctionalSyntaxOWLParserFactory" alt="" href="org/semanticweb/owlapi/functional/parser/OWLFunctionalSyntaxOWLParserFactory.html#OWLFunctionalSyntaxOWLParserFactory"/>
+<area shape="poly" coords="290,209,288,211,285,209,288,206,290,209,290,209" title="Complexity: 1; Coverage: 100%; Class: KRSS2Parser.LookaheadSuccess" alt="" href="org/semanticweb/owlapi/krss2/parser/KRSS2Parser.html#KRSS2Parser.LookaheadSuccess"/>
+<area shape="poly" coords="53,209,50,211,48,209,50,206,53,209,53,209" title="Complexity: 1; Coverage: 0%; Class: LatexRendererIOException" alt="" href="org/semanticweb/owlapi/latex/renderer/LatexRendererIOException.html#LatexRendererIOException"/>
+<area shape="poly" coords="290,209,288,211,285,209,288,206,290,209,290,209" title="Complexity: 1; Coverage: 100%; Class: KRSS2Parser.LookaheadSuccess" alt="" href="org/semanticweb/owlapi/krss2/parser/KRSS2Parser.html#KRSS2Parser.LookaheadSuccess"/>
+<area shape="poly" coords="257,208,254,210,252,208,254,205,257,208,257,208" title="Complexity: 8; Coverage: 86%; Class: OWLXMLParser" alt="" href="org/semanticweb/owlapi/owlxml/parser/OWLXMLParser.html#OWLXMLParser"/>
+<area shape="poly" coords="117,208,114,211,112,208,114,206,117,208,117,208" title="Complexity: 5; Coverage: 27%; Class: RendererEvent" alt="" href="org/semanticweb/owlapi/manchestersyntax/renderer/RendererEvent.html#RendererEvent"/>
+<area shape="poly" coords="188,204,186,207,183,204,186,202,188,204,188,204" title="Complexity: 30; Coverage: 57%; Class: ParserException" alt="" href="org/semanticweb/owlapi/manchestersyntax/renderer/ParserException.html#ParserException"/>
+<area shape="poly" coords="290,209,288,211,285,209,288,206,290,209,290,209" title="Complexity: 2; Coverage: 100%; Class: OWLFunctionalSyntaxOWLParserFactory" alt="" href="org/semanticweb/owlapi/functional/parser/OWLFunctionalSyntaxOWLParserFactory.html#OWLFunctionalSyntaxOWLParserFactory"/>
+<area shape="poly" coords="53,209,50,211,48,209,50,206,53,209,53,209" title="Complexity: 3; Coverage: 0%; Class: LatexRendererException" alt="" href="org/semanticweb/owlapi/latex/renderer/LatexRendererException.html#LatexRendererException"/>
+<area shape="poly" coords="290,209,288,211,285,209,288,206,290,209,290,209" title="Complexity: 2; Coverage: 100%; Class: OWLFunctionalSyntaxOWLParserFactory" alt="" href="org/semanticweb/owlapi/functional/parser/OWLFunctionalSyntaxOWLParserFactory.html#OWLFunctionalSyntaxOWLParserFactory"/>
+<area shape="poly" coords="53,209,50,211,48,209,50,206,53,209,53,209" title="Complexity: 1; Coverage: 0%; Class: LatexRendererIOException" alt="" href="org/semanticweb/owlapi/latex/renderer/LatexRendererIOException.html#LatexRendererIOException"/>
+<area shape="poly" coords="186,208,183,210,181,208,183,205,186,208,186,208" title="Complexity: 9; Coverage: 56%; Class: ManchesterOWLSyntaxPrefixNameShortFormProvider" alt="" href="org/semanticweb/owlapi/manchestersyntax/renderer/ManchesterOWLSyntaxPrefixNameShortFormProvider.html#ManchesterOWLSyntaxPrefixNameShortFormProvider"/>
+<area shape="poly" coords="183,183,181,185,178,183,181,180,183,183,183,183" title="Complexity: 158; Coverage: 55%; Class: ManchesterOWLSyntaxObjectRenderer" alt="" href="org/semanticweb/owlapi/manchestersyntax/renderer/ManchesterOWLSyntaxObjectRenderer.html#ManchesterOWLSyntaxObjectRenderer"/>
+<area shape="poly" coords="53,208,50,211,48,208,50,206,53,208,53,208" title="Complexity: 6; Coverage: 0%; Class: OWLDataRestrictionElementHandler" alt="" href="org/semanticweb/owlapi/owlxml/parser/PARSER_OWLXMLVocabulary.html#OWLDataRestrictionElementHandler"/>
+<area shape="poly" coords="53,209,50,211,48,209,50,206,53,209,53,209" title="Complexity: 3; Coverage: 0%; Class: LatexRendererException" alt="" href="org/semanticweb/owlapi/latex/renderer/LatexRendererException.html#LatexRendererException"/>
+<area shape="poly" coords="290,209,288,211,285,209,288,206,290,209,290,209" title="Complexity: 2; Coverage: 100%; Class: OWLFunctionalSyntaxOWLParserFactory" alt="" href="org/semanticweb/owlapi/functional/parser/OWLFunctionalSyntaxOWLParserFactory.html#OWLFunctionalSyntaxOWLParserFactory"/>
+<area shape="poly" coords="269,208,266,210,264,208,266,205,269,208,269,208" title="Complexity: 7; Coverage: 91%; Class: ManchesterOWLSyntaxFrameRenderer.SectionMap" alt="" href="org/semanticweb/owlapi/manchestersyntax/renderer/ManchesterOWLSyntaxFrameRenderer.html#ManchesterOWLSyntaxFrameRenderer.SectionMap"/>
+<area shape="poly" coords="231,173,228,176,226,173,228,171,231,173,231,173" title="Complexity: 215; Coverage: 75%; Class: ManchesterOWLSyntaxFrameRenderer" alt="" href="org/semanticweb/owlapi/manchestersyntax/renderer/ManchesterOWLSyntaxFrameRenderer.html#ManchesterOWLSyntaxFrameRenderer"/>
+<area shape="poly" coords="250,204,247,207,245,204,247,202,250,204,250,204" title="Complexity: 28; Coverage: 83%; Class: AbstractRenderer" alt="" href="org/semanticweb/owlapi/manchestersyntax/renderer/AbstractRenderer.html#AbstractRenderer"/>
+<area shape="poly" coords="240,207,238,210,235,207,238,205,240,207,240,207" title="Complexity: 10; Coverage: 79%; Class: RDFTranslator" alt="" href="org/semanticweb/owlapi/rdf/model/RDFTranslator.html#RDFTranslator"/>
+<area shape="poly" coords="262,206,259,208,257,206,259,203,262,206,262,206" title="Complexity: 21; Coverage: 88%; Class: RDFGraph" alt="" href="org/semanticweb/owlapi/rdf/model/RDFGraph.html#RDFGraph"/>
+<area shape="poly" coords="290,208,288,211,285,208,288,206,290,208,290,208" title="Complexity: 6; Coverage: 100%; Class: OWLHasKeyElementHandler" alt="" href="org/semanticweb/owlapi/owlxml/parser/PARSER_OWLXMLVocabulary.html#OWLHasKeyElementHandler"/>
+<area shape="poly" coords="276,180,273,183,271,180,273,178,276,180,276,180" title="Complexity: 175; Coverage: 94%; Class: AbstractTranslator" alt="" href="org/semanticweb/owlapi/rdf/model/AbstractTranslator.html#AbstractTranslator"/>
+<area shape="poly" coords="257,208,254,211,252,208,254,206,257,208,257,208" title="Complexity: 6; Coverage: 86%; Class: ManchesterOWLSyntaxTokenizer.Token" alt="" href="org/semanticweb/owlapi/manchestersyntax/parser/ManchesterOWLSyntaxTokenizer.html#ManchesterOWLSyntaxTokenizer.Token"/>
+<area shape="poly" coords="271,203,269,205,266,203,269,200,271,203,271,203" title="Complexity: 37; Coverage: 92%; Class: ManchesterOWLSyntaxTokenizer" alt="" href="org/semanticweb/owlapi/manchestersyntax/parser/ManchesterOWLSyntaxTokenizer.html#ManchesterOWLSyntaxTokenizer"/>
+<area shape="poly" coords="290,209,288,211,285,209,288,206,290,209,290,209" title="Complexity: 2; Coverage: 100%; Class: OWLFunctionalSyntaxOWLParserFactory" alt="" href="org/semanticweb/owlapi/functional/parser/OWLFunctionalSyntaxOWLParserFactory.html#OWLFunctionalSyntaxOWLParserFactory"/>
+<area shape="poly" coords="290,209,288,211,285,209,288,206,290,209,290,209" title="Complexity: 2; Coverage: 100%; Class: OWLFunctionalSyntaxOWLParserFactory" alt="" href="org/semanticweb/owlapi/functional/parser/OWLFunctionalSyntaxOWLParserFactory.html#OWLFunctionalSyntaxOWLParserFactory"/>
+<area shape="poly" coords="290,209,288,211,285,209,288,206,290,209,290,209" title="Complexity: 3; Coverage: 100%; Class: TripleHandlers.TypeTransitivePropertyHandler" alt="" href="org/semanticweb/owlapi/rdf/rdfxml/parser/TripleHandlers.html#TripleHandlers.TypeTransitivePropertyHandler"/>
+<area shape="poly" coords="290,209,288,211,285,209,288,206,290,209,290,209" title="Complexity: 1; Coverage: 100%; Class: KRSS2Parser.LookaheadSuccess" alt="" href="org/semanticweb/owlapi/krss2/parser/KRSS2Parser.html#KRSS2Parser.LookaheadSuccess"/>
+<area shape="poly" coords="290,208,288,211,285,208,288,206,290,208,290,208" title="Complexity: 4; Coverage: 100%; Class: TripleHandlers.TPRestHandler" alt="" href="org/semanticweb/owlapi/rdf/rdfxml/parser/TripleHandlers.html#TripleHandlers.TPRestHandler"/>
+<area shape="poly" coords="290,209,288,211,285,209,288,206,290,209,290,209" title="Complexity: 3; Coverage: 100%; Class: TripleHandlers.TypeTransitivePropertyHandler" alt="" href="org/semanticweb/owlapi/rdf/rdfxml/parser/TripleHandlers.html#TripleHandlers.TypeTransitivePropertyHandler"/>
+<area shape="poly" coords="290,209,288,211,285,209,288,206,290,209,290,209" title="Complexity: 2; Coverage: 100%; Class: OWLFunctionalSyntaxOWLParserFactory" alt="" href="org/semanticweb/owlapi/functional/parser/OWLFunctionalSyntaxOWLParserFactory.html#OWLFunctionalSyntaxOWLParserFactory"/>
+<area shape="poly" coords="290,209,288,211,285,209,288,206,290,209,290,209" title="Complexity: 2; Coverage: 100%; Class: OWLFunctionalSyntaxOWLParserFactory" alt="" href="org/semanticweb/owlapi/functional/parser/OWLFunctionalSyntaxOWLParserFactory.html#OWLFunctionalSyntaxOWLParserFactory"/>
+<area shape="poly" coords="290,209,288,211,285,209,288,206,290,209,290,209" title="Complexity: 3; Coverage: 100%; Class: TripleHandlers.TypeTransitivePropertyHandler" alt="" href="org/semanticweb/owlapi/rdf/rdfxml/parser/TripleHandlers.html#TripleHandlers.TypeTransitivePropertyHandler"/>
+<area shape="poly" coords="290,209,288,211,285,209,288,206,290,209,290,209" title="Complexity: 2; Coverage: 100%; Class: OWLFunctionalSyntaxOWLParserFactory" alt="" href="org/semanticweb/owlapi/functional/parser/OWLFunctionalSyntaxOWLParserFactory.html#OWLFunctionalSyntaxOWLParserFactory"/>
+<area shape="poly" coords="290,209,288,211,285,209,288,206,290,209,290,209" title="Complexity: 3; Coverage: 100%; Class: TripleHandlers.TypeTransitivePropertyHandler" alt="" href="org/semanticweb/owlapi/rdf/rdfxml/parser/TripleHandlers.html#TripleHandlers.TypeTransitivePropertyHandler"/>
+<area shape="poly" coords="290,209,288,211,285,209,288,206,290,209,290,209" title="Complexity: 2; Coverage: 100%; Class: OWLFunctionalSyntaxOWLParserFactory" alt="" href="org/semanticweb/owlapi/functional/parser/OWLFunctionalSyntaxOWLParserFactory.html#OWLFunctionalSyntaxOWLParserFactory"/>
+<area shape="poly" coords="290,209,288,211,285,209,288,206,290,209,290,209" title="Complexity: 1; Coverage: 100%; Class: KRSS2Parser.LookaheadSuccess" alt="" href="org/semanticweb/owlapi/krss2/parser/KRSS2Parser.html#KRSS2Parser.LookaheadSuccess"/>
+<area shape="poly" coords="290,209,288,211,285,209,288,206,290,209,290,209" title="Complexity: 2; Coverage: 100%; Class: OWLFunctionalSyntaxOWLParserFactory" alt="" href="org/semanticweb/owlapi/functional/parser/OWLFunctionalSyntaxOWLParserFactory.html#OWLFunctionalSyntaxOWLParserFactory"/>
+<area shape="poly" coords="290,209,288,211,285,209,288,206,290,209,290,209" title="Complexity: 2; Coverage: 100%; Class: OWLFunctionalSyntaxOWLParserFactory" alt="" href="org/semanticweb/owlapi/functional/parser/OWLFunctionalSyntaxOWLParserFactory.html#OWLFunctionalSyntaxOWLParserFactory"/>
+<area shape="poly" coords="290,209,288,211,285,209,288,206,290,209,290,209" title="Complexity: 2; Coverage: 100%; Class: OWLFunctionalSyntaxOWLParserFactory" alt="" href="org/semanticweb/owlapi/functional/parser/OWLFunctionalSyntaxOWLParserFactory.html#OWLFunctionalSyntaxOWLParserFactory"/>
+<area shape="poly" coords="290,209,288,211,285,209,288,206,290,209,290,209" title="Complexity: 2; Coverage: 100%; Class: OWLFunctionalSyntaxOWLParserFactory" alt="" href="org/semanticweb/owlapi/functional/parser/OWLFunctionalSyntaxOWLParserFactory.html#OWLFunctionalSyntaxOWLParserFactory"/>
+<area shape="poly" coords="290,209,288,211,285,209,288,206,290,209,290,209" title="Complexity: 1; Coverage: 100%; Class: KRSS2Parser.LookaheadSuccess" alt="" href="org/semanticweb/owlapi/krss2/parser/KRSS2Parser.html#KRSS2Parser.LookaheadSuccess"/>
+<area shape="poly" coords="290,209,288,211,285,209,288,206,290,209,290,209" title="Complexity: 3; Coverage: 100%; Class: TripleHandlers.TypeTransitivePropertyHandler" alt="" href="org/semanticweb/owlapi/rdf/rdfxml/parser/TripleHandlers.html#TripleHandlers.TypeTransitivePropertyHandler"/>
+<area shape="poly" coords="290,209,288,211,285,209,288,206,290,209,290,209" title="Complexity: 3; Coverage: 100%; Class: TripleHandlers.TypeTransitivePropertyHandler" alt="" href="org/semanticweb/owlapi/rdf/rdfxml/parser/TripleHandlers.html#TripleHandlers.TypeTransitivePropertyHandler"/>
+<area shape="poly" coords="290,209,288,211,285,209,288,206,290,209,290,209" title="Complexity: 2; Coverage: 100%; Class: OWLFunctionalSyntaxOWLParserFactory" alt="" href="org/semanticweb/owlapi/functional/parser/OWLFunctionalSyntaxOWLParserFactory.html#OWLFunctionalSyntaxOWLParserFactory"/>
+<area shape="poly" coords="290,209,288,211,285,209,288,206,290,209,290,209" title="Complexity: 2; Coverage: 100%; Class: OWLFunctionalSyntaxOWLParserFactory" alt="" href="org/semanticweb/owlapi/functional/parser/OWLFunctionalSyntaxOWLParserFactory.html#OWLFunctionalSyntaxOWLParserFactory"/>
+<area shape="poly" coords="290,209,288,211,285,209,288,206,290,209,290,209" title="Complexity: 2; Coverage: 100%; Class: OWLFunctionalSyntaxOWLParserFactory" alt="" href="org/semanticweb/owlapi/functional/parser/OWLFunctionalSyntaxOWLParserFactory.html#OWLFunctionalSyntaxOWLParserFactory"/>
+<area shape="poly" coords="290,209,288,211,285,209,288,206,290,209,290,209" title="Complexity: 2; Coverage: 100%; Class: OWLFunctionalSyntaxOWLParserFactory" alt="" href="org/semanticweb/owlapi/functional/parser/OWLFunctionalSyntaxOWLParserFactory.html#OWLFunctionalSyntaxOWLParserFactory"/>
+<area shape="poly" coords="290,209,288,211,285,209,288,206,290,209,290,209" title="Complexity: 2; Coverage: 100%; Class: OWLFunctionalSyntaxOWLParserFactory" alt="" href="org/semanticweb/owlapi/functional/parser/OWLFunctionalSyntaxOWLParserFactory.html#OWLFunctionalSyntaxOWLParserFactory"/>
+<area shape="poly" coords="172,209,169,211,167,209,169,206,172,209,172,209" title="Complexity: 2; Coverage: 50%; Class: KRSS2OWLSyntaxStorer" alt="" href="org/semanticweb/owlapi/krss2/renderer/KRSS2OWLSyntaxStorer.html#KRSS2OWLSyntaxStorer"/>
+<area shape="poly" coords="290,209,288,211,285,209,288,206,290,209,290,209" title="Complexity: 2; Coverage: 100%; Class: OWLFunctionalSyntaxOWLParserFactory" alt="" href="org/semanticweb/owlapi/functional/parser/OWLFunctionalSyntaxOWLParserFactory.html#OWLFunctionalSyntaxOWLParserFactory"/>
+<area shape="poly" coords="290,209,288,211,285,209,288,206,290,209,290,209" title="Complexity: 1; Coverage: 100%; Class: KRSS2Parser.LookaheadSuccess" alt="" href="org/semanticweb/owlapi/krss2/parser/KRSS2Parser.html#KRSS2Parser.LookaheadSuccess"/>
+<area shape="poly" coords="290,209,288,211,285,209,288,206,290,209,290,209" title="Complexity: 2; Coverage: 100%; Class: OWLFunctionalSyntaxOWLParserFactory" alt="" href="org/semanticweb/owlapi/functional/parser/OWLFunctionalSyntaxOWLParserFactory.html#OWLFunctionalSyntaxOWLParserFactory"/>
+<area shape="poly" coords="290,209,288,211,285,209,288,206,290,209,290,209" title="Complexity: 2; Coverage: 100%; Class: OWLFunctionalSyntaxOWLParserFactory" alt="" href="org/semanticweb/owlapi/functional/parser/OWLFunctionalSyntaxOWLParserFactory.html#OWLFunctionalSyntaxOWLParserFactory"/>
+<area shape="poly" coords="172,209,169,211,167,209,169,206,172,209,172,209" title="Complexity: 2; Coverage: 50%; Class: KRSS2OWLSyntaxStorer" alt="" href="org/semanticweb/owlapi/krss2/renderer/KRSS2OWLSyntaxStorer.html#KRSS2OWLSyntaxStorer"/>
+<area shape="poly" coords="290,209,288,211,285,209,288,206,290,209,290,209" title="Complexity: 2; Coverage: 100%; Class: OWLFunctionalSyntaxOWLParserFactory" alt="" href="org/semanticweb/owlapi/functional/parser/OWLFunctionalSyntaxOWLParserFactory.html#OWLFunctionalSyntaxOWLParserFactory"/>
+<area shape="poly" coords="290,209,288,211,285,209,288,206,290,209,290,209" title="Complexity: 2; Coverage: 100%; Class: OWLFunctionalSyntaxOWLParserFactory" alt="" href="org/semanticweb/owlapi/functional/parser/OWLFunctionalSyntaxOWLParserFactory.html#OWLFunctionalSyntaxOWLParserFactory"/>
+<area shape="poly" coords="290,209,288,211,285,209,288,206,290,209,290,209" title="Complexity: 2; Coverage: 100%; Class: OWLFunctionalSyntaxOWLParserFactory" alt="" href="org/semanticweb/owlapi/functional/parser/OWLFunctionalSyntaxOWLParserFactory.html#OWLFunctionalSyntaxOWLParserFactory"/>
+<area shape="poly" coords="290,209,288,211,285,209,288,206,290,209,290,209" title="Complexity: 2; Coverage: 100%; Class: OWLFunctionalSyntaxOWLParserFactory" alt="" href="org/semanticweb/owlapi/functional/parser/OWLFunctionalSyntaxOWLParserFactory.html#OWLFunctionalSyntaxOWLParserFactory"/>
+<area shape="poly" coords="290,209,288,211,285,209,288,206,290,209,290,209" title="Complexity: 2; Coverage: 100%; Class: OWLFunctionalSyntaxOWLParserFactory" alt="" href="org/semanticweb/owlapi/functional/parser/OWLFunctionalSyntaxOWLParserFactory.html#OWLFunctionalSyntaxOWLParserFactory"/>
+<area shape="poly" coords="290,209,288,211,285,209,288,206,290,209,290,209" title="Complexity: 2; Coverage: 100%; Class: OWLFunctionalSyntaxOWLParserFactory" alt="" href="org/semanticweb/owlapi/functional/parser/OWLFunctionalSyntaxOWLParserFactory.html#OWLFunctionalSyntaxOWLParserFactory"/>
+<area shape="poly" coords="290,209,288,211,285,209,288,206,290,209,290,209" title="Complexity: 1; Coverage: 100%; Class: KRSS2Parser.LookaheadSuccess" alt="" href="org/semanticweb/owlapi/krss2/parser/KRSS2Parser.html#KRSS2Parser.LookaheadSuccess"/>
+<area shape="poly" coords="290,209,288,211,285,209,288,206,290,209,290,209" title="Complexity: 1; Coverage: 100%; Class: KRSS2Parser.LookaheadSuccess" alt="" href="org/semanticweb/owlapi/krss2/parser/KRSS2Parser.html#KRSS2Parser.LookaheadSuccess"/>
+<area shape="poly" coords="290,209,288,211,285,209,288,206,290,209,290,209" title="Complexity: 1; Coverage: 100%; Class: KRSS2Parser.LookaheadSuccess" alt="" href="org/semanticweb/owlapi/krss2/parser/KRSS2Parser.html#KRSS2Parser.LookaheadSuccess"/>
+<area shape="poly" coords="290,209,288,211,285,209,288,206,290,209,290,209" title="Complexity: 1; Coverage: 100%; Class: KRSS2Parser.LookaheadSuccess" alt="" href="org/semanticweb/owlapi/krss2/parser/KRSS2Parser.html#KRSS2Parser.LookaheadSuccess"/>
+<area shape="poly" coords="290,209,288,211,285,209,288,206,290,209,290,209" title="Complexity: 1; Coverage: 100%; Class: KRSS2Parser.LookaheadSuccess" alt="" href="org/semanticweb/owlapi/krss2/parser/KRSS2Parser.html#KRSS2Parser.LookaheadSuccess"/>
+<area shape="poly" coords="266,206,264,209,261,206,264,204,266,206,266,206" title="Complexity: 16; Coverage: 90%; Class: ManchesterOWLSyntaxParserImpl.DefaultEntityChecker" alt="" href="org/semanticweb/owlapi/manchestersyntax/parser/ManchesterOWLSyntaxParserImpl.html#ManchesterOWLSyntaxParserImpl.DefaultEntityChecker"/>
+<area shape="poly" coords="212,206,209,208,207,206,209,203,212,206,212,206" title="Complexity: 19; Coverage: 67%; Class: ManchesterOWLSyntaxParserImpl.ExceptionBuilder" alt="" href="org/semanticweb/owlapi/manchestersyntax/parser/ManchesterOWLSyntaxParserImpl.html#ManchesterOWLSyntaxParserImpl.ExceptionBuilder"/>
+<area shape="poly" coords="209,121,207,124,204,121,207,119,209,121,209,121" title="Complexity: 529; Coverage: 66%; Class: ManchesterOWLSyntaxParserImpl" alt="" href="org/semanticweb/owlapi/manchestersyntax/parser/ManchesterOWLSyntaxParserImpl.html#ManchesterOWLSyntaxParserImpl"/>
+<area shape="poly" coords="290,209,288,211,285,209,288,206,290,209,290,209" title="Complexity: 2; Coverage: 100%; Class: OWLFunctionalSyntaxOWLParserFactory" alt="" href="org/semanticweb/owlapi/functional/parser/OWLFunctionalSyntaxOWLParserFactory.html#OWLFunctionalSyntaxOWLParserFactory"/>
+<area shape="poly" coords="290,209,288,211,285,209,288,206,290,209,290,209" title="Complexity: 2; Coverage: 100%; Class: OWLFunctionalSyntaxOWLParserFactory" alt="" href="org/semanticweb/owlapi/functional/parser/OWLFunctionalSyntaxOWLParserFactory.html#OWLFunctionalSyntaxOWLParserFactory"/>
+<area shape="poly" coords="252,207,250,209,247,207,250,204,252,207,252,207" title="Complexity: 14; Coverage: 84%; Class: ManchesterOWLSyntaxOntologyParser" alt="" href="org/semanticweb/owlapi/manchestersyntax/parser/ManchesterOWLSyntaxOntologyParser.html#ManchesterOWLSyntaxOntologyParser"/>
+<area shape="poly" coords="290,208,288,211,285,208,288,206,290,208,290,208" title="Complexity: 4; Coverage: 100%; Class: TripleHandlers.TPRestHandler" alt="" href="org/semanticweb/owlapi/rdf/rdfxml/parser/TripleHandlers.html#TripleHandlers.TPRestHandler"/>
+<area shape="poly" coords="53,209,50,211,48,209,50,206,53,209,53,209" title="Complexity: 3; Coverage: 0%; Class: LatexRendererException" alt="" href="org/semanticweb/owlapi/latex/renderer/LatexRendererException.html#LatexRendererException"/>
+<area shape="poly" coords="53,208,50,211,48,208,50,206,53,208,53,208" title="Complexity: 5; Coverage: 0%; Class: ManchesterOWLSyntaxFramesParser" alt="" href="org/semanticweb/owlapi/manchestersyntax/parser/ManchesterOWLSyntaxFramesParser.html#ManchesterOWLSyntaxFramesParser"/>
+<area shape="poly" coords="53,209,50,211,48,209,50,206,53,209,53,209" title="Complexity: 3; Coverage: 0%; Class: LatexRendererException" alt="" href="org/semanticweb/owlapi/latex/renderer/LatexRendererException.html#LatexRendererException"/>
+<area shape="poly" coords="53,209,50,211,48,209,50,206,53,209,53,209" title="Complexity: 3; Coverage: 0%; Class: LatexRendererException" alt="" href="org/semanticweb/owlapi/latex/renderer/LatexRendererException.html#LatexRendererException"/>
+<area shape="poly" coords="224,207,221,209,219,207,221,204,224,207,224,207" title="Complexity: 14; Coverage: 72%; Class: ManchesterOWLSyntax" alt="" href="org/semanticweb/owlapi/manchestersyntax/parser/ManchesterOWLSyntax.html#ManchesterOWLSyntax"/>
+<area shape="poly" coords="219,207,216,209,214,207,216,204,219,207,219,207" title="Complexity: 13; Coverage: 70%; Class: XMLWriterPreferences" alt="" href="org/semanticweb/owlapi/rdf/rdfxml/renderer/XMLWriterPreferences.html#XMLWriterPreferences"/>
+<area shape="poly" coords="198,205,195,208,193,205,195,203,198,205,198,205" title="Complexity: 23; Coverage: 61%; Class: XMLWriterNamespaceManager" alt="" href="org/semanticweb/owlapi/rdf/rdfxml/renderer/XMLWriterNamespaceManager.html#XMLWriterNamespaceManager"/>
+<area shape="poly" coords="269,203,266,206,264,203,266,201,269,203,269,203" title="Complexity: 36; Coverage: 91%; Class: XMLWriterImpl.XMLElement" alt="" href="org/semanticweb/owlapi/rdf/rdfxml/renderer/XMLWriterImpl.html#XMLWriterImpl.XMLElement"/>
+<area shape="poly" coords="252,202,250,205,247,202,250,200,252,202,252,202" title="Complexity: 40; Coverage: 84%; Class: XMLWriterImpl" alt="" href="org/semanticweb/owlapi/rdf/rdfxml/renderer/XMLWriterImpl.html#XMLWriterImpl"/>
+<area shape="poly" coords="290,209,288,211,285,209,288,206,290,209,290,209" title="Complexity: 1; Coverage: 100%; Class: KRSS2Parser.LookaheadSuccess" alt="" href="org/semanticweb/owlapi/krss2/parser/KRSS2Parser.html#KRSS2Parser.LookaheadSuccess"/>
+<area shape="poly" coords="283,206,281,209,278,206,281,204,283,206,283,206" title="Complexity: 17; Coverage: 97%; Class: RDFXMLWriter" alt="" href="org/semanticweb/owlapi/rdf/rdfxml/renderer/RDFXMLWriter.html#RDFXMLWriter"/>
+<area shape="poly" coords="290,209,288,211,285,209,288,206,290,209,290,209" title="Complexity: 2; Coverage: 100%; Class: OWLFunctionalSyntaxOWLParserFactory" alt="" href="org/semanticweb/owlapi/functional/parser/OWLFunctionalSyntaxOWLParserFactory.html#OWLFunctionalSyntaxOWLParserFactory"/>
+<area shape="poly" coords="276,208,273,211,271,208,273,206,276,208,276,208" title="Complexity: 5; Coverage: 94%; Class: RDFXMLStorer" alt="" href="org/semanticweb/owlapi/rdf/rdfxml/renderer/RDFXMLStorer.html#RDFXMLStorer"/>
+<area shape="poly" coords="247,202,245,205,242,202,245,200,247,202,247,202" title="Complexity: 41; Coverage: 82%; Class: RDFXMLRenderer" alt="" href="org/semanticweb/owlapi/rdf/rdfxml/renderer/RDFXMLRenderer.html#RDFXMLRenderer"/>
+<area shape="poly" coords="290,208,288,211,285,208,288,206,290,208,290,208" title="Complexity: 4; Coverage: 100%; Class: TripleHandlers.TPRestHandler" alt="" href="org/semanticweb/owlapi/rdf/rdfxml/parser/TripleHandlers.html#TripleHandlers.TPRestHandler"/>
+<area shape="poly" coords="219,204,216,207,214,204,216,202,219,204,219,204" title="Complexity: 30; Coverage: 70%; Class: OWLOntologyXMLNamespaceManager" alt="" href="org/semanticweb/owlapi/rdf/rdfxml/renderer/OWLOntologyXMLNamespaceManager.html#OWLOntologyXMLNamespaceManager"/>
+<area shape="poly" coords="195,209,193,211,190,209,193,206,195,209,195,209" title="Complexity: 2; Coverage: 60%; Class: IllegalElementNameException" alt="" href="org/semanticweb/owlapi/rdf/rdfxml/renderer/IllegalElementNameException.html#IllegalElementNameException"/>
+<area shape="poly" coords="290,209,288,211,285,209,288,206,290,209,290,209" title="Complexity: 2; Coverage: 100%; Class: OWLFunctionalSyntaxOWLParserFactory" alt="" href="org/semanticweb/owlapi/functional/parser/OWLFunctionalSyntaxOWLParserFactory.html#OWLFunctionalSyntaxOWLParserFactory"/>
+<area shape="poly" coords="202,205,200,207,197,205,200,202,202,205,202,205" title="Complexity: 25; Coverage: 63%; Class: DLSyntaxStorerBase" alt="" href="org/semanticweb/owlapi/dlsyntax/renderer/DLSyntaxStorerBase.html#DLSyntaxStorerBase"/>
+<area shape="poly" coords="290,209,288,211,285,209,288,206,290,209,290,209" title="Complexity: 1; Coverage: 100%; Class: KRSS2Parser.LookaheadSuccess" alt="" href="org/semanticweb/owlapi/krss2/parser/KRSS2Parser.html#KRSS2Parser.LookaheadSuccess"/>
+<area shape="poly" coords="74,188,72,191,69,188,72,186,74,188,74,188" title="Complexity: 126; Coverage: 9%; Class: DLSyntaxObjectRenderer" alt="" href="org/semanticweb/owlapi/dlsyntax/renderer/DLSyntaxObjectRenderer.html#DLSyntaxObjectRenderer"/>
+<area shape="poly" coords="290,209,288,211,285,209,288,206,290,209,290,209" title="Complexity: 2; Coverage: 100%; Class: OWLFunctionalSyntaxOWLParserFactory" alt="" href="org/semanticweb/owlapi/functional/parser/OWLFunctionalSyntaxOWLParserFactory.html#OWLFunctionalSyntaxOWLParserFactory"/>
+<area shape="poly" coords="285,206,283,209,280,206,283,204,285,206,285,206" title="Complexity: 16; Coverage: 98%; Class: DLSyntaxHTMLStorer" alt="" href="org/semanticweb/owlapi/dlsyntax/renderer/DLSyntaxHTMLStorer.html#DLSyntaxHTMLStorer"/>
+<area shape="poly" coords="290,209,288,211,285,209,288,206,290,209,290,209" title="Complexity: 3; Coverage: 100%; Class: TripleHandlers.TypeTransitivePropertyHandler" alt="" href="org/semanticweb/owlapi/rdf/rdfxml/parser/TripleHandlers.html#TripleHandlers.TypeTransitivePropertyHandler"/>
+<area shape="poly" coords="290,208,288,211,285,208,288,206,290,208,290,208" title="Complexity: 4; Coverage: 100%; Class: TripleHandlers.TPRestHandler" alt="" href="org/semanticweb/owlapi/rdf/rdfxml/parser/TripleHandlers.html#TripleHandlers.TPRestHandler"/>
+<area shape="poly" coords="278,193,276,196,273,193,276,191,278,193,278,193" title="Complexity: 95; Coverage: 95%; Class: RDFRendererBase" alt="" href="org/semanticweb/owlapi/rdf/RDFRendererBase.html#RDFRendererBase"/>
+</map>
+            </div>
+        </div>
+        
+                    <div class="dashboard-widget">
+                <header class="dashboard-widget-header">
+                    <h3>Coverage tree map</h3>
+                </header>
+                <div class="dashboard-widget-content">
+                    <div id="infovis" style="width:100%; height:250px;">
+                        <div id="treemap-loader" style="position:relative;top:50px;">
+                            <p>
+                                Generating Coverage Tree Map. Please wait...
+                            </p>
+                            <p>
+                                <img src="img/ajax-loader.gif" alt="Loading Treemap"/>
+                            </p>
+                        </div>
+                    </div>
+                    <p><a href="treemap.html">See more</a></p>
+                </div>
+
+            </div>
+            </div>
+
+
+    <div class="aui-item">
+        <div class="dashboard-widget">
+            <header class="dashboard-widget-header">
+                <h3>Top 20 project risks</h3>
+            </header>
+            <div class="dashboard-widget-content">
+                
+                                                                <a class="tag" href="org/semanticweb/owlapi/manchestersyntax/parser/ManchesterOWLSyntaxTokenizer.html"
+                            style="font-size: 15px;color:#14892c"
+                            title="Average Method Complexity - 4.111 , Coverage - 92.7% ">ManchesterOWLSyntaxTokenizer</a>
+                                    
+                                                                <a class="tag" href="org/semanticweb/owlapi/rdf/RDFRendererBase.html"
+                            style="font-size: 14px;color:#89c495"
+                            title="Average Method Complexity - 2.714 , Coverage - 95.3% ">RDFRendererBase</a>
+                                    
+                                                                <a class="tag" href="org/semanticweb/owlapi/rdf/rdfxml/parser/TripleHandlers.html"
+                            style="font-size: 15px;color:#14892c"
+                            title="Average Method Complexity - 4.6 , Coverage - 89% ">TripleHandlers.TPSubPropertyOfHandler</a>
+                                    
+                                                                <a class="tag" href="org/semanticweb/owlapi/functional/parser/CustomTokenizer.html"
+                            style="font-size: 23px;color:#14892c"
+                            title="Average Method Complexity - 14.455 , Coverage - 86.7% ">CustomTokenizer</a>
+                                    
+                                                                <a class="tag" href="org/semanticweb/owlapi/rdf/rdfxml/renderer/RDFXMLStorer.html"
+                            style="font-size: 14px;color:#89c495"
+                            title="Average Method Complexity - 2.5 , Coverage - 94.1% ">RDFXMLStorer</a>
+                                    
+                                                                <a class="tag" href="org/semanticweb/owlapi/rdf/rdfxml/parser/StartRDF.html"
+                            style="font-size: 15px;color:#14892c"
+                            title="Average Method Complexity - 4.286 , Coverage - 87.5% ">AbstractState</a>
+                                    
+                                                                <a class="tag" href="org/semanticweb/owlapi/rdf/rdfxml/parser/TripleHandlers.html"
+                            style="font-size: 13px;color:#89c495"
+                            title="Average Method Complexity - 2.333 , Coverage - 96.9% ">TripleHandlers.TPPropertyDomainHandler</a>
+                                    
+                                                                <a class="tag" href="org/semanticweb/owlapi/rdf/rdfxml/parser/StartRDF.html"
+                            style="font-size: 14px;color:#89c495"
+                            title="Average Method Complexity - 2.5 , Coverage - 93.9% ">PropertyElementList</a>
+                                    
+                                                                <a class="tag" href="org/semanticweb/owlapi/rdf/turtle/renderer/TurtleRenderer.html"
+                            style="font-size: 14px;color:#14892c"
+                            title="Average Method Complexity - 2.812 , Coverage - 91.7% ">TurtleRenderer</a>
+                                    
+                                                                <a class="tag" href="org/semanticweb/owlapi/rdf/rdfxml/parser/Translators.html"
+                            style="font-size: 15px;color:#14892c"
+                            title="Average Method Complexity - 4 , Coverage - 87.2% ">Translators.SWRLRuleTranslator</a>
+                                    
+                                                                <a class="tag" href="org/semanticweb/owlapi/rdf/rdfxml/renderer/XMLWriterImpl.html"
+                            style="font-size: 14px;color:#14892c"
+                            title="Average Method Complexity - 2.769 , Coverage - 91.9% ">XMLWriterImpl.XMLElement</a>
+                                    
+                                                                <a class="tag" href="org/semanticweb/owlapi/rdf/rdfxml/parser/TripleHandlers.html"
+                            style="font-size: 14px;color:#14892c"
+                            title="Average Method Complexity - 2.5 , Coverage - 92.3% ">TripleHandlers.TypeOntologyHandler</a>
+                                    
+                                                                <a class="tag" href="org/semanticweb/owlapi/rdf/rdfxml/parser/TripleHandlers.html"
+                            style="font-size: 13px;color:#89c495"
+                            title="Average Method Complexity - 2 , Coverage - 93.9% ">TripleHandlers.GTPAnnotationResourceTripleHandler</a>
+                                    
+                                                                <a class="tag" href="org/semanticweb/owlapi/manchestersyntax/parser/ManchesterOWLSyntaxParserImpl.html"
+                            style="font-size: 14px;color:#14892c"
+                            title="Average Method Complexity - 2.667 , Coverage - 90.9% ">ManchesterOWLSyntaxParserImpl.DefaultEntityChecker</a>
+                                    
+                                                                <a class="tag" href="org/semanticweb/owlapi/rdf/rdfxml/parser/RDFXMLParser.html"
+                            style="font-size: 14px;color:#14892c"
+                            title="Average Method Complexity - 3 , Coverage - 87.5% ">RDFXMLParser</a>
+                                    
+                                                                <a class="tag" href="org/semanticweb/owlapi/rdf/rdfxml/parser/TripleHandlers.html"
+                            style="font-size: 15px;color:#14892c"
+                            title="Average Method Complexity - 3.75 , Coverage - 83.1% ">TripleHandlers.GTPAnnotationLiteralHandler</a>
+                                    
+                                                                <a class="tag" href="org/semanticweb/owlapi/manchestersyntax/parser/ManchesterOWLSyntaxOntologyParser.html"
+                            style="font-size: 14px;color:#14892c"
+                            title="Average Method Complexity - 3.5 , Coverage - 84.2% ">ManchesterOWLSyntaxOntologyParser</a>
+                                    
+                                                                <a class="tag" href="org/semanticweb/owlapi/functional/parser/OWLFunctionalSyntaxParser.html"
+                            style="font-size: 15px;color:#14892c"
+                            title="Average Method Complexity - 4.05 , Coverage - 82.7% ">OWLFunctionalSyntaxParser</a>
+                                    
+                                                                <a class="tag" href="org/semanticweb/owlapi/rdf/rdfxml/parser/Translators.html"
+                            style="font-size: 15px;color:#fae1a0"
+                            title="Average Method Complexity - 4.6 , Coverage - 81% ">Translators.SWRLAtomListItemTranslator</a>
+                                    
+                                                                <a class="tag" href="org/semanticweb/owlapi/owlxml/parser/PARSER_OWLXMLVocabulary.html"
+                            style="font-size: 13px;color:#14892c"
+                            title="Average Method Complexity - 2 , Coverage - 91.3% ">SWRLDifferentIndividualsAtomElementHandler</a>
+                                                    <p><a href="top-risks.html">See more</a></p>
+            </div>
+        </div>
+
+        <div class="dashboard-widget">
+            <header class="dashboard-widget-header">
+                <h3>Most complex packages</h3>
+            </header>
+            <div class="dashboard-widget-content">
+                
+                <table class="aui">
+                                            
+                                                <tr>
+                            <td>1. </td>
+                            <td><div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">0.41781452</span>41.8%</div><div style="display: table-cell">
+ <div title="41.8% Covered"  style="min-width:40px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:41.8%"></div></div></div></div></td>
+                            <td>
+                                <a href="org/semanticweb/owlapi/functional/parser/pkg-summary.html">org.semanticweb.owlapi.functional.parser</a>
+                                <span class="aui-badge" title="Package complexity">2020</span>
+                            </td>
+                        </tr>
+                                            
+                                                <tr>
+                            <td>2. </td>
+                            <td><div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">0.14100018</span>14.1%</div><div style="display: table-cell">
+ <div title="14.1% Covered"  style="min-width:40px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:14.1%"></div></div></div></div></td>
+                            <td>
+                                <a href="org/semanticweb/owlapi/krss2/parser/pkg-summary.html">org.semanticweb.owlapi.krss2.parser</a>
+                                <span class="aui-badge" title="Package complexity">1624</span>
+                            </td>
+                        </tr>
+                                            
+                                                <tr>
+                            <td>3. </td>
+                            <td><div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">0.76840454</span>76.8%</div><div style="display: table-cell">
+ <div title="76.8% Covered"  style="min-width:40px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:76.8%"></div></div></div></div></td>
+                            <td>
+                                <a href="org/semanticweb/owlapi/rdf/rdfxml/parser/pkg-summary.html">org.semanticweb.owlapi.rdf.rdfxml.parser</a>
+                                <span class="aui-badge" title="Package complexity">1390</span>
+                            </td>
+                        </tr>
+                                            
+                                                <tr>
+                            <td>4. </td>
+                            <td><div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">0.5749228</span>57.5%</div><div style="display: table-cell">
+ <div title="57.5% Covered"  style="min-width:40px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:57.5%"></div></div></div></div></td>
+                            <td>
+                                <a href="org/semanticweb/owlapi/rdf/turtle/parser/pkg-summary.html">org.semanticweb.owlapi.rdf.turtle.parser</a>
+                                <span class="aui-badge" title="Package complexity">1230</span>
+                            </td>
+                        </tr>
+                                            
+                                                <tr>
+                            <td>5. </td>
+                            <td><div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">0.0</span>0%</div><div style="display: table-cell">
+ <div title="0% Covered"  style="min-width:40px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:0%"></div></div></div></div></td>
+                            <td>
+                                <a href="org/semanticweb/owlapi/dlsyntax/parser/pkg-summary.html">org.semanticweb.owlapi.dlsyntax.parser</a>
+                                <span class="aui-badge" title="Package complexity">1188</span>
+                            </td>
+                        </tr>
+                                    </table>
+            </div>
+        </div>
+
+        <div class="dashboard-widget">
+            <header class="dashboard-widget-header">
+                <h3>Most complex classes</h3>
+            </header>
+            <div class="dashboard-widget-content">
+                <table class="aui">
+                                            
+                                                <tr>
+                            <td>1. </td>
+                            <td><div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">0.07073171</span>7.1%</div><div style="display: table-cell">
+ <div title="7.1% Covered"  style="min-width:40px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:7.1%"></div></div></div></div></td>
+                            <td>
+                                <a  href="org/semanticweb/owlapi/functional/parser/OWLFunctionalSyntaxParserTokenManager.html"  title="org.semanticweb.owlapi.functional.parser.OWLFunctionalSyntaxParserTokenManager">OWLFunctionalSyntaxParserTokenManager</a>
+                                <span class="aui-badge" title="Class complexity">1157</span>
+                            </td>
+                        </tr>
+                                            
+                                                <tr>
+                            <td>2. </td>
+                            <td><div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">0.14339623</span>14.3%</div><div style="display: table-cell">
+ <div title="14.3% Covered"  style="min-width:40px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:14.3%"></div></div></div></div></td>
+                            <td>
+                                <a  href="org/semanticweb/owlapi/krss2/parser/KRSS2Parser.html"  title="org.semanticweb.owlapi.krss2.parser.KRSS2Parser">KRSS2Parser</a>
+                                <span class="aui-badge" title="Class complexity">769</span>
+                            </td>
+                        </tr>
+                                            
+                                                <tr>
+                            <td>3. </td>
+                            <td><div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">0.09456838</span>9.5%</div><div style="display: table-cell">
+ <div title="9.5% Covered"  style="min-width:40px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:9.5%"></div></div></div></div></td>
+                            <td>
+                                <a  href="org/semanticweb/owlapi/krss2/parser/KRSS2ParserTokenManager.html"  title="org.semanticweb.owlapi.krss2.parser.KRSS2ParserTokenManager">KRSS2ParserTokenManager</a>
+                                <span class="aui-badge" title="Class complexity">688</span>
+                            </td>
+                        </tr>
+                                            
+                                                <tr>
+                            <td>4. </td>
+                            <td><div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">0.0</span>0%</div><div style="display: table-cell">
+ <div title="0% Covered"  style="min-width:40px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:0%"></div></div></div></div></td>
+                            <td>
+                                <a  href="org/semanticweb/owlapi/dlsyntax/parser/DLSyntaxParser.html"  title="org.semanticweb.owlapi.dlsyntax.parser.DLSyntaxParser">DLSyntaxParser</a>
+                                <span class="aui-badge" title="Class complexity">580</span>
+                            </td>
+                        </tr>
+                                            
+                                                <tr>
+                            <td>5. </td>
+                            <td><div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">0.51293105</span>51.3%</div><div style="display: table-cell">
+ <div title="51.3% Covered"  style="min-width:40px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:51.3%"></div></div></div></div></td>
+                            <td>
+                                <a  href="org/semanticweb/owlapi/rdf/turtle/parser/TurtleParserTokenManager.html"  title="org.semanticweb.owlapi.rdf.turtle.parser.TurtleParserTokenManager">TurtleParserTokenManager</a>
+                                <span class="aui-badge" title="Class complexity">577</span>
+                            </td>
+                        </tr>
+                                    </table>
+            </div>
+        </div>
+
+                <div class="dashboard-widget">
+            <header class="dashboard-widget-header">
+                <h3>Least tested methods</h3>
+            </header>
+            <div class="dashboard-widget-content">
+                <table class="aui">
+                                            
+
+                    <tr>
+                        <td align="right">1.</td>
+                        <td align="right"><div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">0.0</span>0%</div><div style="display: table-cell">
+ <div title="0% Covered"  style="min-width:40px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:0%"></div></div></div></div></td>
+                        <td>
+                              <!-- normal method -->
+                                                      <a title="DLSyntaxParserTokenManager.jjMoveNfa_0(int,int)&#160;:&#160;int" href="org/semanticweb/owlapi/dlsyntax/parser/DLSyntaxParserTokenManager.html?line=105#src-105">DLSyntaxParserTokenManager.jjMoveNfa_0(int,int)&#160;:&#160;int</a>
+                            <span class="aui-badge" title="Method complexity">358</span>
+
+                        </td>
+                    </tr>
+                                            
+
+                    <tr>
+                        <td align="right">2.</td>
+                        <td align="right"><div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">0.0</span>0%</div><div style="display: table-cell">
+ <div title="0% Covered"  style="min-width:40px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:0%"></div></div></div></div></td>
+                        <td>
+                              <!-- normal method -->
+                                                      <a title="KRSSParserTokenManager.jjStopStringLiteralDfa_0(int,long)&#160;:&#160;int" href="org/semanticweb/owlapi/krss1/parser/KRSSParserTokenManager.html?line=25#src-25">KRSSParserTokenManager.jjStopStringLiteralDfa_0(int,long)&#160;:&#160;int</a>
+                            <span class="aui-badge" title="Method complexity">112</span>
+
+                        </td>
+                    </tr>
+                                            
+
+                    <tr>
+                        <td align="right">3.</td>
+                        <td align="right"><div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">0.0</span>0%</div><div style="display: table-cell">
+ <div title="0% Covered"  style="min-width:40px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:0%"></div></div></div></div></td>
+                        <td>
+                              <!-- normal method -->
+                                                      <a title="OWLFunctionalSyntaxParserTokenManager.jjStopStringLiteralDfa_0(int,long,long)&#160;:&#160;int" href="org/semanticweb/owlapi/functional/parser/OWLFunctionalSyntaxParserTokenManager.html?line=18#src-18">OWLFunctionalSyntaxParserTokenManager.jjStopStringLiteralDfa_0(int,long,long)&#160;:&#160;int</a>
+                            <span class="aui-badge" title="Method complexity">134</span>
+
+                        </td>
+                    </tr>
+                                            
+
+                    <tr>
+                        <td align="right">4.</td>
+                        <td align="right"><div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">0.0</span>0%</div><div style="display: table-cell">
+ <div title="0% Covered"  style="min-width:40px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:0%"></div></div></div></div></td>
+                        <td>
+                              <!-- normal method -->
+                                                      <a title="KRSS2ObjectRenderer.visit(OWLOntology)&#160;:&#160;void" href="org/semanticweb/owlapi/krss2/renderer/KRSS2ObjectRenderer.html?line=286#src-286">KRSS2ObjectRenderer.visit(OWLOntology)&#160;:&#160;void</a>
+                            <span class="aui-badge" title="Method complexity">26</span>
+
+                        </td>
+                    </tr>
+                                            
+
+                    <tr>
+                        <td align="right">5.</td>
+                        <td align="right"><div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">0.0</span>0%</div><div style="display: table-cell">
+ <div title="0% Covered"  style="min-width:40px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:0%"></div></div></div></div></td>
+                        <td>
+                              <!-- normal method -->
+                                                      <a title="DLSyntaxParser.jj_rescan_token()&#160;:&#160;void" href="org/semanticweb/owlapi/dlsyntax/parser/DLSyntaxParser.html?line=2385#src-2385">DLSyntaxParser.jj_rescan_token()&#160;:&#160;void</a>
+                            <span class="aui-badge" title="Method complexity">55</span>
+
+                        </td>
+                    </tr>
+                                            
+
+                    <tr>
+                        <td align="right">6.</td>
+                        <td align="right"><div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">0.0</span>0%</div><div style="display: table-cell">
+ <div title="0% Covered"  style="min-width:40px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:0%"></div></div></div></div></td>
+                        <td>
+                              <!-- normal method -->
+                                                      <a title="KRSS2ParserTokenManager.jjMoveStringLiteralDfa6_0(long,long)&#160;:&#160;int" href="org/semanticweb/owlapi/krss2/parser/KRSS2ParserTokenManager.html?line=536#src-536">KRSS2ParserTokenManager.jjMoveStringLiteralDfa6_0(long,long)&#160;:&#160;int</a>
+                            <span class="aui-badge" title="Method complexity">39</span>
+
+                        </td>
+                    </tr>
+                                            
+
+                    <tr>
+                        <td align="right">7.</td>
+                        <td align="right"><div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">0.0</span>0%</div><div style="display: table-cell">
+ <div title="0% Covered"  style="min-width:40px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:0%"></div></div></div></div></td>
+                        <td>
+                              <!-- normal method -->
+                                                      <a title="KRSS2ParserTokenManager.jjMoveStringLiteralDfa7_0(long,long)&#160;:&#160;int" href="org/semanticweb/owlapi/krss2/parser/KRSS2ParserTokenManager.html?line=651#src-651">KRSS2ParserTokenManager.jjMoveStringLiteralDfa7_0(long,long)&#160;:&#160;int</a>
+                            <span class="aui-badge" title="Method complexity">38</span>
+
+                        </td>
+                    </tr>
+                                            
+
+                    <tr>
+                        <td align="right">8.</td>
+                        <td align="right"><div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">0.0</span>0%</div><div style="display: table-cell">
+ <div title="0% Covered"  style="min-width:40px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:0%"></div></div></div></div></td>
+                        <td>
+                              <!-- normal method -->
+                                                      <a title="KRSS2ParserTokenManager.jjMoveStringLiteralDfa2_0(long,long,long,long)&#160;:&#160;int" href="org/semanticweb/owlapi/krss2/parser/KRSS2ParserTokenManager.html?line=193#src-193">KRSS2ParserTokenManager.jjMoveStringLiteralDfa2_0(long,long,long,long)&#160;:&#160;int</a>
+                            <span class="aui-badge" title="Method complexity">40</span>
+
+                        </td>
+                    </tr>
+                                            
+
+                    <tr>
+                        <td align="right">9.</td>
+                        <td align="right"><div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">0.0</span>0%</div><div style="display: table-cell">
+ <div title="0% Covered"  style="min-width:40px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:0%"></div></div></div></div></td>
+                        <td>
+                              <!-- normal method -->
+                                                      <a title="KRSSParserTokenManager.getNextToken()&#160;:&#160;Token" href="org/semanticweb/owlapi/krss1/parser/KRSSParserTokenManager.html?line=1405#src-1405">KRSSParserTokenManager.getNextToken()&#160;:&#160;Token</a>
+                            <span class="aui-badge" title="Method complexity">29</span>
+
+                        </td>
+                    </tr>
+                                            
+
+                    <tr>
+                        <td align="right">10.</td>
+                        <td align="right"><div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">0.0</span>0%</div><div style="display: table-cell">
+ <div title="0% Covered"  style="min-width:40px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:0%"></div></div></div></div></td>
+                        <td>
+                              <!-- normal method -->
+                                                      <a title="KRSSParserTokenManager.jjMoveNfa_0(int,int)&#160;:&#160;int" href="org/semanticweb/owlapi/krss1/parser/KRSSParserTokenManager.html?line=1148#src-1148">KRSSParserTokenManager.jjMoveNfa_0(int,int)&#160;:&#160;int</a>
+                            <span class="aui-badge" title="Method complexity">24</span>
+
+                        </td>
+                    </tr>
+                                            
+
+                    <tr>
+                        <td align="right">11.</td>
+                        <td align="right"><div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">0.0</span>0%</div><div style="display: table-cell">
+ <div title="0% Covered"  style="min-width:40px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:0%"></div></div></div></div></td>
+                        <td>
+                              <!-- normal method -->
+                                                      <a title="KRSS2OWLObjectRenderer.visit(OWLOntology)&#160;:&#160;void" href="org/semanticweb/owlapi/krss2/renderer/KRSS2OWLObjectRenderer.html?line=188#src-188">KRSS2OWLObjectRenderer.visit(OWLOntology)&#160;:&#160;void</a>
+                            <span class="aui-badge" title="Method complexity">13</span>
+
+                        </td>
+                    </tr>
+                                            
+
+                    <tr>
+                        <td align="right">12.</td>
+                        <td align="right"><div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">0.0</span>0%</div><div style="display: table-cell">
+ <div title="0% Covered"  style="min-width:40px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:0%"></div></div></div></div></td>
+                        <td>
+                              <!-- normal method -->
+                                                      <a title="KRSSParser.jj_rescan_token()&#160;:&#160;void" href="org/semanticweb/owlapi/krss1/parser/KRSSParser.html?line=1404#src-1404">KRSSParser.jj_rescan_token()&#160;:&#160;void</a>
+                            <span class="aui-badge" title="Method complexity">29</span>
+
+                        </td>
+                    </tr>
+                                            
+
+                    <tr>
+                        <td align="right">13.</td>
+                        <td align="right"><div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">0.0</span>0%</div><div style="display: table-cell">
+ <div title="0% Covered"  style="min-width:40px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:0%"></div></div></div></div></td>
+                        <td>
+                              <!-- normal method -->
+                                                      <a title="KRSS2ParserTokenManager.jjMoveStringLiteralDfa3_0(long,long,long,long)&#160;:&#160;int" href="org/semanticweb/owlapi/krss2/parser/KRSS2ParserTokenManager.html?line=301#src-301">KRSS2ParserTokenManager.jjMoveStringLiteralDfa3_0(long,long,long,long)&#160;:&#160;int</a>
+                            <span class="aui-badge" title="Method complexity">34</span>
+
+                        </td>
+                    </tr>
+                                            
+
+                    <tr>
+                        <td align="right">14.</td>
+                        <td align="right"><div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">0.0</span>0%</div><div style="display: table-cell">
+ <div title="0% Covered"  style="min-width:40px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:0%"></div></div></div></div></td>
+                        <td>
+                              <!-- normal method -->
+                                                      <a title="OWLFunctionalSyntaxParserTokenManager.jjMoveStringLiteralDfa10_0(long,long,long,long)&#160;:&#160;int" href="org/semanticweb/owlapi/functional/parser/OWLFunctionalSyntaxParserTokenManager.html?line=1240#src-1240">OWLFunctionalSyntaxParserTokenManager.jjMoveStringLiteralDfa10_0(long,long,long,long)&#160;:&#160;int</a>
+                            <span class="aui-badge" title="Method complexity">33</span>
+
+                        </td>
+                    </tr>
+                                            
+
+                    <tr>
+                        <td align="right">15.</td>
+                        <td align="right"><div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">0.0</span>0%</div><div style="display: table-cell">
+ <div title="0% Covered"  style="min-width:40px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:0%"></div></div></div></div></td>
+                        <td>
+                              <!-- normal method -->
+                                                      <a title="OWLFunctionalSyntaxParserTokenManager.jjMoveStringLiteralDfa4_0(long,long,long,long)&#160;:&#160;int" href="org/semanticweb/owlapi/functional/parser/OWLFunctionalSyntaxParserTokenManager.html?line=670#src-670">OWLFunctionalSyntaxParserTokenManager.jjMoveStringLiteralDfa4_0(long,long,long,long)&#160;:&#160;int</a>
+                            <span class="aui-badge" title="Method complexity">34</span>
+
+                        </td>
+                    </tr>
+                                            
+
+                    <tr>
+                        <td align="right">16.</td>
+                        <td align="right"><div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">0.0</span>0%</div><div style="display: table-cell">
+ <div title="0% Covered"  style="min-width:40px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:0%"></div></div></div></div></td>
+                        <td>
+                              <!-- normal method -->
+                                                      <a title="OWLFunctionalSyntaxParserTokenManager.jjMoveStringLiteralDfa17_0(long,long,long,long)&#160;:&#160;int" href="org/semanticweb/owlapi/functional/parser/OWLFunctionalSyntaxParserTokenManager.html?line=1845#src-1845">OWLFunctionalSyntaxParserTokenManager.jjMoveStringLiteralDfa17_0(long,long,long,long)&#160;:&#160;int</a>
+                            <span class="aui-badge" title="Method complexity">28</span>
+
+                        </td>
+                    </tr>
+                                            
+
+                    <tr>
+                        <td align="right">17.</td>
+                        <td align="right"><div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">0.0</span>0%</div><div style="display: table-cell">
+ <div title="0% Covered"  style="min-width:40px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:0%"></div></div></div></div></td>
+                        <td>
+                              <!-- normal method -->
+                                                      <a title="OWLFunctionalSyntaxParserTokenManager.jjMoveStringLiteralDfa12_0(long,long,long,long)&#160;:&#160;int" href="org/semanticweb/owlapi/functional/parser/OWLFunctionalSyntaxParserTokenManager.html?line=1424#src-1424">OWLFunctionalSyntaxParserTokenManager.jjMoveStringLiteralDfa12_0(long,long,long,long)&#160;:&#160;int</a>
+                            <span class="aui-badge" title="Method complexity">31</span>
+
+                        </td>
+                    </tr>
+                                            
+
+                    <tr>
+                        <td align="right">18.</td>
+                        <td align="right"><div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">0.0</span>0%</div><div style="display: table-cell">
+ <div title="0% Covered"  style="min-width:40px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:0%"></div></div></div></div></td>
+                        <td>
+                              <!-- normal method -->
+                                                      <a title="KRSS2ParserTokenManager.jjMoveStringLiteralDfa4_0(long,long,long,long)&#160;:&#160;int" href="org/semanticweb/owlapi/krss2/parser/KRSS2ParserTokenManager.html?line=389#src-389">KRSS2ParserTokenManager.jjMoveStringLiteralDfa4_0(long,long,long,long)&#160;:&#160;int</a>
+                            <span class="aui-badge" title="Method complexity">30</span>
+
+                        </td>
+                    </tr>
+                                            
+
+                    <tr>
+                        <td align="right">19.</td>
+                        <td align="right"><div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">0.0</span>0%</div><div style="display: table-cell">
+ <div title="0% Covered"  style="min-width:40px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:0%"></div></div></div></div></td>
+                        <td>
+                              <!-- normal method -->
+                                                      <a title="ManchesterOWLSyntaxParserImpl.parseAxiomWithObjectPropertyStart()&#160;:&#160;OWLAxiom" href="org/semanticweb/owlapi/manchestersyntax/parser/ManchesterOWLSyntaxParserImpl.html?line=2723#src-2723">ManchesterOWLSyntaxParserImpl.parseAxiomWithObjectPropertyStart()&#160;:&#160;OWLAxiom</a>
+                            <span class="aui-badge" title="Method complexity">15</span>
+
+                        </td>
+                    </tr>
+                                            
+
+                    <tr>
+                        <td align="right">20.</td>
+                        <td align="right"><div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">0.0</span>0%</div><div style="display: table-cell">
+ <div title="0% Covered"  style="min-width:40px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:0%"></div></div></div></div></td>
+                        <td>
+                              <!-- normal method -->
+                                                      <a title="KRSS2ParserTokenManager.jjMoveStringLiteralDfa9_0(long,long)&#160;:&#160;int" href="org/semanticweb/owlapi/krss2/parser/KRSS2ParserTokenManager.html?line=810#src-810">KRSS2ParserTokenManager.jjMoveStringLiteralDfa9_0(long,long)&#160;:&#160;int</a>
+                            <span class="aui-badge" title="Method complexity">27</span>
+
+                        </td>
+                    </tr>
+                                    </table>
+            </div>
+        </div>
+        
+    </div>
+</div>
+                            </div> <!-- tabs-pane active-pane -->
+                        </div>
+
+    <script type="text/javascript" src="jit.js" ></script>
+    <script type="text/javascript" src="treemap-dash-json.js" ></script>
+
+                        </div> <!-- class="aui-page-panel-content-clover" -->
+                    <footer id="footer" role="contentinfo">
+    <section class="footer-body">
+        <ul>
+            <li>
+                Report generated by <a target="_new" href="https://openclover.org">OpenClover</a> v 4.5.2
+                on Sat Apr 27 2024 12:17:55 CDT using coverage data from Sat Apr 27 2024 12:05:38 CDT.
+            </li>
+        </ul>
+        <ul>
+            <li>OpenClover is free and open-source software. </li>
+        </ul>
+    </section>
+</footer>                </section> <!-- class="aui-page-panel-content" -->
+            </div> <!-- class="aui-page-panel-inner" -->
+        </div> <!-- class="aui-page-panel" -->
+    </div> <!-- id="page" -->
+</body>
+</html>

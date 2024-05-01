@@ -1,0 +1,10 @@
+var clover = new Object();
+
+// JSON: {classes : [{name, id, sl, el,  methods : [{sl, el}, ...]}, ...]}
+clover.pageData = {"classes":[{"el":97,"id":39629,"methods":[{"el":38,"sc":5,"sl":35},{"el":44,"sc":5,"sl":40},{"el":50,"sc":5,"sl":46},{"el":56,"sc":5,"sl":52},{"el":62,"sc":5,"sl":58},{"el":68,"sc":5,"sl":64},{"el":74,"sc":5,"sl":70},{"el":81,"sc":5,"sl":76},{"el":93,"sc":21,"sl":87},{"el":96,"sc":5,"sl":83}],"name":"MethodGraphCompilerDefaultHarmonizerForJavaMethodTest","sl":21}]}
+
+// JSON: {test_ID : {"methods": [ID1, ID2, ID3...], "name" : "testXXX() void"}, ...};
+clover.testTargets = {"test_1079":{"methods":[{"sl":58}],"name":"testMethodReturnTypeInequality","pass":true,"statements":[{"sl":60}]},"test_1836":{"methods":[{"sl":40}],"name":"testMethodEqualityHashCode","pass":true,"statements":[{"sl":42}]},"test_2701":{"methods":[{"sl":46}],"name":"testMethodEquality","pass":true,"statements":[{"sl":48}]},"test_3118":{"methods":[{"sl":83},{"sl":87}],"name":"testObjectProperties","pass":true,"statements":[{"sl":85},{"sl":89},{"sl":90},{"sl":91},{"sl":92},{"sl":95}]},"test_5427":{"methods":[{"sl":64}],"name":"testMethodParameterTypesHashCode","pass":true,"statements":[{"sl":66}]},"test_5463":{"methods":[{"sl":76}],"name":"testFactory","pass":true,"statements":[{"sl":78}]},"test_5716":{"methods":[{"sl":52}],"name":"testMethodReturnTypeInequalityHashCode","pass":true,"statements":[{"sl":54}]},"test_742":{"methods":[{"sl":70}],"name":"testMethodParameterTypesEquality","pass":true,"statements":[{"sl":72}]}}
+
+// JSON: { lines : [{tests : [testid1, testid2, testid3, ...]}, ...]};
+clover.srcFileLines = [[], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [1836], [], [1836], [], [], [], [2701], [], [2701], [], [], [], [5716], [], [5716], [], [], [], [1079], [], [1079], [], [], [], [5427], [], [5427], [], [], [], [742], [], [742], [], [], [], [5463], [], [5463], [], [], [], [], [3118], [], [3118], [], [3118], [], [3118], [3118], [3118], [3118], [], [], [3118], [], []]

@@ -1,0 +1,10 @@
+var clover = new Object();
+
+// JSON: {classes : [{name, id, sl, el,  methods : [{sl, el}, ...]}, ...]}
+clover.pageData = {"classes":[{"el":90,"id":50829,"methods":[{"el":50,"sc":5,"sl":46},{"el":67,"sc":5,"sl":52},{"el":73,"sc":5,"sl":69},{"el":78,"sc":5,"sl":75},{"el":89,"sc":5,"sl":80}],"name":"MethodReturnTest","sl":26}]}
+
+// JSON: {test_ID : {"methods": [ID1, ID2, ID3...], "name" : "testXXX() void"}, ...};
+clover.testTargets = {"test_1059":{"methods":[{"sl":80}],"name":"testVoidReturn","pass":true,"statements":[{"sl":82},{"sl":83},{"sl":84},{"sl":85},{"sl":86},{"sl":87},{"sl":88}]},"test_1111":{"methods":[{"sl":80}],"name":"testVoidReturn","pass":true,"statements":[{"sl":82},{"sl":83},{"sl":84},{"sl":85},{"sl":86},{"sl":87},{"sl":88}]},"test_1821":{"methods":[{"sl":80}],"name":"testVoidReturn","pass":true,"statements":[{"sl":82},{"sl":83},{"sl":84},{"sl":85},{"sl":86},{"sl":87},{"sl":88}]},"test_2135":{"methods":[{"sl":80}],"name":"testVoidReturn","pass":true,"statements":[{"sl":82},{"sl":83},{"sl":84},{"sl":85},{"sl":86},{"sl":87},{"sl":88}]},"test_25":{"methods":[{"sl":80}],"name":"testVoidReturn","pass":true,"statements":[{"sl":82},{"sl":83},{"sl":84},{"sl":85},{"sl":86},{"sl":87},{"sl":88}]},"test_3139":{"methods":[{"sl":80}],"name":"testVoidReturn","pass":true,"statements":[{"sl":82},{"sl":83},{"sl":84},{"sl":85},{"sl":86},{"sl":87},{"sl":88}]}}
+
+// JSON: { lines : [{tests : [testid1, testid2, testid3, ...]}, ...]};
+clover.srcFileLines = [[], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [2135, 1111, 1059, 25, 1821, 3139], [], [2135, 1111, 1059, 25, 1821, 3139], [2135, 1111, 1059, 25, 1821, 3139], [2135, 1111, 1059, 25, 1821, 3139], [2135, 1111, 1059, 25, 1821, 3139], [2135, 1111, 1059, 25, 1821, 3139], [2135, 1111, 1059, 25, 1821, 3139], [2135, 1111, 1059, 25, 1821, 3139], [], []]

@@ -1,0 +1,10 @@
+var clover = new Object();
+
+// JSON: {classes : [{name, id, sl, el,  methods : [{sl, el}, ...]}, ...]}
+clover.pageData = {"classes":[{"el":100,"id":58242,"methods":[{"el":48,"sc":5,"sl":36},{"el":62,"sc":5,"sl":50},{"el":73,"sc":5,"sl":64},{"el":78,"sc":5,"sl":75},{"el":86,"sc":5,"sl":80},{"el":99,"sc":5,"sl":88}],"name":"ImmutablePairTest","sl":34}]}
+
+// JSON: {test_ID : {"methods": [ID1, ID2, ID3...], "name" : "testXXX() void"}, ...};
+clover.testTargets = {"test_1086":{"methods":[{"sl":50}],"name":"testPairOf","pass":true,"statements":[{"sl":52},{"sl":53},{"sl":54},{"sl":55},{"sl":56},{"sl":57},{"sl":58},{"sl":59},{"sl":60},{"sl":61}]},"test_1736":{"methods":[{"sl":36}],"name":"testBasic","pass":true,"statements":[{"sl":38},{"sl":39},{"sl":40},{"sl":41},{"sl":42},{"sl":43},{"sl":44},{"sl":45},{"sl":46},{"sl":47}]},"test_2263":{"methods":[{"sl":64}],"name":"testEquals","pass":true,"statements":[{"sl":66},{"sl":67},{"sl":68},{"sl":70},{"sl":71},{"sl":72}]},"test_3186":{"methods":[{"sl":75}],"name":"testHashCode","pass":true,"statements":[{"sl":77}]},"test_3193":{"methods":[{"sl":88}],"name":"testSerialization","pass":true,"statements":[{"sl":91},{"sl":92},{"sl":93},{"sl":94},{"sl":95},{"sl":97},{"sl":98}]},"test_380":{"methods":[{"sl":80}],"name":"testToString","pass":true,"statements":[{"sl":82},{"sl":83},{"sl":84},{"sl":85}]}}
+
+// JSON: { lines : [{tests : [testid1, testid2, testid3, ...]}, ...]};
+clover.srcFileLines = [[], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [1736], [], [1736], [1736], [1736], [1736], [1736], [1736], [1736], [1736], [1736], [1736], [], [], [1086], [], [1086], [1086], [1086], [1086], [1086], [1086], [1086], [1086], [1086], [1086], [], [], [2263], [], [2263], [2263], [2263], [], [2263], [2263], [2263], [], [], [3186], [], [3186], [], [], [380], [], [380], [380], [380], [380], [], [], [3193], [], [], [3193], [3193], [3193], [3193], [3193], [], [3193], [3193], [], []]

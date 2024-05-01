@@ -1,0 +1,10 @@
+var clover = new Object();
+
+// JSON: {classes : [{name, id, sl, el,  methods : [{sl, el}, ...]}, ...]}
+clover.pageData = {"classes":[{"el":92,"id":43092,"methods":[{"el":28,"sc":5,"sl":22},{"el":36,"sc":5,"sl":30},{"el":46,"sc":5,"sl":38},{"el":64,"sc":5,"sl":48},{"el":72,"sc":5,"sl":66},{"el":81,"sc":5,"sl":74},{"el":91,"sc":5,"sl":83}],"name":"ImplementationContextDefaultOtherTest","sl":20}]}
+
+// JSON: {test_ID : {"methods": [ID1, ID2, ID3...], "name" : "testXXX() void"}, ...};
+clover.testTargets = {"test_1717":{"methods":[{"sl":83}],"name":"testObjectProperties","pass":true,"statements":[{"sl":85},{"sl":86},{"sl":87},{"sl":88},{"sl":89},{"sl":90}]},"test_192":{"methods":[{"sl":74}],"name":"testInstrumentationGetter","pass":true,"statements":[{"sl":76},{"sl":77}]},"test_2108":{"methods":[{"sl":66}],"name":"testPrematureUse","pass":true,"statements":[{"sl":68}]},"test_259":{"methods":[{"sl":22}],"name":"testFactory","pass":true,"statements":[{"sl":24}]},"test_2712":{"methods":[{"sl":38}],"name":"testFrozenTypeInitializerRetainsInitializer","pass":true,"statements":[{"sl":40},{"sl":44},{"sl":45}]},"test_3374":{"methods":[{"sl":48}],"name":"testFrozenTypeInitializerFrozenThrowsExceptionOnDrain","pass":true,"statements":[{"sl":50},{"sl":51},{"sl":55},{"sl":56},{"sl":57},{"sl":58},{"sl":59},{"sl":60}]},"test_3979":{"methods":[{"sl":30}],"name":"testTypeInitializerNotRetained","pass":true,"statements":[{"sl":32}]}}
+
+// JSON: { lines : [{tests : [testid1, testid2, testid3, ...]}, ...]};
+clover.srcFileLines = [[], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [259], [], [259], [], [], [], [], [], [3979], [], [3979], [], [], [], [], [], [2712], [], [2712], [], [], [], [2712], [2712], [], [], [3374], [], [3374], [3374], [], [], [], [3374], [3374], [3374], [3374], [3374], [3374], [], [], [], [], [], [2108], [], [2108], [], [], [], [], [], [192], [], [192], [192], [], [], [], [], [], [1717], [], [1717], [1717], [1717], [1717], [1717], [1717], [], []]

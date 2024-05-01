@@ -1,0 +1,2204 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+
+    
+    
+    <link rel="SHORTCUT ICON" href="../../../img/clover.ico" />
+
+    <link rel="stylesheet" href="../../../aui/css/aui.min.css" media="all"/>
+    <link rel="stylesheet" href="../../../aui/css/aui-experimental.min.css" media="all"/>
+    <!--[if IE 9]><link rel="stylesheet" href="../../../aui/css/aui-ie9.min.css" media="all"/><![endif]-->
+
+    <style type="text/css" media="all">
+        @import url('../../../style.css');
+        @import url('../../../tree.css');
+        
+    </style>
+
+    <script src="../../../jquery-1.8.3.min.js" type="text/javascript"></script>
+    <script src="../../../aui/js/aui.min.js" type="text/javascript"></script>
+    <script src="../../../aui/js/aui-experimental.min.js" type="text/javascript"></script>
+    <script src="../../../aui/js/aui-soy.min.js" type="text/javascript"></script>
+
+    <script src="../../../package-nodes-tree.js" type="text/javascript"></script>
+    <script src="../../../clover-tree.js" type="text/javascript"></script>
+    <script src="../../../clover.js" type="text/javascript"></script>
+    <script src="../../../clover-descriptions.js" type="text/javascript"></script>
+    <script src="../../../cloud.js" type="text/javascript"></script>
+
+            <title>parsers 4.2.5</title>
+    </head>
+
+<body  >
+    <div id="page">
+        
+        
+
+
+<header id="header" role="banner">
+    <nav class="aui-header aui-dropdown2-trigger-group" role="navigation">
+        <div class="aui-header-inner">
+            <div class="aui-header-primary">
+                <h1 id="logo" class="aui-header-logo aui-header-logo-clover">
+                    <a href="https://openclover.org" title="Visit OpenClover home page"><span class="aui-header-logo-device">OpenClover</span></a>
+                </h1>
+                            </div>
+            <div class="aui-header-secondary">
+                <ul class="aui-nav">
+                    <li id="system-help-menu">
+                        <a class="aui-nav-link" title="Open online documentation" target="_blank"
+                           href="https://openclover.org/documentation">
+                            <span class="aui-icon aui-icon-small aui-iconfont-help">&#160;Help</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+        
+        <div class="aui-page-panel">
+            <div class="aui-page-panel-inner">
+                <div class="aui-page-panel-nav aui-page-panel-nav-clover">
+                    
+
+<div class="aui-page-header-inner" style="margin-bottom: 20px;">
+    <div class="aui-page-header-image">
+                    <a href="http://owlcs.github.io/owlapi/owlapi-parsers/" target="_top">
+                <div class="aui-avatar aui-avatar-large aui-avatar-project">
+            <div class="aui-avatar-inner">
+                                    <img src="../../../img/clover_logo_large.png" alt="Clover icon"/>
+                            </div>
+        </div>
+                    </a>
+            </div>
+    <div class="aui-page-header-main" >
+        <h1>
+                            <a href="http://owlcs.github.io/owlapi/owlapi-parsers/" target="_top">
+                                        parsers 4.2.5
+                                        </a>
+                    </h1>
+    </div>
+</div>
+
+<nav class="aui-navgroup aui-navgroup-vertical">
+    <div class="aui-navgroup-inner">
+                                            <ul class="aui-nav">
+                <li class="">
+                    <a href="../../../dashboard.html">Project overview</a>
+                </li>
+            </ul>
+        
+                <div class="aui-nav-heading packages-nav-heading">
+            <strong>Packages</strong>
+        </div>
+        <div class="aui-nav project-packages">
+            <form method="get" action="#" class="aui package-filter-container">
+                <input type="text" autocomplete="off" class="package-filter text"
+                       placeholder="Type to filter packages..." name="package-filter" id="package-filter"
+                       title="Start typing package name (or part of the name) to search through the tree. Use arrow keys and the Enter key to navigate."/>
+            </form>
+            <p class="package-filter-no-results-message hidden">
+                <small>No results found.</small>
+            </p>
+                                                <div class="packages-tree-wrapper" data-root-relative="../../../" data-package-name="org.semanticweb.owlapi">
+                <div class="packages-tree-container"></div>
+                <div class="clover-packages-lozenges"></div>
+            </div>
+        </div>
+        
+            </div>
+</nav>                </div>
+                <section class="aui-page-panel-content">
+                    <div class="aui-page-panel-content-clover">
+
+                    
+                    <ol class="aui-nav aui-nav-breadcrumbs">
+            
+        <li><a href="../../../dashboard.html">Project Clover database Sat Apr 27 2024 12:01:29 CDT</a></li> 
+    </ol>
+    
+<h1 class="aui-h2-clover">
+            Package org.semanticweb.owlapi
+    </h1>
+<div class="aui-tabs horizontal-tabs">
+            <ul class="tabs-menu">
+                <li class="menu-item ">
+            <a href="pkg-summary.html"><strong>Application code</strong></a>
+        </li>
+                    <li class="menu-item active-tab">
+            <a href="top-risks.html"><strong>Top risks</strong></a>
+        </li>
+        <li class="menu-item ">
+            <a href="quick-wins.html"><strong>Quick wins</strong></a>
+        </li>
+                            </ul>
+    <div class="tabs-pane active-pane" id="tabs-first">
+
+        <div>&#160;</div>
+
+        
+
+
+                        <div style="text-align: right; margin-bottom: 10px">
+            
+                            <button id="cloudDepthCheckbox" class="aui-button active"
+                        onclick="showDeepPackageCloud(this)">Include classes from sub-packages</button>
+            
+                                    <button class="aui-button aui-button-subtle" id="popupHelp">
+    <span class="aui-icon aui-icon-small aui-iconfont-help"></span>&#160;How to read this chart
+</button>
+<script>
+    AJS.InlineDialog(AJS.$("#popupHelp"), "helpDialog",
+            function (content, trigger, showPopup) {
+                var description = topRisksDescription();
+                var title = 'Top Risks';
+                content.css({"padding": "20px"}).html(
+                        '<h2>' + title + '</h2>' + description);
+                showPopup();
+                return false;
+            },
+            {
+                width: 600
+            }
+    );
+</script>
+        </div>
+
+        
+
+<div style="padding: 20px; border: 1px solid #cccccc; background-color: #f5f5f5; border-radius: 3px">
+          <div id="deepPackageCloud"  >
+                          
+    
+        
+    
+            <a href="../owlapi/owlxml/parser/PARSER_OWLXMLVocabulary.html" class="tag"
+            style="font-size: 13px;color:#89c495"
+            title="Average Method Complexity - 1 , Coverage - 100% ">AbbreviatedIRIElementHandler</a>
+            
+    
+            <a href="../owlapi/owlxml/parser/PARSER_OWLXMLVocabulary.html" class="tag"
+            style="font-size: 13px;color:#89c495"
+            title="Average Method Complexity - 1 , Coverage - 100% ">AbstractClassExpressionElementHandler</a>
+            
+    
+            <a href="../owlapi/owlxml/parser/PARSER_OWLXMLVocabulary.html" class="tag"
+            style="font-size: 13px;color:#89c495"
+            title="Average Method Complexity - 1 , Coverage - 100% ">AbstractClassExpressionFillerRestriction</a>
+            
+    
+            <a href="../owlapi/owlxml/parser/PARSER_OWLXMLVocabulary.html" class="tag"
+            style="font-size: 13px;color:#89c495"
+            title="Average Method Complexity - 1 , Coverage - 100% ">AbstractClassExpressionOperandAxiomElementHandler</a>
+            
+    
+            <a href="../owlapi/owlxml/parser/PARSER_OWLXMLVocabulary.html" class="tag"
+            style="font-size: 14px;color:#14892c"
+            title="Average Method Complexity - 1.25 , Coverage - 91.7% ">AbstractDataCardinalityRestrictionElementHandler</a>
+            
+    
+            <a href="../owlapi/owlxml/parser/PARSER_OWLXMLVocabulary.html" class="tag"
+            style="font-size: 13px;color:#89c495"
+            title="Average Method Complexity - 1 , Coverage - 100% ">AbstractDataRangeFillerRestrictionElementHandler</a>
+            
+    
+            <a href="../owlapi/owlxml/parser/PARSER_OWLXMLVocabulary.html" class="tag"
+            style="font-size: 13px;color:#89c495"
+            title="Average Method Complexity - 1 , Coverage - 100% ">AbstractDataRestrictionElementHandler</a>
+            
+    
+            <a href="../owlapi/owlxml/parser/PARSER_OWLXMLVocabulary.html" class="tag"
+            style="font-size: 13px;color:#89c495"
+            title="Average Method Complexity - 1 , Coverage - 100% ">AbstractIRIElementHandler</a>
+            
+    
+            <a href="../owlapi/owlxml/parser/PARSER_OWLXMLVocabulary.html" class="tag"
+            style="font-size: 15px;color:#e7a19b"
+            title="Average Method Complexity - 1.667 , Coverage - 53.3% ">AbstractNaryBooleanClassExpressionElementHandler</a>
+            
+    
+            <a href="../owlapi/owlxml/parser/PARSER_OWLXMLVocabulary.html" class="tag"
+            style="font-size: 13px;color:#89c495"
+            title="Average Method Complexity - 1 , Coverage - 100% ">AbstractOWLAssertionAxiomElementHandler</a>
+            
+    
+            <a href="../owlapi/owlxml/parser/PARSER_OWLXMLVocabulary.html" class="tag"
+            style="font-size: 13px;color:#89c495"
+            title="Average Method Complexity - 1 , Coverage - 100% ">AbstractOWLAxiomElementHandler</a>
+            
+    
+            <a href="../owlapi/owlxml/parser/PARSER_OWLXMLVocabulary.html" class="tag"
+            style="font-size: 13px;color:#89c495"
+            title="Average Method Complexity - 1 , Coverage - 100% ">AbstractOWLDataPropertyAssertionAxiomElementHandler</a>
+            
+    
+            <a href="../owlapi/owlxml/parser/PARSER_OWLXMLVocabulary.html" class="tag"
+            style="font-size: 13px;color:#89c495"
+            title="Average Method Complexity - 1 , Coverage - 100% ">AbstractOWLDataPropertyOperandAxiomElementHandler</a>
+            
+    
+            <a href="../owlapi/owlxml/parser/PARSER_OWLXMLVocabulary.html" class="tag"
+            style="font-size: 13px;color:#89c495"
+            title="Average Method Complexity - 1 , Coverage - 100% ">AbstractOWLDataRangeHandler</a>
+            
+    
+            <a href="../owlapi/owlxml/parser/PARSER_OWLXMLVocabulary.html" class="tag"
+            style="font-size: 13px;color:#89c495"
+            title="Average Method Complexity - 1 , Coverage - 100% ">AbstractOWLIndividualOperandAxiomElementHandler</a>
+            
+    
+            <a href="../owlapi/owlxml/parser/PARSER_OWLXMLVocabulary.html" class="tag"
+            style="font-size: 14px;color:#14892c"
+            title="Average Method Complexity - 1.2 , Coverage - 92.9% ">AbstractOWLObjectCardinalityElementHandler</a>
+            
+    
+            <a href="../owlapi/owlxml/parser/PARSER_OWLXMLVocabulary.html" class="tag"
+            style="font-size: 15px;color:#14892c"
+            title="Average Method Complexity - 2 , Coverage - 90.9% ">AbstractOWLObjectPropertyAssertionAxiomElementHandler</a>
+            
+    
+            <a href="../owlapi/owlxml/parser/PARSER_OWLXMLVocabulary.html" class="tag"
+            style="font-size: 13px;color:#89c495"
+            title="Average Method Complexity - 1 , Coverage - 100% ">AbstractOWLObjectPropertyCharacteristicAxiomElementHandler</a>
+            
+    
+            <a href="../owlapi/owlxml/parser/PARSER_OWLXMLVocabulary.html" class="tag"
+            style="font-size: 13px;color:#89c495"
+            title="Average Method Complexity - 1 , Coverage - 100% ">AbstractOWLObjectPropertyElementHandler</a>
+            
+    
+            <a href="../owlapi/owlxml/parser/PARSER_OWLXMLVocabulary.html" class="tag"
+            style="font-size: 13px;color:#89c495"
+            title="Average Method Complexity - 1 , Coverage - 100% ">AbstractOWLObjectPropertyOperandAxiomElementHandler</a>
+            
+    
+            <a href="../owlapi/owlxml/parser/PARSER_OWLXMLVocabulary.html" class="tag"
+            style="font-size: 13px;color:#89c495"
+            title="Average Method Complexity - 1 , Coverage - 100% ">AbstractOWLPropertyCharacteristicAxiomElementHandler</a>
+            
+    
+            <a href="../owlapi/owlxml/parser/PARSER_OWLXMLVocabulary.html" class="tag"
+            style="font-size: 13px;color:#89c495"
+            title="Average Method Complexity - 1 , Coverage - 100% ">AbstractObjectRestrictionElementHandler</a>
+            
+    
+            <a href="../owlapi/owlxml/parser/PARSER_OWLXMLVocabulary.html" class="tag"
+            style="font-size: 13px;color:#89c495"
+            title="Average Method Complexity - 1 , Coverage - 100% ">AbstractOperandAxiomElementHandler</a>
+            
+    
+            <a href="../owlapi/manchestersyntax/renderer/AbstractRenderer.html" class="tag"
+            style="font-size: 14px;color:#fae1a0"
+            title="Average Method Complexity - 1.333 , Coverage - 83.6% ">AbstractRenderer</a>
+            
+    
+            <a href="../owlapi/owlxml/parser/PARSER_OWLXMLVocabulary.html" class="tag"
+            style="font-size: 13px;color:#89c495"
+            title="Average Method Complexity - 1 , Coverage - 100% ">AbstractRestrictionElementHandler</a>
+            
+    
+            <a href="../owlapi/rdf/rdfxml/parser/StartRDF.html" class="tag"
+            style="font-size: 19px;color:#14892c"
+            title="Average Method Complexity - 4.286 , Coverage - 87.5% ">AbstractState</a>
+            
+    
+            <a href="../owlapi/rdf/model/AbstractTranslator.html" class="tag"
+            style="font-size: 14px;color:#14892c"
+            title="Average Method Complexity - 1.471 , Coverage - 95% ">AbstractTranslator</a>
+            
+    
+            <a href="../owlapi/rdf/model/AbstractTranslator.html" class="tag"
+            style="font-size: 13px;color:#89c495"
+            title="Average Method Complexity - 1 , Coverage - 100% ">AbstractTranslator.OWLEntityTypeProvider</a>
+            
+    
+            <a href="../owlapi/functional/parser/CustomTokenizer.html" class="tag"
+            style="font-size: 38px;color:#14892c"
+            title="Average Method Complexity - 14.455 , Coverage - 86.7% ">CustomTokenizer</a>
+            
+    
+            <a href="../owlapi/dlsyntax/renderer/DLSyntax.html" class="tag"
+            style="font-size: 13px;color:#89c495"
+            title="Average Method Complexity - 1 , Coverage - 100% ">DLSyntax</a>
+            
+    
+            <a href="../owlapi/dlsyntax/renderer/DLSyntaxHTMLStorer.html" class="tag"
+            style="font-size: 13px;color:#89c495"
+            title="Average Method Complexity - 1.067 , Coverage - 98.2% ">DLSyntaxHTMLStorer</a>
+            
+    
+            <a href="../owlapi/dlsyntax/renderer/DLSyntaxHTMLStorerFactory.html" class="tag"
+            style="font-size: 13px;color:#89c495"
+            title="Average Method Complexity - 1 , Coverage - 100% ">DLSyntaxHTMLStorerFactory</a>
+            
+    
+            <a href="../owlapi/dlsyntax/renderer/DLSyntaxObjectRenderer.html" class="tag"
+            style="font-size: 14px;color:#d5584c"
+            title="Average Method Complexity - 1.286 , Coverage - 10% ">DLSyntaxObjectRenderer</a>
+            
+    
+            <a href="../owlapi/dlsyntax/renderer/DLSyntaxStorer.html" class="tag"
+            style="font-size: 13px;color:#89c495"
+            title="Average Method Complexity - 1 , Coverage - 100% ">DLSyntaxStorer</a>
+            
+    
+            <a href="../owlapi/dlsyntax/renderer/DLSyntaxStorerBase.html" class="tag"
+            style="font-size: 15px;color:#f6c342"
+            title="Average Method Complexity - 1.786 , Coverage - 63% ">DLSyntaxStorerBase</a>
+            
+    
+            <a href="../owlapi/dlsyntax/renderer/DLSyntaxStorerFactory.html" class="tag"
+            style="font-size: 13px;color:#89c495"
+            title="Average Method Complexity - 1 , Coverage - 100% ">DLSyntaxStorerFactory</a>
+            
+    
+            <a href="../owlapi/rdf/rdfxml/parser/StartRDF.html" class="tag"
+            style="font-size: 14px;color:#fae1a0"
+            title="Average Method Complexity - 1.2 , Coverage - 80% ">EmptyPropertyElement</a>
+            
+    
+            <a href="../owlapi/functional/renderer/FunctionalSyntaxObjectRenderer.html" class="tag"
+            style="font-size: 14px;color:#14892c"
+            title="Average Method Complexity - 1.561 , Coverage - 94.5% ">FunctionalSyntaxObjectRenderer</a>
+            
+    
+            <a href="../owlapi/functional/renderer/FunctionalSyntaxStorer.html" class="tag"
+            style="font-size: 14px;color:#14892c"
+            title="Average Method Complexity - 1.5 , Coverage - 85.7% ">FunctionalSyntaxStorer</a>
+            
+    
+            <a href="../owlapi/functional/renderer/FunctionalSyntaxStorerFactory.html" class="tag"
+            style="font-size: 13px;color:#89c495"
+            title="Average Method Complexity - 1 , Coverage - 100% ">FunctionalSyntaxStorerFactory</a>
+            
+    
+            <a href="../owlapi/owlxml/parser/PARSER_OWLXMLVocabulary.html" class="tag"
+            style="font-size: 13px;color:#89c495"
+            title="Average Method Complexity - 1 , Coverage - 100% ">IRIElementHandler</a>
+            
+    
+            <a href="../owlapi/rdf/rdfxml/renderer/IllegalElementNameException.html" class="tag"
+            style="font-size: 13px;color:#e7a19b"
+            title="Average Method Complexity - 1 , Coverage - 60% ">IllegalElementNameException</a>
+            
+    
+            <a href="../owlapi/rdf/turtle/parser/JavaCharStream.html" class="tag"
+            style="font-size: 17px;color:#de7b72"
+            title="Average Method Complexity - 2.838 , Coverage - 36.3% ">JavaCharStream</a>
+            
+    
+            <a href="../owlapi/krss2/parser/JavaCharStream.html" class="tag"
+            style="font-size: 17px;color:#d9695f"
+            title="Average Method Complexity - 2.838 , Coverage - 21.1% ">JavaCharStream</a>
+            
+    
+            <a href="../owlapi/krss2/parser/KRSS2OWLParser.html" class="tag"
+            style="font-size: 16px;color:#e7a19b"
+            title="Average Method Complexity - 2.667 , Coverage - 58.8% ">KRSS2OWLParser</a>
+            
+    
+            <a href="../owlapi/krss2/parser/KRSS2OWLParserException.html" class="tag"
+            style="font-size: 13px;color:#89c495"
+            title="Average Method Complexity - 1 , Coverage - 100% ">KRSS2OWLParserException</a>
+            
+    
+            <a href="../owlapi/krss2/parser/KRSS2OWLParserFactory.html" class="tag"
+            style="font-size: 13px;color:#89c495"
+            title="Average Method Complexity - 1 , Coverage - 100% ">KRSS2OWLParserFactory</a>
+            
+    
+            <a href="../owlapi/krss2/renderer/KRSS2OWLSyntaxStorer.html" class="tag"
+            style="font-size: 13px;color:#e7a19b"
+            title="Average Method Complexity - 1 , Coverage - 50% ">KRSS2OWLSyntaxStorer</a>
+            
+    
+            <a href="../owlapi/krss2/renderer/KRSS2OWLSyntaxStorerFactory.html" class="tag"
+            style="font-size: 13px;color:#89c495"
+            title="Average Method Complexity - 1 , Coverage - 100% ">KRSS2OWLSyntaxStorerFactory</a>
+            
+    
+            <a href="../owlapi/krss2/parser/KRSS2Parser.html" class="tag"
+            style="font-size: 17px;color:#d5584c"
+            title="Average Method Complexity - 2.913 , Coverage - 14.3% ">KRSS2Parser</a>
+            
+    
+            <a href="../owlapi/krss2/parser/KRSS2Parser.html" class="tag"
+            style="font-size: 13px;color:#89c495"
+            title="Average Method Complexity - 1 , Coverage - 100% ">KRSS2Parser.LookaheadSuccess</a>
+            
+    
+            <a href="../owlapi/krss2/parser/KRSS2ParserTokenManager.html" class="tag"
+            style="font-size: 43px;color:#d5584c"
+            title="Average Method Complexity - 16.78 , Coverage - 9.5% ">KRSS2ParserTokenManager</a>
+            
+    
+            <a href="../owlapi/krss1/parser/KRSSOWLParser.html" class="tag"
+            style="font-size: 15px;color:#d5584c"
+            title="Average Method Complexity - 2 , Coverage - 9.5% ">KRSSOWLParser</a>
+            
+    
+            <a href="../owlapi/latex/renderer/LatexObjectVisitor.html" class="tag"
+            style="font-size: 14px;color:#d04437"
+            title="Average Method Complexity - 1.337 , Coverage - 3.2% ">LatexObjectVisitor</a>
+            
+    
+            <a href="../owlapi/latex/renderer/LatexRenderer.html" class="tag"
+            style="font-size: 16px;color:#f6c342"
+            title="Average Method Complexity - 2.4 , Coverage - 67.1% ">LatexRenderer</a>
+            
+    
+            <a href="../owlapi/latex/renderer/LatexRenderer.html" class="tag"
+            style="font-size: 13px;color:#d9695f"
+            title="Average Method Complexity - 1 , Coverage - 20% ">LatexRenderer.OWLAxiomComparator</a>
+            
+    
+            <a href="../owlapi/latex/renderer/LatexStorer.html" class="tag"
+            style="font-size: 14px;color:#14892c"
+            title="Average Method Complexity - 1.5 , Coverage - 85.7% ">LatexStorer</a>
+            
+    
+            <a href="../owlapi/latex/renderer/LatexStorerFactory.html" class="tag"
+            style="font-size: 13px;color:#89c495"
+            title="Average Method Complexity - 1 , Coverage - 100% ">LatexStorerFactory</a>
+            
+    
+            <a href="../owlapi/latex/renderer/LatexWriter.html" class="tag"
+            style="font-size: 13px;color:#e28e87"
+            title="Average Method Complexity - 1 , Coverage - 42.9% ">LatexWriter</a>
+            
+    
+            <a href="../owlapi/manchestersyntax/parser/ManchesterOWLSyntax.html" class="tag"
+            style="font-size: 13px;color:#f6c342"
+            title="Average Method Complexity - 1.077 , Coverage - 73% ">ManchesterOWLSyntax</a>
+            
+    
+            <a href="../owlapi/manchestersyntax/renderer/ManchesterOWLSyntaxFrameRenderer.html" class="tag"
+            style="font-size: 20px;color:#fae1a0"
+            title="Average Method Complexity - 4.574 , Coverage - 75.1% ">ManchesterOWLSyntaxFrameRenderer</a>
+            
+    
+            <a href="../owlapi/manchestersyntax/renderer/ManchesterOWLSyntaxFrameRenderer.html" class="tag"
+            style="font-size: 13px;color:#89c495"
+            title="Average Method Complexity - 1 , Coverage - 100% ">ManchesterOWLSyntaxFrameRenderer.DefaultRenderingDirector</a>
+            
+    
+            <a href="../owlapi/manchestersyntax/renderer/ManchesterOWLSyntaxFrameRenderer.html" class="tag"
+            style="font-size: 14px;color:#14892c"
+            title="Average Method Complexity - 1.4 , Coverage - 91.7% ">ManchesterOWLSyntaxFrameRenderer.SectionMap</a>
+            
+    
+            <a href="../owlapi/manchestersyntax/renderer/ManchesterOWLSyntaxObjectRenderer.html" class="tag"
+            style="font-size: 14px;color:#e7a19b"
+            title="Average Method Complexity - 1.596 , Coverage - 55.9% ">ManchesterOWLSyntaxObjectRenderer</a>
+            
+    
+            <a href="../owlapi/manchestersyntax/parser/ManchesterOWLSyntaxOntologyHeader.html" class="tag"
+            style="font-size: 13px;color:#89c495"
+            title="Average Method Complexity - 1 , Coverage - 100% ">ManchesterOWLSyntaxOntologyHeader</a>
+            
+    
+            <a href="../owlapi/manchestersyntax/parser/ManchesterOWLSyntaxOntologyParser.html" class="tag"
+            style="font-size: 18px;color:#14892c"
+            title="Average Method Complexity - 3.5 , Coverage - 84.2% ">ManchesterOWLSyntaxOntologyParser</a>
+            
+    
+            <a href="../owlapi/manchestersyntax/parser/ManchesterOWLSyntaxOntologyParserFactory.html" class="tag"
+            style="font-size: 13px;color:#89c495"
+            title="Average Method Complexity - 1 , Coverage - 100% ">ManchesterOWLSyntaxOntologyParserFactory</a>
+            
+    
+            <a href="../owlapi/manchestersyntax/parser/ManchesterOWLSyntaxParserException.html" class="tag"
+            style="font-size: 13px;color:#89c495"
+            title="Average Method Complexity - 1 , Coverage - 100% ">ManchesterOWLSyntaxParserException</a>
+            
+    
+            <a href="../owlapi/manchestersyntax/parser/ManchesterOWLSyntaxParserImpl.html" class="tag"
+            style="font-size: 18px;color:#f6c342"
+            title="Average Method Complexity - 3.503 , Coverage - 67% ">ManchesterOWLSyntaxParserImpl</a>
+            
+    
+            <a href="../owlapi/manchestersyntax/parser/ManchesterOWLSyntaxParserImpl.html" class="tag"
+            style="font-size: 13px;color:#89c495"
+            title="Average Method Complexity - 1 , Coverage - 100% ">ManchesterOWLSyntaxParserImpl.AnnotatedClassExpressionListItemParser</a>
+            
+    
+            <a href="../owlapi/manchestersyntax/parser/ManchesterOWLSyntaxParserImpl.html" class="tag"
+            style="font-size: 13px;color:#89c495"
+            title="Average Method Complexity - 1 , Coverage - 100% ">ManchesterOWLSyntaxParserImpl.AnnotatedClassExpressionSetListItemParser</a>
+            
+    
+            <a href="../owlapi/manchestersyntax/parser/ManchesterOWLSyntaxParserImpl.html" class="tag"
+            style="font-size: 13px;color:#89c495"
+            title="Average Method Complexity - 1 , Coverage - 100% ">ManchesterOWLSyntaxParserImpl.AnnotatedDataRangeListItemParser</a>
+            
+    
+            <a href="../owlapi/manchestersyntax/parser/ManchesterOWLSyntaxParserImpl.html" class="tag"
+            style="font-size: 13px;color:#89c495"
+            title="Average Method Complexity - 1 , Coverage - 100% ">ManchesterOWLSyntaxParserImpl.AnnotatedIRIListItemParser</a>
+            
+    
+            <a href="../owlapi/manchestersyntax/parser/ManchesterOWLSyntaxParserImpl.html" class="tag"
+            style="font-size: 13px;color:#89c495"
+            title="Average Method Complexity - 1 , Coverage - 100% ">ManchesterOWLSyntaxParserImpl.AnnotatedIndividualsListItemParser</a>
+            
+    
+            <a href="../owlapi/manchestersyntax/parser/ManchesterOWLSyntaxParserImpl.html" class="tag"
+            style="font-size: 13px;color:#89c495"
+            title="Average Method Complexity - 1 , Coverage - 100% ">ManchesterOWLSyntaxParserImpl.AnnotatedPropertyListListItemParser</a>
+            
+    
+            <a href="../owlapi/manchestersyntax/parser/ManchesterOWLSyntaxParserImpl.html" class="tag"
+            style="font-size: 13px;color:#89c495"
+            title="Average Method Complexity - 1 , Coverage - 100% ">ManchesterOWLSyntaxParserImpl.AnnotationListItemParser</a>
+            
+    
+            <a href="../owlapi/manchestersyntax/parser/ManchesterOWLSyntaxParserImpl.html" class="tag"
+            style="font-size: 13px;color:#89c495"
+            title="Average Method Complexity - 1 , Coverage - 100% ">ManchesterOWLSyntaxParserImpl.AnnotationPropertyDomainListItemParser</a>
+            
+    
+            <a href="../owlapi/manchestersyntax/parser/ManchesterOWLSyntaxParserImpl.html" class="tag"
+            style="font-size: 13px;color:#89c495"
+            title="Average Method Complexity - 1 , Coverage - 100% ">ManchesterOWLSyntaxParserImpl.AnnotationPropertyRangeListItemParser</a>
+            
+    
+            <a href="../owlapi/manchestersyntax/parser/ManchesterOWLSyntaxParserImpl.html" class="tag"
+            style="font-size: 13px;color:#89c495"
+            title="Average Method Complexity - 1 , Coverage - 100% ">ManchesterOWLSyntaxParserImpl.AnnotationPropertySubPropertyOfListItemParser</a>
+            
+    
+            <a href="../owlapi/manchestersyntax/parser/ManchesterOWLSyntaxParserImpl.html" class="tag"
+            style="font-size: 13px;color:#89c495"
+            title="Average Method Complexity - 1 , Coverage - 100% ">ManchesterOWLSyntaxParserImpl.ClassDisjointClassesListItemParser</a>
+            
+    
+            <a href="../owlapi/manchestersyntax/parser/ManchesterOWLSyntaxParserImpl.html" class="tag"
+            style="font-size: 13px;color:#89c495"
+            title="Average Method Complexity - 1 , Coverage - 100% ">ManchesterOWLSyntaxParserImpl.ClassDisjointUnionOfListItemParser</a>
+            
+    
+            <a href="../owlapi/manchestersyntax/parser/ManchesterOWLSyntaxParserImpl.html" class="tag"
+            style="font-size: 13px;color:#89c495"
+            title="Average Method Complexity - 1 , Coverage - 100% ">ManchesterOWLSyntaxParserImpl.ClassDisjointWithListItemParser</a>
+            
+    
+            <a href="../owlapi/manchestersyntax/parser/ManchesterOWLSyntaxParserImpl.html" class="tag"
+            style="font-size: 13px;color:#89c495"
+            title="Average Method Complexity - 1 , Coverage - 100% ">ManchesterOWLSyntaxParserImpl.ClassEquivalentToListItemParser</a>
+            
+    
+            <a href="../owlapi/manchestersyntax/parser/ManchesterOWLSyntaxParserImpl.html" class="tag"
+            style="font-size: 13px;color:#89c495"
+            title="Average Method Complexity - 1 , Coverage - 100% ">ManchesterOWLSyntaxParserImpl.ClassHasKeyListItemParser</a>
+            
+    
+            <a href="../owlapi/manchestersyntax/parser/ManchesterOWLSyntaxParserImpl.html" class="tag"
+            style="font-size: 13px;color:#89c495"
+            title="Average Method Complexity - 1 , Coverage - 100% ">ManchesterOWLSyntaxParserImpl.ClassIndividualsListItemParser</a>
+            
+    
+            <a href="../owlapi/manchestersyntax/parser/ManchesterOWLSyntaxParserImpl.html" class="tag"
+            style="font-size: 13px;color:#89c495"
+            title="Average Method Complexity - 1 , Coverage - 100% ">ManchesterOWLSyntaxParserImpl.ClassSubClassOfListItemParser</a>
+            
+    
+            <a href="../owlapi/manchestersyntax/parser/ManchesterOWLSyntaxParserImpl.html" class="tag"
+            style="font-size: 13px;color:#e7a19b"
+            title="Average Method Complexity - 1 , Coverage - 50% ">ManchesterOWLSyntaxParserImpl.ClassSuperClassOfListItemParser</a>
+            
+    
+            <a href="../owlapi/manchestersyntax/parser/ManchesterOWLSyntaxParserImpl.html" class="tag"
+            style="font-size: 13px;color:#89c495"
+            title="Average Method Complexity - 1 , Coverage - 100% ">ManchesterOWLSyntaxParserImpl.DataPropertyCharacteristicsItemParser</a>
+            
+    
+            <a href="../owlapi/manchestersyntax/parser/ManchesterOWLSyntaxParserImpl.html" class="tag"
+            style="font-size: 13px;color:#89c495"
+            title="Average Method Complexity - 1 , Coverage - 100% ">ManchesterOWLSyntaxParserImpl.DataPropertyDisjointWithListItemParser</a>
+            
+    
+            <a href="../owlapi/manchestersyntax/parser/ManchesterOWLSyntaxParserImpl.html" class="tag"
+            style="font-size: 13px;color:#89c495"
+            title="Average Method Complexity - 1 , Coverage - 100% ">ManchesterOWLSyntaxParserImpl.DataPropertyDomainListItemParser</a>
+            
+    
+            <a href="../owlapi/manchestersyntax/parser/ManchesterOWLSyntaxParserImpl.html" class="tag"
+            style="font-size: 13px;color:#89c495"
+            title="Average Method Complexity - 1 , Coverage - 100% ">ManchesterOWLSyntaxParserImpl.DataPropertyEquivalentToListItemParser</a>
+            
+    
+            <a href="../owlapi/manchestersyntax/parser/ManchesterOWLSyntaxParserImpl.html" class="tag"
+            style="font-size: 13px;color:#89c495"
+            title="Average Method Complexity - 1 , Coverage - 100% ">ManchesterOWLSyntaxParserImpl.DataPropertyExpressionListItemParser</a>
+            
+    
+            <a href="../owlapi/manchestersyntax/parser/ManchesterOWLSyntaxParserImpl.html" class="tag"
+            style="font-size: 13px;color:#89c495"
+            title="Average Method Complexity - 1 , Coverage - 100% ">ManchesterOWLSyntaxParserImpl.DataPropertyRangeListItemParser</a>
+            
+    
+            <a href="../owlapi/manchestersyntax/parser/ManchesterOWLSyntaxParserImpl.html" class="tag"
+            style="font-size: 13px;color:#89c495"
+            title="Average Method Complexity - 1 , Coverage - 100% ">ManchesterOWLSyntaxParserImpl.DataPropertySubPropertyOfListItemParser</a>
+            
+    
+            <a href="../owlapi/manchestersyntax/parser/ManchesterOWLSyntaxParserImpl.html" class="tag"
+            style="font-size: 16px;color:#14892c"
+            title="Average Method Complexity - 2.667 , Coverage - 90.9% ">ManchesterOWLSyntaxParserImpl.DefaultEntityChecker</a>
+            
+    
+            <a href="../owlapi/manchestersyntax/parser/ManchesterOWLSyntaxParserImpl.html" class="tag"
+            style="font-size: 13px;color:#89c495"
+            title="Average Method Complexity - 1 , Coverage - 100% ">ManchesterOWLSyntaxParserImpl.EntityAnnotationsListItemParser</a>
+            
+    
+            <a href="../owlapi/manchestersyntax/parser/ManchesterOWLSyntaxParserImpl.html" class="tag"
+            style="font-size: 14px;color:#f6c342"
+            title="Average Method Complexity - 1.188 , Coverage - 67.1% ">ManchesterOWLSyntaxParserImpl.ExceptionBuilder</a>
+            
+    
+            <a href="../owlapi/manchestersyntax/parser/ManchesterOWLSyntaxParserImpl.html" class="tag"
+            style="font-size: 14px;color:#89c495"
+            title="Average Method Complexity - 1.333 , Coverage - 100% ">ManchesterOWLSyntaxParserImpl.IndividualAnnotationItemParser</a>
+            
+    
+            <a href="../owlapi/manchestersyntax/parser/ManchesterOWLSyntaxParserImpl.html" class="tag"
+            style="font-size: 13px;color:#89c495"
+            title="Average Method Complexity - 1 , Coverage - 100% ">ManchesterOWLSyntaxParserImpl.IndividualDifferentFromItemParser</a>
+            
+    
+            <a href="../owlapi/manchestersyntax/parser/ManchesterOWLSyntaxParserImpl.html" class="tag"
+            style="font-size: 13px;color:#89c495"
+            title="Average Method Complexity - 1 , Coverage - 100% ">ManchesterOWLSyntaxParserImpl.IndividualDifferentIndividualsItemParser</a>
+            
+    
+            <a href="../owlapi/manchestersyntax/parser/ManchesterOWLSyntaxParserImpl.html" class="tag"
+            style="font-size: 13px;color:#89c495"
+            title="Average Method Complexity - 1 , Coverage - 100% ">ManchesterOWLSyntaxParserImpl.IndividualFactsItemParser</a>
+            
+    
+            <a href="../owlapi/manchestersyntax/parser/ManchesterOWLSyntaxParserImpl.html" class="tag"
+            style="font-size: 13px;color:#89c495"
+            title="Average Method Complexity - 1 , Coverage - 100% ">ManchesterOWLSyntaxParserImpl.IndividualSameAsItemParser</a>
+            
+    
+            <a href="../owlapi/manchestersyntax/parser/ManchesterOWLSyntaxParserImpl.html" class="tag"
+            style="font-size: 13px;color:#89c495"
+            title="Average Method Complexity - 1 , Coverage - 100% ">ManchesterOWLSyntaxParserImpl.IndividualTypesItemParser</a>
+            
+    
+            <a href="../owlapi/manchestersyntax/parser/ManchesterOWLSyntaxParserImpl.html" class="tag"
+            style="font-size: 13px;color:#89c495"
+            title="Average Method Complexity - 1 , Coverage - 100% ">ManchesterOWLSyntaxParserImpl.ObjectPropertyCharacteristicsItemParser</a>
+            
+    
+            <a href="../owlapi/manchestersyntax/parser/ManchesterOWLSyntaxParserImpl.html" class="tag"
+            style="font-size: 13px;color:#89c495"
+            title="Average Method Complexity - 1 , Coverage - 100% ">ManchesterOWLSyntaxParserImpl.ObjectPropertyDisjointWithListItemParser</a>
+            
+    
+            <a href="../owlapi/manchestersyntax/parser/ManchesterOWLSyntaxParserImpl.html" class="tag"
+            style="font-size: 13px;color:#89c495"
+            title="Average Method Complexity - 1 , Coverage - 100% ">ManchesterOWLSyntaxParserImpl.ObjectPropertyDomainListItemParser</a>
+            
+    
+            <a href="../owlapi/manchestersyntax/parser/ManchesterOWLSyntaxParserImpl.html" class="tag"
+            style="font-size: 13px;color:#89c495"
+            title="Average Method Complexity - 1 , Coverage - 100% ">ManchesterOWLSyntaxParserImpl.ObjectPropertyEquivalentToListItemParser</a>
+            
+    
+            <a href="../owlapi/manchestersyntax/parser/ManchesterOWLSyntaxParserImpl.html" class="tag"
+            style="font-size: 13px;color:#89c495"
+            title="Average Method Complexity - 1 , Coverage - 100% ">ManchesterOWLSyntaxParserImpl.ObjectPropertyExpressionListItemParser</a>
+            
+    
+            <a href="../owlapi/manchestersyntax/parser/ManchesterOWLSyntaxParserImpl.html" class="tag"
+            style="font-size: 13px;color:#89c495"
+            title="Average Method Complexity - 1 , Coverage - 100% ">ManchesterOWLSyntaxParserImpl.ObjectPropertyInverseOfListItemParser</a>
+            
+    
+            <a href="../owlapi/manchestersyntax/parser/ManchesterOWLSyntaxParserImpl.html" class="tag"
+            style="font-size: 13px;color:#89c495"
+            title="Average Method Complexity - 1 , Coverage - 100% ">ManchesterOWLSyntaxParserImpl.ObjectPropertyRangeListItemParser</a>
+            
+    
+            <a href="../owlapi/manchestersyntax/parser/ManchesterOWLSyntaxParserImpl.html" class="tag"
+            style="font-size: 13px;color:#89c495"
+            title="Average Method Complexity - 1 , Coverage - 100% ">ManchesterOWLSyntaxParserImpl.ObjectPropertySubPropertyChainListItemParser</a>
+            
+    
+            <a href="../owlapi/manchestersyntax/parser/ManchesterOWLSyntaxParserImpl.html" class="tag"
+            style="font-size: 13px;color:#89c495"
+            title="Average Method Complexity - 1 , Coverage - 100% ">ManchesterOWLSyntaxParserImpl.ObjectPropertySubPropertyOfListItemParser</a>
+            
+    
+            <a href="../owlapi/manchestersyntax/parser/ManchesterOWLSyntaxParserImpl.html" class="tag"
+            style="font-size: 13px;color:#e7a19b"
+            title="Average Method Complexity - 1 , Coverage - 50% ">ManchesterOWLSyntaxParserImpl.ObjectPropertySuperPropertyOfListItemParser</a>
+            
+    
+            <a href="../owlapi/manchestersyntax/renderer/ManchesterOWLSyntaxPrefixNameShortFormProvider.html" class="tag"
+            style="font-size: 14px;color:#e7a19b"
+            title="Average Method Complexity - 1.286 , Coverage - 56% ">ManchesterOWLSyntaxPrefixNameShortFormProvider</a>
+            
+    
+            <a href="../owlapi/manchestersyntax/parser/ManchesterOWLSyntaxTokenizer.html" class="tag"
+            style="font-size: 19px;color:#14892c"
+            title="Average Method Complexity - 4.111 , Coverage - 92.7% ">ManchesterOWLSyntaxTokenizer</a>
+            
+    
+            <a href="../owlapi/manchestersyntax/parser/ManchesterOWLSyntaxTokenizer.html" class="tag"
+            style="font-size: 13px;color:#14892c"
+            title="Average Method Complexity - 1 , Coverage - 86.7% ">ManchesterOWLSyntaxTokenizer.Token</a>
+            
+    
+            <a href="../owlapi/manchestersyntax/renderer/ManchesterSyntaxStorer.html" class="tag"
+            style="font-size: 13px;color:#89c495"
+            title="Average Method Complexity - 1 , Coverage - 100% ">ManchesterSyntaxStorer</a>
+            
+    
+            <a href="../owlapi/manchestersyntax/renderer/ManchesterSyntaxStorerFactory.html" class="tag"
+            style="font-size: 13px;color:#89c495"
+            title="Average Method Complexity - 1 , Coverage - 100% ">ManchesterSyntaxStorerFactory</a>
+            
+    
+            <a href="../owlapi/rdf/rdfxml/parser/StartRDF.html" class="tag"
+            style="font-size: 15px;color:#14892c"
+            title="Average Method Complexity - 1.8 , Coverage - 87.3% ">NodeElement</a>
+            
+    
+            <a href="../owlapi/rdf/rdfxml/parser/StartRDF.html" class="tag"
+            style="font-size: 13px;color:#89c495"
+            title="Average Method Complexity - 1 , Coverage - 100% ">NodeElementList</a>
+            
+    
+            <a href="../owlapi/OWLAPIParsersModule.html" class="tag"
+            style="font-size: 13px;color:#89c495"
+            title="Average Method Complexity - 1 , Coverage - 100% ">OWLAPIParsersModule</a>
+            
+    
+            <a href="../owlapi/owlxml/parser/PARSER_OWLXMLVocabulary.html" class="tag"
+            style="font-size: 14px;color:#89c495"
+            title="Average Method Complexity - 1.333 , Coverage - 100% ">OWLAnnotationAssertionElementHandler</a>
+            
+    
+            <a href="../owlapi/owlxml/parser/PARSER_OWLXMLVocabulary.html" class="tag"
+            style="font-size: 14px;color:#f6c342"
+            title="Average Method Complexity - 1.1 , Coverage - 64% ">OWLAnnotationElementHandler</a>
+            
+    
+            <a href="../owlapi/owlxml/parser/PARSER_OWLXMLVocabulary.html" class="tag"
+            style="font-size: 13px;color:#89c495"
+            title="Average Method Complexity - 1 , Coverage - 100% ">OWLAnnotationPropertyDomainElementHandler</a>
+            
+    
+            <a href="../owlapi/owlxml/parser/PARSER_OWLXMLVocabulary.html" class="tag"
+            style="font-size: 13px;color:#89c495"
+            title="Average Method Complexity - 1 , Coverage - 100% ">OWLAnnotationPropertyElementHandler</a>
+            
+    
+            <a href="../owlapi/owlxml/parser/PARSER_OWLXMLVocabulary.html" class="tag"
+            style="font-size: 13px;color:#89c495"
+            title="Average Method Complexity - 1 , Coverage - 100% ">OWLAnnotationPropertyRangeElementHandler</a>
+            
+    
+            <a href="../owlapi/owlxml/parser/PARSER_OWLXMLVocabulary.html" class="tag"
+            style="font-size: 14px;color:#fae1a0"
+            title="Average Method Complexity - 1.25 , Coverage - 83.3% ">OWLAnonymousIndividualElementHandler</a>
+            
+    
+            <a href="../owlapi/owlxml/parser/PARSER_OWLXMLVocabulary.html" class="tag"
+            style="font-size: 13px;color:#89c495"
+            title="Average Method Complexity - 1 , Coverage - 100% ">OWLAsymmetricObjectPropertyElementHandler</a>
+            
+    
+            <a href="../owlapi/owlxml/parser/PARSER_OWLXMLVocabulary.html" class="tag"
+            style="font-size: 14px;color:#14892c"
+            title="Average Method Complexity - 1.4 , Coverage - 87.5% ">OWLClassAssertionAxiomElementHandler</a>
+            
+    
+            <a href="../owlapi/owlxml/parser/PARSER_OWLXMLVocabulary.html" class="tag"
+            style="font-size: 13px;color:#89c495"
+            title="Average Method Complexity - 1 , Coverage - 100% ">OWLClassElementHandler</a>
+            
+    
+            <a href="../owlapi/owlxml/parser/PARSER_OWLXMLVocabulary.html" class="tag"
+            style="font-size: 13px;color:#89c495"
+            title="Average Method Complexity - 1 , Coverage - 100% ">OWLDataAllValuesFromElementHandler</a>
+            
+    
+            <a href="../owlapi/owlxml/parser/PARSER_OWLXMLVocabulary.html" class="tag"
+            style="font-size: 13px;color:#89c495"
+            title="Average Method Complexity - 1 , Coverage - 100% ">OWLDataComplementOfElementHandler</a>
+            
+    
+            <a href="../owlapi/owlxml/parser/PARSER_OWLXMLVocabulary.html" class="tag"
+            style="font-size: 13px;color:#89c495"
+            title="Average Method Complexity - 1 , Coverage - 100% ">OWLDataExactCardinalityElementHandler</a>
+            
+    
+            <a href="../owlapi/owlxml/parser/PARSER_OWLXMLVocabulary.html" class="tag"
+            style="font-size: 13px;color:#89c495"
+            title="Average Method Complexity - 1 , Coverage - 100% ">OWLDataHasValueElementHandler</a>
+            
+    
+            <a href="../owlapi/owlxml/parser/PARSER_OWLXMLVocabulary.html" class="tag"
+            style="font-size: 13px;color:#89c495"
+            title="Average Method Complexity - 1 , Coverage - 100% ">OWLDataIntersectionOfElementHandler</a>
+            
+    
+            <a href="../owlapi/owlxml/parser/PARSER_OWLXMLVocabulary.html" class="tag"
+            style="font-size: 13px;color:#89c495"
+            title="Average Method Complexity - 1 , Coverage - 100% ">OWLDataMaxCardinalityElementHandler</a>
+            
+    
+            <a href="../owlapi/owlxml/parser/PARSER_OWLXMLVocabulary.html" class="tag"
+            style="font-size: 13px;color:#89c495"
+            title="Average Method Complexity - 1 , Coverage - 100% ">OWLDataMinCardinalityElementHandler</a>
+            
+    
+            <a href="../owlapi/owlxml/parser/PARSER_OWLXMLVocabulary.html" class="tag"
+            style="font-size: 14px;color:#fae1a0"
+            title="Average Method Complexity - 1.333 , Coverage - 80% ">OWLDataOneOfElementHandler</a>
+            
+    
+            <a href="../owlapi/owlxml/parser/PARSER_OWLXMLVocabulary.html" class="tag"
+            style="font-size: 13px;color:#89c495"
+            title="Average Method Complexity - 1 , Coverage - 100% ">OWLDataPropertyAssertionAxiomElementHandler</a>
+            
+    
+            <a href="../owlapi/owlxml/parser/PARSER_OWLXMLVocabulary.html" class="tag"
+            style="font-size: 13px;color:#89c495"
+            title="Average Method Complexity - 1 , Coverage - 100% ">OWLDataPropertyDomainAxiomElementHandler</a>
+            
+    
+            <a href="../owlapi/owlxml/parser/PARSER_OWLXMLVocabulary.html" class="tag"
+            style="font-size: 13px;color:#89c495"
+            title="Average Method Complexity - 1 , Coverage - 100% ">OWLDataPropertyElementHandler</a>
+            
+    
+            <a href="../owlapi/owlxml/parser/PARSER_OWLXMLVocabulary.html" class="tag"
+            style="font-size: 13px;color:#89c495"
+            title="Average Method Complexity - 1 , Coverage - 100% ">OWLDataPropertyRangeAxiomElementHandler</a>
+            
+    
+            <a href="../owlapi/owlxml/parser/PARSER_OWLXMLVocabulary.html" class="tag"
+            style="font-size: 13px;color:#89c495"
+            title="Average Method Complexity - 1 , Coverage - 100% ">OWLDataSomeValuesFromElementHandler</a>
+            
+    
+            <a href="../owlapi/owlxml/parser/PARSER_OWLXMLVocabulary.html" class="tag"
+            style="font-size: 13px;color:#89c495"
+            title="Average Method Complexity - 1 , Coverage - 100% ">OWLDataUnionOfElementHandler</a>
+            
+    
+            <a href="../owlapi/owlxml/parser/PARSER_OWLXMLVocabulary.html" class="tag"
+            style="font-size: 15px;color:#89c495"
+            title="Average Method Complexity - 1.667 , Coverage - 100% ">OWLDatatypeDefinitionElementHandler</a>
+            
+    
+            <a href="../owlapi/owlxml/parser/PARSER_OWLXMLVocabulary.html" class="tag"
+            style="font-size: 13px;color:#89c495"
+            title="Average Method Complexity - 1 , Coverage - 100% ">OWLDatatypeElementHandler</a>
+            
+    
+            <a href="../owlapi/owlxml/parser/PARSER_OWLXMLVocabulary.html" class="tag"
+            style="font-size: 14px;color:#14892c"
+            title="Average Method Complexity - 1.2 , Coverage - 92.3% ">OWLDatatypeFacetRestrictionElementHandler</a>
+            
+    
+            <a href="../owlapi/owlxml/parser/PARSER_OWLXMLVocabulary.html" class="tag"
+            style="font-size: 14px;color:#14892c"
+            title="Average Method Complexity - 1.25 , Coverage - 91.7% ">OWLDatatypeRestrictionElementHandler</a>
+            
+    
+            <a href="../owlapi/owlxml/parser/PARSER_OWLXMLVocabulary.html" class="tag"
+            style="font-size: 14px;color:#14892c"
+            title="Average Method Complexity - 1.1 , Coverage - 92.3% ">OWLDeclarationAxiomElementHandler</a>
+            
+    
+            <a href="../owlapi/owlxml/parser/PARSER_OWLXMLVocabulary.html" class="tag"
+            style="font-size: 13px;color:#89c495"
+            title="Average Method Complexity - 1 , Coverage - 100% ">OWLDifferentIndividualsAxiomElementHandler</a>
+            
+    
+            <a href="../owlapi/owlxml/parser/PARSER_OWLXMLVocabulary.html" class="tag"
+            style="font-size: 13px;color:#89c495"
+            title="Average Method Complexity - 1 , Coverage - 100% ">OWLDisjointClassesAxiomElementHandler</a>
+            
+    
+            <a href="../owlapi/owlxml/parser/PARSER_OWLXMLVocabulary.html" class="tag"
+            style="font-size: 13px;color:#89c495"
+            title="Average Method Complexity - 1 , Coverage - 100% ">OWLDisjointDataPropertiesAxiomElementHandler</a>
+            
+    
+            <a href="../owlapi/owlxml/parser/PARSER_OWLXMLVocabulary.html" class="tag"
+            style="font-size: 13px;color:#89c495"
+            title="Average Method Complexity - 1 , Coverage - 100% ">OWLDisjointObjectPropertiesAxiomElementHandler</a>
+            
+    
+            <a href="../owlapi/owlxml/parser/PARSER_OWLXMLVocabulary.html" class="tag"
+            style="font-size: 14px;color:#e7a19b"
+            title="Average Method Complexity - 1.276 , Coverage - 51.4% ">OWLElementHandler</a>
+            
+    
+            <a href="../owlapi/owlxml/parser/PARSER_OWLXMLVocabulary.html" class="tag"
+            style="font-size: 13px;color:#89c495"
+            title="Average Method Complexity - 1 , Coverage - 100% ">OWLEquivalentClassesAxiomElementHandler</a>
+            
+    
+            <a href="../owlapi/owlxml/parser/PARSER_OWLXMLVocabulary.html" class="tag"
+            style="font-size: 13px;color:#89c495"
+            title="Average Method Complexity - 1 , Coverage - 100% ">OWLEquivalentDataPropertiesAxiomElementHandler</a>
+            
+    
+            <a href="../owlapi/owlxml/parser/PARSER_OWLXMLVocabulary.html" class="tag"
+            style="font-size: 13px;color:#89c495"
+            title="Average Method Complexity - 1 , Coverage - 100% ">OWLEquivalentObjectPropertiesAxiomElementHandler</a>
+            
+    
+            <a href="../owlapi/owlxml/parser/PARSER_OWLXMLVocabulary.html" class="tag"
+            style="font-size: 13px;color:#89c495"
+            title="Average Method Complexity - 1 , Coverage - 100% ">OWLFunctionalDataPropertyAxiomElementHandler</a>
+            
+    
+            <a href="../owlapi/owlxml/parser/PARSER_OWLXMLVocabulary.html" class="tag"
+            style="font-size: 13px;color:#89c495"
+            title="Average Method Complexity - 1 , Coverage - 100% ">OWLFunctionalObjectPropertyAxiomElementHandler</a>
+            
+    
+            <a href="../owlapi/functional/parser/OWLFunctionalSyntaxOWLParser.html" class="tag"
+            style="font-size: 17px;color:#fae1a0"
+            title="Average Method Complexity - 3 , Coverage - 81.8% ">OWLFunctionalSyntaxOWLParser</a>
+            
+    
+            <a href="../owlapi/functional/parser/OWLFunctionalSyntaxOWLParserFactory.html" class="tag"
+            style="font-size: 13px;color:#89c495"
+            title="Average Method Complexity - 1 , Coverage - 100% ">OWLFunctionalSyntaxOWLParserFactory</a>
+            
+    
+            <a href="../owlapi/functional/parser/OWLFunctionalSyntaxParser.html" class="tag"
+            style="font-size: 19px;color:#fae1a0"
+            title="Average Method Complexity - 4.05 , Coverage - 82.7% ">OWLFunctionalSyntaxParser</a>
+            
+    
+            <a href="../owlapi/functional/parser/OWLFunctionalSyntaxParserTokenManager.html" class="tag"
+            style="font-size: 48px;color:#d5584c"
+            title="Average Method Complexity - 19.283 , Coverage - 7.1% ">OWLFunctionalSyntaxParserTokenManager</a>
+            
+    
+            <a href="../owlapi/functional/renderer/OWLFunctionalSyntaxRenderer.html" class="tag"
+            style="font-size: 15px;color:#fae1a0"
+            title="Average Method Complexity - 2 , Coverage - 83.3% ">OWLFunctionalSyntaxRenderer</a>
+            
+    
+            <a href="../owlapi/owlxml/parser/PARSER_OWLXMLVocabulary.html" class="tag"
+            style="font-size: 13px;color:#89c495"
+            title="Average Method Complexity - 1 , Coverage - 100% ">OWLHasKeyElementHandler</a>
+            
+    
+            <a href="../owlapi/owlxml/parser/PARSER_OWLXMLVocabulary.html" class="tag"
+            style="font-size: 13px;color:#fae1a0"
+            title="Average Method Complexity - 1 , Coverage - 81.8% ">OWLImportsHandler</a>
+            
+    
+            <a href="../owlapi/owlxml/parser/PARSER_OWLXMLVocabulary.html" class="tag"
+            style="font-size: 13px;color:#89c495"
+            title="Average Method Complexity - 1 , Coverage - 100% ">OWLIndividualElementHandler</a>
+            
+    
+            <a href="../owlapi/owlxml/parser/PARSER_OWLXMLVocabulary.html" class="tag"
+            style="font-size: 13px;color:#89c495"
+            title="Average Method Complexity - 1 , Coverage - 100% ">OWLInverseFunctionalObjectPropertyAxiomElementHandler</a>
+            
+    
+            <a href="../owlapi/owlxml/parser/PARSER_OWLXMLVocabulary.html" class="tag"
+            style="font-size: 18px;color:#f6c342"
+            title="Average Method Complexity - 3.5 , Coverage - 71.4% ">OWLInverseObjectPropertiesAxiomElementHandler</a>
+            
+    
+            <a href="../owlapi/owlxml/parser/PARSER_OWLXMLVocabulary.html" class="tag"
+            style="font-size: 13px;color:#89c495"
+            title="Average Method Complexity - 1 , Coverage - 100% ">OWLInverseObjectPropertyElementHandler</a>
+            
+    
+            <a href="../owlapi/owlxml/parser/PARSER_OWLXMLVocabulary.html" class="tag"
+            style="font-size: 13px;color:#89c495"
+            title="Average Method Complexity - 1 , Coverage - 100% ">OWLIrreflexiveObjectPropertyAxiomElementHandler</a>
+            
+    
+            <a href="../owlapi/owlxml/parser/PARSER_OWLXMLVocabulary.html" class="tag"
+            style="font-size: 15px;color:#89c495"
+            title="Average Method Complexity - 1.667 , Coverage - 96.2% ">OWLLiteralElementHandler</a>
+            
+    
+            <a href="../owlapi/owlxml/parser/PARSER_OWLXMLVocabulary.html" class="tag"
+            style="font-size: 13px;color:#89c495"
+            title="Average Method Complexity - 1 , Coverage - 100% ">OWLNegativeDataPropertyAssertionAxiomElementHandler</a>
+            
+    
+            <a href="../owlapi/owlxml/parser/PARSER_OWLXMLVocabulary.html" class="tag"
+            style="font-size: 13px;color:#89c495"
+            title="Average Method Complexity - 1 , Coverage - 100% ">OWLNegativeObjectPropertyAssertionAxiomElementHandler</a>
+            
+    
+            <a href="../owlapi/owlxml/parser/PARSER_OWLXMLVocabulary.html" class="tag"
+            style="font-size: 13px;color:#89c495"
+            title="Average Method Complexity - 1 , Coverage - 100% ">OWLObjectAllValuesFromElementHandler</a>
+            
+    
+            <a href="../owlapi/owlxml/parser/PARSER_OWLXMLVocabulary.html" class="tag"
+            style="font-size: 13px;color:#89c495"
+            title="Average Method Complexity - 1 , Coverage - 100% ">OWLObjectComplementOfElementHandler</a>
+            
+    
+            <a href="../owlapi/owlxml/parser/PARSER_OWLXMLVocabulary.html" class="tag"
+            style="font-size: 13px;color:#89c495"
+            title="Average Method Complexity - 1 , Coverage - 100% ">OWLObjectExactCardinalityElementHandler</a>
+            
+    
+            <a href="../owlapi/owlxml/parser/PARSER_OWLXMLVocabulary.html" class="tag"
+            style="font-size: 13px;color:#89c495"
+            title="Average Method Complexity - 1 , Coverage - 100% ">OWLObjectExistsSelfElementHandler</a>
+            
+    
+            <a href="../owlapi/owlxml/parser/PARSER_OWLXMLVocabulary.html" class="tag"
+            style="font-size: 13px;color:#89c495"
+            title="Average Method Complexity - 1 , Coverage - 100% ">OWLObjectHasValueElementHandler</a>
+            
+    
+            <a href="../owlapi/owlxml/parser/PARSER_OWLXMLVocabulary.html" class="tag"
+            style="font-size: 13px;color:#89c495"
+            title="Average Method Complexity - 1 , Coverage - 100% ">OWLObjectIntersectionOfElementHandler</a>
+            
+    
+            <a href="../owlapi/owlxml/parser/PARSER_OWLXMLVocabulary.html" class="tag"
+            style="font-size: 13px;color:#89c495"
+            title="Average Method Complexity - 1 , Coverage - 100% ">OWLObjectMaxCardinalityElementHandler</a>
+            
+    
+            <a href="../owlapi/owlxml/parser/PARSER_OWLXMLVocabulary.html" class="tag"
+            style="font-size: 13px;color:#89c495"
+            title="Average Method Complexity - 1 , Coverage - 100% ">OWLObjectMinCardinalityElementHandler</a>
+            
+    
+            <a href="../owlapi/owlxml/parser/PARSER_OWLXMLVocabulary.html" class="tag"
+            style="font-size: 14px;color:#fae1a0"
+            title="Average Method Complexity - 1.333 , Coverage - 80% ">OWLObjectOneOfElementHandler</a>
+            
+    
+            <a href="../owlapi/owlxml/parser/PARSER_OWLXMLVocabulary.html" class="tag"
+            style="font-size: 13px;color:#89c495"
+            title="Average Method Complexity - 1 , Coverage - 100% ">OWLObjectPropertyAssertionAxiomElementHandler</a>
+            
+    
+            <a href="../owlapi/owlxml/parser/PARSER_OWLXMLVocabulary.html" class="tag"
+            style="font-size: 13px;color:#89c495"
+            title="Average Method Complexity - 1 , Coverage - 100% ">OWLObjectPropertyDomainElementHandler</a>
+            
+    
+            <a href="../owlapi/owlxml/parser/PARSER_OWLXMLVocabulary.html" class="tag"
+            style="font-size: 13px;color:#89c495"
+            title="Average Method Complexity - 1 , Coverage - 100% ">OWLObjectPropertyElementHandler</a>
+            
+    
+            <a href="../owlapi/owlxml/parser/PARSER_OWLXMLVocabulary.html" class="tag"
+            style="font-size: 13px;color:#89c495"
+            title="Average Method Complexity - 1 , Coverage - 100% ">OWLObjectPropertyRangeAxiomElementHandler</a>
+            
+    
+            <a href="../owlapi/owlxml/parser/PARSER_OWLXMLVocabulary.html" class="tag"
+            style="font-size: 13px;color:#89c495"
+            title="Average Method Complexity - 1 , Coverage - 100% ">OWLObjectSomeValuesFromElementHandler</a>
+            
+    
+            <a href="../owlapi/owlxml/parser/PARSER_OWLXMLVocabulary.html" class="tag"
+            style="font-size: 13px;color:#89c495"
+            title="Average Method Complexity - 1 , Coverage - 100% ">OWLObjectUnionOfElementHandler</a>
+            
+    
+            <a href="../owlapi/owlxml/parser/PARSER_OWLXMLVocabulary.html" class="tag"
+            style="font-size: 14px;color:#fae1a0"
+            title="Average Method Complexity - 1.4 , Coverage - 82.1% ">OWLOntologyHandler</a>
+            
+    
+            <a href="../owlapi/rdf/rdfxml/renderer/OWLOntologyXMLNamespaceManager.html" class="tag"
+            style="font-size: 19px;color:#f6c342"
+            title="Average Method Complexity - 3.75 , Coverage - 70.2% ">OWLOntologyXMLNamespaceManager</a>
+            
+    
+            <a href="../owlapi/rdf/rdfxml/parser/OWLRDFConsumer.html" class="tag"
+            style="font-size: 15px;color:#fae1a0"
+            title="Average Method Complexity - 1.993 , Coverage - 79.4% ">OWLRDFConsumer</a>
+            
+    
+            <a href="../owlapi/rdf/turtle/parser/OWLRDFConsumerAdapter.html" class="tag"
+            style="font-size: 13px;color:#14892c"
+            title="Average Method Complexity - 1 , Coverage - 93.3% ">OWLRDFConsumerAdapter</a>
+            
+    
+            <a href="../owlapi/rdf/rdfxml/parser/OWLRDFXMLParserException.html" class="tag"
+            style="font-size: 13px;color:#de7b72"
+            title="Average Method Complexity - 1 , Coverage - 33.3% ">OWLRDFXMLParserException</a>
+            
+    
+            <a href="../owlapi/owlxml/parser/PARSER_OWLXMLVocabulary.html" class="tag"
+            style="font-size: 13px;color:#89c495"
+            title="Average Method Complexity - 1 , Coverage - 100% ">OWLReflexiveObjectPropertyAxiomElementHandler</a>
+            
+    
+            <a href="../owlapi/owlxml/parser/PARSER_OWLXMLVocabulary.html" class="tag"
+            style="font-size: 13px;color:#89c495"
+            title="Average Method Complexity - 1 , Coverage - 100% ">OWLSameIndividualsAxiomElementHandler</a>
+            
+    
+            <a href="../owlapi/owlxml/parser/PARSER_OWLXMLVocabulary.html" class="tag"
+            style="font-size: 15px;color:#14892c"
+            title="Average Method Complexity - 1.667 , Coverage - 87.5% ">OWLSubAnnotationPropertyOfElementHandler</a>
+            
+    
+            <a href="../owlapi/owlxml/parser/PARSER_OWLXMLVocabulary.html" class="tag"
+            style="font-size: 14px;color:#14892c"
+            title="Average Method Complexity - 1.5 , Coverage - 94.1% ">OWLSubClassAxiomElementHandler</a>
+            
+    
+            <a href="../owlapi/owlxml/parser/PARSER_OWLXMLVocabulary.html" class="tag"
+            style="font-size: 15px;color:#14892c"
+            title="Average Method Complexity - 1.667 , Coverage - 85.7% ">OWLSubDataPropertyOfAxiomElementHandler</a>
+            
+    
+            <a href="../owlapi/owlxml/parser/PARSER_OWLXMLVocabulary.html" class="tag"
+            style="font-size: 13px;color:#89c495"
+            title="Average Method Complexity - 1 , Coverage - 100% ">OWLSubObjectPropertyChainElementHandler</a>
+            
+    
+            <a href="../owlapi/owlxml/parser/PARSER_OWLXMLVocabulary.html" class="tag"
+            style="font-size: 17px;color:#fae1a0"
+            title="Average Method Complexity - 2.75 , Coverage - 83.3% ">OWLSubObjectPropertyOfAxiomElementHandler</a>
+            
+    
+            <a href="../owlapi/owlxml/parser/PARSER_OWLXMLVocabulary.html" class="tag"
+            style="font-size: 13px;color:#89c495"
+            title="Average Method Complexity - 1 , Coverage - 100% ">OWLSymmetricObjectPropertyAxiomElementHandler</a>
+            
+    
+            <a href="../owlapi/owlxml/parser/PARSER_OWLXMLVocabulary.html" class="tag"
+            style="font-size: 13px;color:#89c495"
+            title="Average Method Complexity - 1 , Coverage - 100% ">OWLTransitiveObjectPropertyAxiomElementHandler</a>
+            
+    
+            <a href="../owlapi/owlxml/renderer/OWLXMLObjectRenderer.html" class="tag"
+            style="font-size: 14px;color:#89c495"
+            title="Average Method Complexity - 1.161 , Coverage - 98.4% ">OWLXMLObjectRenderer</a>
+            
+    
+            <a href="../owlapi/owlxml/parser/OWLXMLParser.html" class="tag"
+            style="font-size: 16px;color:#14892c"
+            title="Average Method Complexity - 2.667 , Coverage - 87% ">OWLXMLParser</a>
+            
+    
+            <a href="../owlapi/owlxml/parser/OWLXMLParserAttributeNotFoundException.html" class="tag"
+            style="font-size: 13px;color:#89c495"
+            title="Average Method Complexity - 1 , Coverage - 100% ">OWLXMLParserAttributeNotFoundException</a>
+            
+    
+            <a href="../owlapi/owlxml/parser/OWLXMLParserException.html" class="tag"
+            style="font-size: 13px;color:#89c495"
+            title="Average Method Complexity - 1 , Coverage - 100% ">OWLXMLParserException</a>
+            
+    
+            <a href="../owlapi/owlxml/parser/OWLXMLParserFactory.html" class="tag"
+            style="font-size: 13px;color:#89c495"
+            title="Average Method Complexity - 1 , Coverage - 100% ">OWLXMLParserFactory</a>
+            
+    
+            <a href="../owlapi/owlxml/parser/OWLXMLParserHandler.html" class="tag"
+            style="font-size: 15px;color:#14892c"
+            title="Average Method Complexity - 1.923 , Coverage - 90.1% ">OWLXMLParserHandler</a>
+            
+    
+            <a href="../owlapi/owlxml/renderer/OWLXMLRenderer.html" class="tag"
+            style="font-size: 21px;color:#f6c342"
+            title="Average Method Complexity - 5 , Coverage - 62.2% ">OWLXMLRenderer</a>
+            
+    
+            <a href="../owlapi/owlxml/renderer/OWLXMLStorer.html" class="tag"
+            style="font-size: 13px;color:#89c495"
+            title="Average Method Complexity - 1 , Coverage - 100% ">OWLXMLStorer</a>
+            
+    
+            <a href="../owlapi/owlxml/renderer/OWLXMLStorerFactory.html" class="tag"
+            style="font-size: 13px;color:#89c495"
+            title="Average Method Complexity - 1 , Coverage - 100% ">OWLXMLStorerFactory</a>
+            
+    
+            <a href="../owlapi/owlxml/renderer/OWLXMLWriter.html" class="tag"
+            style="font-size: 16px;color:#fae1a0"
+            title="Average Method Complexity - 2.2 , Coverage - 82.3% ">OWLXMLWriter</a>
+            
+    
+            <a href="../owlapi/rdf/rdfxml/parser/OptimisedListTranslator.html" class="tag"
+            style="font-size: 16px;color:#14892c"
+            title="Average Method Complexity - 2.6 , Coverage - 86.3% ">OptimisedListTranslator</a>
+            
+    
+            <a href="../owlapi/owlxml/parser/PARSER_OWLXMLVocabulary.html" class="tag"
+            style="font-size: 13px;color:#14892c"
+            title="Average Method Complexity - 1 , Coverage - 94.6% ">PARSER_OWLXMLVocabulary</a>
+            
+    
+            <a href="../owlapi/rdf/turtle/parser/ParseException.html" class="tag"
+            style="font-size: 21px;color:#d9695f"
+            title="Average Method Complexity - 5 , Coverage - 24.5% ">ParseException</a>
+            
+    
+            <a href="../owlapi/krss2/parser/ParseException.html" class="tag"
+            style="font-size: 21px;color:#e7a19b"
+            title="Average Method Complexity - 5 , Coverage - 59.2% ">ParseException</a>
+            
+    
+            <a href="../owlapi/functional/parser/ParseException.html" class="tag"
+            style="font-size: 21px;color:#f6c342"
+            title="Average Method Complexity - 5 , Coverage - 67.7% ">ParseException</a>
+            
+    
+            <a href="../owlapi/rdf/rdfxml/parser/StartRDF.html" class="tag"
+            style="font-size: 14px;color:#14892c"
+            title="Average Method Complexity - 1.429 , Coverage - 94.6% ">ParseTypeCollectionElement</a>
+            
+    
+            <a href="../owlapi/rdf/rdfxml/parser/StartRDF.html" class="tag"
+            style="font-size: 15px;color:#89c495"
+            title="Average Method Complexity - 2 , Coverage - 100% ">ParseTypeLiteralElement</a>
+            
+    
+            <a href="../owlapi/rdf/rdfxml/parser/StartRDF.html" class="tag"
+            style="font-size: 13px;color:#14892c"
+            title="Average Method Complexity - 1 , Coverage - 85.7% ">ParseTypeResourceElement</a>
+            
+    
+            <a href="../owlapi/manchestersyntax/renderer/ParserException.html" class="tag"
+            style="font-size: 14px;color:#e7a19b"
+            title="Average Method Complexity - 1.429 , Coverage - 57.7% ">ParserException</a>
+            
+    
+            <a href="../owlapi/rdf/rdfxml/parser/StartRDF.html" class="tag"
+            style="font-size: 16px;color:#14892c"
+            title="Average Method Complexity - 2.5 , Coverage - 93.9% ">PropertyElementList</a>
+            
+    
+            <a href="../owlapi/rdf/model/RDFGraph.html" class="tag"
+            style="font-size: 16px;color:#14892c"
+            title="Average Method Complexity - 2.333 , Coverage - 88.3% ">RDFGraph</a>
+            
+    
+            <a href="../owlapi/rdf/rdfxml/parser/RDFParser.html" class="tag"
+            style="font-size: 15px;color:#f6c342"
+            title="Average Method Complexity - 1.719 , Coverage - 67.3% ">RDFParser</a>
+            
+    
+            <a href="../owlapi/rdf/rdfxml/parser/RDFParserException.html" class="tag"
+            style="font-size: 14px;color:#e7a19b"
+            title="Average Method Complexity - 1.286 , Coverage - 58.3% ">RDFParserException</a>
+            
+    
+            <a href="../owlapi/rdf/RDFRendererBase.html" class="tag"
+            style="font-size: 17px;color:#89c495"
+            title="Average Method Complexity - 2.714 , Coverage - 95.3% ">RDFRendererBase</a>
+            
+    
+            <a href="../owlapi/rdf/RDFRendererBase.html" class="tag"
+            style="font-size: 15px;color:#89c495"
+            title="Average Method Complexity - 2 , Coverage - 100% ">RDFRendererBase.SequentialBlankNodeRDFTranslator</a>
+            
+    
+            <a href="../owlapi/rdf/model/RDFTranslator.html" class="tag"
+            style="font-size: 14px;color:#fae1a0"
+            title="Average Method Complexity - 1.111 , Coverage - 79.2% ">RDFTranslator</a>
+            
+    
+            <a href="../owlapi/rdf/rdfxml/renderer/RDFXMLNamespaceManager.html" class="tag"
+            style="font-size: 14px;color:#89c495"
+            title="Average Method Complexity - 1.333 , Coverage - 100% ">RDFXMLNamespaceManager</a>
+            
+    
+            <a href="../owlapi/rdf/rdfxml/parser/RDFXMLParser.html" class="tag"
+            style="font-size: 17px;color:#14892c"
+            title="Average Method Complexity - 3 , Coverage - 87.5% ">RDFXMLParser</a>
+            
+    
+            <a href="../owlapi/rdf/rdfxml/parser/RDFXMLParserFactory.html" class="tag"
+            style="font-size: 13px;color:#89c495"
+            title="Average Method Complexity - 1 , Coverage - 100% ">RDFXMLParserFactory</a>
+            
+    
+            <a href="../owlapi/rdf/rdfxml/renderer/RDFXMLRenderer.html" class="tag"
+            style="font-size: 17px;color:#fae1a0"
+            title="Average Method Complexity - 2.733 , Coverage - 82.6% ">RDFXMLRenderer</a>
+            
+    
+            <a href="../owlapi/rdf/rdfxml/renderer/RDFXMLStorer.html" class="tag"
+            style="font-size: 16px;color:#14892c"
+            title="Average Method Complexity - 2.5 , Coverage - 94.1% ">RDFXMLStorer</a>
+            
+    
+            <a href="../owlapi/rdf/rdfxml/renderer/RDFXMLStorerFactory.html" class="tag"
+            style="font-size: 13px;color:#89c495"
+            title="Average Method Complexity - 1 , Coverage - 100% ">RDFXMLStorerFactory</a>
+            
+    
+            <a href="../owlapi/rdf/rdfxml/renderer/RDFXMLWriter.html" class="tag"
+            style="font-size: 13px;color:#89c495"
+            title="Average Method Complexity - 1.062 , Coverage - 97.2% ">RDFXMLWriter</a>
+            
+    
+            <a href="../owlapi/rdf/rdfxml/parser/StartRDF.html" class="tag"
+            style="font-size: 13px;color:#89c495"
+            title="Average Method Complexity - 1 , Coverage - 100% ">ReificationManager</a>
+            
+    
+            <a href="../owlapi/manchestersyntax/renderer/RendererEvent.html" class="tag"
+            style="font-size: 13px;color:#d9695f"
+            title="Average Method Complexity - 1 , Coverage - 27.3% ">RendererEvent</a>
+            
+    
+            <a href="../owlapi/rdf/rdfxml/parser/StartRDF.html" class="tag"
+            style="font-size: 14px;color:#89c495"
+            title="Average Method Complexity - 1.6 , Coverage - 100% ">ResourceOrLiteralElement</a>
+            
+    
+            <a href="../owlapi/owlxml/parser/PARSER_OWLXMLVocabulary.html" class="tag"
+            style="font-size: 13px;color:#89c495"
+            title="Average Method Complexity - 1 , Coverage - 100% ">SWRLAtomElementHandler</a>
+            
+    
+            <a href="../owlapi/owlxml/parser/PARSER_OWLXMLVocabulary.html" class="tag"
+            style="font-size: 13px;color:#89c495"
+            title="Average Method Complexity - 1 , Coverage - 100% ">SWRLAtomListElementHandler</a>
+            
+    
+            <a href="../owlapi/owlxml/parser/PARSER_OWLXMLVocabulary.html" class="tag"
+            style="font-size: 13px;color:#89c495"
+            title="Average Method Complexity - 1 , Coverage - 100% ">SWRLBuiltInAtomElementHandler</a>
+            
+    
+            <a href="../owlapi/owlxml/parser/PARSER_OWLXMLVocabulary.html" class="tag"
+            style="font-size: 13px;color:#89c495"
+            title="Average Method Complexity - 1 , Coverage - 100% ">SWRLClassAtomElementHandler</a>
+            
+    
+            <a href="../owlapi/owlxml/parser/PARSER_OWLXMLVocabulary.html" class="tag"
+            style="font-size: 14px;color:#fae1a0"
+            title="Average Method Complexity - 1.286 , Coverage - 77.3% ">SWRLDataPropertyAtomElementHandler</a>
+            
+    
+            <a href="../owlapi/owlxml/parser/PARSER_OWLXMLVocabulary.html" class="tag"
+            style="font-size: 13px;color:#fae1a0"
+            title="Average Method Complexity - 1 , Coverage - 81.8% ">SWRLDataRangeAtomElementHandler</a>
+            
+    
+            <a href="../owlapi/owlxml/parser/PARSER_OWLXMLVocabulary.html" class="tag"
+            style="font-size: 15px;color:#14892c"
+            title="Average Method Complexity - 2 , Coverage - 91.3% ">SWRLDifferentIndividualsAtomElementHandler</a>
+            
+    
+            <a href="../owlapi/owlxml/parser/PARSER_OWLXMLVocabulary.html" class="tag"
+            style="font-size: 15px;color:#e7a19b"
+            title="Average Method Complexity - 1.8 , Coverage - 60% ">SWRLObjectPropertyAtomElementHandler</a>
+            
+    
+            <a href="../owlapi/owlxml/parser/PARSER_OWLXMLVocabulary.html" class="tag"
+            style="font-size: 15px;color:#14892c"
+            title="Average Method Complexity - 1.667 , Coverage - 92.3% ">SWRLRuleElementHandler</a>
+            
+    
+            <a href="../owlapi/owlxml/parser/PARSER_OWLXMLVocabulary.html" class="tag"
+            style="font-size: 15px;color:#14892c"
+            title="Average Method Complexity - 2 , Coverage - 91.3% ">SWRLSameIndividualAtomElementHandler</a>
+            
+    
+            <a href="../owlapi/owlxml/parser/PARSER_OWLXMLVocabulary.html" class="tag"
+            style="font-size: 13px;color:#89c495"
+            title="Average Method Complexity - 1 , Coverage - 100% ">SWRLVariableElementHandler</a>
+            
+    
+            <a href="../owlapi/functional/parser/SimpleCharStream.html" class="tag"
+            style="font-size: 15px;color:#d9695f"
+            title="Average Method Complexity - 1.868 , Coverage - 26.5% ">SimpleCharStream</a>
+            
+    
+            <a href="../owlapi/rdf/rdfxml/parser/StartRDF.html" class="tag"
+            style="font-size: 14px;color:#14892c"
+            title="Average Method Complexity - 1.25 , Coverage - 86.7% ">StartRDF</a>
+            
+    
+            <a href="../owlapi/rdf/turtle/parser/Token.html" class="tag"
+            style="font-size: 13px;color:#e7a19b"
+            title="Average Method Complexity - 1 , Coverage - 50% ">Token</a>
+            
+    
+            <a href="../owlapi/krss2/parser/Token.html" class="tag"
+            style="font-size: 13px;color:#e7a19b"
+            title="Average Method Complexity - 1 , Coverage - 50% ">Token</a>
+            
+    
+            <a href="../owlapi/functional/parser/Token.html" class="tag"
+            style="font-size: 13px;color:#f6c342"
+            title="Average Method Complexity - 1 , Coverage - 62.5% ">Token</a>
+            
+    
+            <a href="../owlapi/rdf/rdfxml/parser/Translators.html" class="tag"
+            style="font-size: 13px;color:#f6c342"
+            title="Average Method Complexity - 1 , Coverage - 66.7% ">Translators</a>
+            
+    
+            <a href="../owlapi/rdf/rdfxml/parser/Translators.html" class="tag"
+            style="font-size: 14px;color:#e28e87"
+            title="Average Method Complexity - 1.344 , Coverage - 39.1% ">Translators.AbstractClassExpressionTranslator</a>
+            
+    
+            <a href="../owlapi/rdf/rdfxml/parser/Translators.html" class="tag"
+            style="font-size: 13px;color:#de7b72"
+            title="Average Method Complexity - 1 , Coverage - 33.3% ">Translators.AbstractClassExpressionTranslator.ClassExpressionMatcher</a>
+            
+    
+            <a href="../owlapi/rdf/rdfxml/parser/Translators.html" class="tag"
+            style="font-size: 13px;color:#de7b72"
+            title="Average Method Complexity - 1 , Coverage - 33.3% ">Translators.AbstractClassExpressionTranslator.DataRangeMatcher</a>
+            
+    
+            <a href="../owlapi/rdf/rdfxml/parser/Translators.html" class="tag"
+            style="font-size: 13px;color:#de7b72"
+            title="Average Method Complexity - 1 , Coverage - 33.3% ">Translators.AbstractClassExpressionTranslator.IndividualMatcher</a>
+            
+    
+            <a href="../owlapi/rdf/rdfxml/parser/Translators.html" class="tag"
+            style="font-size: 13px;color:#fae1a0"
+            title="Average Method Complexity - 1 , Coverage - 75% ">Translators.ClassExpressionListItemTranslator</a>
+            
+    
+            <a href="../owlapi/rdf/rdfxml/parser/Translators.html" class="tag"
+            style="font-size: 14px;color:#fae1a0"
+            title="Average Method Complexity - 1.5 , Coverage - 76.5% ">Translators.DataAllValuesFromTranslator</a>
+            
+    
+            <a href="../owlapi/rdf/rdfxml/parser/Translators.html" class="tag"
+            style="font-size: 15px;color:#f6c342"
+            title="Average Method Complexity - 1.75 , Coverage - 70% ">Translators.DataCardinalityTranslator</a>
+            
+    
+            <a href="../owlapi/rdf/rdfxml/parser/Translators.html" class="tag"
+            style="font-size: 14px;color:#fae1a0"
+            title="Average Method Complexity - 1.5 , Coverage - 75% ">Translators.DataHasValueTranslator</a>
+            
+    
+            <a href="../owlapi/rdf/rdfxml/parser/Translators.html" class="tag"
+            style="font-size: 15px;color:#f6c342"
+            title="Average Method Complexity - 1.75 , Coverage - 70% ">Translators.DataMaxCardinalityTranslator</a>
+            
+    
+            <a href="../owlapi/rdf/rdfxml/parser/Translators.html" class="tag"
+            style="font-size: 14px;color:#fae1a0"
+            title="Average Method Complexity - 1.5 , Coverage - 77.8% ">Translators.DataMaxQualifiedCardinalityTranslator</a>
+            
+    
+            <a href="../owlapi/rdf/rdfxml/parser/Translators.html" class="tag"
+            style="font-size: 15px;color:#f6c342"
+            title="Average Method Complexity - 1.75 , Coverage - 70% ">Translators.DataMinCardinalityTranslator</a>
+            
+    
+            <a href="../owlapi/rdf/rdfxml/parser/Translators.html" class="tag"
+            style="font-size: 14px;color:#fae1a0"
+            title="Average Method Complexity - 1.5 , Coverage - 77.8% ">Translators.DataMinQualifiedCardinalityTranslator</a>
+            
+    
+            <a href="../owlapi/rdf/rdfxml/parser/Translators.html" class="tag"
+            style="font-size: 13px;color:#f6c342"
+            title="Average Method Complexity - 1 , Coverage - 71.4% ">Translators.DataPropertyListItemTranslator</a>
+            
+    
+            <a href="../owlapi/rdf/rdfxml/parser/Translators.html" class="tag"
+            style="font-size: 14px;color:#fae1a0"
+            title="Average Method Complexity - 1.5 , Coverage - 77.8% ">Translators.DataQualifiedCardinalityTranslator</a>
+            
+    
+            <a href="../owlapi/rdf/rdfxml/parser/Translators.html" class="tag"
+            style="font-size: 13px;color:#f6c342"
+            title="Average Method Complexity - 1 , Coverage - 66.7% ">Translators.DataRangeListItemTranslator</a>
+            
+    
+            <a href="../owlapi/rdf/rdfxml/parser/Translators.html" class="tag"
+            style="font-size: 14px;color:#fae1a0"
+            title="Average Method Complexity - 1.5 , Coverage - 76.5% ">Translators.DataSomeValuesFromTranslator</a>
+            
+    
+            <a href="../owlapi/rdf/rdfxml/parser/Translators.html" class="tag"
+            style="font-size: 18px;color:#e7a19b"
+            title="Average Method Complexity - 3.667 , Coverage - 56.1% ">Translators.HasKeyListItemTranslator</a>
+            
+    
+            <a href="../owlapi/rdf/rdfxml/parser/Translators.html" class="tag"
+            style="font-size: 13px;color:#e7a19b"
+            title="Average Method Complexity - 1 , Coverage - 57.1% ">Translators.IndividualListItemTranslator</a>
+            
+    
+            <a href="../owlapi/rdf/rdfxml/parser/Translators.html" class="tag"
+            style="font-size: 13px;color:#fae1a0"
+            title="Average Method Complexity - 1 , Coverage - 75% ">Translators.NamedClassTranslator</a>
+            
+    
+            <a href="../owlapi/rdf/rdfxml/parser/Translators.html" class="tag"
+            style="font-size: 14px;color:#fae1a0"
+            title="Average Method Complexity - 1.333 , Coverage - 75% ">Translators.OWLFacetRestrictionListItemTranslator</a>
+            
+    
+            <a href="../owlapi/rdf/rdfxml/parser/Translators.html" class="tag"
+            style="font-size: 14px;color:#fae1a0"
+            title="Average Method Complexity - 1.5 , Coverage - 76.5% ">Translators.ObjectAllValuesFromTranslator</a>
+            
+    
+            <a href="../owlapi/rdf/rdfxml/parser/Translators.html" class="tag"
+            style="font-size: 15px;color:#f6c342"
+            title="Average Method Complexity - 1.75 , Coverage - 70% ">Translators.ObjectCardinalityTranslator</a>
+            
+    
+            <a href="../owlapi/rdf/rdfxml/parser/Translators.html" class="tag"
+            style="font-size: 14px;color:#f6c342"
+            title="Average Method Complexity - 1.25 , Coverage - 69.2% ">Translators.ObjectComplementOfTranslator</a>
+            
+    
+            <a href="../owlapi/rdf/rdfxml/parser/Translators.html" class="tag"
+            style="font-size: 14px;color:#f6c342"
+            title="Average Method Complexity - 1.2 , Coverage - 64.7% ">Translators.ObjectHasSelfTranslator</a>
+            
+    
+            <a href="../owlapi/rdf/rdfxml/parser/Translators.html" class="tag"
+            style="font-size: 14px;color:#fae1a0"
+            title="Average Method Complexity - 1.5 , Coverage - 75% ">Translators.ObjectHasValueTranslator</a>
+            
+    
+            <a href="../owlapi/rdf/rdfxml/parser/Translators.html" class="tag"
+            style="font-size: 14px;color:#f6c342"
+            title="Average Method Complexity - 1.25 , Coverage - 69.2% ">Translators.ObjectIntersectionOfTranslator</a>
+            
+    
+            <a href="../owlapi/rdf/rdfxml/parser/Translators.html" class="tag"
+            style="font-size: 15px;color:#f6c342"
+            title="Average Method Complexity - 1.75 , Coverage - 70% ">Translators.ObjectMaxCardinalityTranslator</a>
+            
+    
+            <a href="../owlapi/rdf/rdfxml/parser/Translators.html" class="tag"
+            style="font-size: 14px;color:#fae1a0"
+            title="Average Method Complexity - 1.5 , Coverage - 76.5% ">Translators.ObjectMaxQualifiedCardinalityTranslator</a>
+            
+    
+            <a href="../owlapi/rdf/rdfxml/parser/Translators.html" class="tag"
+            style="font-size: 15px;color:#f6c342"
+            title="Average Method Complexity - 1.75 , Coverage - 70% ">Translators.ObjectMinCardinalityTranslator</a>
+            
+    
+            <a href="../owlapi/rdf/rdfxml/parser/Translators.html" class="tag"
+            style="font-size: 14px;color:#fae1a0"
+            title="Average Method Complexity - 1.5 , Coverage - 76.5% ">Translators.ObjectMinQualifiedCardinalityTranslator</a>
+            
+    
+            <a href="../owlapi/rdf/rdfxml/parser/Translators.html" class="tag"
+            style="font-size: 14px;color:#f6c342"
+            title="Average Method Complexity - 1.25 , Coverage - 69.2% ">Translators.ObjectOneOfTranslator</a>
+            
+    
+            <a href="../owlapi/rdf/rdfxml/parser/Translators.html" class="tag"
+            style="font-size: 13px;color:#f6c342"
+            title="Average Method Complexity - 1 , Coverage - 62.5% ">Translators.ObjectPropertyListItemTranslator</a>
+            
+    
+            <a href="../owlapi/rdf/rdfxml/parser/Translators.html" class="tag"
+            style="font-size: 14px;color:#fae1a0"
+            title="Average Method Complexity - 1.5 , Coverage - 76.5% ">Translators.ObjectQualifiedCardinalityTranslator</a>
+            
+    
+            <a href="../owlapi/rdf/rdfxml/parser/Translators.html" class="tag"
+            style="font-size: 14px;color:#fae1a0"
+            title="Average Method Complexity - 1.5 , Coverage - 76.5% ">Translators.ObjectSomeValuesFromTranslator</a>
+            
+    
+            <a href="../owlapi/rdf/rdfxml/parser/Translators.html" class="tag"
+            style="font-size: 14px;color:#f6c342"
+            title="Average Method Complexity - 1.25 , Coverage - 69.2% ">Translators.ObjectUnionOfTranslator</a>
+            
+    
+            <a href="../owlapi/rdf/rdfxml/parser/Translators.html" class="tag"
+            style="font-size: 20px;color:#fae1a0"
+            title="Average Method Complexity - 4.6 , Coverage - 81% ">Translators.SWRLAtomListItemTranslator</a>
+            
+    
+            <a href="../owlapi/rdf/rdfxml/parser/Translators.html" class="tag"
+            style="font-size: 13px;color:#89c495"
+            title="Average Method Complexity - 1 , Coverage - 100% ">Translators.SWRLAtomListItemTranslator.SWRLAtomDObjectListItemTranslator</a>
+            
+    
+            <a href="../owlapi/rdf/rdfxml/parser/Translators.html" class="tag"
+            style="font-size: 19px;color:#14892c"
+            title="Average Method Complexity - 4 , Coverage - 87.2% ">Translators.SWRLRuleTranslator</a>
+            
+    
+            <a href="../owlapi/rdf/rdfxml/parser/Translators.html" class="tag"
+            style="font-size: 14px;color:#14892c"
+            title="Average Method Complexity - 1.385 , Coverage - 91.1% ">Translators.TranslatorAccessor</a>
+            
+    
+            <a href="../owlapi/rdf/rdfxml/parser/Translators.html" class="tag"
+            style="font-size: 13px;color:#e28e87"
+            title="Average Method Complexity - 1 , Coverage - 40% ">Translators.TypedConstantListItemTranslator</a>
+            
+    
+            <a href="../owlapi/rdf/rdfxml/parser/TripleHandlers.html" class="tag"
+            style="font-size: 13px;color:#89c495"
+            title="Average Method Complexity - 1 , Coverage - 100% ">TripleHandlers.AbstractBuiltInTypeHandler</a>
+            
+    
+            <a href="../owlapi/rdf/rdfxml/parser/TripleHandlers.html" class="tag"
+            style="font-size: 13px;color:#89c495"
+            title="Average Method Complexity - 1 , Coverage - 100% ">TripleHandlers.AbstractNamedEquivalentClassAxiomHandler</a>
+            
+    
+            <a href="../owlapi/rdf/rdfxml/parser/TripleHandlers.html" class="tag"
+            style="font-size: 15px;color:#89c495"
+            title="Average Method Complexity - 1.667 , Coverage - 100% ">TripleHandlers.AbstractResourceTripleHandler</a>
+            
+    
+            <a href="../owlapi/rdf/rdfxml/parser/TripleHandlers.html" class="tag"
+            style="font-size: 14px;color:#d9695f"
+            title="Average Method Complexity - 1.25 , Coverage - 26% ">TripleHandlers.AbstractTripleHandler</a>
+            
+    
+            <a href="../owlapi/rdf/rdfxml/parser/TripleHandlers.html" class="tag"
+            style="font-size: 13px;color:#de7b72"
+            title="Average Method Complexity - 1 , Coverage - 33.3% ">TripleHandlers.AbstractTripleHandler.ClassExpressionMatcher</a>
+            
+    
+            <a href="../owlapi/rdf/rdfxml/parser/TripleHandlers.html" class="tag"
+            style="font-size: 13px;color:#de7b72"
+            title="Average Method Complexity - 1 , Coverage - 33.3% ">TripleHandlers.AbstractTripleHandler.DataRangeMatcher</a>
+            
+    
+            <a href="../owlapi/rdf/rdfxml/parser/TripleHandlers.html" class="tag"
+            style="font-size: 13px;color:#de7b72"
+            title="Average Method Complexity - 1 , Coverage - 33.3% ">TripleHandlers.AbstractTripleHandler.IndividualMatcher</a>
+            
+    
+            <a href="../owlapi/rdf/rdfxml/parser/TripleHandlers.html" class="tag"
+            style="font-size: 13px;color:#89c495"
+            title="Average Method Complexity - 1 , Coverage - 100% ">TripleHandlers.AbstractTriplePredicateHandler</a>
+            
+    
+            <a href="../owlapi/rdf/rdfxml/parser/TripleHandlers.html" class="tag"
+            style="font-size: 19px;color:#fae1a0"
+            title="Average Method Complexity - 3.75 , Coverage - 83.1% ">TripleHandlers.GTPAnnotationLiteralHandler</a>
+            
+    
+            <a href="../owlapi/rdf/rdfxml/parser/TripleHandlers.html" class="tag"
+            style="font-size: 15px;color:#14892c"
+            title="Average Method Complexity - 2 , Coverage - 93.9% ">TripleHandlers.GTPAnnotationResourceTripleHandler</a>
+            
+    
+            <a href="../owlapi/rdf/rdfxml/parser/TripleHandlers.html" class="tag"
+            style="font-size: 14px;color:#89c495"
+            title="Average Method Complexity - 1.25 , Coverage - 100% ">TripleHandlers.GTPDataPropertyAssertionHandler</a>
+            
+    
+            <a href="../owlapi/rdf/rdfxml/parser/TripleHandlers.html" class="tag"
+            style="font-size: 14px;color:#14892c"
+            title="Average Method Complexity - 1.5 , Coverage - 93.8% ">TripleHandlers.GTPObjectPropertyAssertionHandler</a>
+            
+    
+            <a href="../owlapi/rdf/rdfxml/parser/TripleHandlers.html" class="tag"
+            style="font-size: 15px;color:#89c495"
+            title="Average Method Complexity - 1.897 , Coverage - 100% ">TripleHandlers.HandlerAccessor</a>
+            
+    
+            <a href="../owlapi/rdf/rdfxml/parser/TripleHandlers.html" class="tag"
+            style="font-size: 16px;color:#89c495"
+            title="Average Method Complexity - 2.667 , Coverage - 100% ">TripleHandlers.TPAllValuesFromHandler</a>
+            
+    
+            <a href="../owlapi/rdf/rdfxml/parser/TripleHandlers.html" class="tag"
+            style="font-size: 13px;color:#89c495"
+            title="Average Method Complexity - 1 , Coverage - 100% ">TripleHandlers.TPAnnotatedPropertyHandler</a>
+            
+    
+            <a href="../owlapi/rdf/rdfxml/parser/TripleHandlers.html" class="tag"
+            style="font-size: 13px;color:#89c495"
+            title="Average Method Complexity - 1 , Coverage - 100% ">TripleHandlers.TPAnnotatedSourceHandler</a>
+            
+    
+            <a href="../owlapi/rdf/rdfxml/parser/TripleHandlers.html" class="tag"
+            style="font-size: 13px;color:#14892c"
+            title="Average Method Complexity - 1 , Coverage - 85.7% ">TripleHandlers.TPAnnotatedTargetHandler</a>
+            
+    
+            <a href="../owlapi/rdf/rdfxml/parser/TripleHandlers.html" class="tag"
+            style="font-size: 13px;color:#89c495"
+            title="Average Method Complexity - 1 , Coverage - 100% ">TripleHandlers.TPComplementOfHandler</a>
+            
+    
+            <a href="../owlapi/rdf/rdfxml/parser/TripleHandlers.html" class="tag"
+            style="font-size: 13px;color:#14892c"
+            title="Average Method Complexity - 1 , Coverage - 88.9% ">TripleHandlers.TPDatatypeComplementOfHandler</a>
+            
+    
+            <a href="../owlapi/rdf/rdfxml/parser/TripleHandlers.html" class="tag"
+            style="font-size: 16px;color:#d5584c"
+            title="Average Method Complexity - 2.333 , Coverage - 9.5% ">TripleHandlers.TPDeclaredAsHandler</a>
+            
+    
+            <a href="../owlapi/rdf/rdfxml/parser/TripleHandlers.html" class="tag"
+            style="font-size: 13px;color:#89c495"
+            title="Average Method Complexity - 1 , Coverage - 100% ">TripleHandlers.TPDifferentFromHandler</a>
+            
+    
+            <a href="../owlapi/rdf/rdfxml/parser/TripleHandlers.html" class="tag"
+            style="font-size: 14px;color:#14892c"
+            title="Average Method Complexity - 1.25 , Coverage - 93.3% ">TripleHandlers.TPDisjointUnionHandler</a>
+            
+    
+            <a href="../owlapi/rdf/rdfxml/parser/TripleHandlers.html" class="tag"
+            style="font-size: 13px;color:#89c495"
+            title="Average Method Complexity - 1 , Coverage - 100% ">TripleHandlers.TPDisjointWithHandler</a>
+            
+    
+            <a href="../owlapi/rdf/rdfxml/parser/TripleHandlers.html" class="tag"
+            style="font-size: 13px;color:#89c495"
+            title="Average Method Complexity - 1 , Coverage - 100% ">TripleHandlers.TPDistinctMembersHandler</a>
+            
+    
+            <a href="../owlapi/rdf/rdfxml/parser/TripleHandlers.html" class="tag"
+            style="font-size: 16px;color:#fae1a0"
+            title="Average Method Complexity - 2.5 , Coverage - 75% ">TripleHandlers.TPEquivalentClassHandler</a>
+            
+    
+            <a href="../owlapi/rdf/rdfxml/parser/TripleHandlers.html" class="tag"
+            style="font-size: 16px;color:#89c495"
+            title="Average Method Complexity - 2.333 , Coverage - 100% ">TripleHandlers.TPEquivalentPropertyHandler</a>
+            
+    
+            <a href="../owlapi/rdf/rdfxml/parser/TripleHandlers.html" class="tag"
+            style="font-size: 13px;color:#89c495"
+            title="Average Method Complexity - 1 , Coverage - 100% ">TripleHandlers.TPFirstLiteralHandler</a>
+            
+    
+            <a href="../owlapi/rdf/rdfxml/parser/TripleHandlers.html" class="tag"
+            style="font-size: 13px;color:#89c495"
+            title="Average Method Complexity - 1 , Coverage - 100% ">TripleHandlers.TPFirstResourceHandler</a>
+            
+    
+            <a href="../owlapi/rdf/rdfxml/parser/TripleHandlers.html" class="tag"
+            style="font-size: 14px;color:#14892c"
+            title="Average Method Complexity - 1.333 , Coverage - 92.9% ">TripleHandlers.TPHasKeyHandler</a>
+            
+    
+            <a href="../owlapi/rdf/rdfxml/parser/TripleHandlers.html" class="tag"
+            style="font-size: 18px;color:#fae1a0"
+            title="Average Method Complexity - 3.333 , Coverage - 76.9% ">TripleHandlers.TPImportsHandler</a>
+            
+    
+            <a href="../owlapi/rdf/rdfxml/parser/TripleHandlers.html" class="tag"
+            style="font-size: 16px;color:#fae1a0"
+            title="Average Method Complexity - 2.333 , Coverage - 81.8% ">TripleHandlers.TPIntersectionOfHandler</a>
+            
+    
+            <a href="../owlapi/rdf/rdfxml/parser/TripleHandlers.html" class="tag"
+            style="font-size: 14px;color:#14892c"
+            title="Average Method Complexity - 1.5 , Coverage - 88.9% ">TripleHandlers.TPInverseOfHandler</a>
+            
+    
+            <a href="../owlapi/rdf/rdfxml/parser/TripleHandlers.html" class="tag"
+            style="font-size: 13px;color:#f6c342"
+            title="Average Method Complexity - 1 , Coverage - 62.5% ">TripleHandlers.TPOnClassHandler</a>
+            
+    
+            <a href="../owlapi/rdf/rdfxml/parser/TripleHandlers.html" class="tag"
+            style="font-size: 13px;color:#f6c342"
+            title="Average Method Complexity - 1 , Coverage - 62.5% ">TripleHandlers.TPOnDataRangeHandler</a>
+            
+    
+            <a href="../owlapi/rdf/rdfxml/parser/TripleHandlers.html" class="tag"
+            style="font-size: 13px;color:#fae1a0"
+            title="Average Method Complexity - 1 , Coverage - 83.3% ">TripleHandlers.TPOnPropertyHandler</a>
+            
+    
+            <a href="../owlapi/rdf/rdfxml/parser/TripleHandlers.html" class="tag"
+            style="font-size: 13px;color:#89c495"
+            title="Average Method Complexity - 1 , Coverage - 100% ">TripleHandlers.TPOneOfHandler</a>
+            
+    
+            <a href="../owlapi/rdf/rdfxml/parser/TripleHandlers.html" class="tag"
+            style="font-size: 13px;color:#89c495"
+            title="Average Method Complexity - 1 , Coverage - 100% ">TripleHandlers.TPPropertyChainAxiomHandler</a>
+            
+    
+            <a href="../owlapi/rdf/rdfxml/parser/TripleHandlers.html" class="tag"
+            style="font-size: 15px;color:#89c495"
+            title="Average Method Complexity - 2 , Coverage - 100% ">TripleHandlers.TPPropertyDisjointWithHandler</a>
+            
+    
+            <a href="../owlapi/rdf/rdfxml/parser/TripleHandlers.html" class="tag"
+            style="font-size: 16px;color:#89c495"
+            title="Average Method Complexity - 2.333 , Coverage - 96.9% ">TripleHandlers.TPPropertyDomainHandler</a>
+            
+    
+            <a href="../owlapi/rdf/rdfxml/parser/TripleHandlers.html" class="tag"
+            style="font-size: 19px;color:#e7a19b"
+            title="Average Method Complexity - 4.167 , Coverage - 61.6% ">TripleHandlers.TPPropertyRangeHandler</a>
+            
+    
+            <a href="../owlapi/rdf/rdfxml/parser/TripleHandlers.html" class="tag"
+            style="font-size: 14px;color:#89c495"
+            title="Average Method Complexity - 1.333 , Coverage - 100% ">TripleHandlers.TPRestHandler</a>
+            
+    
+            <a href="../owlapi/rdf/rdfxml/parser/TripleHandlers.html" class="tag"
+            style="font-size: 13px;color:#89c495"
+            title="Average Method Complexity - 1 , Coverage - 100% ">TripleHandlers.TPSameAsHandler</a>
+            
+    
+            <a href="../owlapi/rdf/rdfxml/parser/TripleHandlers.html" class="tag"
+            style="font-size: 15px;color:#89c495"
+            title="Average Method Complexity - 1.667 , Coverage - 100% ">TripleHandlers.TPSomeValuesFromHandler</a>
+            
+    
+            <a href="../owlapi/rdf/rdfxml/parser/TripleHandlers.html" class="tag"
+            style="font-size: 15px;color:#fae1a0"
+            title="Average Method Complexity - 1.833 , Coverage - 79.3% ">TripleHandlers.TPSubClassOfHandler</a>
+            
+    
+            <a href="../owlapi/rdf/rdfxml/parser/TripleHandlers.html" class="tag"
+            style="font-size: 20px;color:#14892c"
+            title="Average Method Complexity - 4.6 , Coverage - 89% ">TripleHandlers.TPSubPropertyOfHandler</a>
+            
+    
+            <a href="../owlapi/rdf/rdfxml/parser/TripleHandlers.html" class="tag"
+            style="font-size: 16px;color:#14892c"
+            title="Average Method Complexity - 2.333 , Coverage - 90% ">TripleHandlers.TPTypeHandler</a>
+            
+    
+            <a href="../owlapi/rdf/rdfxml/parser/TripleHandlers.html" class="tag"
+            style="font-size: 13px;color:#89c495"
+            title="Average Method Complexity - 1 , Coverage - 100% ">TripleHandlers.TPUnionOfHandler</a>
+            
+    
+            <a href="../owlapi/rdf/rdfxml/parser/TripleHandlers.html" class="tag"
+            style="font-size: 15px;color:#14892c"
+            title="Average Method Complexity - 1.75 , Coverage - 90% ">TripleHandlers.TPVersionIRIHandler</a>
+            
+    
+            <a href="../owlapi/rdf/rdfxml/parser/TripleHandlers.html" class="tag"
+            style="font-size: 14px;color:#fae1a0"
+            title="Average Method Complexity - 1.25 , Coverage - 78.6% ">TripleHandlers.TypeAllDifferentHandler</a>
+            
+    
+            <a href="../owlapi/rdf/rdfxml/parser/TripleHandlers.html" class="tag"
+            style="font-size: 14px;color:#fae1a0"
+            title="Average Method Complexity - 1.25 , Coverage - 80% ">TripleHandlers.TypeAllDisjointClassesHandler</a>
+            
+    
+            <a href="../owlapi/rdf/rdfxml/parser/TripleHandlers.html" class="tag"
+            style="font-size: 15px;color:#fae1a0"
+            title="Average Method Complexity - 1.667 , Coverage - 83.3% ">TripleHandlers.TypeAllDisjointPropertiesHandler</a>
+            
+    
+            <a href="../owlapi/rdf/rdfxml/parser/TripleHandlers.html" class="tag"
+            style="font-size: 13px;color:#89c495"
+            title="Average Method Complexity - 1 , Coverage - 100% ">TripleHandlers.TypeAnnotationHandler</a>
+            
+    
+            <a href="../owlapi/rdf/rdfxml/parser/TripleHandlers.html" class="tag"
+            style="font-size: 14px;color:#14892c"
+            title="Average Method Complexity - 1.5 , Coverage - 90.9% ">TripleHandlers.TypeAnnotationPropertyHandler</a>
+            
+    
+            <a href="../owlapi/rdf/rdfxml/parser/TripleHandlers.html" class="tag"
+            style="font-size: 14px;color:#14892c"
+            title="Average Method Complexity - 1.333 , Coverage - 90.9% ">TripleHandlers.TypeAsymmetricPropertyHandler</a>
+            
+    
+            <a href="../owlapi/rdf/rdfxml/parser/TripleHandlers.html" class="tag"
+            style="font-size: 15px;color:#fae1a0"
+            title="Average Method Complexity - 1.846 , Coverage - 78.2% ">TripleHandlers.TypeAxiomHandler</a>
+            
+    
+            <a href="../owlapi/rdf/rdfxml/parser/TripleHandlers.html" class="tag"
+            style="font-size: 14px;color:#89c495"
+            title="Average Method Complexity - 1.5 , Coverage - 100% ">TripleHandlers.TypeClassHandler</a>
+            
+    
+            <a href="../owlapi/rdf/rdfxml/parser/TripleHandlers.html" class="tag"
+            style="font-size: 14px;color:#14892c"
+            title="Average Method Complexity - 1.5 , Coverage - 90% ">TripleHandlers.TypeDataPropertyHandler</a>
+            
+    
+            <a href="../owlapi/rdf/rdfxml/parser/TripleHandlers.html" class="tag"
+            style="font-size: 14px;color:#de7b72"
+            title="Average Method Complexity - 1.5 , Coverage - 28.6% ">TripleHandlers.TypeDataRangeHandler</a>
+            
+    
+            <a href="../owlapi/rdf/rdfxml/parser/TripleHandlers.html" class="tag"
+            style="font-size: 14px;color:#89c495"
+            title="Average Method Complexity - 1.5 , Coverage - 100% ">TripleHandlers.TypeDatatypeHandler</a>
+            
+    
+            <a href="../owlapi/rdf/rdfxml/parser/TripleHandlers.html" class="tag"
+            style="font-size: 13px;color:#89c495"
+            title="Average Method Complexity - 1 , Coverage - 100% ">TripleHandlers.TypeDeprecatedClassHandler</a>
+            
+    
+            <a href="../owlapi/rdf/rdfxml/parser/TripleHandlers.html" class="tag"
+            style="font-size: 13px;color:#89c495"
+            title="Average Method Complexity - 1 , Coverage - 100% ">TripleHandlers.TypeDeprecatedPropertyHandler</a>
+            
+    
+            <a href="../owlapi/rdf/rdfxml/parser/TripleHandlers.html" class="tag"
+            style="font-size: 15px;color:#89c495"
+            title="Average Method Complexity - 1.667 , Coverage - 100% ">TripleHandlers.TypeFunctionalPropertyHandler</a>
+            
+    
+            <a href="../owlapi/rdf/rdfxml/parser/TripleHandlers.html" class="tag"
+            style="font-size: 14px;color:#14892c"
+            title="Average Method Complexity - 1.333 , Coverage - 91.7% ">TripleHandlers.TypeInverseFunctionalPropertyHandler</a>
+            
+    
+            <a href="../owlapi/rdf/rdfxml/parser/TripleHandlers.html" class="tag"
+            style="font-size: 14px;color:#14892c"
+            title="Average Method Complexity - 1.333 , Coverage - 90.9% ">TripleHandlers.TypeIrreflexivePropertyHandler</a>
+            
+    
+            <a href="../owlapi/rdf/rdfxml/parser/TripleHandlers.html" class="tag"
+            style="font-size: 13px;color:#89c495"
+            title="Average Method Complexity - 1 , Coverage - 100% ">TripleHandlers.TypeListHandler</a>
+            
+    
+            <a href="../owlapi/rdf/rdfxml/parser/TripleHandlers.html" class="tag"
+            style="font-size: 14px;color:#89c495"
+            title="Average Method Complexity - 1.5 , Coverage - 100% ">TripleHandlers.TypeNamedIndividualHandler</a>
+            
+    
+            <a href="../owlapi/rdf/rdfxml/parser/TripleHandlers.html" class="tag"
+            style="font-size: 15px;color:#d04437"
+            title="Average Method Complexity - 2 , Coverage - 4.3% ">TripleHandlers.TypeNegativeDataPropertyAssertionHandler</a>
+            
+    
+            <a href="../owlapi/rdf/rdfxml/parser/TripleHandlers.html" class="tag"
+            style="font-size: 16px;color:#fae1a0"
+            title="Average Method Complexity - 2.375 , Coverage - 80.7% ">TripleHandlers.TypeNegativePropertyAssertionHandler</a>
+            
+    
+            <a href="../owlapi/rdf/rdfxml/parser/TripleHandlers.html" class="tag"
+            style="font-size: 14px;color:#89c495"
+            title="Average Method Complexity - 1.5 , Coverage - 100% ">TripleHandlers.TypeObjectPropertyHandler</a>
+            
+    
+            <a href="../owlapi/rdf/rdfxml/parser/TripleHandlers.html" class="tag"
+            style="font-size: 16px;color:#14892c"
+            title="Average Method Complexity - 2.5 , Coverage - 92.3% ">TripleHandlers.TypeOntologyHandler</a>
+            
+    
+            <a href="../owlapi/rdf/rdfxml/parser/TripleHandlers.html" class="tag"
+            style="font-size: 13px;color:#89c495"
+            title="Average Method Complexity - 1 , Coverage - 100% ">TripleHandlers.TypeOntologyPropertyHandler</a>
+            
+    
+            <a href="../owlapi/rdf/rdfxml/parser/TripleHandlers.html" class="tag"
+            style="font-size: 13px;color:#89c495"
+            title="Average Method Complexity - 1 , Coverage - 100% ">TripleHandlers.TypePropertyHandler</a>
+            
+    
+            <a href="../owlapi/rdf/rdfxml/parser/TripleHandlers.html" class="tag"
+            style="font-size: 14px;color:#14892c"
+            title="Average Method Complexity - 1.5 , Coverage - 88.9% ">TripleHandlers.TypeRDFSClassHandler</a>
+            
+    
+            <a href="../owlapi/rdf/rdfxml/parser/TripleHandlers.html" class="tag"
+            style="font-size: 14px;color:#14892c"
+            title="Average Method Complexity - 1.333 , Coverage - 90.9% ">TripleHandlers.TypeReflexivePropertyHandler</a>
+            
+    
+            <a href="../owlapi/rdf/rdfxml/parser/TripleHandlers.html" class="tag"
+            style="font-size: 13px;color:#89c495"
+            title="Average Method Complexity - 1 , Coverage - 100% ">TripleHandlers.TypeRestrictionHandler</a>
+            
+    
+            <a href="../owlapi/rdf/rdfxml/parser/TripleHandlers.html" class="tag"
+            style="font-size: 13px;color:#89c495"
+            title="Average Method Complexity - 1 , Coverage - 100% ">TripleHandlers.TypeSWRLAtomListHandler</a>
+            
+    
+            <a href="../owlapi/rdf/rdfxml/parser/TripleHandlers.html" class="tag"
+            style="font-size: 13px;color:#89c495"
+            title="Average Method Complexity - 1 , Coverage - 100% ">TripleHandlers.TypeSWRLBuiltInAtomHandler</a>
+            
+    
+            <a href="../owlapi/rdf/rdfxml/parser/TripleHandlers.html" class="tag"
+            style="font-size: 13px;color:#89c495"
+            title="Average Method Complexity - 1 , Coverage - 100% ">TripleHandlers.TypeSWRLBuiltInHandler</a>
+            
+    
+            <a href="../owlapi/rdf/rdfxml/parser/TripleHandlers.html" class="tag"
+            style="font-size: 13px;color:#89c495"
+            title="Average Method Complexity - 1 , Coverage - 100% ">TripleHandlers.TypeSWRLClassAtomHandler</a>
+            
+    
+            <a href="../owlapi/rdf/rdfxml/parser/TripleHandlers.html" class="tag"
+            style="font-size: 13px;color:#89c495"
+            title="Average Method Complexity - 1 , Coverage - 100% ">TripleHandlers.TypeSWRLDataRangeAtomHandler</a>
+            
+    
+            <a href="../owlapi/rdf/rdfxml/parser/TripleHandlers.html" class="tag"
+            style="font-size: 13px;color:#89c495"
+            title="Average Method Complexity - 1 , Coverage - 100% ">TripleHandlers.TypeSWRLDataValuedPropertyAtomHandler</a>
+            
+    
+            <a href="../owlapi/rdf/rdfxml/parser/TripleHandlers.html" class="tag"
+            style="font-size: 13px;color:#89c495"
+            title="Average Method Complexity - 1 , Coverage - 100% ">TripleHandlers.TypeSWRLDifferentIndividualsAtomHandler</a>
+            
+    
+            <a href="../owlapi/rdf/rdfxml/parser/TripleHandlers.html" class="tag"
+            style="font-size: 13px;color:#89c495"
+            title="Average Method Complexity - 1 , Coverage - 100% ">TripleHandlers.TypeSWRLImpHandler</a>
+            
+    
+            <a href="../owlapi/rdf/rdfxml/parser/TripleHandlers.html" class="tag"
+            style="font-size: 13px;color:#89c495"
+            title="Average Method Complexity - 1 , Coverage - 100% ">TripleHandlers.TypeSWRLIndividualPropertyAtomHandler</a>
+            
+    
+            <a href="../owlapi/rdf/rdfxml/parser/TripleHandlers.html" class="tag"
+            style="font-size: 13px;color:#89c495"
+            title="Average Method Complexity - 1 , Coverage - 100% ">TripleHandlers.TypeSWRLSameIndividualAtomHandler</a>
+            
+    
+            <a href="../owlapi/rdf/rdfxml/parser/TripleHandlers.html" class="tag"
+            style="font-size: 13px;color:#89c495"
+            title="Average Method Complexity - 1 , Coverage - 100% ">TripleHandlers.TypeSWRLVariableHandler</a>
+            
+    
+            <a href="../owlapi/rdf/rdfxml/parser/TripleHandlers.html" class="tag"
+            style="font-size: 13px;color:#de7b72"
+            title="Average Method Complexity - 1 , Coverage - 33.3% ">TripleHandlers.TypeSelfRestrictionHandler</a>
+            
+    
+            <a href="../owlapi/rdf/rdfxml/parser/TripleHandlers.html" class="tag"
+            style="font-size: 15px;color:#14892c"
+            title="Average Method Complexity - 1.667 , Coverage - 93.3% ">TripleHandlers.TypeSymmetricPropertyHandler</a>
+            
+    
+            <a href="../owlapi/rdf/rdfxml/parser/TripleHandlers.html" class="tag"
+            style="font-size: 13px;color:#89c495"
+            title="Average Method Complexity - 1 , Coverage - 100% ">TripleHandlers.TypeTransitivePropertyHandler</a>
+            
+    
+            <a href="../owlapi/rdf/rdfxml/parser/TripleLogger.html" class="tag"
+            style="font-size: 15px;color:#e28e87"
+            title="Average Method Complexity - 2 , Coverage - 46.9% ">TripleLogger</a>
+            
+    
+            <a href="../owlapi/rdf/turtle/parser/TurtleOntologyParser.html" class="tag"
+            style="font-size: 17px;color:#f6c342"
+            title="Average Method Complexity - 3 , Coverage - 65.9% ">TurtleOntologyParser</a>
+            
+    
+            <a href="../owlapi/rdf/turtle/parser/TurtleOntologyParserFactory.html" class="tag"
+            style="font-size: 13px;color:#89c495"
+            title="Average Method Complexity - 1 , Coverage - 100% ">TurtleOntologyParserFactory</a>
+            
+    
+            <a href="../owlapi/rdf/turtle/parser/TurtleParser.html" class="tag"
+            style="font-size: 17px;color:#f6c342"
+            title="Average Method Complexity - 2.816 , Coverage - 72.3% ">TurtleParser</a>
+            
+    
+            <a href="../owlapi/rdf/turtle/parser/TurtleParserException.html" class="tag"
+            style="font-size: 13px;color:#de7b72"
+            title="Average Method Complexity - 1 , Coverage - 33.3% ">TurtleParserException</a>
+            
+    
+            <a href="../owlapi/rdf/turtle/parser/TurtleParserTokenManager.html" class="tag"
+            style="font-size: 45px;color:#e7a19b"
+            title="Average Method Complexity - 18.031 , Coverage - 51.3% ">TurtleParserTokenManager</a>
+            
+    
+            <a href="../owlapi/rdf/turtle/renderer/TurtleRenderer.html" class="tag"
+            style="font-size: 17px;color:#14892c"
+            title="Average Method Complexity - 2.812 , Coverage - 91.7% ">TurtleRenderer</a>
+            
+    
+            <a href="../owlapi/rdf/turtle/renderer/TurtleStorer.html" class="tag"
+            style="font-size: 14px;color:#14892c"
+            title="Average Method Complexity - 1.5 , Coverage - 85.7% ">TurtleStorer</a>
+            
+    
+            <a href="../owlapi/rdf/turtle/renderer/TurtleStorerFactory.html" class="tag"
+            style="font-size: 13px;color:#89c495"
+            title="Average Method Complexity - 1 , Coverage - 100% ">TurtleStorerFactory</a>
+            
+    
+            <a href="../owlapi/rdf/rdfxml/renderer/XMLWriterFactory.html" class="tag"
+            style="font-size: 13px;color:#89c495"
+            title="Average Method Complexity - 1 , Coverage - 100% ">XMLWriterFactory</a>
+            
+    
+            <a href="../owlapi/rdf/rdfxml/renderer/XMLWriterImpl.html" class="tag"
+            style="font-size: 16px;color:#14892c"
+            title="Average Method Complexity - 2.353 , Coverage - 84.3% ">XMLWriterImpl</a>
+            
+    
+            <a href="../owlapi/rdf/rdfxml/renderer/XMLWriterImpl.html" class="tag"
+            style="font-size: 17px;color:#14892c"
+            title="Average Method Complexity - 2.769 , Coverage - 91.9% ">XMLWriterImpl.XMLElement</a>
+            
+    
+            <a href="../owlapi/rdf/rdfxml/renderer/XMLWriterNamespaceManager.html" class="tag"
+            style="font-size: 15px;color:#e7a19b"
+            title="Average Method Complexity - 1.769 , Coverage - 61.8% ">XMLWriterNamespaceManager</a>
+            
+    
+            <a href="../owlapi/rdf/rdfxml/renderer/XMLWriterPreferences.html" class="tag"
+            style="font-size: 13px;color:#f6c342"
+            title="Average Method Complexity - 1 , Coverage - 70.4% ">XMLWriterPreferences</a>
+           </div>
+   
+          <div id="shallowPackageCloud"  style="display: none"  >
+                          
+    
+        
+    
+            <a href="../owlapi/OWLAPIParsersModule.html" class="tag"
+            style="font-size: 48px;color:#89c495"
+            title="Average Method Complexity - 1 , Coverage - 100% ">OWLAPIParsersModule</a>
+           </div>
+   </div>
+    </div> <!-- tabs-pane active-pane -->
+</div> <!-- aui-tabs horizontal-tabs -->
+
+                        </div> <!-- class="aui-page-panel-content-clover" -->
+                    <footer id="footer" role="contentinfo">
+    <section class="footer-body">
+        <ul>
+            <li>
+                Report generated by <a target="_new" href="https://openclover.org">OpenClover</a> v 4.5.2
+                on Sat Apr 27 2024 12:17:55 CDT using coverage data from Sat Apr 27 2024 12:05:38 CDT.
+            </li>
+        </ul>
+        <ul>
+            <li>OpenClover is free and open-source software. </li>
+        </ul>
+    </section>
+</footer>                </section> <!-- class="aui-page-panel-content" -->
+            </div> <!-- class="aui-page-panel-inner" -->
+        </div> <!-- class="aui-page-panel" -->
+    </div> <!-- id="page" -->
+</body>
+</html>

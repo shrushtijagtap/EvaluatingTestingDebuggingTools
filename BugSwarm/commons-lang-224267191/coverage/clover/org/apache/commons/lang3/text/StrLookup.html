@@ -1,0 +1,2486 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+
+    
+    
+    <link rel="SHORTCUT ICON" href="../../../../../img/clover.ico" />
+
+    <link rel="stylesheet" href="../../../../../aui/css/aui.min.css" media="all"/>
+    <link rel="stylesheet" href="../../../../../aui/css/aui-experimental.min.css" media="all"/>
+    <!--[if IE 9]><link rel="stylesheet" href="../../../../../aui/css/aui-ie9.min.css" media="all"/><![endif]-->
+
+    <style type="text/css" media="all">
+        @import url('../../../../../style.css');
+        @import url('../../../../../tree.css');
+        
+    </style>
+
+    <script src="../../../../../jquery-1.8.3.min.js" type="text/javascript"></script>
+    <script src="../../../../../aui/js/aui.min.js" type="text/javascript"></script>
+    <script src="../../../../../aui/js/aui-experimental.min.js" type="text/javascript"></script>
+    <script src="../../../../../aui/js/aui-soy.min.js" type="text/javascript"></script>
+
+    <script src="../../../../../package-nodes-tree.js" type="text/javascript"></script>
+    <script src="../../../../../clover-tree.js" type="text/javascript"></script>
+    <script src="../../../../../clover.js" type="text/javascript"></script>
+    <script src="../../../../../clover-descriptions.js" type="text/javascript"></script>
+    <script src="../../../../../cloud.js" type="text/javascript"></script>
+
+            <title>Apache Commons Lang 3.6-SNAPSHOT</title>
+    </head>
+
+<body  onload="onLoad('Apache Commons Lang 3.6-SNAPSHOT: org.apache.commons.lang3.text.StrLookup.java')">
+    <div id="page">
+        
+        
+
+
+<header id="header" role="banner">
+    <nav class="aui-header aui-dropdown2-trigger-group" role="navigation">
+        <div class="aui-header-inner">
+            <div class="aui-header-primary">
+                <h1 id="logo" class="aui-header-logo aui-header-logo-clover">
+                    <a href="https://openclover.org" title="Visit OpenClover home page"><span class="aui-header-logo-device">OpenClover</span></a>
+                </h1>
+                            </div>
+            <div class="aui-header-secondary">
+                <ul class="aui-nav">
+                    <li id="system-help-menu">
+                        <a class="aui-nav-link" title="Open online documentation" target="_blank"
+                           href="https://openclover.org/documentation">
+                            <span class="aui-icon aui-icon-small aui-iconfont-help">&#160;Help</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+        
+        <div class="aui-page-panel">
+            <div class="aui-page-panel-inner">
+                <div class="aui-page-panel-nav aui-page-panel-nav-clover">
+                    
+
+<div class="aui-page-header-inner" style="margin-bottom: 20px;">
+    <div class="aui-page-header-image">
+                    <a href="http://commons.apache.org/proper/commons-lang/" target="_top">
+                <div class="aui-avatar aui-avatar-large aui-avatar-project">
+            <div class="aui-avatar-inner">
+                                    <img src="../../../../../img/clover_logo_large.png" alt="Clover icon"/>
+                            </div>
+        </div>
+                    </a>
+            </div>
+    <div class="aui-page-header-main" >
+        <h1>
+                            <a href="http://commons.apache.org/proper/commons-lang/" target="_top">
+                                        Apache Commons Lang 3.6-SNAPSHOT
+                                        </a>
+                    </h1>
+    </div>
+</div>
+
+<nav class="aui-navgroup aui-navgroup-vertical">
+    <div class="aui-navgroup-inner">
+                                            <ul class="aui-nav">
+                <li class="">
+                    <a href="../../../../../dashboard.html">Project overview</a>
+                </li>
+            </ul>
+        
+                <div class="aui-nav-heading packages-nav-heading">
+            <strong>Packages</strong>
+        </div>
+        <div class="aui-nav project-packages">
+            <form method="get" action="#" class="aui package-filter-container">
+                <input type="text" autocomplete="off" class="package-filter text"
+                       placeholder="Type to filter packages..." name="package-filter" id="package-filter"
+                       title="Start typing package name (or part of the name) to search through the tree. Use arrow keys and the Enter key to navigate."/>
+            </form>
+            <p class="package-filter-no-results-message hidden">
+                <small>No results found.</small>
+            </p>
+                                                <div class="packages-tree-wrapper" data-root-relative="../../../../../" data-package-name="org.apache.commons.lang3.text">
+                <div class="packages-tree-container"></div>
+                <div class="clover-packages-lozenges"></div>
+            </div>
+        </div>
+        
+            </div>
+</nav>                </div>
+                <section class="aui-page-panel-content">
+                    <div class="aui-page-panel-content-clover">
+
+                    
+                    <ol class="aui-nav aui-nav-breadcrumbs">
+            
+        <li><a href="../../../../../dashboard.html">Project Clover database Fri Apr 26 2024 18:06:03 CDT</a></li> 
+        <li><a href="pkg-summary.html">        Package org.apache.commons.lang3.text</a></li> 
+    </ol>
+    
+<h1 class="aui-h2-clover">
+            File StrLookup.java
+    </h1>
+
+
+
+
+
+
+
+
+            
+<div class="aui-tabs horizontal-tabs" id="tabs-file">
+            <div class="tabs-pane aui-tabs-pane-100-pcnt active-pane" id="tabs-file-source">
+        <div>&#160;</div>
+
+        
+                <div style="display: table; width: 100%">
+                            <div class="clover-histogram-table-cell">
+                                <div class="dashboard-widget">
+            <header class="dashboard-widget-header">
+                <h3>Coverage histogram</h3>
+            </header>
+            <div class="dashboard-widget-content">
+                <div class="aui-item clover-aui-item-histogram">
+                    <img src="../../../../../img/srcFileCovDistChart10.png" alt="../../../../../img/srcFileCovDistChart10.png"
+                         usemap="#srcFileCovDistChart10.png" class="clover-histogram-img"/>
+                    <map id="srcFileCovDistChart10.png" name="srcFileCovDistChart10.png">
+<area shape="rect" coords="100,8,107,65" title="105 files have 91-100% coverage" alt="" nohref="nohref"/>
+<area shape="rect" coords="91,60,98,66" title="11 files have 81-90% coverage" alt="" nohref="nohref"/>
+<area shape="rect" coords="82,65,89,66" title="3 files have 71-80% coverage" alt="" nohref="nohref"/>
+<area shape="rect" coords="73,64,80,66" title="4 files have 61-70% coverage" alt="" nohref="nohref"/>
+<area shape="rect" coords="64,65,71,66" title="2 files have 51-60% coverage" alt="" nohref="nohref"/>
+<area shape="rect" coords="56,66,63,67" title="0 files have 41-50% coverage" alt="" nohref="nohref"/>
+<area shape="rect" coords="47,66,54,67" title="0 files have 31-40% coverage" alt="" nohref="nohref"/>
+<area shape="rect" coords="38,66,45,67" title="1 file has 21-30% coverage" alt="" nohref="nohref"/>
+<area shape="rect" coords="29,66,36,67" title="0 files have 11-20% coverage" alt="" nohref="nohref"/>
+<area shape="rect" coords="20,66,27,67" title="0 files have 1-10% coverage" alt="" nohref="nohref"/>
+<area shape="rect" coords="11,62,18,66" title="8 files have 0% coverage" alt="" nohref="nohref"/>
+</map><br />
+                    <span class="subtle"><strong>0% </strong>of files have more coverage</span>
+                </div>
+            </div>
+        </div>
+                    </div>
+                        <div style="display: table-cell; width: 67%;">
+                    <div class="dashboard-widget">
+        <header class="dashboard-widget-header">
+            <h3>Code metrics</h3>
+        </header>
+        <div class="dashboard-widget-content">
+                        
+
+<div id="td-header-stats" class="aui-item" style="display: ">
+<div style="display: table">
+    <div class="stats-box">
+        <div class="stats-box-label"><label title="Total number of branches in this file">Branches:</label></div>
+        <div class="stats-box-value">6</div>
+    </div>
+    <div class="stats-box">
+        <div class="stats-box-label"><label title="Total number of statements in this file">Statements:</label></div>
+        <div class="stats-box-value">15</div>
+    </div>
+    <div class="stats-box">
+        <div class="stats-box-label"><label title="Total number of methods in this file">Methods:</label></div>
+        <div class="stats-box-value">7</div>
+    </div>
+    <div class="stats-box">
+        <div class="stats-box-label"><label title="Total number of classes in this file">Classes:</label></div>
+        <div class="stats-box-value">3</div>
+    </div>
+            <div class="stats-box">
+        <div class="stats-box-label"><label title="Total number of lines of code in this file">LOC:</label></div>
+        <div class="stats-box-value">184</div>
+    </div>
+    <div class="stats-box">
+        <div class="stats-box-label"><label title="Total number of non-comment lines of code in this file">NCLOC:</label></div>
+        <div class="stats-box-value">49</div>
+    </div>
+    <div class="stats-box">
+        <div class="stats-box-label"><label title="Cyclomatic complexity is the number of paths in this file">Total complexity:</label></div>
+        <div class="stats-box-value">11</div>
+    </div>
+    <div class="stats-box">
+        <div class="stats-box-label">
+            <label title="Complexity density is the complexity divided by the number of statements in this file">Complexity density:</label>
+        </div>
+        <div class="stats-box-value">0.73</div>
+    </div>
+    <div class="stats-box">
+        <div class="stats-box-label"><label title="Number of statements per method.">Statements/Method:</label></div>
+        <div class="stats-box-value">2.14</div>
+    </div>
+    <div class="stats-box">
+        <div class="stats-box-label"><label title="Number of methods per class.">Methods/Class:</label></div>
+        <div class="stats-box-value">2.33</div>
+    </div>
+        <div class="stats-box">
+        <div class="stats-box-label"><label title="Complexity divided by the number of methods in this file">Average method complexity:</label></div>
+        <div class="stats-box-value">1.57</div>
+    </div>
+</div>
+
+</div>
+                        
+
+<div id="td-filtered-header-stats" class="aui-item" style="display: none">
+<div style="display: table">
+    <div class="stats-box">
+        <div class="stats-box-label"><label title="Total number of branches in this file">Branches:</label></div>
+        <div class="stats-box-value">6</div>
+    </div>
+    <div class="stats-box">
+        <div class="stats-box-label"><label title="Total number of statements in this file">Statements:</label></div>
+        <div class="stats-box-value">15</div>
+    </div>
+    <div class="stats-box">
+        <div class="stats-box-label"><label title="Total number of methods in this file">Methods:</label></div>
+        <div class="stats-box-value">7</div>
+    </div>
+    <div class="stats-box">
+        <div class="stats-box-label"><label title="Total number of classes in this file">Classes:</label></div>
+        <div class="stats-box-value">3</div>
+    </div>
+            <div class="stats-box">
+        <div class="stats-box-label"><label title="Total number of lines of code in this file">LOC:</label></div>
+        <div class="stats-box-value">184</div>
+    </div>
+    <div class="stats-box">
+        <div class="stats-box-label"><label title="Total number of non-comment lines of code in this file">NCLOC:</label></div>
+        <div class="stats-box-value">49</div>
+    </div>
+    <div class="stats-box">
+        <div class="stats-box-label"><label title="Cyclomatic complexity is the number of paths in this file">Total complexity:</label></div>
+        <div class="stats-box-value">11</div>
+    </div>
+    <div class="stats-box">
+        <div class="stats-box-label">
+            <label title="Complexity density is the complexity divided by the number of statements in this file">Complexity density:</label>
+        </div>
+        <div class="stats-box-value">0.73</div>
+    </div>
+    <div class="stats-box">
+        <div class="stats-box-label"><label title="Number of statements per method.">Statements/Method:</label></div>
+        <div class="stats-box-value">2.14</div>
+    </div>
+    <div class="stats-box">
+        <div class="stats-box-label"><label title="Number of methods per class.">Methods/Class:</label></div>
+        <div class="stats-box-value">2.33</div>
+    </div>
+        <div class="stats-box">
+        <div class="stats-box-label"><label title="Complexity divided by the number of methods in this file">Average method complexity:</label></div>
+        <div class="stats-box-value">1.57</div>
+    </div>
+</div>
+
+</div>        </div>
+    </div>
+            </div>
+        </div>
+
+        
+        
+
+
+    <h2>Classes</h2>
+
+        <table class="aui aui-table-sortable">
+        <thead>
+                        <tr>     <th>Class</th>
+    <th>Line #</th>
+
+            
+        <th class="">
+            <label  title="The total number of statements.">Total Statements</label>
+        </th>
+        
+            
+        <th class="">
+            <label  title="The percentage of elements that have been filtered from this report.">% Filtered</label>
+        </th>
+        
+            
+        <th class="">
+            <label  title="Cyclomatic complexity is a measure of the number of paths in your code.">Complexity</label>
+        </th>
+        
+            
+        <th class="">
+            <label  title="The number of statements and branches that were not covered during testing.">Uncovered Elements</label>
+        </th>
+        
+            
+        <th class="">
+            <label  title="The amount of code that was hit at least once during testing.">TOTAL Coverage</label>
+        </th>
+        
+    
+            <th>Actions</th>
+    </tr>         </thead>
+        <tbody>
+                              <tr> <td id="StrLookup">
+        <span><a href="#40" title="StrLookup" onclick="closeDialogAndScrollTo('dialog-StrLookup', '40');">StrLookup</a></span>
+</td>
+<td>40<a name="sl-40"></a></td>
+    <td class="">4</td>
+    <td class="">0%</td>
+    <td class="">4</td>
+    <td class="">0</td>
+    <td class=""><div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">1.0</span>100%</div><div style="display: table-cell">
+ <div title="100% Covered"  style="min-width:200px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:100%"></div></div></div></div></td>
+    <td><button data-dialog-id="dialog-StrLookup" class="aui-button aui-button-link dialog-show-button">Show methods</button></td>
+</tr>                               <tr> <td id="StrLookup.MapStrLookup">
+        <span><a href="#128" title="StrLookup.MapStrLookup" onclick="closeDialogAndScrollTo('dialog-StrLookup_MapStrLookup', '128');">StrLookup.MapStrLookup</a></span>
+</td>
+<td>128<a name="sl-128"></a></td>
+    <td class="">7</td>
+    <td class="">0%</td>
+    <td class="">4</td>
+    <td class="">0</td>
+    <td class=""><div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">1.0</span>100%</div><div style="display: table-cell">
+ <div title="100% Covered"  style="min-width:200px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:100%"></div></div></div></div></td>
+    <td><button data-dialog-id="dialog-StrLookup_MapStrLookup" class="aui-button aui-button-link dialog-show-button">Show methods</button></td>
+</tr>                               <tr> <td id="StrLookup.SystemPropertiesStrLookup">
+        <span><a href="#168" title="StrLookup.SystemPropertiesStrLookup" onclick="closeDialogAndScrollTo('dialog-StrLookup_SystemPropertiesStrLookup', '168');">StrLookup.SystemPropertiesStrLookup</a></span>
+</td>
+<td>168<a name="sl-168"></a></td>
+    <td class="">4</td>
+    <td class="">0%</td>
+    <td class="">3</td>
+    <td class="">0</td>
+    <td class=""><div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">1.0</span>100%</div><div style="display: table-cell">
+ <div title="100% Covered"  style="min-width:200px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:100%"></div></div></div></div></td>
+    <td><button data-dialog-id="dialog-StrLookup_SystemPropertiesStrLookup" class="aui-button aui-button-link dialog-show-button">Show methods</button></td>
+</tr>                      </tbody>
+    </table>
+
+    
+     
+        <section role="dialog" id="dialog-StrLookup" class="aui-layer aui-dialog2 aui-dialog2-xlarge" aria-hidden="true">
+            
+            <header class="aui-dialog2-header">
+                <h1 class="aui-dialog2-header-main">Class StrLookup</h1>
+                <div class="aui-dialog2-header-secondary">
+                    <input id="dialog-StrLookup-method-filter" class="test-filter text" type="text" name="method-filter"
+                           placeholder="Type to filter methods..." autocomplete="off"
+                           onkeyup="filterMethods('dialog-StrLookup-methods-body', 'dialog-StrLookup-method-filter');"/>
+                </div>
+            </header>
+
+            
+            <div class="aui-dialog2-content">
+
+                
+
+                <table class="aui aui-table-sortable">
+                                                                                                                                                                                                                                                                                                                        
+                    <thead>
+                                                 <tr> <th id="StrLookup">
+    Class<br/>    <span><a href="#40" title="StrLookup" onclick="closeDialogAndScrollTo('dialog-StrLookup', '40');">StrLookup</a></span>
+</th>
+<th>Line #<br/>40<a name="sl-40"></a></th>
+    <th class=""><label  title="The total number of statements.">Total Statements</label><br/>4</th>
+    <th class=""><label  title="The percentage of elements that have been filtered from this report.">% Filtered</label><br/>0%</th>
+    <th class=""><label  title="Cyclomatic complexity is a measure of the number of paths in your code.">Complexity</label><br/>4</th>
+    <th class=""><label  title="The number of statements and branches that were not covered during testing.">Uncovered Elements</label><br/>0</th>
+    <th class=""><label  title="The amount of code that was hit at least once during testing.">TOTAL Coverage</label><br/><div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">1.0</span>100%</div><div style="display: table-cell">
+ <div title="100% Covered"  style="min-width:200px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:100%"></div></div></div></div></th>
+</tr>                     </thead>
+                    <tbody id="dialog-StrLookup-methods-body">
+                                                                                                            <tr id="StrLookup-1">
+<td id="summary-58-5">
+ <span class="sortValue">noneLookup()&#160;:&#160;StrLookup&lt;?&gt;</span>
+&#160;&#160;<a href="?line=29#58" title="noneLookup()&#160;:&#160;StrLookup&lt;?&gt;" name="sl-58" onclick="closeDialogAndScrollTo('dialog-StrLookup', '58');">noneLookup()&#160;:&#160;StrLookup&lt;?&gt;</a>
+</td>
+<td align="right"><span class="sortValue">58</span>58</td>
+<td class="" align="right"><span class="sortValue">1.0</span>1</td>
+<td class="" align="right"><span class="sortValue">0.0</span>0%</td>
+<td class="" align="right"><span class="sortValue">1.0</span>1</td>
+<td class="" align="right"><span class="sortValue">0.0</span>0</td>
+<td class="" align="right"><span class="sortValue">1.0</span><div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">1.0</span>100%</div><div style="display: table-cell">
+ <div title="100% Covered"  style="min-width:200px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:100%"></div></div></div></div></td>
+ </tr>                                                                                                                <tr id="StrLookup-2">
+<td id="summary-73-5">
+ <span class="sortValue">systemPropertiesLookup()&#160;:&#160;StrLookup&lt;String&gt;</span>
+&#160;&#160;<a href="?line=29#73" title="systemPropertiesLookup()&#160;:&#160;StrLookup&lt;String&gt;" name="sl-73" onclick="closeDialogAndScrollTo('dialog-StrLookup', '73');">systemPropertiesLookup()&#160;:&#160;StrLookup&lt;String&gt;</a>
+</td>
+<td align="right"><span class="sortValue">73</span>73</td>
+<td class="" align="right"><span class="sortValue">1.0</span>1</td>
+<td class="" align="right"><span class="sortValue">0.0</span>0%</td>
+<td class="" align="right"><span class="sortValue">1.0</span>1</td>
+<td class="" align="right"><span class="sortValue">0.0</span>0</td>
+<td class="" align="right"><span class="sortValue">1.0</span><div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">1.0</span>100%</div><div style="display: table-cell">
+ <div title="100% Covered"  style="min-width:200px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:100%"></div></div></div></div></td>
+ </tr>                                                                                                                <tr id="StrLookup-3">
+<td id="summary-87-5">
+ <span class="sortValue">mapLookup(Map&lt;String,&#160;V&gt;)&#160;:&#160;StrLookup&lt;V&gt;</span>
+&#160;&#160;<a href="?line=29#87" title="mapLookup(Map&lt;String,&#160;V&gt;)&#160;:&#160;StrLookup&lt;V&gt;" name="sl-87" onclick="closeDialogAndScrollTo('dialog-StrLookup', '87');">mapLookup(Map&lt;String,&#160;V&gt;)&#160;:&#160;StrLookup&lt;V&gt;</a>
+</td>
+<td align="right"><span class="sortValue">87</span>87</td>
+<td class="" align="right"><span class="sortValue">1.0</span>1</td>
+<td class="" align="right"><span class="sortValue">0.0</span>0%</td>
+<td class="" align="right"><span class="sortValue">1.0</span>1</td>
+<td class="" align="right"><span class="sortValue">0.0</span>0</td>
+<td class="" align="right"><span class="sortValue">1.0</span><div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">1.0</span>100%</div><div style="display: table-cell">
+ <div title="100% Covered"  style="min-width:200px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:100%"></div></div></div></div></td>
+ </tr>                                                                                                                <tr id="StrLookup-4">
+<td id="summary-95-5">
+ <span class="sortValue">StrLookup()</span>
+&#160;&#160;<a href="?line=29#95" title="StrLookup()" name="sl-95" onclick="closeDialogAndScrollTo('dialog-StrLookup', '95');">StrLookup()</a>
+</td>
+<td align="right"><span class="sortValue">95</span>95</td>
+<td class="" align="right"><span class="sortValue">1.0</span>1</td>
+<td class="" align="right"><span class="sortValue">0.0</span>0%</td>
+<td class="" align="right"><span class="sortValue">1.0</span>1</td>
+<td class="" align="right"><span class="sortValue">0.0</span>0</td>
+<td class="" align="right"><span class="sortValue">1.0</span><div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">1.0</span>100%</div><div style="display: table-cell">
+ <div title="100% Covered"  style="min-width:200px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:100%"></div></div></div></div></td>
+ </tr>                                                                         </tbody>
+                </table>
+
+                <div>&#160;</div>
+                
+
+            </div>
+
+            
+            <footer class="aui-dialog2-footer">
+                <div class="aui-dialog2-footer-actions">
+                    <button class="aui-button aui-button-primary dialog-close-button"
+                            data-dialog-id="dialog-StrLookup">Close</button>
+                </div>
+                <div class="aui-dialog2-footer-hint">Click on a class or a method name to jump to source.</div>
+            </footer>
+        </section>
+
+     
+        <section role="dialog" id="dialog-StrLookup_MapStrLookup" class="aui-layer aui-dialog2 aui-dialog2-xlarge" aria-hidden="true">
+            
+            <header class="aui-dialog2-header">
+                <h1 class="aui-dialog2-header-main">Class StrLookup.MapStrLookup</h1>
+                <div class="aui-dialog2-header-secondary">
+                    <input id="dialog-StrLookup.MapStrLookup-method-filter" class="test-filter text" type="text" name="method-filter"
+                           placeholder="Type to filter methods..." autocomplete="off"
+                           onkeyup="filterMethods('dialog-StrLookup.MapStrLookup-methods-body', 'dialog-StrLookup.MapStrLookup-method-filter');"/>
+                </div>
+            </header>
+
+            
+            <div class="aui-dialog2-content">
+
+                
+
+                <table class="aui aui-table-sortable">
+                                                                                                                                                                                
+                    <thead>
+                                                 <tr> <th id="StrLookup.MapStrLookup">
+    Class<br/>    <span><a href="#128" title="StrLookup.MapStrLookup" onclick="closeDialogAndScrollTo('dialog-StrLookup_MapStrLookup', '128');">StrLookup.MapStrLookup</a></span>
+</th>
+<th>Line #<br/>128<a name="sl-128"></a></th>
+    <th class=""><label  title="The total number of statements.">Total Statements</label><br/>7</th>
+    <th class=""><label  title="The percentage of elements that have been filtered from this report.">% Filtered</label><br/>0%</th>
+    <th class=""><label  title="Cyclomatic complexity is a measure of the number of paths in your code.">Complexity</label><br/>4</th>
+    <th class=""><label  title="The number of statements and branches that were not covered during testing.">Uncovered Elements</label><br/>0</th>
+    <th class=""><label  title="The amount of code that was hit at least once during testing.">TOTAL Coverage</label><br/><div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">1.0</span>100%</div><div style="display: table-cell">
+ <div title="100% Covered"  style="min-width:200px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:100%"></div></div></div></div></th>
+</tr>                     </thead>
+                    <tbody id="dialog-StrLookup.MapStrLookup-methods-body">
+                                                                                                            <tr id="StrLookup.MapStrLookup-1">
+<td id="summary-138-9">
+ <span class="sortValue">MapStrLookup(Map&lt;String,&#160;V&gt;)</span>
+&#160;&#160;<a href="?line=29#138" title="MapStrLookup(Map&lt;String,&#160;V&gt;)" name="sl-138" onclick="closeDialogAndScrollTo('dialog-StrLookup.MapStrLookup', '138');">MapStrLookup(Map&lt;String,&#160;V&gt;)</a>
+</td>
+<td align="right"><span class="sortValue">138</span>138</td>
+<td class="" align="right"><span class="sortValue">1.0</span>1</td>
+<td class="" align="right"><span class="sortValue">0.0</span>0%</td>
+<td class="" align="right"><span class="sortValue">1.0</span>1</td>
+<td class="" align="right"><span class="sortValue">0.0</span>0</td>
+<td class="" align="right"><span class="sortValue">1.0</span><div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">1.0</span>100%</div><div style="display: table-cell">
+ <div title="100% Covered"  style="min-width:200px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:100%"></div></div></div></div></td>
+ </tr>                                                                                                                <tr id="StrLookup.MapStrLookup-2">
+<td id="summary-151-9">
+ <span class="sortValue">lookup(String)&#160;:&#160;String</span>
+&#160;&#160;<a href="?line=29#151" title="lookup(String)&#160;:&#160;String" name="sl-151" onclick="closeDialogAndScrollTo('dialog-StrLookup.MapStrLookup', '151');">lookup(String)&#160;:&#160;String</a>
+</td>
+<td align="right"><span class="sortValue">151</span>151</td>
+<td class="" align="right"><span class="sortValue">6.0</span>6</td>
+<td class="" align="right"><span class="sortValue">0.0</span>0%</td>
+<td class="" align="right"><span class="sortValue">3.0</span>3</td>
+<td class="" align="right"><span class="sortValue">0.0</span>0</td>
+<td class="" align="right"><span class="sortValue">1.0</span><div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">1.0</span>100%</div><div style="display: table-cell">
+ <div title="100% Covered"  style="min-width:200px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:100%"></div></div></div></div></td>
+ </tr>                                                                         </tbody>
+                </table>
+
+                <div>&#160;</div>
+                
+
+            </div>
+
+            
+            <footer class="aui-dialog2-footer">
+                <div class="aui-dialog2-footer-actions">
+                    <button class="aui-button aui-button-primary dialog-close-button"
+                            data-dialog-id="dialog-StrLookup_MapStrLookup">Close</button>
+                </div>
+                <div class="aui-dialog2-footer-hint">Click on a class or a method name to jump to source.</div>
+            </footer>
+        </section>
+
+     
+        <section role="dialog" id="dialog-StrLookup_SystemPropertiesStrLookup" class="aui-layer aui-dialog2 aui-dialog2-xlarge" aria-hidden="true">
+            
+            <header class="aui-dialog2-header">
+                <h1 class="aui-dialog2-header-main">Class StrLookup.SystemPropertiesStrLookup</h1>
+                <div class="aui-dialog2-header-secondary">
+                    <input id="dialog-StrLookup.SystemPropertiesStrLookup-method-filter" class="test-filter text" type="text" name="method-filter"
+                           placeholder="Type to filter methods..." autocomplete="off"
+                           onkeyup="filterMethods('dialog-StrLookup.SystemPropertiesStrLookup-methods-body', 'dialog-StrLookup.SystemPropertiesStrLookup-method-filter');"/>
+                </div>
+            </header>
+
+            
+            <div class="aui-dialog2-content">
+
+                
+
+                <table class="aui aui-table-sortable">
+                                                                                                            
+                    <thead>
+                                                 <tr> <th id="StrLookup.SystemPropertiesStrLookup">
+    Class<br/>    <span><a href="#168" title="StrLookup.SystemPropertiesStrLookup" onclick="closeDialogAndScrollTo('dialog-StrLookup_SystemPropertiesStrLookup', '168');">StrLookup.SystemPropertiesStrLookup</a></span>
+</th>
+<th>Line #<br/>168<a name="sl-168"></a></th>
+    <th class=""><label  title="The total number of statements.">Total Statements</label><br/>4</th>
+    <th class=""><label  title="The percentage of elements that have been filtered from this report.">% Filtered</label><br/>0%</th>
+    <th class=""><label  title="Cyclomatic complexity is a measure of the number of paths in your code.">Complexity</label><br/>3</th>
+    <th class=""><label  title="The number of statements and branches that were not covered during testing.">Uncovered Elements</label><br/>0</th>
+    <th class=""><label  title="The amount of code that was hit at least once during testing.">TOTAL Coverage</label><br/><div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">1.0</span>100%</div><div style="display: table-cell">
+ <div title="100% Covered"  style="min-width:200px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:100%"></div></div></div></div></th>
+</tr>                     </thead>
+                    <tbody id="dialog-StrLookup.SystemPropertiesStrLookup-methods-body">
+                                                                                                            <tr id="StrLookup.SystemPropertiesStrLookup-1">
+<td id="summary-172-9">
+ <span class="sortValue">lookup(String)&#160;:&#160;String</span>
+&#160;&#160;<a href="?line=29#172" title="lookup(String)&#160;:&#160;String" name="sl-172" onclick="closeDialogAndScrollTo('dialog-StrLookup.SystemPropertiesStrLookup', '172');">lookup(String)&#160;:&#160;String</a>
+</td>
+<td align="right"><span class="sortValue">172</span>172</td>
+<td class="" align="right"><span class="sortValue">4.0</span>4</td>
+<td class="" align="right"><span class="sortValue">0.0</span>0%</td>
+<td class="" align="right"><span class="sortValue">3.0</span>3</td>
+<td class="" align="right"><span class="sortValue">0.0</span>0</td>
+<td class="" align="right"><span class="sortValue">1.0</span><div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">1.0</span>100%</div><div style="display: table-cell">
+ <div title="100% Covered"  style="min-width:200px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:100%"></div></div></div></div></td>
+ </tr>                                                                         </tbody>
+                </table>
+
+                <div>&#160;</div>
+                
+
+            </div>
+
+            
+            <footer class="aui-dialog2-footer">
+                <div class="aui-dialog2-footer-actions">
+                    <button class="aui-button aui-button-primary dialog-close-button"
+                            data-dialog-id="dialog-StrLookup_SystemPropertiesStrLookup">Close</button>
+                </div>
+                <div class="aui-dialog2-footer-hint">Click on a class or a method name to jump to source.</div>
+            </footer>
+        </section>
+
+     
+ 
+        
+        <div>&#160;</div>
+
+<h2>Contributing tests</h2>
+
+    <div>
+                This file is covered by 41 tests.
+        <button data-dialog-id="contr-tests-dialog" class="aui-button aui-button-link dialog-show-button">
+            Select tests to highlight the test coverage
+        </button>.
+    </div>
+
+<section role="dialog" id="contr-tests-dialog" class="aui-layer aui-dialog2 aui-dialog2-xlarge" aria-hidden="true">
+    
+    <header class="aui-dialog2-header">
+        <h1 class="aui-dialog2-header-main">Contributing tests</h1>
+        <div class="aui-dialog2-header-secondary">
+            <input id="test-filter" class="test-filter text" type="text" name="test-filter"
+                   placeholder="Type to filter tests..." autocomplete="off"
+                   onkeyup="filterTests('tests-body', 'test-filter', 3);"/>
+        </div>
+    </header>
+
+    
+    <div class="aui-dialog2-content">
+    
+
+        <p class="aui-buttons">
+            <button title="Selects all tests for this file, highlighting their coverage."
+                    class="aui-button" id="selectalltests">Select all</button>
+        </p>
+
+        <table class="aui aui-table-sortable">
+            <thead id="tests-head">
+            <tr id="testHeaderRow">
+                <th class="aui-table-column-unsortable"></th>
+                <th>
+                    <label title="The percentage of coverage contributed by each single test.">Test contribution</label>
+                </th>
+                <th>
+                    <label title="The test (or test iteration) which was executed.">Test</label>
+                </th>
+                <th>
+                    <label>Result</label>
+                </th>
+                <th class="aui-table-column-unsortable">
+                    <label>Actions</label>
+                </th>
+            </tr>
+            </thead>
+            <tbody id="tests-body">
+
+<tr id="test-2346">
+<td><a name="testA-2346"></a><input type="checkbox" id="cb-2346" value="2346" name="testMethod" autocomplete="off" title="Check to highlight coverage of this test in the source code"/></td>
+<td style="vertical-align: middle"  class="link" onclick="window.location.href='../../../../../org/apache/commons/lang3/text/StrSubstitutorTest_testLANG1055_1t6.html';">
+<span class="sortValue">0.71428573</span>
+<div>
+<div title="71.4% Covered" style="min-width:40px;" class="barNegative contribBarNegative contribBarNegative"><div class="barPositive contribBarPositive contribBarPositive" style="width:71.4%"></div></div></div></td>
+<td id="tc-2346">  <span class="sortValue">org.apache.commons.lang3.text.StrSubstitutorTest.testLANG1055</span><a href="../../../../../org/apache/commons/lang3/text/StrSubstitutorTest_testLANG1055_1t6.html" title="View Test Summary Page">org.apache.commons.lang3.text.StrSubstitutorTest.testLANG1055</a>
+</td>
+<td>      <span class="sortValue">1</span><span class="aui-lozenge aui-lozenge-success">PASS</span>
+  </td>
+<td> <a href="../../../../../org/apache/commons/lang3/text/StrSubstitutorTest.html?line=594#src-594" title="View Test Source">
+ <span class="aui-icon aui-icon-small aui-iconfont-file-txt aui-icon-medium-gray"></span>
+</a>
+<a href="../../../../../org/apache/commons/lang3/text/StrSubstitutorTest_testLANG1055_1t6.html" title="View Test Summary Page"><span class="aui-icon aui-icon-small aui-iconfont-file-ppt aui-icon-medium-gray"></span></a>
+</td>
+</tr>
+<tr id="test-3119">
+<td><a name="testA-3119"></a><input type="checkbox" id="cb-3119" value="3119" name="testMethod" autocomplete="off" title="Check to highlight coverage of this test in the source code"/></td>
+<td style="vertical-align: middle"  class="link" onclick="window.location.href='../../../../../org/apache/commons/lang3/text/StrSubstitutorTest_testReplaceUnknownKey_2en.html';">
+<span class="sortValue">0.53571427</span>
+<div>
+<div title="53.6% Covered" style="min-width:40px;" class="barNegative contribBarNegative contribBarNegative"><div class="barPositive contribBarPositive contribBarPositive" style="width:53.6%"></div></div></div></td>
+<td id="tc-3119">  <span class="sortValue">org.apache.commons.lang3.text.StrSubstitutorTest.testReplaceUnknownKey</span><a href="../../../../../org/apache/commons/lang3/text/StrSubstitutorTest_testReplaceUnknownKey_2en.html" title="View Test Summary Page">org.apache.commons.lang3.text.StrSubstitutorTest.testReplaceUnknownKey</a>
+</td>
+<td>      <span class="sortValue">1</span><span class="aui-lozenge aui-lozenge-success">PASS</span>
+  </td>
+<td> <a href="../../../../../org/apache/commons/lang3/text/StrSubstitutorTest.html?line=110#src-110" title="View Test Source">
+ <span class="aui-icon aui-icon-small aui-iconfont-file-txt aui-icon-medium-gray"></span>
+</a>
+<a href="../../../../../org/apache/commons/lang3/text/StrSubstitutorTest_testReplaceUnknownKey_2en.html" title="View Test Summary Page"><span class="aui-icon aui-icon-small aui-iconfont-file-ppt aui-icon-medium-gray"></span></a>
+</td>
+</tr>
+<tr id="test-2536">
+<td><a name="testA-2536"></a><input type="checkbox" id="cb-2536" value="2536" name="testMethod" autocomplete="off" title="Check to highlight coverage of this test in the source code"/></td>
+<td style="vertical-align: middle"  class="link" onclick="window.location.href='../../../../../org/apache/commons/lang3/text/StrSubstitutorTest_testReplacePrefixNoSuffix_1yg.html';">
+<span class="sortValue">0.53571427</span>
+<div>
+<div title="53.6% Covered" style="min-width:40px;" class="barNegative contribBarNegative contribBarNegative"><div class="barPositive contribBarPositive contribBarPositive" style="width:53.6%"></div></div></div></td>
+<td id="tc-2536">  <span class="sortValue">org.apache.commons.lang3.text.StrSubstitutorTest.testReplacePrefixNoSuffix</span><a href="../../../../../org/apache/commons/lang3/text/StrSubstitutorTest_testReplacePrefixNoSuffix_1yg.html" title="View Test Summary Page">org.apache.commons.lang3.text.StrSubstitutorTest.testReplacePrefixNoSuffix</a>
+</td>
+<td>      <span class="sortValue">1</span><span class="aui-lozenge aui-lozenge-success">PASS</span>
+  </td>
+<td> <a href="../../../../../org/apache/commons/lang3/text/StrSubstitutorTest.html?line=201#src-201" title="View Test Source">
+ <span class="aui-icon aui-icon-small aui-iconfont-file-txt aui-icon-medium-gray"></span>
+</a>
+<a href="../../../../../org/apache/commons/lang3/text/StrSubstitutorTest_testReplacePrefixNoSuffix_1yg.html" title="View Test Summary Page"><span class="aui-icon aui-icon-small aui-iconfont-file-ppt aui-icon-medium-gray"></span></a>
+</td>
+</tr>
+<tr id="test-1459">
+<td><a name="testA-1459"></a><input type="checkbox" id="cb-1459" value="1459" name="testMethod" autocomplete="off" title="Check to highlight coverage of this test in the source code"/></td>
+<td style="vertical-align: middle"  class="link" onclick="window.location.href='../../../../../org/apache/commons/lang3/text/StrSubstitutorTest_testReplaceRecursive_14j.html';">
+<span class="sortValue">0.53571427</span>
+<div>
+<div title="53.6% Covered" style="min-width:40px;" class="barNegative contribBarNegative contribBarNegative"><div class="barPositive contribBarPositive contribBarPositive" style="width:53.6%"></div></div></div></td>
+<td id="tc-1459">  <span class="sortValue">org.apache.commons.lang3.text.StrSubstitutorTest.testReplaceRecursive</span><a href="../../../../../org/apache/commons/lang3/text/StrSubstitutorTest_testReplaceRecursive_14j.html" title="View Test Summary Page">org.apache.commons.lang3.text.StrSubstitutorTest.testReplaceRecursive</a>
+</td>
+<td>      <span class="sortValue">1</span><span class="aui-lozenge aui-lozenge-success">PASS</span>
+  </td>
+<td> <a href="../../../../../org/apache/commons/lang3/text/StrSubstitutorTest.html?line=141#src-141" title="View Test Source">
+ <span class="aui-icon aui-icon-small aui-iconfont-file-txt aui-icon-medium-gray"></span>
+</a>
+<a href="../../../../../org/apache/commons/lang3/text/StrSubstitutorTest_testReplaceRecursive_14j.html" title="View Test Summary Page"><span class="aui-icon aui-icon-small aui-iconfont-file-ppt aui-icon-medium-gray"></span></a>
+</td>
+</tr>
+<tr id="test-1895">
+<td><a name="testA-1895"></a><input type="checkbox" id="cb-1895" value="1895" name="testMethod" autocomplete="off" title="Check to highlight coverage of this test in the source code"/></td>
+<td style="vertical-align: middle"  class="link" onclick="window.location.href='../../../../../org/apache/commons/lang3/text/StrSubstitutorTest_testReplaceInVariable_1gn.html';">
+<span class="sortValue">0.53571427</span>
+<div>
+<div title="53.6% Covered" style="min-width:40px;" class="barNegative contribBarNegative contribBarNegative"><div class="barPositive contribBarPositive contribBarPositive" style="width:53.6%"></div></div></div></td>
+<td id="tc-1895">  <span class="sortValue">org.apache.commons.lang3.text.StrSubstitutorTest.testReplaceInVariable</span><a href="../../../../../org/apache/commons/lang3/text/StrSubstitutorTest_testReplaceInVariable_1gn.html" title="View Test Summary Page">org.apache.commons.lang3.text.StrSubstitutorTest.testReplaceInVariable</a>
+</td>
+<td>      <span class="sortValue">1</span><span class="aui-lozenge aui-lozenge-success">PASS</span>
+  </td>
+<td> <a href="../../../../../org/apache/commons/lang3/text/StrSubstitutorTest.html?line=303#src-303" title="View Test Source">
+ <span class="aui-icon aui-icon-small aui-iconfont-file-txt aui-icon-medium-gray"></span>
+</a>
+<a href="../../../../../org/apache/commons/lang3/text/StrSubstitutorTest_testReplaceInVariable_1gn.html" title="View Test Summary Page"><span class="aui-icon aui-icon-small aui-iconfont-file-ppt aui-icon-medium-gray"></span></a>
+</td>
+</tr>
+<tr id="test-3530">
+<td><a name="testA-3530"></a><input type="checkbox" id="cb-3530" value="3530" name="testMethod" autocomplete="off" title="Check to highlight coverage of this test in the source code"/></td>
+<td style="vertical-align: middle"  class="link" onclick="window.location.href='../../../../../org/apache/commons/lang3/text/StrSubstitutorTest_testDefaultValueDelimiters_2q2.html';">
+<span class="sortValue">0.53571427</span>
+<div>
+<div title="53.6% Covered" style="min-width:40px;" class="barNegative contribBarNegative contribBarNegative"><div class="barPositive contribBarPositive contribBarPositive" style="width:53.6%"></div></div></div></td>
+<td id="tc-3530">  <span class="sortValue">org.apache.commons.lang3.text.StrSubstitutorTest.testDefaultValueDelimiters</span><a href="../../../../../org/apache/commons/lang3/text/StrSubstitutorTest_testDefaultValueDelimiters_2q2.html" title="View Test Summary Page">org.apache.commons.lang3.text.StrSubstitutorTest.testDefaultValueDelimiters</a>
+</td>
+<td>      <span class="sortValue">1</span><span class="aui-lozenge aui-lozenge-success">PASS</span>
+  </td>
+<td> <a href="../../../../../org/apache/commons/lang3/text/StrSubstitutorTest.html?line=366#src-366" title="View Test Source">
+ <span class="aui-icon aui-icon-small aui-iconfont-file-txt aui-icon-medium-gray"></span>
+</a>
+<a href="../../../../../org/apache/commons/lang3/text/StrSubstitutorTest_testDefaultValueDelimiters_2q2.html" title="View Test Summary Page"><span class="aui-icon aui-icon-small aui-iconfont-file-ppt aui-icon-medium-gray"></span></a>
+</td>
+</tr>
+<tr id="test-828">
+<td><a name="testA-828"></a><input type="checkbox" id="cb-828" value="828" name="testMethod" autocomplete="off" title="Check to highlight coverage of this test in the source code"/></td>
+<td style="vertical-align: middle"  class="link" onclick="window.location.href='../../../../../org/apache/commons/lang3/text/StrSubstitutorTest_testReplaceEmptyKeys_n0.html';">
+<span class="sortValue">0.53571427</span>
+<div>
+<div title="53.6% Covered" style="min-width:40px;" class="barNegative contribBarNegative contribBarNegative"><div class="barPositive contribBarPositive contribBarPositive" style="width:53.6%"></div></div></div></td>
+<td id="tc-828">  <span class="sortValue">org.apache.commons.lang3.text.StrSubstitutorTest.testReplaceEmptyKeys</span><a href="../../../../../org/apache/commons/lang3/text/StrSubstitutorTest_testReplaceEmptyKeys_n0.html" title="View Test Summary Page">org.apache.commons.lang3.text.StrSubstitutorTest.testReplaceEmptyKeys</a>
+</td>
+<td>      <span class="sortValue">1</span><span class="aui-lozenge aui-lozenge-success">PASS</span>
+  </td>
+<td> <a href="../../../../../org/apache/commons/lang3/text/StrSubstitutorTest.html?line=217#src-217" title="View Test Source">
+ <span class="aui-icon aui-icon-small aui-iconfont-file-txt aui-icon-medium-gray"></span>
+</a>
+<a href="../../../../../org/apache/commons/lang3/text/StrSubstitutorTest_testReplaceEmptyKeys_n0.html" title="View Test Summary Page"><span class="aui-icon aui-icon-small aui-iconfont-file-ppt aui-icon-medium-gray"></span></a>
+</td>
+</tr>
+<tr id="test-2577">
+<td><a name="testA-2577"></a><input type="checkbox" id="cb-2577" value="2577" name="testMethod" autocomplete="off" title="Check to highlight coverage of this test in the source code"/></td>
+<td style="vertical-align: middle"  class="link" onclick="window.location.href='../../../../../org/apache/commons/lang3/text/StrSubstitutorTest_testReplaceInVariableRecursive_1zl.html';">
+<span class="sortValue">0.53571427</span>
+<div>
+<div title="53.6% Covered" style="min-width:40px;" class="barNegative contribBarNegative contribBarNegative"><div class="barPositive contribBarPositive contribBarPositive" style="width:53.6%"></div></div></div></td>
+<td id="tc-2577">  <span class="sortValue">org.apache.commons.lang3.text.StrSubstitutorTest.testReplaceInVariableRecursive</span><a href="../../../../../org/apache/commons/lang3/text/StrSubstitutorTest_testReplaceInVariableRecursive_1zl.html" title="View Test Summary Page">org.apache.commons.lang3.text.StrSubstitutorTest.testReplaceInVariableRecursive</a>
+</td>
+<td>      <span class="sortValue">1</span><span class="aui-lozenge aui-lozenge-success">PASS</span>
+  </td>
+<td> <a href="../../../../../org/apache/commons/lang3/text/StrSubstitutorTest.html?line=347#src-347" title="View Test Source">
+ <span class="aui-icon aui-icon-small aui-iconfont-file-txt aui-icon-medium-gray"></span>
+</a>
+<a href="../../../../../org/apache/commons/lang3/text/StrSubstitutorTest_testReplaceInVariableRecursive_1zl.html" title="View Test Summary Page"><span class="aui-icon aui-icon-small aui-iconfont-file-ppt aui-icon-medium-gray"></span></a>
+</td>
+</tr>
+<tr id="test-2170">
+<td><a name="testA-2170"></a><input type="checkbox" id="cb-2170" value="2170" name="testMethod" autocomplete="off" title="Check to highlight coverage of this test in the source code"/></td>
+<td style="vertical-align: middle"  class="link" onclick="window.location.href='../../../../../org/apache/commons/lang3/text/StrLookupTest_testMapLookup_1oa.html';">
+<span class="sortValue">0.53571427</span>
+<div>
+<div title="53.6% Covered" style="min-width:40px;" class="barNegative contribBarNegative contribBarNegative"><div class="barPositive contribBarPositive contribBarPositive" style="width:53.6%"></div></div></div></td>
+<td id="tc-2170">  <span class="sortValue">org.apache.commons.lang3.text.StrLookupTest.testMapLookup</span><a href="../../../../../org/apache/commons/lang3/text/StrLookupTest_testMapLookup_1oa.html" title="View Test Summary Page">org.apache.commons.lang3.text.StrLookupTest.testMapLookup</a>
+</td>
+<td>      <span class="sortValue">1</span><span class="aui-lozenge aui-lozenge-success">PASS</span>
+  </td>
+<td> <a href="../../../../../org/apache/commons/lang3/text/StrLookupTest.html?line=97#src-97" title="View Test Source">
+ <span class="aui-icon aui-icon-small aui-iconfont-file-txt aui-icon-medium-gray"></span>
+</a>
+<a href="../../../../../org/apache/commons/lang3/text/StrLookupTest_testMapLookup_1oa.html" title="View Test Summary Page"><span class="aui-icon aui-icon-small aui-iconfont-file-ppt aui-icon-medium-gray"></span></a>
+</td>
+</tr>
+<tr id="test-2969">
+<td><a name="testA-2969"></a><input type="checkbox" id="cb-2969" value="2969" name="testMethod" autocomplete="off" title="Check to highlight coverage of this test in the source code"/></td>
+<td style="vertical-align: middle"  class="link" onclick="window.location.href='../../../../../org/apache/commons/lang3/text/StrSubstitutorTest_testReplaceComplexEscaping_2ah.html';">
+<span class="sortValue">0.53571427</span>
+<div>
+<div title="53.6% Covered" style="min-width:40px;" class="barNegative contribBarNegative contribBarNegative"><div class="barPositive contribBarPositive contribBarPositive" style="width:53.6%"></div></div></div></td>
+<td id="tc-2969">  <span class="sortValue">org.apache.commons.lang3.text.StrSubstitutorTest.testReplaceComplexEscaping</span><a href="../../../../../org/apache/commons/lang3/text/StrSubstitutorTest_testReplaceComplexEscaping_2ah.html" title="View Test Summary Page">org.apache.commons.lang3.text.StrSubstitutorTest.testReplaceComplexEscaping</a>
+</td>
+<td>      <span class="sortValue">1</span><span class="aui-lozenge aui-lozenge-success">PASS</span>
+  </td>
+<td> <a href="../../../../../org/apache/commons/lang3/text/StrSubstitutorTest.html?line=176#src-176" title="View Test Source">
+ <span class="aui-icon aui-icon-small aui-iconfont-file-txt aui-icon-medium-gray"></span>
+</a>
+<a href="../../../../../org/apache/commons/lang3/text/StrSubstitutorTest_testReplaceComplexEscaping_2ah.html" title="View Test Summary Page"><span class="aui-icon aui-icon-small aui-iconfont-file-ppt aui-icon-medium-gray"></span></a>
+</td>
+</tr>
+<tr id="test-3657">
+<td><a name="testA-3657"></a><input type="checkbox" id="cb-3657" value="3657" name="testMethod" autocomplete="off" title="Check to highlight coverage of this test in the source code"/></td>
+<td style="vertical-align: middle"  class="link" onclick="window.location.href='../../../../../org/apache/commons/lang3/text/StrSubstitutorTest_testConstructorMapFull_2tl.html';">
+<span class="sortValue">0.53571427</span>
+<div>
+<div title="53.6% Covered" style="min-width:40px;" class="barNegative contribBarNegative contribBarNegative"><div class="barPositive contribBarPositive contribBarPositive" style="width:53.6%"></div></div></div></td>
+<td id="tc-3657">  <span class="sortValue">org.apache.commons.lang3.text.StrSubstitutorTest.testConstructorMapFull</span><a href="../../../../../org/apache/commons/lang3/text/StrSubstitutorTest_testConstructorMapFull_2tl.html" title="View Test Summary Page">org.apache.commons.lang3.text.StrSubstitutorTest.testConstructorMapFull</a>
+</td>
+<td>      <span class="sortValue">1</span><span class="aui-lozenge aui-lozenge-success">PASS</span>
+  </td>
+<td> <a href="../../../../../org/apache/commons/lang3/text/StrSubstitutorTest.html?line=446#src-446" title="View Test Source">
+ <span class="aui-icon aui-icon-small aui-iconfont-file-txt aui-icon-medium-gray"></span>
+</a>
+<a href="../../../../../org/apache/commons/lang3/text/StrSubstitutorTest_testConstructorMapFull_2tl.html" title="View Test Summary Page"><span class="aui-icon aui-icon-small aui-iconfont-file-ppt aui-icon-medium-gray"></span></a>
+</td>
+</tr>
+<tr id="test-3602">
+<td><a name="testA-3602"></a><input type="checkbox" id="cb-3602" value="3602" name="testMethod" autocomplete="off" title="Check to highlight coverage of this test in the source code"/></td>
+<td style="vertical-align: middle"  class="link" onclick="window.location.href='../../../../../org/apache/commons/lang3/text/StrSubstitutorTest_testReplaceInVariableDisabled_2s2.html';">
+<span class="sortValue">0.53571427</span>
+<div>
+<div title="53.6% Covered" style="min-width:40px;" class="barNegative contribBarNegative contribBarNegative"><div class="barPositive contribBarPositive contribBarPositive" style="width:53.6%"></div></div></div></td>
+<td id="tc-3602">  <span class="sortValue">org.apache.commons.lang3.text.StrSubstitutorTest.testReplaceInVariableDisabled</span><a href="../../../../../org/apache/commons/lang3/text/StrSubstitutorTest_testReplaceInVariableDisabled_2s2.html" title="View Test Summary Page">org.apache.commons.lang3.text.StrSubstitutorTest.testReplaceInVariableDisabled</a>
+</td>
+<td>      <span class="sortValue">1</span><span class="aui-lozenge aui-lozenge-success">PASS</span>
+  </td>
+<td> <a href="../../../../../org/apache/commons/lang3/text/StrSubstitutorTest.html?line=328#src-328" title="View Test Source">
+ <span class="aui-icon aui-icon-small aui-iconfont-file-txt aui-icon-medium-gray"></span>
+</a>
+<a href="../../../../../org/apache/commons/lang3/text/StrSubstitutorTest_testReplaceInVariableDisabled_2s2.html" title="View Test Summary Page"><span class="aui-icon aui-icon-small aui-iconfont-file-ppt aui-icon-medium-gray"></span></a>
+</td>
+</tr>
+<tr id="test-1542">
+<td><a name="testA-1542"></a><input type="checkbox" id="cb-1542" value="1542" name="testMethod" autocomplete="off" title="Check to highlight coverage of this test in the source code"/></td>
+<td style="vertical-align: middle"  class="link" onclick="window.location.href='../../../../../org/apache/commons/lang3/text/StrSubstitutorTest_testReplaceEscaping_16u.html';">
+<span class="sortValue">0.4642857</span>
+<div>
+<div title="46.4% Covered" style="min-width:40px;" class="barNegative contribBarNegative contribBarNegative"><div class="barPositive contribBarPositive contribBarPositive" style="width:46.4%"></div></div></div></td>
+<td id="tc-1542">  <span class="sortValue">org.apache.commons.lang3.text.StrSubstitutorTest.testReplaceEscaping</span><a href="../../../../../org/apache/commons/lang3/text/StrSubstitutorTest_testReplaceEscaping_16u.html" title="View Test Summary Page">org.apache.commons.lang3.text.StrSubstitutorTest.testReplaceEscaping</a>
+</td>
+<td>      <span class="sortValue">1</span><span class="aui-lozenge aui-lozenge-success">PASS</span>
+  </td>
+<td> <a href="../../../../../org/apache/commons/lang3/text/StrSubstitutorTest.html?line=160#src-160" title="View Test Source">
+ <span class="aui-icon aui-icon-small aui-iconfont-file-txt aui-icon-medium-gray"></span>
+</a>
+<a href="../../../../../org/apache/commons/lang3/text/StrSubstitutorTest_testReplaceEscaping_16u.html" title="View Test Summary Page"><span class="aui-icon aui-icon-small aui-iconfont-file-ppt aui-icon-medium-gray"></span></a>
+</td>
+</tr>
+<tr id="test-2415">
+<td><a name="testA-2415"></a><input type="checkbox" id="cb-2415" value="2415" name="testMethod" autocomplete="off" title="Check to highlight coverage of this test in the source code"/></td>
+<td style="vertical-align: middle"  class="link" onclick="window.location.href='../../../../../org/apache/commons/lang3/text/StrSubstitutorTest_testReplaceToIdentical_1v3.html';">
+<span class="sortValue">0.4642857</span>
+<div>
+<div title="46.4% Covered" style="min-width:40px;" class="barNegative contribBarNegative contribBarNegative"><div class="barPositive contribBarPositive contribBarPositive" style="width:46.4%"></div></div></div></td>
+<td id="tc-2415">  <span class="sortValue">org.apache.commons.lang3.text.StrSubstitutorTest.testReplaceToIdentical</span><a href="../../../../../org/apache/commons/lang3/text/StrSubstitutorTest_testReplaceToIdentical_1v3.html" title="View Test Summary Page">org.apache.commons.lang3.text.StrSubstitutorTest.testReplaceToIdentical</a>
+</td>
+<td>      <span class="sortValue">1</span><span class="aui-lozenge aui-lozenge-success">PASS</span>
+  </td>
+<td> <a href="../../../../../org/apache/commons/lang3/text/StrSubstitutorTest.html?line=226#src-226" title="View Test Source">
+ <span class="aui-icon aui-icon-small aui-iconfont-file-txt aui-icon-medium-gray"></span>
+</a>
+<a href="../../../../../org/apache/commons/lang3/text/StrSubstitutorTest_testReplaceToIdentical_1v3.html" title="View Test Summary Page"><span class="aui-icon aui-icon-small aui-iconfont-file-ppt aui-icon-medium-gray"></span></a>
+</td>
+</tr>
+<tr id="test-3527">
+<td><a name="testA-3527"></a><input type="checkbox" id="cb-3527" value="3527" name="testMethod" autocomplete="off" title="Check to highlight coverage of this test in the source code"/></td>
+<td style="vertical-align: middle"  class="link" onclick="window.location.href='../../../../../org/apache/commons/lang3/text/StrSubstitutorTest_testReplaceIncompletePrefix_2pz.html';">
+<span class="sortValue">0.4642857</span>
+<div>
+<div title="46.4% Covered" style="min-width:40px;" class="barNegative contribBarNegative contribBarNegative"><div class="barPositive contribBarPositive contribBarPositive" style="width:46.4%"></div></div></div></td>
+<td id="tc-3527">  <span class="sortValue">org.apache.commons.lang3.text.StrSubstitutorTest.testReplaceIncompletePrefix</span><a href="../../../../../org/apache/commons/lang3/text/StrSubstitutorTest_testReplaceIncompletePrefix_2pz.html" title="View Test Summary Page">org.apache.commons.lang3.text.StrSubstitutorTest.testReplaceIncompletePrefix</a>
+</td>
+<td>      <span class="sortValue">1</span><span class="aui-lozenge aui-lozenge-success">PASS</span>
+  </td>
+<td> <a href="../../../../../org/apache/commons/lang3/text/StrSubstitutorTest.html?line=193#src-193" title="View Test Source">
+ <span class="aui-icon aui-icon-small aui-iconfont-file-txt aui-icon-medium-gray"></span>
+</a>
+<a href="../../../../../org/apache/commons/lang3/text/StrSubstitutorTest_testReplaceIncompletePrefix_2pz.html" title="View Test Summary Page"><span class="aui-icon aui-icon-small aui-iconfont-file-ppt aui-icon-medium-gray"></span></a>
+</td>
+</tr>
+<tr id="test-3072">
+<td><a name="testA-3072"></a><input type="checkbox" id="cb-3072" value="3072" name="testMethod" autocomplete="off" title="Check to highlight coverage of this test in the source code"/></td>
+<td style="vertical-align: middle"  class="link" onclick="window.location.href='../../../../../org/apache/commons/lang3/text/StrSubstitutorTest_testConstructorMapPrefixSuffix_2dc.html';">
+<span class="sortValue">0.4642857</span>
+<div>
+<div title="46.4% Covered" style="min-width:40px;" class="barNegative contribBarNegative contribBarNegative"><div class="barPositive contribBarPositive contribBarPositive" style="width:46.4%"></div></div></div></td>
+<td id="tc-3072">  <span class="sortValue">org.apache.commons.lang3.text.StrSubstitutorTest.testConstructorMapPrefixSuffix</span><a href="../../../../../org/apache/commons/lang3/text/StrSubstitutorTest_testConstructorMapPrefixSuffix_2dc.html" title="View Test Summary Page">org.apache.commons.lang3.text.StrSubstitutorTest.testConstructorMapPrefixSuffix</a>
+</td>
+<td>      <span class="sortValue">1</span><span class="aui-lozenge aui-lozenge-success">PASS</span>
+  </td>
+<td> <a href="../../../../../org/apache/commons/lang3/text/StrSubstitutorTest.html?line=435#src-435" title="View Test Source">
+ <span class="aui-icon aui-icon-small aui-iconfont-file-txt aui-icon-medium-gray"></span>
+</a>
+<a href="../../../../../org/apache/commons/lang3/text/StrSubstitutorTest_testConstructorMapPrefixSuffix_2dc.html" title="View Test Summary Page"><span class="aui-icon aui-icon-small aui-iconfont-file-ppt aui-icon-medium-gray"></span></a>
+</td>
+</tr>
+<tr id="test-758">
+<td><a name="testA-758"></a><input type="checkbox" id="cb-758" value="758" name="testMethod" autocomplete="off" title="Check to highlight coverage of this test in the source code"/></td>
+<td style="vertical-align: middle"  class="link" onclick="window.location.href='../../../../../org/apache/commons/lang3/text/StrSubstitutorTest_testReplaceNoPrefixNoSuffix_l2.html';">
+<span class="sortValue">0.4642857</span>
+<div>
+<div title="46.4% Covered" style="min-width:40px;" class="barNegative contribBarNegative contribBarNegative"><div class="barPositive contribBarPositive contribBarPositive" style="width:46.4%"></div></div></div></td>
+<td id="tc-758">  <span class="sortValue">org.apache.commons.lang3.text.StrSubstitutorTest.testReplaceNoPrefixNoSuffix</span><a href="../../../../../org/apache/commons/lang3/text/StrSubstitutorTest_testReplaceNoPrefixNoSuffix_l2.html" title="View Test Summary Page">org.apache.commons.lang3.text.StrSubstitutorTest.testReplaceNoPrefixNoSuffix</a>
+</td>
+<td>      <span class="sortValue">1</span><span class="aui-lozenge aui-lozenge-success">PASS</span>
+  </td>
+<td> <a href="../../../../../org/apache/commons/lang3/text/StrSubstitutorTest.html?line=185#src-185" title="View Test Source">
+ <span class="aui-icon aui-icon-small aui-iconfont-file-txt aui-icon-medium-gray"></span>
+</a>
+<a href="../../../../../org/apache/commons/lang3/text/StrSubstitutorTest_testReplaceNoPrefixNoSuffix_l2.html" title="View Test Summary Page"><span class="aui-icon aui-icon-small aui-iconfont-file-ppt aui-icon-medium-gray"></span></a>
+</td>
+</tr>
+<tr id="test-3639">
+<td><a name="testA-3639"></a><input type="checkbox" id="cb-3639" value="3639" name="testMethod" autocomplete="off" title="Check to highlight coverage of this test in the source code"/></td>
+<td style="vertical-align: middle"  class="link" onclick="window.location.href='../../../../../org/apache/commons/lang3/text/StrSubstitutorTest_testReplaceSimple_2t3.html';">
+<span class="sortValue">0.4642857</span>
+<div>
+<div title="46.4% Covered" style="min-width:40px;" class="barNegative contribBarNegative contribBarNegative"><div class="barPositive contribBarPositive contribBarPositive" style="width:46.4%"></div></div></div></td>
+<td id="tc-3639">  <span class="sortValue">org.apache.commons.lang3.text.StrSubstitutorTest.testReplaceSimple</span><a href="../../../../../org/apache/commons/lang3/text/StrSubstitutorTest_testReplaceSimple_2t3.html" title="View Test Summary Page">org.apache.commons.lang3.text.StrSubstitutorTest.testReplaceSimple</a>
+</td>
+<td>      <span class="sortValue">1</span><span class="aui-lozenge aui-lozenge-success">PASS</span>
+  </td>
+<td> <a href="../../../../../org/apache/commons/lang3/text/StrSubstitutorTest.html?line=60#src-60" title="View Test Source">
+ <span class="aui-icon aui-icon-small aui-iconfont-file-txt aui-icon-medium-gray"></span>
+</a>
+<a href="../../../../../org/apache/commons/lang3/text/StrSubstitutorTest_testReplaceSimple_2t3.html" title="View Test Summary Page"><span class="aui-icon aui-icon-small aui-iconfont-file-ppt aui-icon-medium-gray"></span></a>
+</td>
+</tr>
+<tr id="test-363">
+<td><a name="testA-363"></a><input type="checkbox" id="cb-363" value="363" name="testMethod" autocomplete="off" title="Check to highlight coverage of this test in the source code"/></td>
+<td style="vertical-align: middle"  class="link" onclick="window.location.href='../../../../../org/apache/commons/lang3/text/StrSubstitutorTest_testReplaceChangedMap_a3.html';">
+<span class="sortValue">0.4642857</span>
+<div>
+<div title="46.4% Covered" style="min-width:40px;" class="barNegative contribBarNegative contribBarNegative"><div class="barPositive contribBarPositive contribBarPositive" style="width:46.4%"></div></div></div></td>
+<td id="tc-363">  <span class="sortValue">org.apache.commons.lang3.text.StrSubstitutorTest.testReplaceChangedMap</span><a href="../../../../../org/apache/commons/lang3/text/StrSubstitutorTest_testReplaceChangedMap_a3.html" title="View Test Summary Page">org.apache.commons.lang3.text.StrSubstitutorTest.testReplaceChangedMap</a>
+</td>
+<td>      <span class="sortValue">1</span><span class="aui-lozenge aui-lozenge-success">PASS</span>
+  </td>
+<td> <a href="../../../../../org/apache/commons/lang3/text/StrSubstitutorTest.html?line=100#src-100" title="View Test Source">
+ <span class="aui-icon aui-icon-small aui-iconfont-file-txt aui-icon-medium-gray"></span>
+</a>
+<a href="../../../../../org/apache/commons/lang3/text/StrSubstitutorTest_testReplaceChangedMap_a3.html" title="View Test Summary Page"><span class="aui-icon aui-icon-small aui-iconfont-file-ppt aui-icon-medium-gray"></span></a>
+</td>
+</tr>
+<tr id="test-2993">
+<td><a name="testA-2993"></a><input type="checkbox" id="cb-2993" value="2993" name="testMethod" autocomplete="off" title="Check to highlight coverage of this test in the source code"/></td>
+<td style="vertical-align: middle"  class="link" onclick="window.location.href='../../../../../org/apache/commons/lang3/text/StrSubstitutorTest_testCyclicReplacement_2b5.html';">
+<span class="sortValue">0.4642857</span>
+<div>
+<div title="46.4% Covered" style="min-width:40px;" class="barNegative contribBarNegative contribBarNegative"><div class="barPositive contribBarPositive contribBarPositive" style="width:46.4%"></div></div></div></td>
+<td id="tc-2993">  <span class="sortValue">org.apache.commons.lang3.text.StrSubstitutorTest.testCyclicReplacement</span><a href="../../../../../org/apache/commons/lang3/text/StrSubstitutorTest_testCyclicReplacement_2b5.html" title="View Test Summary Page">org.apache.commons.lang3.text.StrSubstitutorTest.testCyclicReplacement</a>
+</td>
+<td>      <span class="sortValue">1</span><span class="aui-lozenge aui-lozenge-success">PASS</span>
+  </td>
+<td> <a href="../../../../../org/apache/commons/lang3/text/StrSubstitutorTest.html?line=237#src-237" title="View Test Source">
+ <span class="aui-icon aui-icon-small aui-iconfont-file-txt aui-icon-medium-gray"></span>
+</a>
+<a href="../../../../../org/apache/commons/lang3/text/StrSubstitutorTest_testCyclicReplacement_2b5.html" title="View Test Summary Page"><span class="aui-icon aui-icon-small aui-iconfont-file-ppt aui-icon-medium-gray"></span></a>
+</td>
+</tr>
+<tr id="test-2836">
+<td><a name="testA-2836"></a><input type="checkbox" id="cb-2836" value="2836" name="testMethod" autocomplete="off" title="Check to highlight coverage of this test in the source code"/></td>
+<td style="vertical-align: middle"  class="link" onclick="window.location.href='../../../../../org/apache/commons/lang3/text/StrSubstitutorTest_testReplaceSolo_26s.html';">
+<span class="sortValue">0.4642857</span>
+<div>
+<div title="46.4% Covered" style="min-width:40px;" class="barNegative contribBarNegative contribBarNegative"><div class="barPositive contribBarPositive contribBarPositive" style="width:46.4%"></div></div></div></td>
+<td id="tc-2836">  <span class="sortValue">org.apache.commons.lang3.text.StrSubstitutorTest.testReplaceSolo</span><a href="../../../../../org/apache/commons/lang3/text/StrSubstitutorTest_testReplaceSolo_26s.html" title="View Test Summary Page">org.apache.commons.lang3.text.StrSubstitutorTest.testReplaceSolo</a>
+</td>
+<td>      <span class="sortValue">1</span><span class="aui-lozenge aui-lozenge-success">PASS</span>
+  </td>
+<td> <a href="../../../../../org/apache/commons/lang3/text/StrSubstitutorTest.html?line=68#src-68" title="View Test Source">
+ <span class="aui-icon aui-icon-small aui-iconfont-file-txt aui-icon-medium-gray"></span>
+</a>
+<a href="../../../../../org/apache/commons/lang3/text/StrSubstitutorTest_testReplaceSolo_26s.html" title="View Test Summary Page"><span class="aui-icon aui-icon-small aui-iconfont-file-ppt aui-icon-medium-gray"></span></a>
+</td>
+</tr>
+<tr id="test-1983">
+<td><a name="testA-1983"></a><input type="checkbox" id="cb-1983" value="1983" name="testMethod" autocomplete="off" title="Check to highlight coverage of this test in the source code"/></td>
+<td style="vertical-align: middle"  class="link" onclick="window.location.href='../../../../../org/apache/commons/lang3/text/StrSubstitutorTest_testStaticReplace_1j3.html';">
+<span class="sortValue">0.4642857</span>
+<div>
+<div title="46.4% Covered" style="min-width:40px;" class="barNegative contribBarNegative contribBarNegative"><div class="barPositive contribBarPositive contribBarPositive" style="width:46.4%"></div></div></div></td>
+<td id="tc-1983">  <span class="sortValue">org.apache.commons.lang3.text.StrSubstitutorTest.testStaticReplace</span><a href="../../../../../org/apache/commons/lang3/text/StrSubstitutorTest_testStaticReplace_1j3.html" title="View Test Summary Page">org.apache.commons.lang3.text.StrSubstitutorTest.testStaticReplace</a>
+</td>
+<td>      <span class="sortValue">1</span><span class="aui-lozenge aui-lozenge-success">PASS</span>
+  </td>
+<td> <a href="../../../../../org/apache/commons/lang3/text/StrSubstitutorTest.html?line=558#src-558" title="View Test Source">
+ <span class="aui-icon aui-icon-small aui-iconfont-file-txt aui-icon-medium-gray"></span>
+</a>
+<a href="../../../../../org/apache/commons/lang3/text/StrSubstitutorTest_testStaticReplace_1j3.html" title="View Test Summary Page"><span class="aui-icon aui-icon-small aui-iconfont-file-ppt aui-icon-medium-gray"></span></a>
+</td>
+</tr>
+<tr id="test-1820">
+<td><a name="testA-1820"></a><input type="checkbox" id="cb-1820" value="1820" name="testMethod" autocomplete="off" title="Check to highlight coverage of this test in the source code"/></td>
+<td style="vertical-align: middle"  class="link" onclick="window.location.href='../../../../../org/apache/commons/lang3/text/StrSubstitutorTest_testReplaceAdjacentAtStart_1ek.html';">
+<span class="sortValue">0.4642857</span>
+<div>
+<div title="46.4% Covered" style="min-width:40px;" class="barNegative contribBarNegative contribBarNegative"><div class="barPositive contribBarPositive contribBarPositive" style="width:46.4%"></div></div></div></td>
+<td id="tc-1820">  <span class="sortValue">org.apache.commons.lang3.text.StrSubstitutorTest.testReplaceAdjacentAtStart</span><a href="../../../../../org/apache/commons/lang3/text/StrSubstitutorTest_testReplaceAdjacentAtStart_1ek.html" title="View Test Summary Page">org.apache.commons.lang3.text.StrSubstitutorTest.testReplaceAdjacentAtStart</a>
+</td>
+<td>      <span class="sortValue">1</span><span class="aui-lozenge aui-lozenge-success">PASS</span>
+  </td>
+<td> <a href="../../../../../org/apache/commons/lang3/text/StrSubstitutorTest.html?line=119#src-119" title="View Test Source">
+ <span class="aui-icon aui-icon-small aui-iconfont-file-txt aui-icon-medium-gray"></span>
+</a>
+<a href="../../../../../org/apache/commons/lang3/text/StrSubstitutorTest_testReplaceAdjacentAtStart_1ek.html" title="View Test Summary Page"><span class="aui-icon aui-icon-small aui-iconfont-file-ppt aui-icon-medium-gray"></span></a>
+</td>
+</tr>
+<tr id="test-348">
+<td><a name="testA-348"></a><input type="checkbox" id="cb-348" value="348" name="testMethod" autocomplete="off" title="Check to highlight coverage of this test in the source code"/></td>
+<td style="vertical-align: middle"  class="link" onclick="window.location.href='../../../../../org/apache/commons/lang3/text/StrSubstitutorTest_testReplaceWeirdPattens_9o.html';">
+<span class="sortValue">0.4642857</span>
+<div>
+<div title="46.4% Covered" style="min-width:40px;" class="barNegative contribBarNegative contribBarNegative"><div class="barPositive contribBarPositive contribBarPositive" style="width:46.4%"></div></div></div></td>
+<td id="tc-348">  <span class="sortValue">org.apache.commons.lang3.text.StrSubstitutorTest.testReplaceWeirdPattens</span><a href="../../../../../org/apache/commons/lang3/text/StrSubstitutorTest_testReplaceWeirdPattens_9o.html" title="View Test Summary Page">org.apache.commons.lang3.text.StrSubstitutorTest.testReplaceWeirdPattens</a>
+</td>
+<td>      <span class="sortValue">1</span><span class="aui-lozenge aui-lozenge-success">PASS</span>
+  </td>
+<td> <a href="../../../../../org/apache/commons/lang3/text/StrSubstitutorTest.html?line=270#src-270" title="View Test Source">
+ <span class="aui-icon aui-icon-small aui-iconfont-file-txt aui-icon-medium-gray"></span>
+</a>
+<a href="../../../../../org/apache/commons/lang3/text/StrSubstitutorTest_testReplaceWeirdPattens_9o.html" title="View Test Summary Page"><span class="aui-icon aui-icon-small aui-iconfont-file-ppt aui-icon-medium-gray"></span></a>
+</td>
+</tr>
+<tr id="test-1041">
+<td><a name="testA-1041"></a><input type="checkbox" id="cb-1041" value="1041" name="testMethod" autocomplete="off" title="Check to highlight coverage of this test in the source code"/></td>
+<td style="vertical-align: middle"  class="link" onclick="window.location.href='../../../../../org/apache/commons/lang3/text/StrSubstitutorTest_testSubstitutePreserveEscape_sx.html';">
+<span class="sortValue">0.4642857</span>
+<div>
+<div title="46.4% Covered" style="min-width:40px;" class="barNegative contribBarNegative contribBarNegative"><div class="barPositive contribBarPositive contribBarPositive" style="width:46.4%"></div></div></div></td>
+<td id="tc-1041">  <span class="sortValue">org.apache.commons.lang3.text.StrSubstitutorTest.testSubstitutePreserveEscape</span><a href="../../../../../org/apache/commons/lang3/text/StrSubstitutorTest_testSubstitutePreserveEscape_sx.html" title="View Test Summary Page">org.apache.commons.lang3.text.StrSubstitutorTest.testSubstitutePreserveEscape</a>
+</td>
+<td>      <span class="sortValue">1</span><span class="aui-lozenge aui-lozenge-success">PASS</span>
+  </td>
+<td> <a href="../../../../../org/apache/commons/lang3/text/StrSubstitutorTest.html?line=627#src-627" title="View Test Source">
+ <span class="aui-icon aui-icon-small aui-iconfont-file-txt aui-icon-medium-gray"></span>
+</a>
+<a href="../../../../../org/apache/commons/lang3/text/StrSubstitutorTest_testSubstitutePreserveEscape_sx.html" title="View Test Summary Page"><span class="aui-icon aui-icon-small aui-iconfont-file-ppt aui-icon-medium-gray"></span></a>
+</td>
+</tr>
+<tr id="test-3712">
+<td><a name="testA-3712"></a><input type="checkbox" id="cb-3712" value="3712" name="testMethod" autocomplete="off" title="Check to highlight coverage of this test in the source code"/></td>
+<td style="vertical-align: middle"  class="link" onclick="window.location.href='../../../../../org/apache/commons/lang3/text/StrSubstitutorTest_testReplaceAdjacentAtEnd_2v4.html';">
+<span class="sortValue">0.4642857</span>
+<div>
+<div title="46.4% Covered" style="min-width:40px;" class="barNegative contribBarNegative contribBarNegative"><div class="barPositive contribBarPositive contribBarPositive" style="width:46.4%"></div></div></div></td>
+<td id="tc-3712">  <span class="sortValue">org.apache.commons.lang3.text.StrSubstitutorTest.testReplaceAdjacentAtEnd</span><a href="../../../../../org/apache/commons/lang3/text/StrSubstitutorTest_testReplaceAdjacentAtEnd_2v4.html" title="View Test Summary Page">org.apache.commons.lang3.text.StrSubstitutorTest.testReplaceAdjacentAtEnd</a>
+</td>
+<td>      <span class="sortValue">1</span><span class="aui-lozenge aui-lozenge-success">PASS</span>
+  </td>
+<td> <a href="../../../../../org/apache/commons/lang3/text/StrSubstitutorTest.html?line=130#src-130" title="View Test Source">
+ <span class="aui-icon aui-icon-small aui-iconfont-file-txt aui-icon-medium-gray"></span>
+</a>
+<a href="../../../../../org/apache/commons/lang3/text/StrSubstitutorTest_testReplaceAdjacentAtEnd_2v4.html" title="View Test Summary Page"><span class="aui-icon aui-icon-small aui-iconfont-file-ppt aui-icon-medium-gray"></span></a>
+</td>
+</tr>
+<tr id="test-1143">
+<td><a name="testA-1143"></a><input type="checkbox" id="cb-1143" value="1143" name="testMethod" autocomplete="off" title="Check to highlight coverage of this test in the source code"/></td>
+<td style="vertical-align: middle"  class="link" onclick="window.location.href='../../../../../org/apache/commons/lang3/text/StrSubstitutorTest_testStaticReplacePrefixSuffix_vr.html';">
+<span class="sortValue">0.4642857</span>
+<div>
+<div title="46.4% Covered" style="min-width:40px;" class="barNegative contribBarNegative contribBarNegative"><div class="barPositive contribBarPositive contribBarPositive" style="width:46.4%"></div></div></div></td>
+<td id="tc-1143">  <span class="sortValue">org.apache.commons.lang3.text.StrSubstitutorTest.testStaticReplacePrefixSuffix</span><a href="../../../../../org/apache/commons/lang3/text/StrSubstitutorTest_testStaticReplacePrefixSuffix_vr.html" title="View Test Summary Page">org.apache.commons.lang3.text.StrSubstitutorTest.testStaticReplacePrefixSuffix</a>
+</td>
+<td>      <span class="sortValue">1</span><span class="aui-lozenge aui-lozenge-success">PASS</span>
+  </td>
+<td> <a href="../../../../../org/apache/commons/lang3/text/StrSubstitutorTest.html?line=568#src-568" title="View Test Source">
+ <span class="aui-icon aui-icon-small aui-iconfont-file-txt aui-icon-medium-gray"></span>
+</a>
+<a href="../../../../../org/apache/commons/lang3/text/StrSubstitutorTest_testStaticReplacePrefixSuffix_vr.html" title="View Test Summary Page"><span class="aui-icon aui-icon-small aui-iconfont-file-ppt aui-icon-medium-gray"></span></a>
+</td>
+</tr>
+<tr id="test-61">
+<td><a name="testA-61"></a><input type="checkbox" id="cb-61" value="61" name="testMethod" autocomplete="off" title="Check to highlight coverage of this test in the source code"/></td>
+<td style="vertical-align: middle"  class="link" onclick="window.location.href='../../../../../org/apache/commons/lang3/text/StrSubstitutorTest_testSubstituteDefaultProperties_1p.html';">
+<span class="sortValue">0.4642857</span>
+<div>
+<div title="46.4% Covered" style="min-width:40px;" class="barNegative contribBarNegative contribBarNegative"><div class="barPositive contribBarPositive contribBarPositive" style="width:46.4%"></div></div></div></td>
+<td id="tc-61">  <span class="sortValue">org.apache.commons.lang3.text.StrSubstitutorTest.testSubstituteDefaultProperties</span><a href="../../../../../org/apache/commons/lang3/text/StrSubstitutorTest_testSubstituteDefaultProperties_1p.html" title="View Test Summary Page">org.apache.commons.lang3.text.StrSubstitutorTest.testSubstituteDefaultProperties</a>
+</td>
+<td>      <span class="sortValue">1</span><span class="aui-lozenge aui-lozenge-success">PASS</span>
+  </td>
+<td> <a href="../../../../../org/apache/commons/lang3/text/StrSubstitutorTest.html?line=606#src-606" title="View Test Source">
+ <span class="aui-icon aui-icon-small aui-iconfont-file-txt aui-icon-medium-gray"></span>
+</a>
+<a href="../../../../../org/apache/commons/lang3/text/StrSubstitutorTest_testSubstituteDefaultProperties_1p.html" title="View Test Summary Page"><span class="aui-icon aui-icon-small aui-iconfont-file-ppt aui-icon-medium-gray"></span></a>
+</td>
+</tr>
+<tr id="test-435">
+<td><a name="testA-435"></a><input type="checkbox" id="cb-435" value="435" name="testMethod" autocomplete="off" title="Check to highlight coverage of this test in the source code"/></td>
+<td style="vertical-align: middle"  class="link" onclick="window.location.href='../../../../../org/apache/commons/lang3/text/StrSubstitutorTest_testSamePrefixAndSuffix_c3.html';">
+<span class="sortValue">0.4642857</span>
+<div>
+<div title="46.4% Covered" style="min-width:40px;" class="barNegative contribBarNegative contribBarNegative"><div class="barPositive contribBarPositive contribBarPositive" style="width:46.4%"></div></div></div></td>
+<td id="tc-435">  <span class="sortValue">org.apache.commons.lang3.text.StrSubstitutorTest.testSamePrefixAndSuffix</span><a href="../../../../../org/apache/commons/lang3/text/StrSubstitutorTest_testSamePrefixAndSuffix_c3.html" title="View Test Summary Page">org.apache.commons.lang3.text.StrSubstitutorTest.testSamePrefixAndSuffix</a>
+</td>
+<td>      <span class="sortValue">1</span><span class="aui-lozenge aui-lozenge-success">PASS</span>
+  </td>
+<td> <a href="../../../../../org/apache/commons/lang3/text/StrSubstitutorTest.html?line=617#src-617" title="View Test Source">
+ <span class="aui-icon aui-icon-small aui-iconfont-file-txt aui-icon-medium-gray"></span>
+</a>
+<a href="../../../../../org/apache/commons/lang3/text/StrSubstitutorTest_testSamePrefixAndSuffix_c3.html" title="View Test Summary Page"><span class="aui-icon aui-icon-small aui-iconfont-file-ppt aui-icon-medium-gray"></span></a>
+</td>
+</tr>
+<tr id="test-843">
+<td><a name="testA-843"></a><input type="checkbox" id="cb-843" value="843" name="testMethod" autocomplete="off" title="Check to highlight coverage of this test in the source code"/></td>
+<td style="vertical-align: middle"  class="link" onclick="window.location.href='../../../../../org/apache/commons/lang3/text/StrSubstitutorTest_testReplaceNoPrefixSuffix_nf.html';">
+<span class="sortValue">0.4642857</span>
+<div>
+<div title="46.4% Covered" style="min-width:40px;" class="barNegative contribBarNegative contribBarNegative"><div class="barPositive contribBarPositive contribBarPositive" style="width:46.4%"></div></div></div></td>
+<td id="tc-843">  <span class="sortValue">org.apache.commons.lang3.text.StrSubstitutorTest.testReplaceNoPrefixSuffix</span><a href="../../../../../org/apache/commons/lang3/text/StrSubstitutorTest_testReplaceNoPrefixSuffix_nf.html" title="View Test Summary Page">org.apache.commons.lang3.text.StrSubstitutorTest.testReplaceNoPrefixSuffix</a>
+</td>
+<td>      <span class="sortValue">1</span><span class="aui-lozenge aui-lozenge-success">PASS</span>
+  </td>
+<td> <a href="../../../../../org/apache/commons/lang3/text/StrSubstitutorTest.html?line=209#src-209" title="View Test Source">
+ <span class="aui-icon aui-icon-small aui-iconfont-file-txt aui-icon-medium-gray"></span>
+</a>
+<a href="../../../../../org/apache/commons/lang3/text/StrSubstitutorTest_testReplaceNoPrefixSuffix_nf.html" title="View Test Summary Page"><span class="aui-icon aui-icon-small aui-iconfont-file-ppt aui-icon-medium-gray"></span></a>
+</td>
+</tr>
+<tr id="test-1855">
+<td><a name="testA-1855"></a><input type="checkbox" id="cb-1855" value="1855" name="testMethod" autocomplete="off" title="Check to highlight coverage of this test in the source code"/></td>
+<td style="vertical-align: middle"  class="link" onclick="window.location.href='../../../../../org/apache/commons/lang3/text/StrLookupTest_testMapLookup_nullMap_1fj.html';">
+<span class="sortValue">0.35714287</span>
+<div>
+<div title="35.7% Covered" style="min-width:40px;" class="barNegative contribBarNegative contribBarNegative"><div class="barPositive contribBarPositive contribBarPositive" style="width:35.7%"></div></div></div></td>
+<td id="tc-1855">  <span class="sortValue">org.apache.commons.lang3.text.StrLookupTest.testMapLookup_nullMap</span><a href="../../../../../org/apache/commons/lang3/text/StrLookupTest_testMapLookup_nullMap_1fj.html" title="View Test Summary Page">org.apache.commons.lang3.text.StrLookupTest.testMapLookup_nullMap</a>
+</td>
+<td>      <span class="sortValue">1</span><span class="aui-lozenge aui-lozenge-success">PASS</span>
+  </td>
+<td> <a href="../../../../../org/apache/commons/lang3/text/StrLookupTest.html?line=109#src-109" title="View Test Source">
+ <span class="aui-icon aui-icon-small aui-iconfont-file-txt aui-icon-medium-gray"></span>
+</a>
+<a href="../../../../../org/apache/commons/lang3/text/StrLookupTest_testMapLookup_nullMap_1fj.html" title="View Test Summary Page"><span class="aui-icon aui-icon-small aui-iconfont-file-ppt aui-icon-medium-gray"></span></a>
+</td>
+</tr>
+<tr id="test-1339">
+<td><a name="testA-1339"></a><input type="checkbox" id="cb-1339" value="1339" name="testMethod" autocomplete="off" title="Check to highlight coverage of this test in the source code"/></td>
+<td style="vertical-align: middle"  class="link" onclick="window.location.href='../../../../../org/apache/commons/lang3/text/StrLookupTest_testNoneLookup_117.html';">
+<span class="sortValue">0.35714287</span>
+<div>
+<div title="35.7% Covered" style="min-width:40px;" class="barNegative contribBarNegative contribBarNegative"><div class="barPositive contribBarPositive contribBarPositive" style="width:35.7%"></div></div></div></td>
+<td id="tc-1339">  <span class="sortValue">org.apache.commons.lang3.text.StrLookupTest.testNoneLookup</span><a href="../../../../../org/apache/commons/lang3/text/StrLookupTest_testNoneLookup_117.html" title="View Test Summary Page">org.apache.commons.lang3.text.StrLookupTest.testNoneLookup</a>
+</td>
+<td>      <span class="sortValue">1</span><span class="aui-lozenge aui-lozenge-success">PASS</span>
+  </td>
+<td> <a href="../../../../../org/apache/commons/lang3/text/StrLookupTest.html?line=36#src-36" title="View Test Source">
+ <span class="aui-icon aui-icon-small aui-iconfont-file-txt aui-icon-medium-gray"></span>
+</a>
+<a href="../../../../../org/apache/commons/lang3/text/StrLookupTest_testNoneLookup_117.html" title="View Test Summary Page"><span class="aui-icon aui-icon-small aui-iconfont-file-ppt aui-icon-medium-gray"></span></a>
+</td>
+</tr>
+<tr id="test-1757">
+<td><a name="testA-1757"></a><input type="checkbox" id="cb-1757" value="1757" name="testMethod" autocomplete="off" title="Check to highlight coverage of this test in the source code"/></td>
+<td style="vertical-align: middle"  class="link" onclick="window.location.href='../../../../../org/apache/commons/lang3/text/StrLookupTest_testSystemPropertiesLookup_1ct.html';">
+<span class="sortValue">0.32142857</span>
+<div>
+<div title="32.1% Covered" style="min-width:40px;" class="barNegative contribBarNegative contribBarNegative"><div class="barPositive contribBarPositive contribBarPositive" style="width:32.1%"></div></div></div></td>
+<td id="tc-1757">  <span class="sortValue">org.apache.commons.lang3.text.StrLookupTest.testSystemPropertiesLookup</span><a href="../../../../../org/apache/commons/lang3/text/StrLookupTest_testSystemPropertiesLookup_1ct.html" title="View Test Summary Page">org.apache.commons.lang3.text.StrLookupTest.testSystemPropertiesLookup</a>
+</td>
+<td>      <span class="sortValue">1</span><span class="aui-lozenge aui-lozenge-success">PASS</span>
+  </td>
+<td> <a href="../../../../../org/apache/commons/lang3/text/StrLookupTest.html?line=43#src-43" title="View Test Source">
+ <span class="aui-icon aui-icon-small aui-iconfont-file-txt aui-icon-medium-gray"></span>
+</a>
+<a href="../../../../../org/apache/commons/lang3/text/StrLookupTest_testSystemPropertiesLookup_1ct.html" title="View Test Summary Page"><span class="aui-icon aui-icon-small aui-iconfont-file-ppt aui-icon-medium-gray"></span></a>
+</td>
+</tr>
+<tr id="test-2284">
+<td><a name="testA-2284"></a><input type="checkbox" id="cb-2284" value="2284" name="testMethod" autocomplete="off" title="Check to highlight coverage of this test in the source code"/></td>
+<td style="vertical-align: middle"  class="link" onclick="window.location.href='../../../../../org/apache/commons/lang3/text/StrLookupTest_testSystemPropertiesLookupUpdatedProperty_1rg.html';">
+<span class="sortValue">0.25</span>
+<div>
+<div title="25% Covered" style="min-width:40px;" class="barNegative contribBarNegative contribBarNegative"><div class="barPositive contribBarPositive contribBarPositive" style="width:25%"></div></div></div></td>
+<td id="tc-2284">  <span class="sortValue">org.apache.commons.lang3.text.StrLookupTest.testSystemPropertiesLookupUpdatedProperty</span><a href="../../../../../org/apache/commons/lang3/text/StrLookupTest_testSystemPropertiesLookupUpdatedProperty_1rg.html" title="View Test Summary Page">org.apache.commons.lang3.text.StrLookupTest.testSystemPropertiesLookupUpdatedProperty</a>
+</td>
+<td>      <span class="sortValue">1</span><span class="aui-lozenge aui-lozenge-success">PASS</span>
+  </td>
+<td> <a href="../../../../../org/apache/commons/lang3/text/StrLookupTest.html?line=82#src-82" title="View Test Source">
+ <span class="aui-icon aui-icon-small aui-iconfont-file-txt aui-icon-medium-gray"></span>
+</a>
+<a href="../../../../../org/apache/commons/lang3/text/StrLookupTest_testSystemPropertiesLookupUpdatedProperty_1rg.html" title="View Test Summary Page"><span class="aui-icon aui-icon-small aui-iconfont-file-ppt aui-icon-medium-gray"></span></a>
+</td>
+</tr>
+<tr id="test-2219">
+<td><a name="testA-2219"></a><input type="checkbox" id="cb-2219" value="2219" name="testMethod" autocomplete="off" title="Check to highlight coverage of this test in the source code"/></td>
+<td style="vertical-align: middle"  class="link" onclick="window.location.href='../../../../../org/apache/commons/lang3/text/StrSubstitutorTest_testStaticReplaceSystemProperties_1pn.html';">
+<span class="sortValue">0.25</span>
+<div>
+<div title="25% Covered" style="min-width:40px;" class="barNegative contribBarNegative contribBarNegative"><div class="barPositive contribBarPositive contribBarPositive" style="width:25%"></div></div></div></td>
+<td id="tc-2219">  <span class="sortValue">org.apache.commons.lang3.text.StrSubstitutorTest.testStaticReplaceSystemProperties</span><a href="../../../../../org/apache/commons/lang3/text/StrSubstitutorTest_testStaticReplaceSystemProperties_1pn.html" title="View Test Summary Page">org.apache.commons.lang3.text.StrSubstitutorTest.testStaticReplaceSystemProperties</a>
+</td>
+<td>      <span class="sortValue">1</span><span class="aui-lozenge aui-lozenge-success">PASS</span>
+  </td>
+<td> <a href="../../../../../org/apache/commons/lang3/text/StrSubstitutorTest.html?line=578#src-578" title="View Test Source">
+ <span class="aui-icon aui-icon-small aui-iconfont-file-txt aui-icon-medium-gray"></span>
+</a>
+<a href="../../../../../org/apache/commons/lang3/text/StrSubstitutorTest_testStaticReplaceSystemProperties_1pn.html" title="View Test Summary Page"><span class="aui-icon aui-icon-small aui-iconfont-file-ppt aui-icon-medium-gray"></span></a>
+</td>
+</tr>
+<tr id="test-3117">
+<td><a name="testA-3117"></a><input type="checkbox" id="cb-3117" value="3117" name="testMethod" autocomplete="off" title="Check to highlight coverage of this test in the source code"/></td>
+<td style="vertical-align: middle"  class="link" onclick="window.location.href='../../../../../org/apache/commons/lang3/text/StrLookupTest_testSystemPropertiesLookupReplacedProperties_2el.html';">
+<span class="sortValue">0.25</span>
+<div>
+<div title="25% Covered" style="min-width:40px;" class="barNegative contribBarNegative contribBarNegative"><div class="barPositive contribBarPositive contribBarPositive" style="width:25%"></div></div></div></td>
+<td id="tc-3117">  <span class="sortValue">org.apache.commons.lang3.text.StrLookupTest.testSystemPropertiesLookupReplacedProperties</span><a href="../../../../../org/apache/commons/lang3/text/StrLookupTest_testSystemPropertiesLookupReplacedProperties_2el.html" title="View Test Summary Page">org.apache.commons.lang3.text.StrLookupTest.testSystemPropertiesLookupReplacedProperties</a>
+</td>
+<td>      <span class="sortValue">1</span><span class="aui-lozenge aui-lozenge-success">PASS</span>
+  </td>
+<td> <a href="../../../../../org/apache/commons/lang3/text/StrLookupTest.html?line=61#src-61" title="View Test Source">
+ <span class="aui-icon aui-icon-small aui-iconfont-file-txt aui-icon-medium-gray"></span>
+</a>
+<a href="../../../../../org/apache/commons/lang3/text/StrLookupTest_testSystemPropertiesLookupReplacedProperties_2el.html" title="View Test Summary Page"><span class="aui-icon aui-icon-small aui-iconfont-file-ppt aui-icon-medium-gray"></span></a>
+</td>
+</tr>
+<tr id="test-2106">
+<td><a name="testA-2106"></a><input type="checkbox" id="cb-2106" value="2106" name="testMethod" autocomplete="off" title="Check to highlight coverage of this test in the source code"/></td>
+<td style="vertical-align: middle"  class="link" onclick="window.location.href='../../../../../org/apache/commons/lang3/text/StrSubstitutorTest_testReplaceNoVariables_1mi.html';">
+<span class="sortValue">0.21428572</span>
+<div>
+<div title="21.4% Covered" style="min-width:40px;" class="barNegative contribBarNegative contribBarNegative"><div class="barPositive contribBarPositive contribBarPositive" style="width:21.4%"></div></div></div></td>
+<td id="tc-2106">  <span class="sortValue">org.apache.commons.lang3.text.StrSubstitutorTest.testReplaceNoVariables</span><a href="../../../../../org/apache/commons/lang3/text/StrSubstitutorTest_testReplaceNoVariables_1mi.html" title="View Test Summary Page">org.apache.commons.lang3.text.StrSubstitutorTest.testReplaceNoVariables</a>
+</td>
+<td>      <span class="sortValue">1</span><span class="aui-lozenge aui-lozenge-success">PASS</span>
+  </td>
+<td> <a href="../../../../../org/apache/commons/lang3/text/StrSubstitutorTest.html?line=76#src-76" title="View Test Source">
+ <span class="aui-icon aui-icon-small aui-iconfont-file-txt aui-icon-medium-gray"></span>
+</a>
+<a href="../../../../../org/apache/commons/lang3/text/StrSubstitutorTest_testReplaceNoVariables_1mi.html" title="View Test Summary Page"><span class="aui-icon aui-icon-small aui-iconfont-file-ppt aui-icon-medium-gray"></span></a>
+</td>
+</tr>
+<tr id="test-2666">
+<td><a name="testA-2666"></a><input type="checkbox" id="cb-2666" value="2666" name="testMethod" autocomplete="off" title="Check to highlight coverage of this test in the source code"/></td>
+<td style="vertical-align: middle"  class="link" onclick="window.location.href='../../../../../org/apache/commons/lang3/text/StrSubstitutorTest_testReplaceEmpty_222.html';">
+<span class="sortValue">0.21428572</span>
+<div>
+<div title="21.4% Covered" style="min-width:40px;" class="barNegative contribBarNegative contribBarNegative"><div class="barPositive contribBarPositive contribBarPositive" style="width:21.4%"></div></div></div></td>
+<td id="tc-2666">  <span class="sortValue">org.apache.commons.lang3.text.StrSubstitutorTest.testReplaceEmpty</span><a href="../../../../../org/apache/commons/lang3/text/StrSubstitutorTest_testReplaceEmpty_222.html" title="View Test Summary Page">org.apache.commons.lang3.text.StrSubstitutorTest.testReplaceEmpty</a>
+</td>
+<td>      <span class="sortValue">1</span><span class="aui-lozenge aui-lozenge-success">PASS</span>
+  </td>
+<td> <a href="../../../../../org/apache/commons/lang3/text/StrSubstitutorTest.html?line=92#src-92" title="View Test Source">
+ <span class="aui-icon aui-icon-small aui-iconfont-file-txt aui-icon-medium-gray"></span>
+</a>
+<a href="../../../../../org/apache/commons/lang3/text/StrSubstitutorTest_testReplaceEmpty_222.html" title="View Test Summary Page"><span class="aui-icon aui-icon-small aui-iconfont-file-ppt aui-icon-medium-gray"></span></a>
+</td>
+</tr>
+<tr id="test-3612">
+<td><a name="testA-3612"></a><input type="checkbox" id="cb-3612" value="3612" name="testMethod" autocomplete="off" title="Check to highlight coverage of this test in the source code"/></td>
+<td style="vertical-align: middle"  class="link" onclick="window.location.href='../../../../../org/apache/commons/lang3/text/StrSubstitutorTest_testReplaceSoloEscaping_2sc.html';">
+<span class="sortValue">0.21428572</span>
+<div>
+<div title="21.4% Covered" style="min-width:40px;" class="barNegative contribBarNegative contribBarNegative"><div class="barPositive contribBarPositive contribBarPositive" style="width:21.4%"></div></div></div></td>
+<td id="tc-3612">  <span class="sortValue">org.apache.commons.lang3.text.StrSubstitutorTest.testReplaceSoloEscaping</span><a href="../../../../../org/apache/commons/lang3/text/StrSubstitutorTest_testReplaceSoloEscaping_2sc.html" title="View Test Summary Page">org.apache.commons.lang3.text.StrSubstitutorTest.testReplaceSoloEscaping</a>
+</td>
+<td>      <span class="sortValue">1</span><span class="aui-lozenge aui-lozenge-success">PASS</span>
+  </td>
+<td> <a href="../../../../../org/apache/commons/lang3/text/StrSubstitutorTest.html?line=168#src-168" title="View Test Source">
+ <span class="aui-icon aui-icon-small aui-iconfont-file-txt aui-icon-medium-gray"></span>
+</a>
+<a href="../../../../../org/apache/commons/lang3/text/StrSubstitutorTest_testReplaceSoloEscaping_2sc.html" title="View Test Summary Page"><span class="aui-icon aui-icon-small aui-iconfont-file-ppt aui-icon-medium-gray"></span></a>
+</td>
+</tr>
+<tr id="test-775">
+<td><a name="testA-775"></a><input type="checkbox" id="cb-775" value="775" name="testMethod" autocomplete="off" title="Check to highlight coverage of this test in the source code"/></td>
+<td style="vertical-align: middle"  class="link" onclick="window.location.href='../../../../../org/apache/commons/lang3/text/StrSubstitutorTest_testResolveVariable_lj.html';">
+<span class="sortValue">0.21428572</span>
+<div>
+<div title="21.4% Covered" style="min-width:40px;" class="barNegative contribBarNegative contribBarNegative"><div class="barPositive contribBarPositive contribBarPositive" style="width:21.4%"></div></div></div></td>
+<td id="tc-775">  <span class="sortValue">org.apache.commons.lang3.text.StrSubstitutorTest.testResolveVariable</span><a href="../../../../../org/apache/commons/lang3/text/StrSubstitutorTest_testResolveVariable_lj.html" title="View Test Summary Page">org.apache.commons.lang3.text.StrSubstitutorTest.testResolveVariable</a>
+</td>
+<td>      <span class="sortValue">1</span><span class="aui-lozenge aui-lozenge-success">PASS</span>
+  </td>
+<td> <a href="../../../../../org/apache/commons/lang3/text/StrSubstitutorTest.html?line=403#src-403" title="View Test Source">
+ <span class="aui-icon aui-icon-small aui-iconfont-file-txt aui-icon-medium-gray"></span>
+</a>
+<a href="../../../../../org/apache/commons/lang3/text/StrSubstitutorTest_testResolveVariable_lj.html" title="View Test Summary Page"><span class="aui-icon aui-icon-small aui-iconfont-file-ppt aui-icon-medium-gray"></span></a>
+</td>
+</tr>
+<tr id="test-1833">
+<td><a name="testA-1833"></a><input type="checkbox" id="cb-1833" value="1833" name="testMethod" autocomplete="off" title="Check to highlight coverage of this test in the source code"/></td>
+<td style="vertical-align: middle"  class="link" onclick="window.location.href='../../../../../org/apache/commons/lang3/text/StrSubstitutorTest_testReplaceNull_1ex.html';">
+<span class="sortValue">0.21428572</span>
+<div>
+<div title="21.4% Covered" style="min-width:40px;" class="barNegative contribBarNegative contribBarNegative"><div class="barPositive contribBarPositive contribBarPositive" style="width:21.4%"></div></div></div></td>
+<td id="tc-1833">  <span class="sortValue">org.apache.commons.lang3.text.StrSubstitutorTest.testReplaceNull</span><a href="../../../../../org/apache/commons/lang3/text/StrSubstitutorTest_testReplaceNull_1ex.html" title="View Test Summary Page">org.apache.commons.lang3.text.StrSubstitutorTest.testReplaceNull</a>
+</td>
+<td>      <span class="sortValue">1</span><span class="aui-lozenge aui-lozenge-success">PASS</span>
+  </td>
+<td> <a href="../../../../../org/apache/commons/lang3/text/StrSubstitutorTest.html?line=84#src-84" title="View Test Source">
+ <span class="aui-icon aui-icon-small aui-iconfont-file-txt aui-icon-medium-gray"></span>
+</a>
+<a href="../../../../../org/apache/commons/lang3/text/StrSubstitutorTest_testReplaceNull_1ex.html" title="View Test Summary Page"><span class="aui-icon aui-icon-small aui-iconfont-file-ppt aui-icon-medium-gray"></span></a>
+</td>
+</tr>
+
+            </tbody>
+        </table>
+
+        
+        <div>&#160;</div>
+
+    
+    </div>
+
+    
+    <footer class="aui-dialog2-footer">
+        <div class="aui-dialog2-footer-actions">
+            <button data-dialog-id="contr-tests-dialog" class="aui-button aui-button-primary dialog-close-button">Apply</button>
+        </div>
+        <div class="aui-dialog2-footer-hint">Select tests to highlight code covered by them in the source view.</div>
+    </footer>
+</section>
+
+ 
+        
+        
+
+
+
+
+
+<h2>Source view</h2>
+
+
+<div style="display: table; width: 100%;">
+    <div style="display: table-cell">
+        <button class="aui-button aui-button-link"
+                title="Toggles all methods in the source to be either expanded or collapsed."
+                onclick="toggleAllInlineMethods(this); return false;" id="method-expander">
+            Collapse all methods
+        </button>
+    </div>
+    <div style="display: table-cell">
+        <div style="text-align: right; margin-bottom: 10px">
+            <button class="aui-button aui-button-subtle" id="popupHelp">
+    <span class="aui-icon aui-icon-small aui-iconfont-help"></span>&#160;Show legend
+</button>
+<script>
+    AJS.InlineDialog(AJS.$("#popupHelp"), "helpDialog",
+            function(content, trigger, showPopup) {
+                content.css({"padding":"20px"}).html(SRC_FILE_LEGEND_TEXT);
+                showPopup();
+                return false;
+            },
+            {
+                width: 700, hideDelay: 60000
+            }
+    );
+</script>        </div>
+    </div>
+</div>
+
+<table cellspacing="0" cellpadding="0" class="srcView" width="100%">
+
+    
+<tbody> <tr id="l1">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=1#src-1">1</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-1" class="srcLine"><span class="comment">/*</span></span></td>
+</tr>
+ <tr id="l2">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=2#src-2">2</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-2" class="srcLine"><span class="comment"> * Licensed to the Apache Software Foundation (ASF) under one or more</span></span></td>
+</tr>
+ <tr id="l3">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=3#src-3">3</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-3" class="srcLine"><span class="comment"> * contributor license agreements.  See the NOTICE file distributed with</span></span></td>
+</tr>
+ <tr id="l4">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=4#src-4">4</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-4" class="srcLine"><span class="comment"> * this work for additional information regarding copyright ownership.</span></span></td>
+</tr>
+ <tr id="l5">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=5#src-5">5</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-5" class="srcLine"><span class="comment"> * The ASF licenses this file to You under the Apache License, Version 2.0</span></span></td>
+</tr>
+ <tr id="l6">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=6#src-6">6</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-6" class="srcLine"><span class="comment"> * (the &quot;License&quot;); you may not use this file except in compliance with</span></span></td>
+</tr>
+ <tr id="l7">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=7#src-7">7</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-7" class="srcLine"><span class="comment"> * the License.  You may obtain a copy of the License at</span></span></td>
+</tr>
+ <tr id="l8">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=8#src-8">8</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-8" class="srcLine"><span class="comment"> *</span></span></td>
+</tr>
+ <tr id="l9">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=9#src-9">9</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-9" class="srcLine"><span class="comment"> *      http://www.apache.org/licenses/LICENSE-2.0</span></span></td>
+</tr>
+ <tr id="l10">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=10#src-10">10</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-10" class="srcLine"><span class="comment"> *</span></span></td>
+</tr>
+ <tr id="l11">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=11#src-11">11</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-11" class="srcLine"><span class="comment"> * Unless required by applicable law or agreed to in writing, software</span></span></td>
+</tr>
+ <tr id="l12">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=12#src-12">12</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-12" class="srcLine"><span class="comment"> * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span></span></td>
+</tr>
+ <tr id="l13">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=13#src-13">13</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-13" class="srcLine"><span class="comment"> * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span></span></td>
+</tr>
+ <tr id="l14">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=14#src-14">14</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-14" class="srcLine"><span class="comment"> * See the License for the specific language governing permissions and</span></span></td>
+</tr>
+ <tr id="l15">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=15#src-15">15</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-15" class="srcLine"><span class="comment"> * limitations under the License.</span></span></td>
+</tr>
+ <tr id="l16">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=16#src-16">16</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-16" class="srcLine"><span class="comment"> */</span></span></td>
+</tr>
+ <tr id="l17">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=17#src-17">17</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-17" class="srcLine"><span class="keyword">package</span> org.apache.commons.<a href="../../lang3/pkg-summary.html">lang3</a>.<a href="../text/pkg-summary.html">text</a>;</span></td>
+</tr>
+ <tr id="l18">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=18#src-18">18</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-18" class="srcLine"></span></td>
+</tr>
+ <tr id="l19">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=19#src-19">19</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-19" class="srcLine"><span class="keyword">import</span> java.util.Map;</span></td>
+</tr>
+ <tr id="l20">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=20#src-20">20</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-20" class="srcLine"></span></td>
+</tr>
+ <tr id="l21">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=21#src-21">21</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-21" class="srcLine"><span class="comment">/**</span></span></td>
+</tr>
+ <tr id="l22">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=22#src-22">22</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-22" class="srcLine"><span class="comment"> * Lookup a String key to a String value.</span></span></td>
+</tr>
+ <tr id="l23">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=23#src-23">23</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-23" class="srcLine"><span class="comment"> * &lt;p&gt;</span></span></td>
+</tr>
+ <tr id="l24">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=24#src-24">24</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-24" class="srcLine"><span class="comment"> * This class represents the simplest form of a string to string map.</span></span></td>
+</tr>
+ <tr id="l25">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=25#src-25">25</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-25" class="srcLine"><span class="comment"> * It has a benefit over a map in that it can create the result on</span></span></td>
+</tr>
+ <tr id="l26">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=26#src-26">26</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-26" class="srcLine"><span class="comment"> * demand based on the key.</span></span></td>
+</tr>
+ <tr id="l27">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=27#src-27">27</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-27" class="srcLine"><span class="comment"> * &lt;p&gt;</span></span></td>
+</tr>
+ <tr id="l28">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=28#src-28">28</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-28" class="srcLine"><span class="comment"> * This class comes complete with various factory methods.</span></span></td>
+</tr>
+ <tr id="l29">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=29#src-29">29</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-29" class="srcLine"><span class="comment"> * If these do not suffice, you can subclass and implement your own matcher.</span></span></td>
+</tr>
+ <tr id="l30">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=30#src-30">30</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-30" class="srcLine"><span class="comment"> * &lt;p&gt;</span></span></td>
+</tr>
+ <tr id="l31">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=31#src-31">31</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-31" class="srcLine"><span class="comment"> * For example, it would be possible to implement a lookup that used the</span></span></td>
+</tr>
+ <tr id="l32">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=32#src-32">32</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-32" class="srcLine"><span class="comment"> * key as a primary key, and looked up the value on demand from the database</span></span></td>
+</tr>
+ <tr id="l33">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=33#src-33">33</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-33" class="srcLine"><span class="comment"> *</span></span></td>
+</tr>
+ <tr id="l34">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=34#src-34">34</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-34" class="srcLine"><span class="comment"> * </span><span class="javadoc">@since</span><span class="comment"> 2.2</span></span></td>
+</tr>
+ <tr id="l35">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=35#src-35">35</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-35" class="srcLine"><span class="comment"> * </span><span class="javadoc">@deprecated</span><span class="comment"> as of 3.6, use commons-text</span></span></td>
+</tr>
+ <tr id="l36">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=36#src-36">36</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-36" class="srcLine"><span class="comment"> * &lt;a href=&quot;https://commons.apache.org/proper/commons-text/javadocs/api-release/org/apache/commons/text/StrLookup.html&quot;&gt;</span></span></td>
+</tr>
+ <tr id="l37">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=37#src-37">37</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-37" class="srcLine"><span class="comment"> * StrLookup&lt;/a&gt; instead</span></span></td>
+</tr>
+ <tr id="l38">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=38#src-38">38</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-38" class="srcLine"><span class="comment"> */</span></span></td>
+</tr>
+ <tr id="l39">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=39#src-39">39</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-39" class="srcLine">@Deprecated</span></td>
+</tr>
+<tr class="inlineStatsRow" align="right" valign="middle">
+<td class="coverageCount"><a name="40" class="nolink">&#160;</a></td>
+    <td class="coverageCount aui-icon aui-icon-small aui-iconfont-arrows-right" id='inlineStatsToggle-40' onclick="toggleInlineStats(this, 'inlinestats-40');"/>
+    <td align="center" valign="middle">
+        <table id="inlinestats-40" style="display:none;" class="inlineStats" width="100%" cellspacing="1px" cellpadding="1px">
+            <tr onclick="toggleInlineStats(document.getElementById('inlineStatsToggle-40'), 'inlinestats-40');return true;">
+                <td><div>
+<div title="100% Covered" style="min-width:40px;" class="barNegative contribBarNegative barNegative"><div class="barPositive contribBarPositive barPositive" style="width:100%"></div></div></div></td><td>100%</td>
+                <td class="inlineStat">Uncovered Elements: 0 (8)</td>
+                <td class="inlineStat">Complexity: 4</td>
+                <td class="inlineStat">Complexity Density: 1</td>
+                            </tr>
+        </table>
+    </td>
+</tr>
+<tr id="l40">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=40#src-40">40</a></td>
+<td align="right" class="coverageCount NoHilight "   onclick="return showTestsForLine(this, 40, 'Tests that hit StrLookup');" >&#160;&#160;</td>
+<td class=" srcCell" id="id-40"><span class="spacer"></span><span id="src-40" class="srcLine"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">class</span> <a href="../../../../../org/apache/commons/lang3/text/StrLookup.html#StrLookup">StrLookup</a>&lt;V&gt; {</span></td>
+</tr>
+ <tr id="l41">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=41#src-41">41</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-41" class="srcLine"></span></td>
+</tr>
+ <tr id="l42">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=42#src-42">42</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-42" class="srcLine">    <span class="comment">/**</span></span></td>
+</tr>
+ <tr id="l43">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=43#src-43">43</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-43" class="srcLine"><span class="comment">     * Lookup that always returns null.</span></span></td>
+</tr>
+ <tr id="l44">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=44#src-44">44</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-44" class="srcLine"><span class="comment">     */</span></span></td>
+</tr>
+ <tr id="l45">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=45#src-45">45</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-45" class="srcLine">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <a href="../../../../../org/apache/commons/lang3/text/StrLookup.html#StrLookup">StrLookup</a>&lt;String&gt; NONE_LOOKUP = <span class="keyword">new</span> MapStrLookup&lt;&gt;(<span class="keyword">null</span>);</span></td>
+</tr>
+ <tr id="l46">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=46#src-46">46</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-46" class="srcLine"></span></td>
+</tr>
+ <tr id="l47">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=47#src-47">47</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-47" class="srcLine">    <span class="comment">/**</span></span></td>
+</tr>
+ <tr id="l48">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=48#src-48">48</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-48" class="srcLine"><span class="comment">     * Lookup based on system properties.</span></span></td>
+</tr>
+ <tr id="l49">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=49#src-49">49</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-49" class="srcLine"><span class="comment">     */</span></span></td>
+</tr>
+ <tr id="l50">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=50#src-50">50</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-50" class="srcLine">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <a href="../../../../../org/apache/commons/lang3/text/StrLookup.html#StrLookup">StrLookup</a>&lt;String&gt; SYSTEM_PROPERTIES_LOOKUP = <span class="keyword">new</span> SystemPropertiesStrLookup();</span></td>
+</tr>
+ <tr id="l51">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=51#src-51">51</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-51" class="srcLine"></span></td>
+</tr>
+ <tr id="l52">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=52#src-52">52</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-52" class="srcLine">    <span class="comment">//-----------------------------------------------------------------------</span></span></td>
+</tr>
+ <tr id="l53">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=53#src-53">53</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-53" class="srcLine">    <span class="comment">/**</span></span></td>
+</tr>
+ <tr id="l54">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=54#src-54">54</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-54" class="srcLine"><span class="comment">     * Returns a lookup which always returns null.</span></span></td>
+</tr>
+ <tr id="l55">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=55#src-55">55</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-55" class="srcLine"><span class="comment">     *</span></span></td>
+</tr>
+ <tr id="l56">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=56#src-56">56</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-56" class="srcLine"><span class="comment">     * </span><span class="javadoc">@return</span><span class="comment"> a lookup that always returns null, not null</span></span></td>
+</tr>
+ <tr id="l57">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=57#src-57">57</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-57" class="srcLine"><span class="comment">     */</span></span></td>
+</tr>
+<tr class="inlineStatsRow" align="right" valign="middle">
+<td class="coverageCount"><a name="58" class="nolink">&#160;</a></td>
+    <td class="coverageCount aui-icon aui-icon-small aui-iconfont-arrows-right" id='inlineStatsToggle-58' onclick="toggleInlineStats(this, 'inlinestats-58');"/>
+    <td align="center" valign="middle">
+        <table id="inlinestats-58" style="display:none;" class="inlineStats" width="100%" cellspacing="1px" cellpadding="1px">
+            <tr onclick="toggleInlineStats(document.getElementById('inlineStatsToggle-58'), 'inlinestats-58');return true;">
+                <td><div>
+<div title="100% Covered" style="min-width:40px;" class="barNegative contribBarNegative barNegative"><div class="barPositive contribBarPositive barPositive" style="width:100%"></div></div></div></td><td>100%</td>
+                <td class="inlineStat">Uncovered Elements: 0 (1)</td>
+                <td class="inlineStat">Complexity: 1</td>
+                <td class="inlineStat">Complexity Density: 1</td>
+                            </tr>
+        </table>
+    </td>
+</tr>
+<tr id="l58">
+<td align="right" class="lineCount Good"><a class="lineNumHref" href="?line=58#src-58">58</a></td>
+<td align="right" class="coverageCount Good hitByTest"   onclick="return showTestsForLine(this, 58, 'Tests that hit noneLookup()&#160;:&#160;StrLookup&lt;?&gt;');" ><span title="Line 58, Col 5: method entered 3 times." class="nolink">&#160;3</span></td>
+<td class=" methodStart  srcCell" id="id-58"><img title="Method Statistics" onclick="toggleSrcRowVis(this, 58,60);" id="img-58" src="../../../../../img/collapse.gif"  alt="toggle" class="icon"/><span id="src-58" class="srcLine"><span class="nolink" title="Line 58, Col 5: method entered 3 times.">    <span class="keyword">public</span> <span class="keyword">static</span> <a href="../../../../../org/apache/commons/lang3/text/StrLookup.html#StrLookup">StrLookup</a>&lt;?&gt; noneLookup() {</span><span class="foldControl" onclick="toggleSrcRowVis(document.getElementById('img-58'), 58,60);" id="e58" style="display:none;border:none;">...</span></span></td>
+</tr>
+ <tr id="l59">
+<td align="right" class="lineCount Good"><a class="lineNumHref" href="?line=59#src-59">59</a></td>
+<td align="right" class="coverageCount Good hitByTest"   onclick="return showTestsForLine(this, 59, 'Tests that hit line # 59');" ><span title="Line 59, Col 9: statement executed 3 times." class="nolink">&#160;3</span></td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-59" class="srcLine"><span class="nolink" title="Line 59, Col 9: statement executed 3 times.">        <span class="keyword">return</span> NONE_LOOKUP;</span></span></td>
+</tr>
+ <tr id="l60">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=60#src-60">60</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-60" class="srcLine">    }</span></td>
+</tr>
+ <tr id="l61">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=61#src-61">61</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-61" class="srcLine"></span></td>
+</tr>
+ <tr id="l62">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=62#src-62">62</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-62" class="srcLine">    <span class="comment">/**</span></span></td>
+</tr>
+ <tr id="l63">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=63#src-63">63</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-63" class="srcLine"><span class="comment">     * Returns a new lookup which uses a copy of the current</span></span></td>
+</tr>
+ <tr id="l64">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=64#src-64">64</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-64" class="srcLine"><span class="comment">     * {</span><span class="javadoc">@link</span><span class="comment"> System#getProperties() System properties}.</span></span></td>
+</tr>
+ <tr id="l65">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=65#src-65">65</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-65" class="srcLine"><span class="comment">     * &lt;p&gt;</span></span></td>
+</tr>
+ <tr id="l66">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=66#src-66">66</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-66" class="srcLine"><span class="comment">     * If a security manager blocked access to system properties, then null will</span></span></td>
+</tr>
+ <tr id="l67">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=67#src-67">67</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-67" class="srcLine"><span class="comment">     * be returned from every lookup.</span></span></td>
+</tr>
+ <tr id="l68">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=68#src-68">68</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-68" class="srcLine"><span class="comment">     * &lt;p&gt;</span></span></td>
+</tr>
+ <tr id="l69">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=69#src-69">69</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-69" class="srcLine"><span class="comment">     * If a null key is used, this lookup will throw a NullPointerException.</span></span></td>
+</tr>
+ <tr id="l70">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=70#src-70">70</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-70" class="srcLine"><span class="comment">     *</span></span></td>
+</tr>
+ <tr id="l71">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=71#src-71">71</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-71" class="srcLine"><span class="comment">     * </span><span class="javadoc">@return</span><span class="comment"> a lookup using system properties, not null</span></span></td>
+</tr>
+ <tr id="l72">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=72#src-72">72</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-72" class="srcLine"><span class="comment">     */</span></span></td>
+</tr>
+<tr class="inlineStatsRow" align="right" valign="middle">
+<td class="coverageCount"><a name="73" class="nolink">&#160;</a></td>
+    <td class="coverageCount aui-icon aui-icon-small aui-iconfont-arrows-right" id='inlineStatsToggle-73' onclick="toggleInlineStats(this, 'inlinestats-73');"/>
+    <td align="center" valign="middle">
+        <table id="inlinestats-73" style="display:none;" class="inlineStats" width="100%" cellspacing="1px" cellpadding="1px">
+            <tr onclick="toggleInlineStats(document.getElementById('inlineStatsToggle-73'), 'inlinestats-73');return true;">
+                <td><div>
+<div title="100% Covered" style="min-width:40px;" class="barNegative contribBarNegative barNegative"><div class="barPositive contribBarPositive barPositive" style="width:100%"></div></div></div></td><td>100%</td>
+                <td class="inlineStat">Uncovered Elements: 0 (1)</td>
+                <td class="inlineStat">Complexity: 1</td>
+                <td class="inlineStat">Complexity Density: 1</td>
+                            </tr>
+        </table>
+    </td>
+</tr>
+<tr id="l73">
+<td align="right" class="lineCount Good"><a class="lineNumHref" href="?line=73#src-73">73</a></td>
+<td align="right" class="coverageCount Good hitByTest"   onclick="return showTestsForLine(this, 73, 'Tests that hit systemPropertiesLookup()&#160;:&#160;StrLookup&lt;String&gt;');" ><span title="Line 73, Col 5: method entered 8 times." class="nolink">&#160;8</span></td>
+<td class=" methodStart  srcCell" id="id-73"><img title="Method Statistics" onclick="toggleSrcRowVis(this, 73,75);" id="img-73" src="../../../../../img/collapse.gif"  alt="toggle" class="icon"/><span id="src-73" class="srcLine"><span class="nolink" title="Line 73, Col 5: method entered 8 times.">    <span class="keyword">public</span> <span class="keyword">static</span> <a href="../../../../../org/apache/commons/lang3/text/StrLookup.html#StrLookup">StrLookup</a>&lt;String&gt; systemPropertiesLookup() {</span><span class="foldControl" onclick="toggleSrcRowVis(document.getElementById('img-73'), 73,75);" id="e73" style="display:none;border:none;">...</span></span></td>
+</tr>
+ <tr id="l74">
+<td align="right" class="lineCount Good"><a class="lineNumHref" href="?line=74#src-74">74</a></td>
+<td align="right" class="coverageCount Good hitByTest"   onclick="return showTestsForLine(this, 74, 'Tests that hit line # 74');" ><span title="Line 74, Col 9: statement executed 8 times." class="nolink">&#160;8</span></td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-74" class="srcLine"><span class="nolink" title="Line 74, Col 9: statement executed 8 times.">        <span class="keyword">return</span> SYSTEM_PROPERTIES_LOOKUP;</span></span></td>
+</tr>
+ <tr id="l75">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=75#src-75">75</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-75" class="srcLine">    }</span></td>
+</tr>
+ <tr id="l76">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=76#src-76">76</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-76" class="srcLine"></span></td>
+</tr>
+ <tr id="l77">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=77#src-77">77</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-77" class="srcLine">    <span class="comment">/**</span></span></td>
+</tr>
+ <tr id="l78">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=78#src-78">78</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-78" class="srcLine"><span class="comment">     * Returns a lookup which looks up values using a map.</span></span></td>
+</tr>
+ <tr id="l79">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=79#src-79">79</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-79" class="srcLine"><span class="comment">     * &lt;p&gt;</span></span></td>
+</tr>
+ <tr id="l80">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=80#src-80">80</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-80" class="srcLine"><span class="comment">     * If the map is null, then null will be returned from every lookup.</span></span></td>
+</tr>
+ <tr id="l81">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=81#src-81">81</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-81" class="srcLine"><span class="comment">     * The map result object is converted to a string using toString().</span></span></td>
+</tr>
+ <tr id="l82">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=82#src-82">82</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-82" class="srcLine"><span class="comment">     *</span></span></td>
+</tr>
+ <tr id="l83">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=83#src-83">83</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-83" class="srcLine"><span class="comment">     * </span><span class="javadoc">@param</span><span class="comment"> &lt;V&gt; the type of the values supported by the lookup</span></span></td>
+</tr>
+ <tr id="l84">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=84#src-84">84</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-84" class="srcLine"><span class="comment">     * </span><span class="javadoc">@param</span><span class="comment"> map  the map of keys to values, may be null</span></span></td>
+</tr>
+ <tr id="l85">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=85#src-85">85</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-85" class="srcLine"><span class="comment">     * </span><span class="javadoc">@return</span><span class="comment"> a lookup using the map, not null</span></span></td>
+</tr>
+ <tr id="l86">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=86#src-86">86</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-86" class="srcLine"><span class="comment">     */</span></span></td>
+</tr>
+<tr class="inlineStatsRow" align="right" valign="middle">
+<td class="coverageCount"><a name="87" class="nolink">&#160;</a></td>
+    <td class="coverageCount aui-icon aui-icon-small aui-iconfont-arrows-right" id='inlineStatsToggle-87' onclick="toggleInlineStats(this, 'inlinestats-87');"/>
+    <td align="center" valign="middle">
+        <table id="inlinestats-87" style="display:none;" class="inlineStats" width="100%" cellspacing="1px" cellpadding="1px">
+            <tr onclick="toggleInlineStats(document.getElementById('inlineStatsToggle-87'), 'inlinestats-87');return true;">
+                <td><div>
+<div title="100% Covered" style="min-width:40px;" class="barNegative contribBarNegative barNegative"><div class="barPositive contribBarPositive barPositive" style="width:100%"></div></div></div></td><td>100%</td>
+                <td class="inlineStat">Uncovered Elements: 0 (1)</td>
+                <td class="inlineStat">Complexity: 1</td>
+                <td class="inlineStat">Complexity Density: 1</td>
+                            </tr>
+        </table>
+    </td>
+</tr>
+<tr id="l87">
+<td align="right" class="lineCount Good"><a class="lineNumHref" href="?line=87#src-87">87</a></td>
+<td align="right" class="coverageCount Good hitByTest"   onclick="return showTestsForLine(this, 87, 'Tests that hit mapLookup(Map&lt;String,&#160;V&gt;)&#160;:&#160;StrLookup&lt;V&gt;');" ><span title="Line 87, Col 5: method entered 70 times." class="nolink">&#160;70</span></td>
+<td class=" methodStart  srcCell" id="id-87"><img title="Method Statistics" onclick="toggleSrcRowVis(this, 87,89);" id="img-87" src="../../../../../img/collapse.gif"  alt="toggle" class="icon"/><span id="src-87" class="srcLine"><span class="nolink" title="Line 87, Col 5: method entered 70 times.">    <span class="keyword">public</span> <span class="keyword">static</span> &lt;V&gt; <a href="../../../../../org/apache/commons/lang3/text/StrLookup.html#StrLookup">StrLookup</a>&lt;V&gt; mapLookup(<span class="keyword">final</span> Map&lt;String, V&gt; map) {</span><span class="foldControl" onclick="toggleSrcRowVis(document.getElementById('img-87'), 87,89);" id="e87" style="display:none;border:none;">...</span></span></td>
+</tr>
+ <tr id="l88">
+<td align="right" class="lineCount Good"><a class="lineNumHref" href="?line=88#src-88">88</a></td>
+<td align="right" class="coverageCount Good hitByTest"   onclick="return showTestsForLine(this, 88, 'Tests that hit line # 88');" ><span title="Line 88, Col 9: statement executed 70 times." class="nolink">&#160;70</span></td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-88" class="srcLine"><span class="nolink" title="Line 88, Col 9: statement executed 70 times.">        <span class="keyword">return</span> <span class="keyword">new</span> MapStrLookup&lt;&gt;(map);</span></span></td>
+</tr>
+ <tr id="l89">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=89#src-89">89</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-89" class="srcLine">    }</span></td>
+</tr>
+ <tr id="l90">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=90#src-90">90</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-90" class="srcLine"></span></td>
+</tr>
+ <tr id="l91">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=91#src-91">91</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-91" class="srcLine">    <span class="comment">//-----------------------------------------------------------------------</span></span></td>
+</tr>
+ <tr id="l92">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=92#src-92">92</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-92" class="srcLine">    <span class="comment">/**</span></span></td>
+</tr>
+ <tr id="l93">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=93#src-93">93</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-93" class="srcLine"><span class="comment">     * Constructor.</span></span></td>
+</tr>
+ <tr id="l94">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=94#src-94">94</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-94" class="srcLine"><span class="comment">     */</span></span></td>
+</tr>
+<tr class="inlineStatsRow" align="right" valign="middle">
+<td class="coverageCount"><a name="95" class="nolink">&#160;</a></td>
+    <td class="coverageCount aui-icon aui-icon-small aui-iconfont-arrows-right" id='inlineStatsToggle-95' onclick="toggleInlineStats(this, 'inlinestats-95');"/>
+    <td align="center" valign="middle">
+        <table id="inlinestats-95" style="display:none;" class="inlineStats" width="100%" cellspacing="1px" cellpadding="1px">
+            <tr onclick="toggleInlineStats(document.getElementById('inlineStatsToggle-95'), 'inlinestats-95');return true;">
+                <td><div>
+<div title="100% Covered" style="min-width:40px;" class="barNegative contribBarNegative barNegative"><div class="barPositive contribBarPositive barPositive" style="width:100%"></div></div></div></td><td>100%</td>
+                <td class="inlineStat">Uncovered Elements: 0 (1)</td>
+                <td class="inlineStat">Complexity: 1</td>
+                <td class="inlineStat">Complexity Density: 1</td>
+                            </tr>
+        </table>
+    </td>
+</tr>
+<tr id="l95">
+<td align="right" class="lineCount Good"><a class="lineNumHref" href="?line=95#src-95">95</a></td>
+<td align="right" class="coverageCount Good hitByTest"   onclick="return showTestsForLine(this, 95, 'Tests that hit StrLookup()');" ><span title="Line 95, Col 5: method entered 72 times." class="nolink">&#160;72</span></td>
+<td class=" methodStart  srcCell" id="id-95"><img title="Method Statistics" onclick="toggleSrcRowVis(this, 95,97);" id="img-95" src="../../../../../img/collapse.gif"  alt="toggle" class="icon"/><span id="src-95" class="srcLine"><span class="nolink" title="Line 95, Col 5: method entered 72 times.">    <span class="keyword">protected</span> <a href="../../../../../org/apache/commons/lang3/text/StrLookup.html#StrLookup">StrLookup</a>() {</span><span class="foldControl" onclick="toggleSrcRowVis(document.getElementById('img-95'), 95,97);" id="e95" style="display:none;border:none;">...</span></span></td>
+</tr>
+ <tr id="l96">
+<td align="right" class="lineCount Good"><a class="lineNumHref" href="?line=96#src-96">96</a></td>
+<td align="right" class="coverageCount Good hitByTest"   onclick="return showTestsForLine(this, 96, 'Tests that hit line # 96');" ><span title="Line 96, Col 9: statement executed 72 times." class="nolink">&#160;72</span></td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-96" class="srcLine"><span class="nolink" title="Line 96, Col 9: statement executed 72 times.">        <span class="keyword">super</span>();</span></span></td>
+</tr>
+ <tr id="l97">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=97#src-97">97</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-97" class="srcLine">    }</span></td>
+</tr>
+ <tr id="l98">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=98#src-98">98</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-98" class="srcLine"></span></td>
+</tr>
+ <tr id="l99">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=99#src-99">99</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-99" class="srcLine">    <span class="comment">/**</span></span></td>
+</tr>
+ <tr id="l100">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=100#src-100">100</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-100" class="srcLine"><span class="comment">     * Looks up a String key to a String value.</span></span></td>
+</tr>
+ <tr id="l101">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=101#src-101">101</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-101" class="srcLine"><span class="comment">     * &lt;p&gt;</span></span></td>
+</tr>
+ <tr id="l102">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=102#src-102">102</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-102" class="srcLine"><span class="comment">     * The internal implementation may use any mechanism to return the value.</span></span></td>
+</tr>
+ <tr id="l103">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=103#src-103">103</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-103" class="srcLine"><span class="comment">     * The simplest implementation is to use a Map. However, virtually any</span></span></td>
+</tr>
+ <tr id="l104">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=104#src-104">104</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-104" class="srcLine"><span class="comment">     * implementation is possible.</span></span></td>
+</tr>
+ <tr id="l105">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=105#src-105">105</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-105" class="srcLine"><span class="comment">     * &lt;p&gt;</span></span></td>
+</tr>
+ <tr id="l106">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=106#src-106">106</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-106" class="srcLine"><span class="comment">     * For example, it would be possible to implement a lookup that used the</span></span></td>
+</tr>
+ <tr id="l107">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=107#src-107">107</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-107" class="srcLine"><span class="comment">     * key as a primary key, and looked up the value on demand from the database</span></span></td>
+</tr>
+ <tr id="l108">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=108#src-108">108</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-108" class="srcLine"><span class="comment">     * Or, a numeric based implementation could be created that treats the key</span></span></td>
+</tr>
+ <tr id="l109">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=109#src-109">109</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-109" class="srcLine"><span class="comment">     * as an integer, increments the value and return the result as a string -</span></span></td>
+</tr>
+ <tr id="l110">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=110#src-110">110</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-110" class="srcLine"><span class="comment">     * converting 1 to 2, 15 to 16 etc.</span></span></td>
+</tr>
+ <tr id="l111">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=111#src-111">111</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-111" class="srcLine"><span class="comment">     * &lt;p&gt;</span></span></td>
+</tr>
+ <tr id="l112">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=112#src-112">112</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-112" class="srcLine"><span class="comment">     * The {</span><span class="javadoc">@link</span><span class="comment"> #lookup(String)} method always returns a String, regardless of</span></span></td>
+</tr>
+ <tr id="l113">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=113#src-113">113</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-113" class="srcLine"><span class="comment">     * the underlying data, by converting it as necessary. For example:</span></span></td>
+</tr>
+ <tr id="l114">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=114#src-114">114</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-114" class="srcLine"><span class="comment">     * &lt;pre&gt;</span></span></td>
+</tr>
+ <tr id="l115">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=115#src-115">115</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-115" class="srcLine"><span class="comment">     * Map&amp;lt;String, Object&amp;gt; map = new HashMap&amp;lt;String, Object&amp;gt;();</span></span></td>
+</tr>
+ <tr id="l116">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=116#src-116">116</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-116" class="srcLine"><span class="comment">     * map.put(&quot;number&quot;, Integer.valueOf(2));</span></span></td>
+</tr>
+ <tr id="l117">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=117#src-117">117</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-117" class="srcLine"><span class="comment">     * assertEquals(&quot;2&quot;, StrLookup.mapLookup(map).lookup(&quot;number&quot;));</span></span></td>
+</tr>
+ <tr id="l118">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=118#src-118">118</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-118" class="srcLine"><span class="comment">     * &lt;/pre&gt;</span></span></td>
+</tr>
+ <tr id="l119">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=119#src-119">119</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-119" class="srcLine"><span class="comment">     * </span><span class="javadoc">@param</span><span class="comment"> key  the key to be looked up, may be null</span></span></td>
+</tr>
+ <tr id="l120">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=120#src-120">120</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-120" class="srcLine"><span class="comment">     * </span><span class="javadoc">@return</span><span class="comment"> the matching value, null if no match</span></span></td>
+</tr>
+ <tr id="l121">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=121#src-121">121</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-121" class="srcLine"><span class="comment">     */</span></span></td>
+</tr>
+ <tr id="l122">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=122#src-122">122</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-122" class="srcLine">    <span class="keyword">public</span> <span class="keyword">abstract</span> String lookup(String key);</span></td>
+</tr>
+ <tr id="l123">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=123#src-123">123</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-123" class="srcLine"></span></td>
+</tr>
+ <tr id="l124">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=124#src-124">124</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-124" class="srcLine">    <span class="comment">//-----------------------------------------------------------------------</span></span></td>
+</tr>
+ <tr id="l125">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=125#src-125">125</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-125" class="srcLine">    <span class="comment">/**</span></span></td>
+</tr>
+ <tr id="l126">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=126#src-126">126</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-126" class="srcLine"><span class="comment">     * Lookup implementation that uses a Map.</span></span></td>
+</tr>
+ <tr id="l127">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=127#src-127">127</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-127" class="srcLine"><span class="comment">     */</span></span></td>
+</tr>
+<tr class="inlineStatsRow" align="right" valign="middle">
+<td class="coverageCount"><a name="128" class="nolink">&#160;</a></td>
+    <td class="coverageCount aui-icon aui-icon-small aui-iconfont-arrows-right" id='inlineStatsToggle-128' onclick="toggleInlineStats(this, 'inlinestats-128');"/>
+    <td align="center" valign="middle">
+        <table id="inlinestats-128" style="display:none;" class="inlineStats" width="100%" cellspacing="1px" cellpadding="1px">
+            <tr onclick="toggleInlineStats(document.getElementById('inlineStatsToggle-128'), 'inlinestats-128');return true;">
+                <td><div>
+<div title="100% Covered" style="min-width:40px;" class="barNegative contribBarNegative barNegative"><div class="barPositive contribBarPositive barPositive" style="width:100%"></div></div></div></td><td>100%</td>
+                <td class="inlineStat">Uncovered Elements: 0 (13)</td>
+                <td class="inlineStat">Complexity: 4</td>
+                <td class="inlineStat">Complexity Density: 0.57</td>
+                            </tr>
+        </table>
+    </td>
+</tr>
+<tr id="l128">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=128#src-128">128</a></td>
+<td align="right" class="coverageCount NoHilight "   onclick="return showTestsForLine(this, 128, 'Tests that hit StrLookup.MapStrLookup');" >&#160;&#160;</td>
+<td class=" srcCell" id="id-128"><span class="spacer"></span><span id="src-128" class="srcLine">    <span class="keyword">static</span> <span class="keyword">class</span> MapStrLookup&lt;V&gt; <span class="keyword">extends</span> <a href="../../../../../org/apache/commons/lang3/text/StrLookup.html#StrLookup">StrLookup</a>&lt;V&gt; {</span></td>
+</tr>
+ <tr id="l129">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=129#src-129">129</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-129" class="srcLine"></span></td>
+</tr>
+ <tr id="l130">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=130#src-130">130</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-130" class="srcLine">        <span class="comment">/** Map keys are variable names and value. */</span></span></td>
+</tr>
+ <tr id="l131">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=131#src-131">131</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-131" class="srcLine">        <span class="keyword">private</span> <span class="keyword">final</span> Map&lt;String, V&gt; map;</span></td>
+</tr>
+ <tr id="l132">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=132#src-132">132</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-132" class="srcLine"></span></td>
+</tr>
+ <tr id="l133">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=133#src-133">133</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-133" class="srcLine">        <span class="comment">/**</span></span></td>
+</tr>
+ <tr id="l134">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=134#src-134">134</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-134" class="srcLine"><span class="comment">         * Creates a new instance backed by a Map.</span></span></td>
+</tr>
+ <tr id="l135">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=135#src-135">135</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-135" class="srcLine"><span class="comment">         *</span></span></td>
+</tr>
+ <tr id="l136">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=136#src-136">136</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-136" class="srcLine"><span class="comment">         * </span><span class="javadoc">@param</span><span class="comment"> map  the map of keys to values, may be null</span></span></td>
+</tr>
+ <tr id="l137">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=137#src-137">137</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-137" class="srcLine"><span class="comment">         */</span></span></td>
+</tr>
+<tr class="inlineStatsRow" align="right" valign="middle">
+<td class="coverageCount"><a name="138" class="nolink">&#160;</a></td>
+    <td class="coverageCount aui-icon aui-icon-small aui-iconfont-arrows-right" id='inlineStatsToggle-138' onclick="toggleInlineStats(this, 'inlinestats-138');"/>
+    <td align="center" valign="middle">
+        <table id="inlinestats-138" style="display:none;" class="inlineStats" width="100%" cellspacing="1px" cellpadding="1px">
+            <tr onclick="toggleInlineStats(document.getElementById('inlineStatsToggle-138'), 'inlinestats-138');return true;">
+                <td><div>
+<div title="100% Covered" style="min-width:40px;" class="barNegative contribBarNegative barNegative"><div class="barPositive contribBarPositive barPositive" style="width:100%"></div></div></div></td><td>100%</td>
+                <td class="inlineStat">Uncovered Elements: 0 (1)</td>
+                <td class="inlineStat">Complexity: 1</td>
+                <td class="inlineStat">Complexity Density: 1</td>
+                            </tr>
+        </table>
+    </td>
+</tr>
+<tr id="l138">
+<td align="right" class="lineCount Good"><a class="lineNumHref" href="?line=138#src-138">138</a></td>
+<td align="right" class="coverageCount Good hitByTest"   onclick="return showTestsForLine(this, 138, 'Tests that hit MapStrLookup(Map&lt;String,&#160;V&gt;)');" ><span title="Line 138, Col 9: method entered 71 times." class="nolink">&#160;71</span></td>
+<td class=" methodStart  srcCell" id="id-138"><img title="Method Statistics" onclick="toggleSrcRowVis(this, 138,140);" id="img-138" src="../../../../../img/collapse.gif"  alt="toggle" class="icon"/><span id="src-138" class="srcLine"><span class="nolink" title="Line 138, Col 9: method entered 71 times.">        MapStrLookup(<span class="keyword">final</span> Map&lt;String, V&gt; map) {</span><span class="foldControl" onclick="toggleSrcRowVis(document.getElementById('img-138'), 138,140);" id="e138" style="display:none;border:none;">...</span></span></td>
+</tr>
+ <tr id="l139">
+<td align="right" class="lineCount Good"><a class="lineNumHref" href="?line=139#src-139">139</a></td>
+<td align="right" class="coverageCount Good hitByTest"   onclick="return showTestsForLine(this, 139, 'Tests that hit line # 139');" ><span title="Line 139, Col 13: statement executed 71 times." class="nolink">&#160;71</span></td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-139" class="srcLine"><span class="nolink" title="Line 139, Col 13: statement executed 71 times.">            <span class="keyword">this</span>.map = map;</span></span></td>
+</tr>
+ <tr id="l140">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=140#src-140">140</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-140" class="srcLine">        }</span></td>
+</tr>
+ <tr id="l141">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=141#src-141">141</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-141" class="srcLine"></span></td>
+</tr>
+ <tr id="l142">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=142#src-142">142</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-142" class="srcLine">        <span class="comment">/**</span></span></td>
+</tr>
+ <tr id="l143">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=143#src-143">143</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-143" class="srcLine"><span class="comment">         * Looks up a String key to a String value using the map.</span></span></td>
+</tr>
+ <tr id="l144">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=144#src-144">144</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-144" class="srcLine"><span class="comment">         * &lt;p&gt;</span></span></td>
+</tr>
+ <tr id="l145">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=145#src-145">145</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-145" class="srcLine"><span class="comment">         * If the map is null, then null is returned.</span></span></td>
+</tr>
+ <tr id="l146">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=146#src-146">146</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-146" class="srcLine"><span class="comment">         * The map result object is converted to a string using toString().</span></span></td>
+</tr>
+ <tr id="l147">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=147#src-147">147</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-147" class="srcLine"><span class="comment">         *</span></span></td>
+</tr>
+ <tr id="l148">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=148#src-148">148</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-148" class="srcLine"><span class="comment">         * </span><span class="javadoc">@param</span><span class="comment"> key  the key to be looked up, may be null</span></span></td>
+</tr>
+ <tr id="l149">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=149#src-149">149</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-149" class="srcLine"><span class="comment">         * </span><span class="javadoc">@return</span><span class="comment"> the matching value, null if no match</span></span></td>
+</tr>
+ <tr id="l150">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=150#src-150">150</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-150" class="srcLine"><span class="comment">         */</span></span></td>
+</tr>
+<tr class="inlineStatsRow" align="right" valign="middle">
+<td class="coverageCount"><a name="151" class="nolink">&#160;</a></td>
+    <td class="coverageCount aui-icon aui-icon-small aui-iconfont-arrows-right" id='inlineStatsToggle-151' onclick="toggleInlineStats(this, 'inlinestats-151');"/>
+    <td align="center" valign="middle">
+        <table id="inlinestats-151" style="display:none;" class="inlineStats" width="100%" cellspacing="1px" cellpadding="1px">
+            <tr onclick="toggleInlineStats(document.getElementById('inlineStatsToggle-151'), 'inlinestats-151');return true;">
+                <td><div>
+<div title="100% Covered" style="min-width:40px;" class="barNegative contribBarNegative barNegative"><div class="barPositive contribBarPositive barPositive" style="width:100%"></div></div></div></td><td>100%</td>
+                <td class="inlineStat">Uncovered Elements: 0 (10)</td>
+                <td class="inlineStat">Complexity: 3</td>
+                <td class="inlineStat">Complexity Density: 0.5</td>
+                            </tr>
+        </table>
+    </td>
+</tr>
+<tr id="l151">
+<td align="right" class="lineCount Good"><a class="lineNumHref" href="?line=151#src-151">151</a></td>
+<td align="right" class="coverageCount Good hitByTest"   onclick="return showTestsForLine(this, 151, 'Tests that hit lookup(String)&#160;:&#160;String');" ><span title="Line 151, Col 9: method entered 791 times." class="nolink">&#160;791</span></td>
+<td class=" methodStart  srcCell" id="id-151"><img title="Method Statistics" onclick="toggleSrcRowVis(this, 151,161);" id="img-151" src="../../../../../img/collapse.gif"  alt="toggle" class="icon"/><span id="src-151" class="srcLine"><span class="nolink" title="Line 151, Col 9: method entered 791 times.">        @Override</span><span class="foldControl" onclick="toggleSrcRowVis(document.getElementById('img-151'), 151,161);" id="e151" style="display:none;border:none;">...</span></span></td>
+</tr>
+ <tr id="l152">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=152#src-152">152</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-152" class="srcLine">        <span class="keyword">public</span> String lookup(<span class="keyword">final</span> String key) {</span></td>
+</tr>
+ <tr id="l153">
+<td align="right" class="lineCount Good"><a class="lineNumHref" href="?line=153#src-153">153</a></td>
+<td align="right" class="coverageCount Good hitByTest"   onclick="return showTestsForLine(this, 153, 'Tests that hit line # 153');" ><span title="Line 153, Col 16: true branch executed 6 times, false branch executed 785 times." class="nolink">&#160;791</span></td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-153" class="srcLine"><span class="nolink" title="Line 153, Col 16: true branch executed 6 times, false branch executed 785 times.">            <span class="keyword">if</span> (map == <span class="keyword">null</span>) {</span></span></td>
+</tr>
+ <tr id="l154">
+<td align="right" class="lineCount Good"><a class="lineNumHref" href="?line=154#src-154">154</a></td>
+<td align="right" class="coverageCount Good hitByTest"   onclick="return showTestsForLine(this, 154, 'Tests that hit line # 154');" ><span title="Line 154, Col 17: statement executed 6 times." class="nolink">&#160;6</span></td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-154" class="srcLine"><span class="nolink" title="Line 154, Col 17: statement executed 6 times.">                <span class="keyword">return</span> <span class="keyword">null</span>;</span></span></td>
+</tr>
+ <tr id="l155">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=155#src-155">155</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-155" class="srcLine">            }</span></td>
+</tr>
+ <tr id="l156">
+<td align="right" class="lineCount Good"><a class="lineNumHref" href="?line=156#src-156">156</a></td>
+<td align="right" class="coverageCount Good hitByTest"   onclick="return showTestsForLine(this, 156, 'Tests that hit line # 156');" ><span title="Line 156, Col 13: statement executed 785 times." class="nolink">&#160;785</span></td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-156" class="srcLine"><span class="nolink" title="Line 156, Col 13: statement executed 785 times.">            <span class="keyword">final</span> Object obj = map.get(key);</span></span></td>
+</tr>
+ <tr id="l157">
+<td align="right" class="lineCount Good"><a class="lineNumHref" href="?line=157#src-157">157</a></td>
+<td align="right" class="coverageCount Good hitByTest"   onclick="return showTestsForLine(this, 157, 'Tests that hit line # 157');" ><span title="Line 157, Col 16: true branch executed 176 times, false branch executed 609 times." class="nolink">&#160;785</span></td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-157" class="srcLine"><span class="nolink" title="Line 157, Col 16: true branch executed 176 times, false branch executed 609 times.">            <span class="keyword">if</span> (obj == <span class="keyword">null</span>) {</span></span></td>
+</tr>
+ <tr id="l158">
+<td align="right" class="lineCount Good"><a class="lineNumHref" href="?line=158#src-158">158</a></td>
+<td align="right" class="coverageCount Good hitByTest"   onclick="return showTestsForLine(this, 158, 'Tests that hit line # 158');" ><span title="Line 158, Col 17: statement executed 176 times." class="nolink">&#160;176</span></td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-158" class="srcLine"><span class="nolink" title="Line 158, Col 17: statement executed 176 times.">                <span class="keyword">return</span> <span class="keyword">null</span>;</span></span></td>
+</tr>
+ <tr id="l159">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=159#src-159">159</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-159" class="srcLine">            }</span></td>
+</tr>
+ <tr id="l160">
+<td align="right" class="lineCount Good"><a class="lineNumHref" href="?line=160#src-160">160</a></td>
+<td align="right" class="coverageCount Good hitByTest"   onclick="return showTestsForLine(this, 160, 'Tests that hit line # 160');" ><span title="Line 160, Col 13: statement executed 609 times." class="nolink">&#160;609</span></td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-160" class="srcLine"><span class="nolink" title="Line 160, Col 13: statement executed 609 times.">            <span class="keyword">return</span> obj.toString();</span></span></td>
+</tr>
+ <tr id="l161">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=161#src-161">161</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-161" class="srcLine">        }</span></td>
+</tr>
+ <tr id="l162">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=162#src-162">162</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-162" class="srcLine">    }</span></td>
+</tr>
+ <tr id="l163">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=163#src-163">163</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-163" class="srcLine"></span></td>
+</tr>
+ <tr id="l164">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=164#src-164">164</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-164" class="srcLine">    <span class="comment">//-----------------------------------------------------------------------</span></span></td>
+</tr>
+ <tr id="l165">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=165#src-165">165</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-165" class="srcLine">    <span class="comment">/**</span></span></td>
+</tr>
+ <tr id="l166">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=166#src-166">166</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-166" class="srcLine"><span class="comment">     * Lookup implementation based on system properties.</span></span></td>
+</tr>
+ <tr id="l167">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=167#src-167">167</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-167" class="srcLine"><span class="comment">     */</span></span></td>
+</tr>
+<tr class="inlineStatsRow" align="right" valign="middle">
+<td class="coverageCount"><a name="168" class="nolink">&#160;</a></td>
+    <td class="coverageCount aui-icon aui-icon-small aui-iconfont-arrows-right" id='inlineStatsToggle-168' onclick="toggleInlineStats(this, 'inlinestats-168');"/>
+    <td align="center" valign="middle">
+        <table id="inlinestats-168" style="display:none;" class="inlineStats" width="100%" cellspacing="1px" cellpadding="1px">
+            <tr onclick="toggleInlineStats(document.getElementById('inlineStatsToggle-168'), 'inlinestats-168');return true;">
+                <td><div>
+<div title="100% Covered" style="min-width:40px;" class="barNegative contribBarNegative barNegative"><div class="barPositive contribBarPositive barPositive" style="width:100%"></div></div></div></td><td>100%</td>
+                <td class="inlineStat">Uncovered Elements: 0 (7)</td>
+                <td class="inlineStat">Complexity: 3</td>
+                <td class="inlineStat">Complexity Density: 0.75</td>
+                            </tr>
+        </table>
+    </td>
+</tr>
+<tr id="l168">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=168#src-168">168</a></td>
+<td align="right" class="coverageCount NoHilight "   onclick="return showTestsForLine(this, 168, 'Tests that hit StrLookup.SystemPropertiesStrLookup');" >&#160;&#160;</td>
+<td class=" srcCell" id="id-168"><span class="spacer"></span><span id="src-168" class="srcLine">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">class</span> SystemPropertiesStrLookup <span class="keyword">extends</span> <a href="../../../../../org/apache/commons/lang3/text/StrLookup.html#StrLookup">StrLookup</a>&lt;String&gt; {</span></td>
+</tr>
+ <tr id="l169">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=169#src-169">169</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-169" class="srcLine">        <span class="comment">/**</span></span></td>
+</tr>
+ <tr id="l170">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=170#src-170">170</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-170" class="srcLine"><span class="comment">         * {</span><span class="javadoc">@inheritDoc</span><span class="comment">} This implementation directly accesses system properties.</span></span></td>
+</tr>
+ <tr id="l171">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=171#src-171">171</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-171" class="srcLine"><span class="comment">         */</span></span></td>
+</tr>
+<tr class="inlineStatsRow" align="right" valign="middle">
+<td class="coverageCount"><a name="172" class="nolink">&#160;</a></td>
+    <td class="coverageCount aui-icon aui-icon-small aui-iconfont-arrows-right" id='inlineStatsToggle-172' onclick="toggleInlineStats(this, 'inlinestats-172');"/>
+    <td align="center" valign="middle">
+        <table id="inlinestats-172" style="display:none;" class="inlineStats" width="100%" cellspacing="1px" cellpadding="1px">
+            <tr onclick="toggleInlineStats(document.getElementById('inlineStatsToggle-172'), 'inlinestats-172');return true;">
+                <td><div>
+<div title="100% Covered" style="min-width:40px;" class="barNegative contribBarNegative barNegative"><div class="barPositive contribBarPositive barPositive" style="width:100%"></div></div></div></td><td>100%</td>
+                <td class="inlineStat">Uncovered Elements: 0 (6)</td>
+                <td class="inlineStat">Complexity: 3</td>
+                <td class="inlineStat">Complexity Density: 0.75</td>
+                            </tr>
+        </table>
+    </td>
+</tr>
+<tr id="l172">
+<td align="right" class="lineCount Good"><a class="lineNumHref" href="?line=172#src-172">172</a></td>
+<td align="right" class="coverageCount Good hitByTest"   onclick="return showTestsForLine(this, 172, 'Tests that hit lookup(String)&#160;:&#160;String');" ><span title="Line 172, Col 9: method entered 10 times." class="nolink">&#160;10</span></td>
+<td class=" methodStart  srcCell" id="id-172"><img title="Method Statistics" onclick="toggleSrcRowVis(this, 172,182);" id="img-172" src="../../../../../img/collapse.gif"  alt="toggle" class="icon"/><span id="src-172" class="srcLine"><span class="nolink" title="Line 172, Col 9: method entered 10 times.">        @Override</span><span class="foldControl" onclick="toggleSrcRowVis(document.getElementById('img-172'), 172,182);" id="e172" style="display:none;border:none;">...</span></span></td>
+</tr>
+ <tr id="l173">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=173#src-173">173</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-173" class="srcLine">        <span class="keyword">public</span> String lookup(<span class="keyword">final</span> String key) {</span></td>
+</tr>
+ <tr id="l174">
+<td align="right" class="lineCount Good"><a class="lineNumHref" href="?line=174#src-174">174</a></td>
+<td align="right" class="coverageCount Good hitByTest"   onclick="return showTestsForLine(this, 174, 'Tests that hit line # 174');" ><span title="Line 174, Col 16: true branch executed 8 times, false branch executed 1 time." class="nolink">&#160;9</span></td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-174" class="srcLine"><span class="nolink" title="Line 174, Col 16: true branch executed 8 times, false branch executed 1 time.">            <span class="keyword">if</span> (key.length() &gt; 0) {</span></span></td>
+</tr>
+ <tr id="l175">
+<td align="right" class="lineCount Good"><a class="lineNumHref" href="?line=175#src-175">175</a></td>
+<td align="right" class="coverageCount Good hitByTest"   onclick="return showTestsForLine(this, 175, 'Tests that hit line # 175');" ><span title="Line 175, Col 17: statement executed 8 times." class="nolink">&#160;8</span></td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-175" class="srcLine"><span class="nolink" title="Line 175, Col 17: statement executed 8 times.">                <span class="keyword">try</span> {</span></span></td>
+</tr>
+ <tr id="l176">
+<td align="right" class="lineCount Good"><a class="lineNumHref" href="?line=176#src-176">176</a></td>
+<td align="right" class="coverageCount Good hitByTest"   onclick="return showTestsForLine(this, 176, 'Tests that hit line # 176');" ><span title="Line 176, Col 21: statement executed 8 times." class="nolink">&#160;8</span></td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-176" class="srcLine"><span class="nolink" title="Line 176, Col 21: statement executed 8 times.">                    <span class="keyword">return</span> System.getProperty(key);</span></span></td>
+</tr>
+ <tr id="l177">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=177#src-177">177</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-177" class="srcLine">                } <span class="keyword">catch</span> (<span class="keyword">final</span> SecurityException scex) {</span></td>
+</tr>
+ <tr id="l178">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=178#src-178">178</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-178" class="srcLine">                    <span class="comment">// Squelched. All lookup(String) will return null.</span></span></td>
+</tr>
+ <tr id="l179">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=179#src-179">179</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-179" class="srcLine">                }</span></td>
+</tr>
+ <tr id="l180">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=180#src-180">180</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-180" class="srcLine">            }</span></td>
+</tr>
+ <tr id="l181">
+<td align="right" class="lineCount Good"><a class="lineNumHref" href="?line=181#src-181">181</a></td>
+<td align="right" class="coverageCount Good hitByTest"   onclick="return showTestsForLine(this, 181, 'Tests that hit line # 181');" ><span title="Line 181, Col 13: statement executed 1 time." class="nolink">&#160;1</span></td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-181" class="srcLine"><span class="nolink" title="Line 181, Col 13: statement executed 1 time.">            <span class="keyword">return</span> <span class="keyword">null</span>;</span></span></td>
+</tr>
+ <tr id="l182">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=182#src-182">182</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-182" class="srcLine">        }</span></td>
+</tr>
+ <tr id="l183">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=183#src-183">183</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-183" class="srcLine">    }</span></td>
+</tr>
+ <tr id="l184">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=184#src-184">184</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-184" class="srcLine">}</span></td>
+</tr>
+ 
+    </tbody></table>    </div>
+</div><!-- .aui-tabs -->
+
+<script type="text/javascript"> 
+    var ol_bgclass = "overBG";
+    var ol_fgclass = "overFG";
+    var ol_cgclass = "overCaption";
+    var ol_captionfontclass= "overCaption";
+    var ol_closefontclass = "closeFont";
+    var ol_closeclick = 1;
+    var ol_close = 'X';
+    var ol_wrap = 1;
+    var rootRelPath = '../../../../../';
+    var testsPerFile = -1;
+</script>
+<script src="StrLookup.js" type="text/javascript"></script>
+
+                        </div> <!-- class="aui-page-panel-content-clover" -->
+                    <footer id="footer" role="contentinfo">
+    <section class="footer-body">
+        <ul>
+            <li>
+                Report generated by <a target="_new" href="https://openclover.org">OpenClover</a> v 4.5.2
+                on Fri Apr 26 2024 18:07:39 CDT using coverage data from Fri Apr 26 2024 18:07:27 CDT.
+            </li>
+        </ul>
+        <ul>
+            <li>OpenClover is free and open-source software. </li>
+        </ul>
+    </section>
+</footer>                </section> <!-- class="aui-page-panel-content" -->
+            </div> <!-- class="aui-page-panel-inner" -->
+        </div> <!-- class="aui-page-panel" -->
+    </div> <!-- id="page" -->
+</body>
+</html>
