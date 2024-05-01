@@ -1,0 +1,1818 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+
+    
+    
+    <link rel="SHORTCUT ICON" href="../../../../../img/clover.ico" />
+
+    <link rel="stylesheet" href="../../../../../aui/css/aui.min.css" media="all"/>
+    <link rel="stylesheet" href="../../../../../aui/css/aui-experimental.min.css" media="all"/>
+    <!--[if IE 9]><link rel="stylesheet" href="../../../../../aui/css/aui-ie9.min.css" media="all"/><![endif]-->
+
+    <style type="text/css" media="all">
+        @import url('../../../../../style.css');
+        @import url('../../../../../tree.css');
+        
+    </style>
+
+    <script src="../../../../../jquery-1.8.3.min.js" type="text/javascript"></script>
+    <script src="../../../../../aui/js/aui.min.js" type="text/javascript"></script>
+    <script src="../../../../../aui/js/aui-experimental.min.js" type="text/javascript"></script>
+    <script src="../../../../../aui/js/aui-soy.min.js" type="text/javascript"></script>
+
+    <script src="../../../../../package-nodes-tree.js" type="text/javascript"></script>
+    <script src="../../../../../clover-tree.js" type="text/javascript"></script>
+    <script src="../../../../../clover.js" type="text/javascript"></script>
+    <script src="../../../../../clover-descriptions.js" type="text/javascript"></script>
+    <script src="../../../../../cloud.js" type="text/javascript"></script>
+
+            <title>Apache Commons Lang 3.6-SNAPSHOT</title>
+    </head>
+
+<body  onload="onLoad('Apache Commons Lang 3.6-SNAPSHOT: org.apache.commons.lang3.builder.IDKey.java')">
+    <div id="page">
+        
+        
+
+
+<header id="header" role="banner">
+    <nav class="aui-header aui-dropdown2-trigger-group" role="navigation">
+        <div class="aui-header-inner">
+            <div class="aui-header-primary">
+                <h1 id="logo" class="aui-header-logo aui-header-logo-clover">
+                    <a href="https://openclover.org" title="Visit OpenClover home page"><span class="aui-header-logo-device">OpenClover</span></a>
+                </h1>
+                            </div>
+            <div class="aui-header-secondary">
+                <ul class="aui-nav">
+                    <li id="system-help-menu">
+                        <a class="aui-nav-link" title="Open online documentation" target="_blank"
+                           href="https://openclover.org/documentation">
+                            <span class="aui-icon aui-icon-small aui-iconfont-help">&#160;Help</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+        
+        <div class="aui-page-panel">
+            <div class="aui-page-panel-inner">
+                <div class="aui-page-panel-nav aui-page-panel-nav-clover">
+                    
+
+<div class="aui-page-header-inner" style="margin-bottom: 20px;">
+    <div class="aui-page-header-image">
+                    <a href="http://commons.apache.org/proper/commons-lang/" target="_top">
+                <div class="aui-avatar aui-avatar-large aui-avatar-project">
+            <div class="aui-avatar-inner">
+                                    <img src="../../../../../img/clover_logo_large.png" alt="Clover icon"/>
+                            </div>
+        </div>
+                    </a>
+            </div>
+    <div class="aui-page-header-main" >
+        <h1>
+                            <a href="http://commons.apache.org/proper/commons-lang/" target="_top">
+                                        Apache Commons Lang 3.6-SNAPSHOT
+                                        </a>
+                    </h1>
+    </div>
+</div>
+
+<nav class="aui-navgroup aui-navgroup-vertical">
+    <div class="aui-navgroup-inner">
+                                            <ul class="aui-nav">
+                <li class="">
+                    <a href="../../../../../dashboard.html">Project overview</a>
+                </li>
+            </ul>
+        
+                <div class="aui-nav-heading packages-nav-heading">
+            <strong>Packages</strong>
+        </div>
+        <div class="aui-nav project-packages">
+            <form method="get" action="#" class="aui package-filter-container">
+                <input type="text" autocomplete="off" class="package-filter text"
+                       placeholder="Type to filter packages..." name="package-filter" id="package-filter"
+                       title="Start typing package name (or part of the name) to search through the tree. Use arrow keys and the Enter key to navigate."/>
+            </form>
+            <p class="package-filter-no-results-message hidden">
+                <small>No results found.</small>
+            </p>
+                                                <div class="packages-tree-wrapper" data-root-relative="../../../../../" data-package-name="org.apache.commons.lang3.builder">
+                <div class="packages-tree-container"></div>
+                <div class="clover-packages-lozenges"></div>
+            </div>
+        </div>
+        
+            </div>
+</nav>                </div>
+                <section class="aui-page-panel-content">
+                    <div class="aui-page-panel-content-clover">
+
+                    
+                    <ol class="aui-nav aui-nav-breadcrumbs">
+            
+        <li><a href="../../../../../dashboard.html">Project Clover database Fri Apr 26 2024 18:06:03 CDT</a></li> 
+        <li><a href="pkg-summary.html">        Package org.apache.commons.lang3.builder</a></li> 
+    </ol>
+    
+<h1 class="aui-h2-clover">
+            File IDKey.java
+    </h1>
+
+
+
+
+
+
+
+
+    
+<div class="aui-tabs horizontal-tabs" id="tabs-file">
+            <div class="tabs-pane aui-tabs-pane-100-pcnt active-pane" id="tabs-file-source">
+        <div>&#160;</div>
+
+        
+                <div style="display: table; width: 100%">
+                            <div class="clover-histogram-table-cell">
+                                <div class="dashboard-widget">
+            <header class="dashboard-widget-header">
+                <h3>Coverage histogram</h3>
+            </header>
+            <div class="dashboard-widget-content">
+                <div class="aui-item clover-aui-item-histogram">
+                    <img src="../../../../../img/srcFileCovDistChart8.png" alt="../../../../../img/srcFileCovDistChart8.png"
+                         usemap="#srcFileCovDistChart8.png" class="clover-histogram-img"/>
+                    <map id="srcFileCovDistChart8.png" name="srcFileCovDistChart8.png">
+<area shape="rect" coords="100,8,107,65" title="105 files have 91-100% coverage" alt="" nohref="nohref"/>
+<area shape="rect" coords="91,60,98,66" title="11 files have 81-90% coverage" alt="" nohref="nohref"/>
+<area shape="rect" coords="82,65,89,66" title="3 files have 71-80% coverage" alt="" nohref="nohref"/>
+<area shape="rect" coords="73,64,80,66" title="4 files have 61-70% coverage" alt="" nohref="nohref"/>
+<area shape="rect" coords="64,65,71,66" title="2 files have 51-60% coverage" alt="" nohref="nohref"/>
+<area shape="rect" coords="56,66,63,67" title="0 files have 41-50% coverage" alt="" nohref="nohref"/>
+<area shape="rect" coords="47,66,54,67" title="0 files have 31-40% coverage" alt="" nohref="nohref"/>
+<area shape="rect" coords="38,66,45,67" title="1 file has 21-30% coverage" alt="" nohref="nohref"/>
+<area shape="rect" coords="29,66,36,67" title="0 files have 11-20% coverage" alt="" nohref="nohref"/>
+<area shape="rect" coords="20,66,27,67" title="0 files have 1-10% coverage" alt="" nohref="nohref"/>
+<area shape="rect" coords="11,62,18,66" title="8 files have 0% coverage" alt="" nohref="nohref"/>
+</map><br />
+                    <span class="subtle"><strong>86% </strong>of files have more coverage</span>
+                </div>
+            </div>
+        </div>
+                    </div>
+                        <div style="display: table-cell; width: 67%;">
+                    <div class="dashboard-widget">
+        <header class="dashboard-widget-header">
+            <h3>Code metrics</h3>
+        </header>
+        <div class="dashboard-widget-content">
+                        
+
+<div id="td-header-stats" class="aui-item" style="display: ">
+<div style="display: table">
+    <div class="stats-box">
+        <div class="stats-box-label"><label title="Total number of branches in this file">Branches:</label></div>
+        <div class="stats-box-value">4</div>
+    </div>
+    <div class="stats-box">
+        <div class="stats-box-label"><label title="Total number of statements in this file">Statements:</label></div>
+        <div class="stats-box-value">9</div>
+    </div>
+    <div class="stats-box">
+        <div class="stats-box-label"><label title="Total number of methods in this file">Methods:</label></div>
+        <div class="stats-box-value">3</div>
+    </div>
+    <div class="stats-box">
+        <div class="stats-box-label"><label title="Total number of classes in this file">Classes:</label></div>
+        <div class="stats-box-value">1</div>
+    </div>
+            <div class="stats-box">
+        <div class="stats-box-label"><label title="Total number of lines of code in this file">LOC:</label></div>
+        <div class="stats-box-value">72</div>
+    </div>
+    <div class="stats-box">
+        <div class="stats-box-label"><label title="Total number of non-comment lines of code in this file">NCLOC:</label></div>
+        <div class="stats-box-value">24</div>
+    </div>
+    <div class="stats-box">
+        <div class="stats-box-label"><label title="Cyclomatic complexity is the number of paths in this file">Total complexity:</label></div>
+        <div class="stats-box-value">5</div>
+    </div>
+    <div class="stats-box">
+        <div class="stats-box-label">
+            <label title="Complexity density is the complexity divided by the number of statements in this file">Complexity density:</label>
+        </div>
+        <div class="stats-box-value">0.56</div>
+    </div>
+    <div class="stats-box">
+        <div class="stats-box-label"><label title="Number of statements per method.">Statements/Method:</label></div>
+        <div class="stats-box-value">3</div>
+    </div>
+    <div class="stats-box">
+        <div class="stats-box-label"><label title="Number of methods per class.">Methods/Class:</label></div>
+        <div class="stats-box-value">3</div>
+    </div>
+        <div class="stats-box">
+        <div class="stats-box-label"><label title="Complexity divided by the number of methods in this file">Average method complexity:</label></div>
+        <div class="stats-box-value">1.67</div>
+    </div>
+</div>
+
+</div>
+                        
+
+<div id="td-filtered-header-stats" class="aui-item" style="display: none">
+<div style="display: table">
+    <div class="stats-box">
+        <div class="stats-box-label"><label title="Total number of branches in this file">Branches:</label></div>
+        <div class="stats-box-value">4</div>
+    </div>
+    <div class="stats-box">
+        <div class="stats-box-label"><label title="Total number of statements in this file">Statements:</label></div>
+        <div class="stats-box-value">9</div>
+    </div>
+    <div class="stats-box">
+        <div class="stats-box-label"><label title="Total number of methods in this file">Methods:</label></div>
+        <div class="stats-box-value">3</div>
+    </div>
+    <div class="stats-box">
+        <div class="stats-box-label"><label title="Total number of classes in this file">Classes:</label></div>
+        <div class="stats-box-value">1</div>
+    </div>
+            <div class="stats-box">
+        <div class="stats-box-label"><label title="Total number of lines of code in this file">LOC:</label></div>
+        <div class="stats-box-value">72</div>
+    </div>
+    <div class="stats-box">
+        <div class="stats-box-label"><label title="Total number of non-comment lines of code in this file">NCLOC:</label></div>
+        <div class="stats-box-value">24</div>
+    </div>
+    <div class="stats-box">
+        <div class="stats-box-label"><label title="Cyclomatic complexity is the number of paths in this file">Total complexity:</label></div>
+        <div class="stats-box-value">5</div>
+    </div>
+    <div class="stats-box">
+        <div class="stats-box-label">
+            <label title="Complexity density is the complexity divided by the number of statements in this file">Complexity density:</label>
+        </div>
+        <div class="stats-box-value">0.56</div>
+    </div>
+    <div class="stats-box">
+        <div class="stats-box-label"><label title="Number of statements per method.">Statements/Method:</label></div>
+        <div class="stats-box-value">3</div>
+    </div>
+    <div class="stats-box">
+        <div class="stats-box-label"><label title="Number of methods per class.">Methods/Class:</label></div>
+        <div class="stats-box-value">3</div>
+    </div>
+        <div class="stats-box">
+        <div class="stats-box-label"><label title="Complexity divided by the number of methods in this file">Average method complexity:</label></div>
+        <div class="stats-box-value">1.67</div>
+    </div>
+</div>
+
+</div>        </div>
+    </div>
+            </div>
+        </div>
+
+        
+        
+
+
+    <h2>Classes</h2>
+
+        <table class="aui aui-table-sortable">
+        <thead>
+                        <tr>     <th>Class</th>
+    <th>Line #</th>
+
+            
+        <th class="">
+            <label  title="The total number of statements.">Total Statements</label>
+        </th>
+        
+            
+        <th class="">
+            <label  title="The percentage of elements that have been filtered from this report.">% Filtered</label>
+        </th>
+        
+            
+        <th class="">
+            <label  title="Cyclomatic complexity is a measure of the number of paths in your code.">Complexity</label>
+        </th>
+        
+            
+        <th class="">
+            <label  title="The number of statements and branches that were not covered during testing.">Uncovered Elements</label>
+        </th>
+        
+            
+        <th class="">
+            <label  title="The amount of code that was hit at least once during testing.">TOTAL Coverage</label>
+        </th>
+        
+    
+            <th>Actions</th>
+    </tr>         </thead>
+        <tbody>
+                              <tr> <td id="IDKey">
+        <span><a href="#29" title="IDKey" onclick="closeDialogAndScrollTo('dialog-IDKey', '29');">IDKey</a></span>
+</td>
+<td>29<a name="sl-29"></a></td>
+    <td class="">9</td>
+    <td class="">0%</td>
+    <td class="">5</td>
+    <td class="">4</td>
+    <td class=""><div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">0.75</span>75%</div><div style="display: table-cell">
+ <div title="75% Covered"  style="min-width:200px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:75%"></div></div></div></div></td>
+    <td><button data-dialog-id="dialog-IDKey" class="aui-button aui-button-link dialog-show-button">Show methods</button></td>
+</tr>                      </tbody>
+    </table>
+
+    
+     
+        <section role="dialog" id="dialog-IDKey" class="aui-layer aui-dialog2 aui-dialog2-xlarge" aria-hidden="true">
+            
+            <header class="aui-dialog2-header">
+                <h1 class="aui-dialog2-header-main">Class IDKey</h1>
+                <div class="aui-dialog2-header-secondary">
+                    <input id="dialog-IDKey-method-filter" class="test-filter text" type="text" name="method-filter"
+                           placeholder="Type to filter methods..." autocomplete="off"
+                           onkeyup="filterMethods('dialog-IDKey-methods-body', 'dialog-IDKey-method-filter');"/>
+                </div>
+            </header>
+
+            
+            <div class="aui-dialog2-content">
+
+                
+
+                <table class="aui aui-table-sortable">
+                                                                                                                                                                                                                                                    
+                    <thead>
+                                                 <tr> <th id="IDKey">
+    Class<br/>    <span><a href="#29" title="IDKey" onclick="closeDialogAndScrollTo('dialog-IDKey', '29');">IDKey</a></span>
+</th>
+<th>Line #<br/>29<a name="sl-29"></a></th>
+    <th class=""><label  title="The total number of statements.">Total Statements</label><br/>9</th>
+    <th class=""><label  title="The percentage of elements that have been filtered from this report.">% Filtered</label><br/>0%</th>
+    <th class=""><label  title="Cyclomatic complexity is a measure of the number of paths in your code.">Complexity</label><br/>5</th>
+    <th class=""><label  title="The number of statements and branches that were not covered during testing.">Uncovered Elements</label><br/>4</th>
+    <th class=""><label  title="The amount of code that was hit at least once during testing.">TOTAL Coverage</label><br/><div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">0.75</span>75%</div><div style="display: table-cell">
+ <div title="75% Covered"  style="min-width:200px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:75%"></div></div></div></div></th>
+</tr>                     </thead>
+                    <tbody id="dialog-IDKey-methods-body">
+                                                                                                            <tr id="IDKey-1">
+<td id="summary-37-9">
+ <span class="sortValue">IDKey(Object)</span>
+&#160;&#160;<a href="?line=29#37" title="IDKey(Object)" name="sl-37" onclick="closeDialogAndScrollTo('dialog-IDKey', '37');">IDKey(Object)</a>
+</td>
+<td align="right"><span class="sortValue">37</span>37</td>
+<td class="" align="right"><span class="sortValue">2.0</span>2</td>
+<td class="" align="right"><span class="sortValue">0.0</span>0%</td>
+<td class="" align="right"><span class="sortValue">1.0</span>1</td>
+<td class="" align="right"><span class="sortValue">0.0</span>0</td>
+<td class="" align="right"><span class="sortValue">1.0</span><div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">1.0</span>100%</div><div style="display: table-cell">
+ <div title="100% Covered"  style="min-width:200px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:100%"></div></div></div></div></td>
+ </tr>                                                                                                                <tr id="IDKey-2">
+<td id="summary-50-9">
+ <span class="sortValue">hashCode()&#160;:&#160;int</span>
+&#160;&#160;<a href="?line=29#50" title="hashCode()&#160;:&#160;int" name="sl-50" onclick="closeDialogAndScrollTo('dialog-IDKey', '50');">hashCode()&#160;:&#160;int</a>
+</td>
+<td align="right"><span class="sortValue">50</span>50</td>
+<td class="" align="right"><span class="sortValue">1.0</span>1</td>
+<td class="" align="right"><span class="sortValue">0.0</span>0%</td>
+<td class="" align="right"><span class="sortValue">1.0</span>1</td>
+<td class="" align="right"><span class="sortValue">0.0</span>0</td>
+<td class="" align="right"><span class="sortValue">1.0</span><div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">1.0</span>100%</div><div style="display: table-cell">
+ <div title="100% Covered"  style="min-width:200px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:100%"></div></div></div></div></td>
+ </tr>                                                                                                                <tr id="IDKey-3">
+<td id="summary-60-9">
+ <span class="sortValue">equals(Object)&#160;:&#160;boolean</span>
+&#160;&#160;<a href="?line=29#60" title="equals(Object)&#160;:&#160;boolean" name="sl-60" onclick="closeDialogAndScrollTo('dialog-IDKey', '60');">equals(Object)&#160;:&#160;boolean</a>
+</td>
+<td align="right"><span class="sortValue">60</span>60</td>
+<td class="" align="right"><span class="sortValue">6.0</span>6</td>
+<td class="" align="right"><span class="sortValue">0.0</span>0%</td>
+<td class="" align="right"><span class="sortValue">3.0</span>3</td>
+<td class="" align="right"><span class="sortValue">4.0</span>4</td>
+<td class="" align="right"><span class="sortValue">0.6</span><div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">0.6</span>60%</div><div style="display: table-cell">
+ <div title="60% Covered"  style="min-width:200px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:60%"></div></div></div></div></td>
+ </tr>                                                                         </tbody>
+                </table>
+
+                <div>&#160;</div>
+                
+
+            </div>
+
+            
+            <footer class="aui-dialog2-footer">
+                <div class="aui-dialog2-footer-actions">
+                    <button class="aui-button aui-button-primary dialog-close-button"
+                            data-dialog-id="dialog-IDKey">Close</button>
+                </div>
+                <div class="aui-dialog2-footer-hint">Click on a class or a method name to jump to source.</div>
+            </footer>
+        </section>
+
+     
+ 
+        
+        <div>&#160;</div>
+
+<h2>Contributing tests</h2>
+
+    <div>
+                This file is covered by 51 tests.
+        <button data-dialog-id="contr-tests-dialog" class="aui-button aui-button-link dialog-show-button">
+            Select tests to highlight the test coverage
+        </button>.
+    </div>
+
+<section role="dialog" id="contr-tests-dialog" class="aui-layer aui-dialog2 aui-dialog2-xlarge" aria-hidden="true">
+    
+    <header class="aui-dialog2-header">
+        <h1 class="aui-dialog2-header-main">Contributing tests</h1>
+        <div class="aui-dialog2-header-secondary">
+            <input id="test-filter" class="test-filter text" type="text" name="test-filter"
+                   placeholder="Type to filter tests..." autocomplete="off"
+                   onkeyup="filterTests('tests-body', 'test-filter', 3);"/>
+        </div>
+    </header>
+
+    
+    <div class="aui-dialog2-content">
+    
+
+        <p class="aui-buttons">
+            <button title="Selects all tests for this file, highlighting their coverage."
+                    class="aui-button" id="selectalltests">Select all</button>
+        </p>
+
+        <table class="aui aui-table-sortable">
+            <thead id="tests-head">
+            <tr id="testHeaderRow">
+                <th class="aui-table-column-unsortable"></th>
+                <th>
+                    <label title="The percentage of coverage contributed by each single test.">Test contribution</label>
+                </th>
+                <th>
+                    <label title="The test (or test iteration) which was executed.">Test</label>
+                </th>
+                <th>
+                    <label>Result</label>
+                </th>
+                <th class="aui-table-column-unsortable">
+                    <label>Actions</label>
+                </th>
+            </tr>
+            </thead>
+            <tbody id="tests-body">
+
+<tr id="test-1651">
+<td><a name="testA-1651"></a><input type="checkbox" id="cb-1651" value="1651" name="testMethod" autocomplete="off" title="Check to highlight coverage of this test in the source code"/></td>
+<td style="vertical-align: middle"  class="link" onclick="window.location.href='../../../../../org/apache/commons/lang3/builder/HashCodeBuilderAndEqualsBuilderTest_testFixtureWithTransients_19v.html';">
+<span class="sortValue">0.75</span>
+<div>
+<div title="75% Covered" style="min-width:40px;" class="barNegative contribBarNegative contribBarNegative"><div class="barPositive contribBarPositive contribBarPositive" style="width:75%"></div></div></div></td>
+<td id="tc-1651">  <span class="sortValue">org.apache.commons.lang3.builder.HashCodeBuilderAndEqualsBuilderTest.testFixtureWithTransients</span><a href="../../../../../org/apache/commons/lang3/builder/HashCodeBuilderAndEqualsBuilderTest_testFixtureWithTransients_19v.html" title="View Test Summary Page">org.apache.commons.lang3.builder.HashCodeBuilderAndEqualsBuilderTest.testFixtureWithTransients</a>
+</td>
+<td>      <span class="sortValue">1</span><span class="aui-lozenge aui-lozenge-success">PASS</span>
+  </td>
+<td> <a href="../../../../../org/apache/commons/lang3/builder/HashCodeBuilderAndEqualsBuilderTest.html?line=53#src-53" title="View Test Source">
+ <span class="aui-icon aui-icon-small aui-iconfont-file-txt aui-icon-medium-gray"></span>
+</a>
+<a href="../../../../../org/apache/commons/lang3/builder/HashCodeBuilderAndEqualsBuilderTest_testFixtureWithTransients_19v.html" title="View Test Summary Page"><span class="aui-icon aui-icon-small aui-iconfont-file-ppt aui-icon-medium-gray"></span></a>
+</td>
+</tr>
+<tr id="test-1785">
+<td><a name="testA-1785"></a><input type="checkbox" id="cb-1785" value="1785" name="testMethod" autocomplete="off" title="Check to highlight coverage of this test in the source code"/></td>
+<td style="vertical-align: middle"  class="link" onclick="window.location.href='../../../../../org/apache/commons/lang3/builder/DiffBuilderTest_testObjectArrayEqual_1dl.html';">
+<span class="sortValue">0.75</span>
+<div>
+<div title="75% Covered" style="min-width:40px;" class="barNegative contribBarNegative contribBarNegative"><div class="barPositive contribBarPositive contribBarPositive" style="width:75%"></div></div></div></td>
+<td id="tc-1785">  <span class="sortValue">org.apache.commons.lang3.builder.DiffBuilderTest.testObjectArrayEqual</span><a href="../../../../../org/apache/commons/lang3/builder/DiffBuilderTest_testObjectArrayEqual_1dl.html" title="View Test Summary Page">org.apache.commons.lang3.builder.DiffBuilderTest.testObjectArrayEqual</a>
+</td>
+<td>      <span class="sortValue">1</span><span class="aui-lozenge aui-lozenge-success">PASS</span>
+  </td>
+<td> <a href="../../../../../org/apache/commons/lang3/builder/DiffBuilderTest.html?line=386#src-386" title="View Test Source">
+ <span class="aui-icon aui-icon-small aui-iconfont-file-txt aui-icon-medium-gray"></span>
+</a>
+<a href="../../../../../org/apache/commons/lang3/builder/DiffBuilderTest_testObjectArrayEqual_1dl.html" title="View Test Summary Page"><span class="aui-icon aui-icon-small aui-iconfont-file-ppt aui-icon-medium-gray"></span></a>
+</td>
+</tr>
+<tr id="test-658">
+<td><a name="testA-658"></a><input type="checkbox" id="cb-658" value="658" name="testMethod" autocomplete="off" title="Check to highlight coverage of this test in the source code"/></td>
+<td style="vertical-align: middle"  class="link" onclick="window.location.href='../../../../../org/apache/commons/lang3/builder/DiffBuilderTest_testFloat_ia.html';">
+<span class="sortValue">0.75</span>
+<div>
+<div title="75% Covered" style="min-width:40px;" class="barNegative contribBarNegative contribBarNegative"><div class="barPositive contribBarPositive contribBarPositive" style="width:75%"></div></div></div></td>
+<td id="tc-658">  <span class="sortValue">org.apache.commons.lang3.builder.DiffBuilderTest.testFloat</span><a href="../../../../../org/apache/commons/lang3/builder/DiffBuilderTest_testFloat_ia.html" title="View Test Summary Page">org.apache.commons.lang3.builder.DiffBuilderTest.testFloat</a>
+</td>
+<td>      <span class="sortValue">1</span><span class="aui-lozenge aui-lozenge-success">PASS</span>
+  </td>
+<td> <a href="../../../../../org/apache/commons/lang3/builder/DiffBuilderTest.html?line=204#src-204" title="View Test Source">
+ <span class="aui-icon aui-icon-small aui-iconfont-file-txt aui-icon-medium-gray"></span>
+</a>
+<a href="../../../../../org/apache/commons/lang3/builder/DiffBuilderTest_testFloat_ia.html" title="View Test Summary Page"><span class="aui-icon aui-icon-small aui-iconfont-file-ppt aui-icon-medium-gray"></span></a>
+</td>
+</tr>
+<tr id="test-1055">
+<td><a name="testA-1055"></a><input type="checkbox" id="cb-1055" value="1055" name="testMethod" autocomplete="off" title="Check to highlight coverage of this test in the source code"/></td>
+<td style="vertical-align: middle"  class="link" onclick="window.location.href='../../../../../org/apache/commons/lang3/builder/DiffBuilderTest_testDoubleArray_tb.html';">
+<span class="sortValue">0.75</span>
+<div>
+<div title="75% Covered" style="min-width:40px;" class="barNegative contribBarNegative contribBarNegative"><div class="barPositive contribBarPositive contribBarPositive" style="width:75%"></div></div></div></td>
+<td id="tc-1055">  <span class="sortValue">org.apache.commons.lang3.builder.DiffBuilderTest.testDoubleArray</span><a href="../../../../../org/apache/commons/lang3/builder/DiffBuilderTest_testDoubleArray_tb.html" title="View Test Summary Page">org.apache.commons.lang3.builder.DiffBuilderTest.testDoubleArray</a>
+</td>
+<td>      <span class="sortValue">1</span><span class="aui-lozenge aui-lozenge-success">PASS</span>
+  </td>
+<td> <a href="../../../../../org/apache/commons/lang3/builder/DiffBuilderTest.html?line=190#src-190" title="View Test Source">
+ <span class="aui-icon aui-icon-small aui-iconfont-file-txt aui-icon-medium-gray"></span>
+</a>
+<a href="../../../../../org/apache/commons/lang3/builder/DiffBuilderTest_testDoubleArray_tb.html" title="View Test Summary Page"><span class="aui-icon aui-icon-small aui-iconfont-file-ppt aui-icon-medium-gray"></span></a>
+</td>
+</tr>
+<tr id="test-3832">
+<td><a name="testA-3832"></a><input type="checkbox" id="cb-3832" value="3832" name="testMethod" autocomplete="off" title="Check to highlight coverage of this test in the source code"/></td>
+<td style="vertical-align: middle"  class="link" onclick="window.location.href='../../../../../org/apache/commons/lang3/builder/HashCodeBuilderTest_testReflectionObjectCycle_2yg.html';">
+<span class="sortValue">0.75</span>
+<div>
+<div title="75% Covered" style="min-width:40px;" class="barNegative contribBarNegative contribBarNegative"><div class="barPositive contribBarPositive contribBarPositive" style="width:75%"></div></div></div></td>
+<td id="tc-3832">  <span class="sortValue">org.apache.commons.lang3.builder.HashCodeBuilderTest.testReflectionObjectCycle</span><a href="../../../../../org/apache/commons/lang3/builder/HashCodeBuilderTest_testReflectionObjectCycle_2yg.html" title="View Test Summary Page">org.apache.commons.lang3.builder.HashCodeBuilderTest.testReflectionObjectCycle</a>
+</td>
+<td>      <span class="sortValue">1</span><span class="aui-lozenge aui-lozenge-success">PASS</span>
+  </td>
+<td> <a href="../../../../../org/apache/commons/lang3/builder/HashCodeBuilderTest.html?line=526#src-526" title="View Test Source">
+ <span class="aui-icon aui-icon-small aui-iconfont-file-txt aui-icon-medium-gray"></span>
+</a>
+<a href="../../../../../org/apache/commons/lang3/builder/HashCodeBuilderTest_testReflectionObjectCycle_2yg.html" title="View Test Summary Page"><span class="aui-icon aui-icon-small aui-iconfont-file-ppt aui-icon-medium-gray"></span></a>
+</td>
+</tr>
+<tr id="test-1020">
+<td><a name="testA-1020"></a><input type="checkbox" id="cb-1020" value="1020" name="testMethod" autocomplete="off" title="Check to highlight coverage of this test in the source code"/></td>
+<td style="vertical-align: middle"  class="link" onclick="window.location.href='../../../../../org/apache/commons/lang3/builder/ReflectionDiffBuilderTest_test_transient_field_difference_sc.html';">
+<span class="sortValue">0.75</span>
+<div>
+<div title="75% Covered" style="min-width:40px;" class="barNegative contribBarNegative contribBarNegative"><div class="barPositive contribBarPositive contribBarPositive" style="width:75%"></div></div></div></td>
+<td id="tc-1020">  <span class="sortValue">org.apache.commons.lang3.builder.ReflectionDiffBuilderTest.test_transient_field_difference</span><a href="../../../../../org/apache/commons/lang3/builder/ReflectionDiffBuilderTest_test_transient_field_difference_sc.html" title="View Test Summary Page">org.apache.commons.lang3.builder.ReflectionDiffBuilderTest.test_transient_field_difference</a>
+</td>
+<td>      <span class="sortValue">1</span><span class="aui-lozenge aui-lozenge-success">PASS</span>
+  </td>
+<td> <a href="../../../../../org/apache/commons/lang3/builder/ReflectionDiffBuilderTest.html?line=102#src-102" title="View Test Source">
+ <span class="aui-icon aui-icon-small aui-iconfont-file-txt aui-icon-medium-gray"></span>
+</a>
+<a href="../../../../../org/apache/commons/lang3/builder/ReflectionDiffBuilderTest_test_transient_field_difference_sc.html" title="View Test Summary Page"><span class="aui-icon aui-icon-small aui-iconfont-file-ppt aui-icon-medium-gray"></span></a>
+</td>
+</tr>
+<tr id="test-3159">
+<td><a name="testA-3159"></a><input type="checkbox" id="cb-3159" value="3159" name="testMethod" autocomplete="off" title="Check to highlight coverage of this test in the source code"/></td>
+<td style="vertical-align: middle"  class="link" onclick="window.location.href='../../../../../org/apache/commons/lang3/builder/DiffBuilderTest_testLong_2fr.html';">
+<span class="sortValue">0.75</span>
+<div>
+<div title="75% Covered" style="min-width:40px;" class="barNegative contribBarNegative contribBarNegative"><div class="barPositive contribBarPositive contribBarPositive" style="width:75%"></div></div></div></td>
+<td id="tc-3159">  <span class="sortValue">org.apache.commons.lang3.builder.DiffBuilderTest.testLong</span><a href="../../../../../org/apache/commons/lang3/builder/DiffBuilderTest_testLong_2fr.html" title="View Test Summary Page">org.apache.commons.lang3.builder.DiffBuilderTest.testLong</a>
+</td>
+<td>      <span class="sortValue">1</span><span class="aui-lozenge aui-lozenge-success">PASS</span>
+  </td>
+<td> <a href="../../../../../org/apache/commons/lang3/builder/DiffBuilderTest.html?line=259#src-259" title="View Test Source">
+ <span class="aui-icon aui-icon-small aui-iconfont-file-txt aui-icon-medium-gray"></span>
+</a>
+<a href="../../../../../org/apache/commons/lang3/builder/DiffBuilderTest_testLong_2fr.html" title="View Test Summary Page"><span class="aui-icon aui-icon-small aui-iconfont-file-ppt aui-icon-medium-gray"></span></a>
+</td>
+</tr>
+<tr id="test-400">
+<td><a name="testA-400"></a><input type="checkbox" id="cb-400" value="400" name="testMethod" autocomplete="off" title="Check to highlight coverage of this test in the source code"/></td>
+<td style="vertical-align: middle"  class="link" onclick="window.location.href='../../../../../org/apache/commons/lang3/builder/DiffBuilderTest_testCharArray_b4.html';">
+<span class="sortValue">0.75</span>
+<div>
+<div title="75% Covered" style="min-width:40px;" class="barNegative contribBarNegative contribBarNegative"><div class="barPositive contribBarPositive contribBarPositive" style="width:75%"></div></div></div></td>
+<td id="tc-400">  <span class="sortValue">org.apache.commons.lang3.builder.DiffBuilderTest.testCharArray</span><a href="../../../../../org/apache/commons/lang3/builder/DiffBuilderTest_testCharArray_b4.html" title="View Test Summary Page">org.apache.commons.lang3.builder.DiffBuilderTest.testCharArray</a>
+</td>
+<td>      <span class="sortValue">1</span><span class="aui-lozenge aui-lozenge-success">PASS</span>
+  </td>
+<td> <a href="../../../../../org/apache/commons/lang3/builder/DiffBuilderTest.html?line=162#src-162" title="View Test Source">
+ <span class="aui-icon aui-icon-small aui-iconfont-file-txt aui-icon-medium-gray"></span>
+</a>
+<a href="../../../../../org/apache/commons/lang3/builder/DiffBuilderTest_testCharArray_b4.html" title="View Test Summary Page"><span class="aui-icon aui-icon-small aui-iconfont-file-ppt aui-icon-medium-gray"></span></a>
+</td>
+</tr>
+<tr id="test-1532">
+<td><a name="testA-1532"></a><input type="checkbox" id="cb-1532" value="1532" name="testMethod" autocomplete="off" title="Check to highlight coverage of this test in the source code"/></td>
+<td style="vertical-align: middle"  class="link" onclick="window.location.href='../../../../../org/apache/commons/lang3/builder/DiffBuilderTest_testByteArray_16k.html';">
+<span class="sortValue">0.75</span>
+<div>
+<div title="75% Covered" style="min-width:40px;" class="barNegative contribBarNegative contribBarNegative"><div class="barPositive contribBarPositive contribBarPositive" style="width:75%"></div></div></div></td>
+<td id="tc-1532">  <span class="sortValue">org.apache.commons.lang3.builder.DiffBuilderTest.testByteArray</span><a href="../../../../../org/apache/commons/lang3/builder/DiffBuilderTest_testByteArray_16k.html" title="View Test Summary Page">org.apache.commons.lang3.builder.DiffBuilderTest.testByteArray</a>
+</td>
+<td>      <span class="sortValue">1</span><span class="aui-lozenge aui-lozenge-success">PASS</span>
+  </td>
+<td> <a href="../../../../../org/apache/commons/lang3/builder/DiffBuilderTest.html?line=135#src-135" title="View Test Source">
+ <span class="aui-icon aui-icon-small aui-iconfont-file-txt aui-icon-medium-gray"></span>
+</a>
+<a href="../../../../../org/apache/commons/lang3/builder/DiffBuilderTest_testByteArray_16k.html" title="View Test Summary Page"><span class="aui-icon aui-icon-small aui-iconfont-file-ppt aui-icon-medium-gray"></span></a>
+</td>
+</tr>
+<tr id="test-793">
+<td><a name="testA-793"></a><input type="checkbox" id="cb-793" value="793" name="testMethod" autocomplete="off" title="Check to highlight coverage of this test in the source code"/></td>
+<td style="vertical-align: middle"  class="link" onclick="window.location.href='../../../../../org/apache/commons/lang3/builder/DiffBuilderTest_testObjectsNotSameNorEqual_m1.html';">
+<span class="sortValue">0.75</span>
+<div>
+<div title="75% Covered" style="min-width:40px;" class="barNegative contribBarNegative contribBarNegative"><div class="barPositive contribBarPositive contribBarPositive" style="width:75%"></div></div></div></td>
+<td id="tc-793">  <span class="sortValue">org.apache.commons.lang3.builder.DiffBuilderTest.testObjectsNotSameNorEqual</span><a href="../../../../../org/apache/commons/lang3/builder/DiffBuilderTest_testObjectsNotSameNorEqual_m1.html" title="View Test Summary Page">org.apache.commons.lang3.builder.DiffBuilderTest.testObjectsNotSameNorEqual</a>
+</td>
+<td>      <span class="sortValue">1</span><span class="aui-lozenge aui-lozenge-success">PASS</span>
+  </td>
+<td> <a href="../../../../../org/apache/commons/lang3/builder/DiffBuilderTest.html?line=361#src-361" title="View Test Source">
+ <span class="aui-icon aui-icon-small aui-iconfont-file-txt aui-icon-medium-gray"></span>
+</a>
+<a href="../../../../../org/apache/commons/lang3/builder/DiffBuilderTest_testObjectsNotSameNorEqual_m1.html" title="View Test Summary Page"><span class="aui-icon aui-icon-small aui-iconfont-file-ppt aui-icon-medium-gray"></span></a>
+</td>
+</tr>
+<tr id="test-2037">
+<td><a name="testA-2037"></a><input type="checkbox" id="cb-2037" value="2037" name="testMethod" autocomplete="off" title="Check to highlight coverage of this test in the source code"/></td>
+<td style="vertical-align: middle"  class="link" onclick="window.location.href='../../../../../org/apache/commons/lang3/builder/DiffBuilderTest_testObjectArray_1kl.html';">
+<span class="sortValue">0.75</span>
+<div>
+<div title="75% Covered" style="min-width:40px;" class="barNegative contribBarNegative contribBarNegative"><div class="barPositive contribBarPositive contribBarPositive" style="width:75%"></div></div></div></td>
+<td id="tc-2037">  <span class="sortValue">org.apache.commons.lang3.builder.DiffBuilderTest.testObjectArray</span><a href="../../../../../org/apache/commons/lang3/builder/DiffBuilderTest_testObjectArray_1kl.html" title="View Test Summary Page">org.apache.commons.lang3.builder.DiffBuilderTest.testObjectArray</a>
+</td>
+<td>      <span class="sortValue">1</span><span class="aui-lozenge aui-lozenge-success">PASS</span>
+  </td>
+<td> <a href="../../../../../org/apache/commons/lang3/builder/DiffBuilderTest.html?line=374#src-374" title="View Test Source">
+ <span class="aui-icon aui-icon-small aui-iconfont-file-txt aui-icon-medium-gray"></span>
+</a>
+<a href="../../../../../org/apache/commons/lang3/builder/DiffBuilderTest_testObjectArray_1kl.html" title="View Test Summary Page"><span class="aui-icon aui-icon-small aui-iconfont-file-ppt aui-icon-medium-gray"></span></a>
+</td>
+</tr>
+<tr id="test-3453">
+<td><a name="testA-3453"></a><input type="checkbox" id="cb-3453" value="3453" name="testMethod" autocomplete="off" title="Check to highlight coverage of this test in the source code"/></td>
+<td style="vertical-align: middle"  class="link" onclick="window.location.href='../../../../../org/apache/commons/lang3/builder/DiffBuilderTest_testDiffResult_2nx.html';">
+<span class="sortValue">0.75</span>
+<div>
+<div title="75% Covered" style="min-width:40px;" class="barNegative contribBarNegative contribBarNegative"><div class="barPositive contribBarPositive contribBarPositive" style="width:75%"></div></div></div></td>
+<td id="tc-3453">  <span class="sortValue">org.apache.commons.lang3.builder.DiffBuilderTest.testDiffResult</span><a href="../../../../../org/apache/commons/lang3/builder/DiffBuilderTest_testDiffResult_2nx.html" title="View Test Summary Page">org.apache.commons.lang3.builder.DiffBuilderTest.testDiffResult</a>
+</td>
+<td>      <span class="sortValue">1</span><span class="aui-lozenge aui-lozenge-success">PASS</span>
+  </td>
+<td> <a href="../../../../../org/apache/commons/lang3/builder/DiffBuilderTest.html?line=414#src-414" title="View Test Source">
+ <span class="aui-icon aui-icon-small aui-iconfont-file-txt aui-icon-medium-gray"></span>
+</a>
+<a href="../../../../../org/apache/commons/lang3/builder/DiffBuilderTest_testDiffResult_2nx.html" title="View Test Summary Page"><span class="aui-icon aui-icon-small aui-iconfont-file-ppt aui-icon-medium-gray"></span></a>
+</td>
+</tr>
+<tr id="test-2108">
+<td><a name="testA-2108"></a><input type="checkbox" id="cb-2108" value="2108" name="testMethod" autocomplete="off" title="Check to highlight coverage of this test in the source code"/></td>
+<td style="vertical-align: middle"  class="link" onclick="window.location.href='../../../../../org/apache/commons/lang3/builder/ReflectionDiffBuilderTest_test_array_difference_1mk.html';">
+<span class="sortValue">0.75</span>
+<div>
+<div title="75% Covered" style="min-width:40px;" class="barNegative contribBarNegative contribBarNegative"><div class="barPositive contribBarPositive contribBarPositive" style="width:75%"></div></div></div></td>
+<td id="tc-2108">  <span class="sortValue">org.apache.commons.lang3.builder.ReflectionDiffBuilderTest.test_array_difference</span><a href="../../../../../org/apache/commons/lang3/builder/ReflectionDiffBuilderTest_test_array_difference_1mk.html" title="View Test Summary Page">org.apache.commons.lang3.builder.ReflectionDiffBuilderTest.test_array_difference</a>
+</td>
+<td>      <span class="sortValue">1</span><span class="aui-lozenge aui-lozenge-success">PASS</span>
+  </td>
+<td> <a href="../../../../../org/apache/commons/lang3/builder/ReflectionDiffBuilderTest.html?line=92#src-92" title="View Test Source">
+ <span class="aui-icon aui-icon-small aui-iconfont-file-txt aui-icon-medium-gray"></span>
+</a>
+<a href="../../../../../org/apache/commons/lang3/builder/ReflectionDiffBuilderTest_test_array_difference_1mk.html" title="View Test Summary Page"><span class="aui-icon aui-icon-small aui-iconfont-file-ppt aui-icon-medium-gray"></span></a>
+</td>
+</tr>
+<tr id="test-2776">
+<td><a name="testA-2776"></a><input type="checkbox" id="cb-2776" value="2776" name="testMethod" autocomplete="off" title="Check to highlight coverage of this test in the source code"/></td>
+<td style="vertical-align: middle"  class="link" onclick="window.location.href='../../../../../org/apache/commons/lang3/builder/EqualsBuilderTest_testReflectionAppend_254.html';">
+<span class="sortValue">0.75</span>
+<div>
+<div title="75% Covered" style="min-width:40px;" class="barNegative contribBarNegative contribBarNegative"><div class="barPositive contribBarPositive contribBarPositive" style="width:75%"></div></div></div></td>
+<td id="tc-2776">  <span class="sortValue">org.apache.commons.lang3.builder.EqualsBuilderTest.testReflectionAppend</span><a href="../../../../../org/apache/commons/lang3/builder/EqualsBuilderTest_testReflectionAppend_254.html" title="View Test Summary Page">org.apache.commons.lang3.builder.EqualsBuilderTest.testReflectionAppend</a>
+</td>
+<td>      <span class="sortValue">1</span><span class="aui-lozenge aui-lozenge-success">PASS</span>
+  </td>
+<td> <a href="../../../../../org/apache/commons/lang3/builder/EqualsBuilderTest.html?line=1301#src-1301" title="View Test Source">
+ <span class="aui-icon aui-icon-small aui-iconfont-file-txt aui-icon-medium-gray"></span>
+</a>
+<a href="../../../../../org/apache/commons/lang3/builder/EqualsBuilderTest_testReflectionAppend_254.html" title="View Test Summary Page"><span class="aui-icon aui-icon-small aui-iconfont-file-ppt aui-icon-medium-gray"></span></a>
+</td>
+</tr>
+<tr id="test-2875">
+<td><a name="testA-2875"></a><input type="checkbox" id="cb-2875" value="2875" name="testMethod" autocomplete="off" title="Check to highlight coverage of this test in the source code"/></td>
+<td style="vertical-align: middle"  class="link" onclick="window.location.href='../../../../../org/apache/commons/lang3/builder/DiffBuilderTest_testObject_27v.html';">
+<span class="sortValue">0.75</span>
+<div>
+<div title="75% Covered" style="min-width:40px;" class="barNegative contribBarNegative contribBarNegative"><div class="barPositive contribBarPositive contribBarPositive" style="width:75%"></div></div></div></td>
+<td id="tc-2875">  <span class="sortValue">org.apache.commons.lang3.builder.DiffBuilderTest.testObject</span><a href="../../../../../org/apache/commons/lang3/builder/DiffBuilderTest_testObject_27v.html" title="View Test Summary Page">org.apache.commons.lang3.builder.DiffBuilderTest.testObject</a>
+</td>
+<td>      <span class="sortValue">1</span><span class="aui-lozenge aui-lozenge-success">PASS</span>
+  </td>
+<td> <a href="../../../../../org/apache/commons/lang3/builder/DiffBuilderTest.html?line=313#src-313" title="View Test Source">
+ <span class="aui-icon aui-icon-small aui-iconfont-file-txt aui-icon-medium-gray"></span>
+</a>
+<a href="../../../../../org/apache/commons/lang3/builder/DiffBuilderTest_testObject_27v.html" title="View Test Summary Page"><span class="aui-icon aui-icon-small aui-iconfont-file-ppt aui-icon-medium-gray"></span></a>
+</td>
+</tr>
+<tr id="test-2573">
+<td><a name="testA-2573"></a><input type="checkbox" id="cb-2573" value="2573" name="testMethod" autocomplete="off" title="Check to highlight coverage of this test in the source code"/></td>
+<td style="vertical-align: middle"  class="link" onclick="window.location.href='../../../../../org/apache/commons/lang3/builder/CompareToBuilderTest_testReflectionHierarchyCompare_1zh.html';">
+<span class="sortValue">0.75</span>
+<div>
+<div title="75% Covered" style="min-width:40px;" class="barNegative contribBarNegative contribBarNegative"><div class="barPositive contribBarPositive contribBarPositive" style="width:75%"></div></div></div></td>
+<td id="tc-2573">  <span class="sortValue">org.apache.commons.lang3.builder.CompareToBuilderTest.testReflectionHierarchyCompare</span><a href="../../../../../org/apache/commons/lang3/builder/CompareToBuilderTest_testReflectionHierarchyCompare_1zh.html" title="View Test Summary Page">org.apache.commons.lang3.builder.CompareToBuilderTest.testReflectionHierarchyCompare</a>
+</td>
+<td>      <span class="sortValue">1</span><span class="aui-lozenge aui-lozenge-success">PASS</span>
+  </td>
+<td> <a href="../../../../../org/apache/commons/lang3/builder/CompareToBuilderTest.html?line=123#src-123" title="View Test Source">
+ <span class="aui-icon aui-icon-small aui-iconfont-file-txt aui-icon-medium-gray"></span>
+</a>
+<a href="../../../../../org/apache/commons/lang3/builder/CompareToBuilderTest_testReflectionHierarchyCompare_1zh.html" title="View Test Summary Page"><span class="aui-icon aui-icon-small aui-iconfont-file-ppt aui-icon-medium-gray"></span></a>
+</td>
+</tr>
+<tr id="test-3334">
+<td><a name="testA-3334"></a><input type="checkbox" id="cb-3334" value="3334" name="testMethod" autocomplete="off" title="Check to highlight coverage of this test in the source code"/></td>
+<td style="vertical-align: middle"  class="link" onclick="window.location.href='../../../../../org/apache/commons/lang3/builder/DiffBuilderTest_testBooleanArray_2km.html';">
+<span class="sortValue">0.75</span>
+<div>
+<div title="75% Covered" style="min-width:40px;" class="barNegative contribBarNegative contribBarNegative"><div class="barPositive contribBarPositive contribBarPositive" style="width:75%"></div></div></div></td>
+<td id="tc-3334">  <span class="sortValue">org.apache.commons.lang3.builder.DiffBuilderTest.testBooleanArray</span><a href="../../../../../org/apache/commons/lang3/builder/DiffBuilderTest_testBooleanArray_2km.html" title="View Test Summary Page">org.apache.commons.lang3.builder.DiffBuilderTest.testBooleanArray</a>
+</td>
+<td>      <span class="sortValue">1</span><span class="aui-lozenge aui-lozenge-success">PASS</span>
+  </td>
+<td> <a href="../../../../../org/apache/commons/lang3/builder/DiffBuilderTest.html?line=108#src-108" title="View Test Source">
+ <span class="aui-icon aui-icon-small aui-iconfont-file-txt aui-icon-medium-gray"></span>
+</a>
+<a href="../../../../../org/apache/commons/lang3/builder/DiffBuilderTest_testBooleanArray_2km.html" title="View Test Summary Page"><span class="aui-icon aui-icon-small aui-iconfont-file-ppt aui-icon-medium-gray"></span></a>
+</td>
+</tr>
+<tr id="test-1554">
+<td><a name="testA-1554"></a><input type="checkbox" id="cb-1554" value="1554" name="testMethod" autocomplete="off" title="Check to highlight coverage of this test in the source code"/></td>
+<td style="vertical-align: middle"  class="link" onclick="window.location.href='../../../../../org/apache/commons/lang3/builder/EqualsBuilderTest_testObjectRecursiveCycleSelfreference_176.html';">
+<span class="sortValue">0.75</span>
+<div>
+<div title="75% Covered" style="min-width:40px;" class="barNegative contribBarNegative contribBarNegative"><div class="barPositive contribBarPositive contribBarPositive" style="width:75%"></div></div></div></td>
+<td id="tc-1554">  <span class="sortValue">org.apache.commons.lang3.builder.EqualsBuilderTest.testObjectRecursiveCycleSelfreference</span><a href="../../../../../org/apache/commons/lang3/builder/EqualsBuilderTest_testObjectRecursiveCycleSelfreference_176.html" title="View Test Summary Page">org.apache.commons.lang3.builder.EqualsBuilderTest.testObjectRecursiveCycleSelfreference</a>
+</td>
+<td>      <span class="sortValue">1</span><span class="aui-lozenge aui-lozenge-success">PASS</span>
+  </td>
+<td> <a href="../../../../../org/apache/commons/lang3/builder/EqualsBuilderTest.html?line=419#src-419" title="View Test Source">
+ <span class="aui-icon aui-icon-small aui-iconfont-file-txt aui-icon-medium-gray"></span>
+</a>
+<a href="../../../../../org/apache/commons/lang3/builder/EqualsBuilderTest_testObjectRecursiveCycleSelfreference_176.html" title="View Test Summary Page"><span class="aui-icon aui-icon-small aui-iconfont-file-ppt aui-icon-medium-gray"></span></a>
+</td>
+</tr>
+<tr id="test-3319">
+<td><a name="testA-3319"></a><input type="checkbox" id="cb-3319" value="3319" name="testMethod" autocomplete="off" title="Check to highlight coverage of this test in the source code"/></td>
+<td style="vertical-align: middle"  class="link" onclick="window.location.href='../../../../../org/apache/commons/lang3/builder/HashCodeBuilderAndEqualsBuilderTest_testInteger_2k7.html';">
+<span class="sortValue">0.75</span>
+<div>
+<div title="75% Covered" style="min-width:40px;" class="barNegative contribBarNegative contribBarNegative"><div class="barPositive contribBarPositive contribBarPositive" style="width:75%"></div></div></div></td>
+<td id="tc-3319">  <span class="sortValue">org.apache.commons.lang3.builder.HashCodeBuilderAndEqualsBuilderTest.testInteger</span><a href="../../../../../org/apache/commons/lang3/builder/HashCodeBuilderAndEqualsBuilderTest_testInteger_2k7.html" title="View Test Summary Page">org.apache.commons.lang3.builder.HashCodeBuilderAndEqualsBuilderTest.testInteger</a>
+</td>
+<td>      <span class="sortValue">1</span><span class="aui-lozenge aui-lozenge-success">PASS</span>
+  </td>
+<td> <a href="../../../../../org/apache/commons/lang3/builder/HashCodeBuilderAndEqualsBuilderTest.html?line=38#src-38" title="View Test Source">
+ <span class="aui-icon aui-icon-small aui-iconfont-file-txt aui-icon-medium-gray"></span>
+</a>
+<a href="../../../../../org/apache/commons/lang3/builder/HashCodeBuilderAndEqualsBuilderTest_testInteger_2k7.html" title="View Test Summary Page"><span class="aui-icon aui-icon-small aui-iconfont-file-ppt aui-icon-medium-gray"></span></a>
+</td>
+</tr>
+<tr id="test-2694">
+<td><a name="testA-2694"></a><input type="checkbox" id="cb-2694" value="2694" name="testMethod" autocomplete="off" title="Check to highlight coverage of this test in the source code"/></td>
+<td style="vertical-align: middle"  class="link" onclick="window.location.href='../../../../../org/apache/commons/lang3/builder/EqualsBuilderTest_testToEqualsExclude_22u.html';">
+<span class="sortValue">0.75</span>
+<div>
+<div title="75% Covered" style="min-width:40px;" class="barNegative contribBarNegative contribBarNegative"><div class="barPositive contribBarPositive contribBarPositive" style="width:75%"></div></div></div></td>
+<td id="tc-2694">  <span class="sortValue">org.apache.commons.lang3.builder.EqualsBuilderTest.testToEqualsExclude</span><a href="../../../../../org/apache/commons/lang3/builder/EqualsBuilderTest_testToEqualsExclude_22u.html" title="View Test Summary Page">org.apache.commons.lang3.builder.EqualsBuilderTest.testToEqualsExclude</a>
+</td>
+<td>      <span class="sortValue">1</span><span class="aui-lozenge aui-lozenge-success">PASS</span>
+  </td>
+<td> <a href="../../../../../org/apache/commons/lang3/builder/EqualsBuilderTest.html?line=1288#src-1288" title="View Test Source">
+ <span class="aui-icon aui-icon-small aui-iconfont-file-txt aui-icon-medium-gray"></span>
+</a>
+<a href="../../../../../org/apache/commons/lang3/builder/EqualsBuilderTest_testToEqualsExclude_22u.html" title="View Test Summary Page"><span class="aui-icon aui-icon-small aui-iconfont-file-ppt aui-icon-medium-gray"></span></a>
+</td>
+</tr>
+<tr id="test-309">
+<td><a name="testA-309"></a><input type="checkbox" id="cb-309" value="309" name="testMethod" autocomplete="off" title="Check to highlight coverage of this test in the source code"/></td>
+<td style="vertical-align: middle"  class="link" onclick="window.location.href='../../../../../org/apache/commons/lang3/builder/DiffBuilderTest_testShort_8l.html';">
+<span class="sortValue">0.75</span>
+<div>
+<div title="75% Covered" style="min-width:40px;" class="barNegative contribBarNegative contribBarNegative"><div class="barPositive contribBarPositive contribBarPositive" style="width:75%"></div></div></div></td>
+<td id="tc-309">  <span class="sortValue">org.apache.commons.lang3.builder.DiffBuilderTest.testShort</span><a href="../../../../../org/apache/commons/lang3/builder/DiffBuilderTest_testShort_8l.html" title="View Test Summary Page">org.apache.commons.lang3.builder.DiffBuilderTest.testShort</a>
+</td>
+<td>      <span class="sortValue">1</span><span class="aui-lozenge aui-lozenge-success">PASS</span>
+  </td>
+<td> <a href="../../../../../org/apache/commons/lang3/builder/DiffBuilderTest.html?line=286#src-286" title="View Test Source">
+ <span class="aui-icon aui-icon-small aui-iconfont-file-txt aui-icon-medium-gray"></span>
+</a>
+<a href="../../../../../org/apache/commons/lang3/builder/DiffBuilderTest_testShort_8l.html" title="View Test Summary Page"><span class="aui-icon aui-icon-small aui-iconfont-file-ppt aui-icon-medium-gray"></span></a>
+</td>
+</tr>
+<tr id="test-3019">
+<td><a name="testA-3019"></a><input type="checkbox" id="cb-3019" value="3019" name="testMethod" autocomplete="off" title="Check to highlight coverage of this test in the source code"/></td>
+<td style="vertical-align: middle"  class="link" onclick="window.location.href='../../../../../org/apache/commons/lang3/builder/HashCodeBuilderAndEqualsBuilderTest_testFixture_2bv.html';">
+<span class="sortValue">0.75</span>
+<div>
+<div title="75% Covered" style="min-width:40px;" class="barNegative contribBarNegative contribBarNegative"><div class="barPositive contribBarPositive contribBarPositive" style="width:75%"></div></div></div></td>
+<td id="tc-3019">  <span class="sortValue">org.apache.commons.lang3.builder.HashCodeBuilderAndEqualsBuilderTest.testFixture</span><a href="../../../../../org/apache/commons/lang3/builder/HashCodeBuilderAndEqualsBuilderTest_testFixture_2bv.html" title="View Test Summary Page">org.apache.commons.lang3.builder.HashCodeBuilderAndEqualsBuilderTest.testFixture</a>
+</td>
+<td>      <span class="sortValue">1</span><span class="aui-lozenge aui-lozenge-success">PASS</span>
+  </td>
+<td> <a href="../../../../../org/apache/commons/lang3/builder/HashCodeBuilderAndEqualsBuilderTest.html?line=48#src-48" title="View Test Source">
+ <span class="aui-icon aui-icon-small aui-iconfont-file-txt aui-icon-medium-gray"></span>
+</a>
+<a href="../../../../../org/apache/commons/lang3/builder/HashCodeBuilderAndEqualsBuilderTest_testFixture_2bv.html" title="View Test Summary Page"><span class="aui-icon aui-icon-small aui-iconfont-file-ppt aui-icon-medium-gray"></span></a>
+</td>
+</tr>
+<tr id="test-2700">
+<td><a name="testA-2700"></a><input type="checkbox" id="cb-2700" value="2700" name="testMethod" autocomplete="off" title="Check to highlight coverage of this test in the source code"/></td>
+<td style="vertical-align: middle"  class="link" onclick="window.location.href='../../../../../org/apache/commons/lang3/builder/EqualsBuilderTest_testObjectRecursiveCycle_230.html';">
+<span class="sortValue">0.75</span>
+<div>
+<div title="75% Covered" style="min-width:40px;" class="barNegative contribBarNegative contribBarNegative"><div class="barPositive contribBarPositive contribBarPositive" style="width:75%"></div></div></div></td>
+<td id="tc-2700">  <span class="sortValue">org.apache.commons.lang3.builder.EqualsBuilderTest.testObjectRecursiveCycle</span><a href="../../../../../org/apache/commons/lang3/builder/EqualsBuilderTest_testObjectRecursiveCycle_230.html" title="View Test Summary Page">org.apache.commons.lang3.builder.EqualsBuilderTest.testObjectRecursiveCycle</a>
+</td>
+<td>      <span class="sortValue">1</span><span class="aui-lozenge aui-lozenge-success">PASS</span>
+  </td>
+<td> <a href="../../../../../org/apache/commons/lang3/builder/EqualsBuilderTest.html?line=430#src-430" title="View Test Source">
+ <span class="aui-icon aui-icon-small aui-iconfont-file-txt aui-icon-medium-gray"></span>
+</a>
+<a href="../../../../../org/apache/commons/lang3/builder/EqualsBuilderTest_testObjectRecursiveCycle_230.html" title="View Test Summary Page"><span class="aui-icon aui-icon-small aui-iconfont-file-ppt aui-icon-medium-gray"></span></a>
+</td>
+</tr>
+<tr id="test-2928">
+<td><a name="testA-2928"></a><input type="checkbox" id="cb-2928" value="2928" name="testMethod" autocomplete="off" title="Check to highlight coverage of this test in the source code"/></td>
+<td style="vertical-align: middle"  class="link" onclick="window.location.href='../../../../../org/apache/commons/lang3/builder/CompareToBuilderTest_testReflectionHierarchyCompareExcludeFields_29c.html';">
+<span class="sortValue">0.75</span>
+<div>
+<div title="75% Covered" style="min-width:40px;" class="barNegative contribBarNegative contribBarNegative"><div class="barPositive contribBarPositive contribBarPositive" style="width:75%"></div></div></div></td>
+<td id="tc-2928">  <span class="sortValue">org.apache.commons.lang3.builder.CompareToBuilderTest.testReflectionHierarchyCompareExcludeFields</span><a href="../../../../../org/apache/commons/lang3/builder/CompareToBuilderTest_testReflectionHierarchyCompareExcludeFields_29c.html" title="View Test Summary Page">org.apache.commons.lang3.builder.CompareToBuilderTest.testReflectionHierarchyCompareExcludeFields</a>
+</td>
+<td>      <span class="sortValue">1</span><span class="aui-lozenge aui-lozenge-success">PASS</span>
+  </td>
+<td> <a href="../../../../../org/apache/commons/lang3/builder/CompareToBuilderTest.html?line=128#src-128" title="View Test Source">
+ <span class="aui-icon aui-icon-small aui-iconfont-file-txt aui-icon-medium-gray"></span>
+</a>
+<a href="../../../../../org/apache/commons/lang3/builder/CompareToBuilderTest_testReflectionHierarchyCompareExcludeFields_29c.html" title="View Test Summary Page"><span class="aui-icon aui-icon-small aui-iconfont-file-ppt aui-icon-medium-gray"></span></a>
+</td>
+</tr>
+<tr id="test-2872">
+<td><a name="testA-2872"></a><input type="checkbox" id="cb-2872" value="2872" name="testMethod" autocomplete="off" title="Check to highlight coverage of this test in the source code"/></td>
+<td style="vertical-align: middle"  class="link" onclick="window.location.href='../../../../../org/apache/commons/lang3/builder/EqualsBuilderTest_testReflectionEqualsExcludeFields_27s.html';">
+<span class="sortValue">0.75</span>
+<div>
+<div title="75% Covered" style="min-width:40px;" class="barNegative contribBarNegative contribBarNegative"><div class="barPositive contribBarPositive contribBarPositive" style="width:75%"></div></div></div></td>
+<td id="tc-2872">  <span class="sortValue">org.apache.commons.lang3.builder.EqualsBuilderTest.testReflectionEqualsExcludeFields</span><a href="../../../../../org/apache/commons/lang3/builder/EqualsBuilderTest_testReflectionEqualsExcludeFields_27s.html" title="View Test Summary Page">org.apache.commons.lang3.builder.EqualsBuilderTest.testReflectionEqualsExcludeFields</a>
+</td>
+<td>      <span class="sortValue">1</span><span class="aui-lozenge aui-lozenge-success">PASS</span>
+  </td>
+<td> <a href="../../../../../org/apache/commons/lang3/builder/EqualsBuilderTest.html?line=1157#src-1157" title="View Test Source">
+ <span class="aui-icon aui-icon-small aui-iconfont-file-txt aui-icon-medium-gray"></span>
+</a>
+<a href="../../../../../org/apache/commons/lang3/builder/EqualsBuilderTest_testReflectionEqualsExcludeFields_27s.html" title="View Test Summary Page"><span class="aui-icon aui-icon-small aui-iconfont-file-ppt aui-icon-medium-gray"></span></a>
+</td>
+</tr>
+<tr id="test-879">
+<td><a name="testA-879"></a><input type="checkbox" id="cb-879" value="879" name="testMethod" autocomplete="off" title="Check to highlight coverage of this test in the source code"/></td>
+<td style="vertical-align: middle"  class="link" onclick="window.location.href='../../../../../org/apache/commons/lang3/builder/HashCodeBuilderTest_testReflectionHashCode_of.html';">
+<span class="sortValue">0.75</span>
+<div>
+<div title="75% Covered" style="min-width:40px;" class="barNegative contribBarNegative contribBarNegative"><div class="barPositive contribBarPositive contribBarPositive" style="width:75%"></div></div></div></td>
+<td id="tc-879">  <span class="sortValue">org.apache.commons.lang3.builder.HashCodeBuilderTest.testReflectionHashCode</span><a href="../../../../../org/apache/commons/lang3/builder/HashCodeBuilderTest_testReflectionHashCode_of.html" title="View Test Summary Page">org.apache.commons.lang3.builder.HashCodeBuilderTest.testReflectionHashCode</a>
+</td>
+<td>      <span class="sortValue">1</span><span class="aui-lozenge aui-lozenge-success">PASS</span>
+  </td>
+<td> <a href="../../../../../org/apache/commons/lang3/builder/HashCodeBuilderTest.html?line=143#src-143" title="View Test Source">
+ <span class="aui-icon aui-icon-small aui-iconfont-file-txt aui-icon-medium-gray"></span>
+</a>
+<a href="../../../../../org/apache/commons/lang3/builder/HashCodeBuilderTest_testReflectionHashCode_of.html" title="View Test Summary Page"><span class="aui-icon aui-icon-small aui-iconfont-file-ppt aui-icon-medium-gray"></span></a>
+</td>
+</tr>
+<tr id="test-1527">
+<td><a name="testA-1527"></a><input type="checkbox" id="cb-1527" value="1527" name="testMethod" autocomplete="off" title="Check to highlight coverage of this test in the source code"/></td>
+<td style="vertical-align: middle"  class="link" onclick="window.location.href='../../../../../org/apache/commons/lang3/builder/DiffBuilderTest_testObjectsSameAndEqual_16f.html';">
+<span class="sortValue">0.75</span>
+<div>
+<div title="75% Covered" style="min-width:40px;" class="barNegative contribBarNegative contribBarNegative"><div class="barPositive contribBarPositive contribBarPositive" style="width:75%"></div></div></div></td>
+<td id="tc-1527">  <span class="sortValue">org.apache.commons.lang3.builder.DiffBuilderTest.testObjectsSameAndEqual</span><a href="../../../../../org/apache/commons/lang3/builder/DiffBuilderTest_testObjectsSameAndEqual_16f.html" title="View Test Summary Page">org.apache.commons.lang3.builder.DiffBuilderTest.testObjectsSameAndEqual</a>
+</td>
+<td>      <span class="sortValue">1</span><span class="aui-lozenge aui-lozenge-success">PASS</span>
+  </td>
+<td> <a href="../../../../../org/apache/commons/lang3/builder/DiffBuilderTest.html?line=328#src-328" title="View Test Source">
+ <span class="aui-icon aui-icon-small aui-iconfont-file-txt aui-icon-medium-gray"></span>
+</a>
+<a href="../../../../../org/apache/commons/lang3/builder/DiffBuilderTest_testObjectsSameAndEqual_16f.html" title="View Test Summary Page"><span class="aui-icon aui-icon-small aui-iconfont-file-ppt aui-icon-medium-gray"></span></a>
+</td>
+</tr>
+<tr id="test-2370">
+<td><a name="testA-2370"></a><input type="checkbox" id="cb-2370" value="2370" name="testMethod" autocomplete="off" title="Check to highlight coverage of this test in the source code"/></td>
+<td style="vertical-align: middle"  class="link" onclick="window.location.href='../../../../../org/apache/commons/lang3/builder/HashCodeBuilderTest_testReflectionHierarchyHashCode_1tu.html';">
+<span class="sortValue">0.75</span>
+<div>
+<div title="75% Covered" style="min-width:40px;" class="barNegative contribBarNegative contribBarNegative"><div class="barPositive contribBarPositive contribBarPositive" style="width:75%"></div></div></div></td>
+<td id="tc-2370">  <span class="sortValue">org.apache.commons.lang3.builder.HashCodeBuilderTest.testReflectionHierarchyHashCode</span><a href="../../../../../org/apache/commons/lang3/builder/HashCodeBuilderTest_testReflectionHierarchyHashCode_1tu.html" title="View Test Summary Page">org.apache.commons.lang3.builder.HashCodeBuilderTest.testReflectionHierarchyHashCode</a>
+</td>
+<td>      <span class="sortValue">1</span><span class="aui-lozenge aui-lozenge-success">PASS</span>
+  </td>
+<td> <a href="../../../../../org/apache/commons/lang3/builder/HashCodeBuilderTest.html?line=149#src-149" title="View Test Source">
+ <span class="aui-icon aui-icon-small aui-iconfont-file-txt aui-icon-medium-gray"></span>
+</a>
+<a href="../../../../../org/apache/commons/lang3/builder/HashCodeBuilderTest_testReflectionHierarchyHashCode_1tu.html" title="View Test Summary Page"><span class="aui-icon aui-icon-small aui-iconfont-file-ppt aui-icon-medium-gray"></span></a>
+</td>
+</tr>
+<tr id="test-3355">
+<td><a name="testA-3355"></a><input type="checkbox" id="cb-3355" value="3355" name="testMethod" autocomplete="off" title="Check to highlight coverage of this test in the source code"/></td>
+<td style="vertical-align: middle"  class="link" onclick="window.location.href='../../../../../org/apache/commons/lang3/builder/DiffBuilderTest_testIntArray_2l7.html';">
+<span class="sortValue">0.75</span>
+<div>
+<div title="75% Covered" style="min-width:40px;" class="barNegative contribBarNegative contribBarNegative"><div class="barPositive contribBarPositive contribBarPositive" style="width:75%"></div></div></div></td>
+<td id="tc-3355">  <span class="sortValue">org.apache.commons.lang3.builder.DiffBuilderTest.testIntArray</span><a href="../../../../../org/apache/commons/lang3/builder/DiffBuilderTest_testIntArray_2l7.html" title="View Test Summary Page">org.apache.commons.lang3.builder.DiffBuilderTest.testIntArray</a>
+</td>
+<td>      <span class="sortValue">1</span><span class="aui-lozenge aui-lozenge-success">PASS</span>
+  </td>
+<td> <a href="../../../../../org/apache/commons/lang3/builder/DiffBuilderTest.html?line=245#src-245" title="View Test Source">
+ <span class="aui-icon aui-icon-small aui-iconfont-file-txt aui-icon-medium-gray"></span>
+</a>
+<a href="../../../../../org/apache/commons/lang3/builder/DiffBuilderTest_testIntArray_2l7.html" title="View Test Summary Page"><span class="aui-icon aui-icon-small aui-iconfont-file-ppt aui-icon-medium-gray"></span></a>
+</td>
+</tr>
+<tr id="test-2651">
+<td><a name="testA-2651"></a><input type="checkbox" id="cb-2651" value="2651" name="testMethod" autocomplete="off" title="Check to highlight coverage of this test in the source code"/></td>
+<td style="vertical-align: middle"  class="link" onclick="window.location.href='../../../../../org/apache/commons/lang3/builder/DiffBuilderTest_testLongArray_21n.html';">
+<span class="sortValue">0.75</span>
+<div>
+<div title="75% Covered" style="min-width:40px;" class="barNegative contribBarNegative contribBarNegative"><div class="barPositive contribBarPositive contribBarPositive" style="width:75%"></div></div></div></td>
+<td id="tc-2651">  <span class="sortValue">org.apache.commons.lang3.builder.DiffBuilderTest.testLongArray</span><a href="../../../../../org/apache/commons/lang3/builder/DiffBuilderTest_testLongArray_21n.html" title="View Test Summary Page">org.apache.commons.lang3.builder.DiffBuilderTest.testLongArray</a>
+</td>
+<td>      <span class="sortValue">1</span><span class="aui-lozenge aui-lozenge-success">PASS</span>
+  </td>
+<td> <a href="../../../../../org/apache/commons/lang3/builder/DiffBuilderTest.html?line=272#src-272" title="View Test Source">
+ <span class="aui-icon aui-icon-small aui-iconfont-file-txt aui-icon-medium-gray"></span>
+</a>
+<a href="../../../../../org/apache/commons/lang3/builder/DiffBuilderTest_testLongArray_21n.html" title="View Test Summary Page"><span class="aui-icon aui-icon-small aui-iconfont-file-ppt aui-icon-medium-gray"></span></a>
+</td>
+</tr>
+<tr id="test-1549">
+<td><a name="testA-1549"></a><input type="checkbox" id="cb-1549" value="1549" name="testMethod" autocomplete="off" title="Check to highlight coverage of this test in the source code"/></td>
+<td style="vertical-align: middle"  class="link" onclick="window.location.href='../../../../../org/apache/commons/lang3/builder/ReflectionDiffBuilderTest_test_no_differences_171.html';">
+<span class="sortValue">0.75</span>
+<div>
+<div title="75% Covered" style="min-width:40px;" class="barNegative contribBarNegative contribBarNegative"><div class="barPositive contribBarPositive contribBarPositive" style="width:75%"></div></div></div></td>
+<td id="tc-1549">  <span class="sortValue">org.apache.commons.lang3.builder.ReflectionDiffBuilderTest.test_no_differences</span><a href="../../../../../org/apache/commons/lang3/builder/ReflectionDiffBuilderTest_test_no_differences_171.html" title="View Test Summary Page">org.apache.commons.lang3.builder.ReflectionDiffBuilderTest.test_no_differences</a>
+</td>
+<td>      <span class="sortValue">1</span><span class="aui-lozenge aui-lozenge-success">PASS</span>
+  </td>
+<td> <a href="../../../../../org/apache/commons/lang3/builder/ReflectionDiffBuilderTest.html?line=73#src-73" title="View Test Source">
+ <span class="aui-icon aui-icon-small aui-iconfont-file-txt aui-icon-medium-gray"></span>
+</a>
+<a href="../../../../../org/apache/commons/lang3/builder/ReflectionDiffBuilderTest_test_no_differences_171.html" title="View Test Summary Page"><span class="aui-icon aui-icon-small aui-iconfont-file-ppt aui-icon-medium-gray"></span></a>
+</td>
+</tr>
+<tr id="test-781">
+<td><a name="testA-781"></a><input type="checkbox" id="cb-781" value="781" name="testMethod" autocomplete="off" title="Check to highlight coverage of this test in the source code"/></td>
+<td style="vertical-align: middle"  class="link" onclick="window.location.href='../../../../../org/apache/commons/lang3/builder/EqualsBuilderTest_testObjectRecursive_lp.html';">
+<span class="sortValue">0.75</span>
+<div>
+<div title="75% Covered" style="min-width:40px;" class="barNegative contribBarNegative contribBarNegative"><div class="barPositive contribBarPositive contribBarPositive" style="width:75%"></div></div></div></td>
+<td id="tc-781">  <span class="sortValue">org.apache.commons.lang3.builder.EqualsBuilderTest.testObjectRecursive</span><a href="../../../../../org/apache/commons/lang3/builder/EqualsBuilderTest_testObjectRecursive_lp.html" title="View Test Summary Page">org.apache.commons.lang3.builder.EqualsBuilderTest.testObjectRecursive</a>
+</td>
+<td>      <span class="sortValue">1</span><span class="aui-lozenge aui-lozenge-success">PASS</span>
+  </td>
+<td> <a href="../../../../../org/apache/commons/lang3/builder/EqualsBuilderTest.html?line=396#src-396" title="View Test Source">
+ <span class="aui-icon aui-icon-small aui-iconfont-file-txt aui-icon-medium-gray"></span>
+</a>
+<a href="../../../../../org/apache/commons/lang3/builder/EqualsBuilderTest_testObjectRecursive_lp.html" title="View Test Summary Page"><span class="aui-icon aui-icon-small aui-iconfont-file-ppt aui-icon-medium-gray"></span></a>
+</td>
+</tr>
+<tr id="test-3033">
+<td><a name="testA-3033"></a><input type="checkbox" id="cb-3033" value="3033" name="testMethod" autocomplete="off" title="Check to highlight coverage of this test in the source code"/></td>
+<td style="vertical-align: middle"  class="link" onclick="window.location.href='../../../../../org/apache/commons/lang3/builder/ReflectionDiffBuilderTest_test_difference_in_inherited_field_2c9.html';">
+<span class="sortValue">0.75</span>
+<div>
+<div title="75% Covered" style="min-width:40px;" class="barNegative contribBarNegative contribBarNegative"><div class="barPositive contribBarPositive contribBarPositive" style="width:75%"></div></div></div></td>
+<td id="tc-3033">  <span class="sortValue">org.apache.commons.lang3.builder.ReflectionDiffBuilderTest.test_difference_in_inherited_field</span><a href="../../../../../org/apache/commons/lang3/builder/ReflectionDiffBuilderTest_test_difference_in_inherited_field_2c9.html" title="View Test Summary Page">org.apache.commons.lang3.builder.ReflectionDiffBuilderTest.test_difference_in_inherited_field</a>
+</td>
+<td>      <span class="sortValue">1</span><span class="aui-lozenge aui-lozenge-success">PASS</span>
+  </td>
+<td> <a href="../../../../../org/apache/commons/lang3/builder/ReflectionDiffBuilderTest.html?line=122#src-122" title="View Test Source">
+ <span class="aui-icon aui-icon-small aui-iconfont-file-txt aui-icon-medium-gray"></span>
+</a>
+<a href="../../../../../org/apache/commons/lang3/builder/ReflectionDiffBuilderTest_test_difference_in_inherited_field_2c9.html" title="View Test Summary Page"><span class="aui-icon aui-icon-small aui-iconfont-file-ppt aui-icon-medium-gray"></span></a>
+</td>
+</tr>
+<tr id="test-608">
+<td><a name="testA-608"></a><input type="checkbox" id="cb-608" value="608" name="testMethod" autocomplete="off" title="Check to highlight coverage of this test in the source code"/></td>
+<td style="vertical-align: middle"  class="link" onclick="window.location.href='../../../../../org/apache/commons/lang3/builder/DiffBuilderTest_testDouble_gw.html';">
+<span class="sortValue">0.75</span>
+<div>
+<div title="75% Covered" style="min-width:40px;" class="barNegative contribBarNegative contribBarNegative"><div class="barPositive contribBarPositive contribBarPositive" style="width:75%"></div></div></div></td>
+<td id="tc-608">  <span class="sortValue">org.apache.commons.lang3.builder.DiffBuilderTest.testDouble</span><a href="../../../../../org/apache/commons/lang3/builder/DiffBuilderTest_testDouble_gw.html" title="View Test Summary Page">org.apache.commons.lang3.builder.DiffBuilderTest.testDouble</a>
+</td>
+<td>      <span class="sortValue">1</span><span class="aui-lozenge aui-lozenge-success">PASS</span>
+  </td>
+<td> <a href="../../../../../org/apache/commons/lang3/builder/DiffBuilderTest.html?line=177#src-177" title="View Test Source">
+ <span class="aui-icon aui-icon-small aui-iconfont-file-txt aui-icon-medium-gray"></span>
+</a>
+<a href="../../../../../org/apache/commons/lang3/builder/DiffBuilderTest_testDouble_gw.html" title="View Test Summary Page"><span class="aui-icon aui-icon-small aui-iconfont-file-ppt aui-icon-medium-gray"></span></a>
+</td>
+</tr>
+<tr id="test-1211">
+<td><a name="testA-1211"></a><input type="checkbox" id="cb-1211" value="1211" name="testMethod" autocomplete="off" title="Check to highlight coverage of this test in the source code"/></td>
+<td style="vertical-align: middle"  class="link" onclick="window.location.href='../../../../../org/apache/commons/lang3/builder/CompareToBuilderTest_testReflectionHierarchyCompareTransients_xn.html';">
+<span class="sortValue">0.75</span>
+<div>
+<div title="75% Covered" style="min-width:40px;" class="barNegative contribBarNegative contribBarNegative"><div class="barPositive contribBarPositive contribBarPositive" style="width:75%"></div></div></div></td>
+<td id="tc-1211">  <span class="sortValue">org.apache.commons.lang3.builder.CompareToBuilderTest.testReflectionHierarchyCompareTransients</span><a href="../../../../../org/apache/commons/lang3/builder/CompareToBuilderTest_testReflectionHierarchyCompareTransients_xn.html" title="View Test Summary Page">org.apache.commons.lang3.builder.CompareToBuilderTest.testReflectionHierarchyCompareTransients</a>
+</td>
+<td>      <span class="sortValue">1</span><span class="aui-lozenge aui-lozenge-success">PASS</span>
+  </td>
+<td> <a href="../../../../../org/apache/commons/lang3/builder/CompareToBuilderTest.html?line=148#src-148" title="View Test Source">
+ <span class="aui-icon aui-icon-small aui-iconfont-file-txt aui-icon-medium-gray"></span>
+</a>
+<a href="../../../../../org/apache/commons/lang3/builder/CompareToBuilderTest_testReflectionHierarchyCompareTransients_xn.html" title="View Test Summary Page"><span class="aui-icon aui-icon-small aui-iconfont-file-ppt aui-icon-medium-gray"></span></a>
+</td>
+</tr>
+<tr id="test-286">
+<td><a name="testA-286"></a><input type="checkbox" id="cb-286" value="286" name="testMethod" autocomplete="off" title="Check to highlight coverage of this test in the source code"/></td>
+<td style="vertical-align: middle"  class="link" onclick="window.location.href='../../../../../org/apache/commons/lang3/builder/HashCodeBuilderTest_testReflectionHashCodeExcludeFields_7y.html';">
+<span class="sortValue">0.75</span>
+<div>
+<div title="75% Covered" style="min-width:40px;" class="barNegative contribBarNegative contribBarNegative"><div class="barPositive contribBarPositive contribBarPositive" style="width:75%"></div></div></div></td>
+<td id="tc-286">  <span class="sortValue">org.apache.commons.lang3.builder.HashCodeBuilderTest.testReflectionHashCodeExcludeFields</span><a href="../../../../../org/apache/commons/lang3/builder/HashCodeBuilderTest_testReflectionHashCodeExcludeFields_7y.html" title="View Test Summary Page">org.apache.commons.lang3.builder.HashCodeBuilderTest.testReflectionHashCodeExcludeFields</a>
+</td>
+<td>      <span class="sortValue">1</span><span class="aui-lozenge aui-lozenge-success">PASS</span>
+  </td>
+<td> <a href="../../../../../org/apache/commons/lang3/builder/HashCodeBuilderTest.html?line=487#src-487" title="View Test Source">
+ <span class="aui-icon aui-icon-small aui-iconfont-file-txt aui-icon-medium-gray"></span>
+</a>
+<a href="../../../../../org/apache/commons/lang3/builder/HashCodeBuilderTest_testReflectionHashCodeExcludeFields_7y.html" title="View Test Summary Page"><span class="aui-icon aui-icon-small aui-iconfont-file-ppt aui-icon-medium-gray"></span></a>
+</td>
+</tr>
+<tr id="test-3017">
+<td><a name="testA-3017"></a><input type="checkbox" id="cb-3017" value="3017" name="testMethod" autocomplete="off" title="Check to highlight coverage of this test in the source code"/></td>
+<td style="vertical-align: middle"  class="link" onclick="window.location.href='../../../../../org/apache/commons/lang3/builder/EqualsBuilderTest_testCyclicalObjectReferences_2bt.html';">
+<span class="sortValue">0.75</span>
+<div>
+<div title="75% Covered" style="min-width:40px;" class="barNegative contribBarNegative contribBarNegative"><div class="barPositive contribBarPositive contribBarPositive" style="width:75%"></div></div></div></td>
+<td id="tc-3017">  <span class="sortValue">org.apache.commons.lang3.builder.EqualsBuilderTest.testCyclicalObjectReferences</span><a href="../../../../../org/apache/commons/lang3/builder/EqualsBuilderTest_testCyclicalObjectReferences_2bt.html" title="View Test Summary Page">org.apache.commons.lang3.builder.EqualsBuilderTest.testCyclicalObjectReferences</a>
+</td>
+<td>      <span class="sortValue">1</span><span class="aui-lozenge aui-lozenge-success">PASS</span>
+  </td>
+<td> <a href="../../../../../org/apache/commons/lang3/builder/EqualsBuilderTest.html?line=1201#src-1201" title="View Test Source">
+ <span class="aui-icon aui-icon-small aui-iconfont-file-txt aui-icon-medium-gray"></span>
+</a>
+<a href="../../../../../org/apache/commons/lang3/builder/EqualsBuilderTest_testCyclicalObjectReferences_2bt.html" title="View Test Summary Page"><span class="aui-icon aui-icon-small aui-iconfont-file-ppt aui-icon-medium-gray"></span></a>
+</td>
+</tr>
+<tr id="test-2360">
+<td><a name="testA-2360"></a><input type="checkbox" id="cb-2360" value="2360" name="testMethod" autocomplete="off" title="Check to highlight coverage of this test in the source code"/></td>
+<td style="vertical-align: middle"  class="link" onclick="window.location.href='../../../../../org/apache/commons/lang3/builder/EqualsBuilderTest_testReflectionHierarchyEquals_1tk.html';">
+<span class="sortValue">0.75</span>
+<div>
+<div title="75% Covered" style="min-width:40px;" class="barNegative contribBarNegative contribBarNegative"><div class="barPositive contribBarPositive contribBarPositive" style="width:75%"></div></div></div></td>
+<td id="tc-2360">  <span class="sortValue">org.apache.commons.lang3.builder.EqualsBuilderTest.testReflectionHierarchyEquals</span><a href="../../../../../org/apache/commons/lang3/builder/EqualsBuilderTest_testReflectionHierarchyEquals_1tk.html" title="View Test Summary Page">org.apache.commons.lang3.builder.EqualsBuilderTest.testReflectionHierarchyEquals</a>
+</td>
+<td>      <span class="sortValue">1</span><span class="aui-lozenge aui-lozenge-success">PASS</span>
+  </td>
+<td> <a href="../../../../../org/apache/commons/lang3/builder/EqualsBuilderTest.html?line=227#src-227" title="View Test Source">
+ <span class="aui-icon aui-icon-small aui-iconfont-file-txt aui-icon-medium-gray"></span>
+</a>
+<a href="../../../../../org/apache/commons/lang3/builder/EqualsBuilderTest_testReflectionHierarchyEquals_1tk.html" title="View Test Summary Page"><span class="aui-icon aui-icon-small aui-iconfont-file-ppt aui-icon-medium-gray"></span></a>
+</td>
+</tr>
+<tr id="test-150">
+<td><a name="testA-150"></a><input type="checkbox" id="cb-150" value="150" name="testMethod" autocomplete="off" title="Check to highlight coverage of this test in the source code"/></td>
+<td style="vertical-align: middle"  class="link" onclick="window.location.href='../../../../../org/apache/commons/lang3/builder/DiffBuilderTest_testShortArray_46.html';">
+<span class="sortValue">0.75</span>
+<div>
+<div title="75% Covered" style="min-width:40px;" class="barNegative contribBarNegative contribBarNegative"><div class="barPositive contribBarPositive contribBarPositive" style="width:75%"></div></div></div></td>
+<td id="tc-150">  <span class="sortValue">org.apache.commons.lang3.builder.DiffBuilderTest.testShortArray</span><a href="../../../../../org/apache/commons/lang3/builder/DiffBuilderTest_testShortArray_46.html" title="View Test Summary Page">org.apache.commons.lang3.builder.DiffBuilderTest.testShortArray</a>
+</td>
+<td>      <span class="sortValue">1</span><span class="aui-lozenge aui-lozenge-success">PASS</span>
+  </td>
+<td> <a href="../../../../../org/apache/commons/lang3/builder/DiffBuilderTest.html?line=299#src-299" title="View Test Source">
+ <span class="aui-icon aui-icon-small aui-iconfont-file-txt aui-icon-medium-gray"></span>
+</a>
+<a href="../../../../../org/apache/commons/lang3/builder/DiffBuilderTest_testShortArray_46.html" title="View Test Summary Page"><span class="aui-icon aui-icon-small aui-iconfont-file-ppt aui-icon-medium-gray"></span></a>
+</td>
+</tr>
+<tr id="test-349">
+<td><a name="testA-349"></a><input type="checkbox" id="cb-349" value="349" name="testMethod" autocomplete="off" title="Check to highlight coverage of this test in the source code"/></td>
+<td style="vertical-align: middle"  class="link" onclick="window.location.href='../../../../../org/apache/commons/lang3/builder/EqualsBuilderTest_testReflectionEquals_9p.html';">
+<span class="sortValue">0.75</span>
+<div>
+<div title="75% Covered" style="min-width:40px;" class="barNegative contribBarNegative contribBarNegative"><div class="barPositive contribBarPositive contribBarPositive" style="width:75%"></div></div></div></td>
+<td id="tc-349">  <span class="sortValue">org.apache.commons.lang3.builder.EqualsBuilderTest.testReflectionEquals</span><a href="../../../../../org/apache/commons/lang3/builder/EqualsBuilderTest_testReflectionEquals_9p.html" title="View Test Summary Page">org.apache.commons.lang3.builder.EqualsBuilderTest.testReflectionEquals</a>
+</td>
+<td>      <span class="sortValue">1</span><span class="aui-lozenge aui-lozenge-success">PASS</span>
+  </td>
+<td> <a href="../../../../../org/apache/commons/lang3/builder/EqualsBuilderTest.html?line=211#src-211" title="View Test Source">
+ <span class="aui-icon aui-icon-small aui-iconfont-file-txt aui-icon-medium-gray"></span>
+</a>
+<a href="../../../../../org/apache/commons/lang3/builder/EqualsBuilderTest_testReflectionEquals_9p.html" title="View Test Summary Page"><span class="aui-icon aui-icon-small aui-iconfont-file-ppt aui-icon-medium-gray"></span></a>
+</td>
+</tr>
+<tr id="test-2584">
+<td><a name="testA-2584"></a><input type="checkbox" id="cb-2584" value="2584" name="testMethod" autocomplete="off" title="Check to highlight coverage of this test in the source code"/></td>
+<td style="vertical-align: middle"  class="link" onclick="window.location.href='../../../../../org/apache/commons/lang3/builder/DiffBuilderTest_testInt_1zs.html';">
+<span class="sortValue">0.75</span>
+<div>
+<div title="75% Covered" style="min-width:40px;" class="barNegative contribBarNegative contribBarNegative"><div class="barPositive contribBarPositive contribBarPositive" style="width:75%"></div></div></div></td>
+<td id="tc-2584">  <span class="sortValue">org.apache.commons.lang3.builder.DiffBuilderTest.testInt</span><a href="../../../../../org/apache/commons/lang3/builder/DiffBuilderTest_testInt_1zs.html" title="View Test Summary Page">org.apache.commons.lang3.builder.DiffBuilderTest.testInt</a>
+</td>
+<td>      <span class="sortValue">1</span><span class="aui-lozenge aui-lozenge-success">PASS</span>
+  </td>
+<td> <a href="../../../../../org/apache/commons/lang3/builder/DiffBuilderTest.html?line=232#src-232" title="View Test Source">
+ <span class="aui-icon aui-icon-small aui-iconfont-file-txt aui-icon-medium-gray"></span>
+</a>
+<a href="../../../../../org/apache/commons/lang3/builder/DiffBuilderTest_testInt_1zs.html" title="View Test Summary Page"><span class="aui-icon aui-icon-small aui-iconfont-file-ppt aui-icon-medium-gray"></span></a>
+</td>
+</tr>
+<tr id="test-242">
+<td><a name="testA-242"></a><input type="checkbox" id="cb-242" value="242" name="testMethod" autocomplete="off" title="Check to highlight coverage of this test in the source code"/></td>
+<td style="vertical-align: middle"  class="link" onclick="window.location.href='../../../../../org/apache/commons/lang3/builder/DiffBuilderTest_testBoolean_6q.html';">
+<span class="sortValue">0.75</span>
+<div>
+<div title="75% Covered" style="min-width:40px;" class="barNegative contribBarNegative contribBarNegative"><div class="barPositive contribBarPositive contribBarPositive" style="width:75%"></div></div></div></td>
+<td id="tc-242">  <span class="sortValue">org.apache.commons.lang3.builder.DiffBuilderTest.testBoolean</span><a href="../../../../../org/apache/commons/lang3/builder/DiffBuilderTest_testBoolean_6q.html" title="View Test Summary Page">org.apache.commons.lang3.builder.DiffBuilderTest.testBoolean</a>
+</td>
+<td>      <span class="sortValue">1</span><span class="aui-lozenge aui-lozenge-success">PASS</span>
+  </td>
+<td> <a href="../../../../../org/apache/commons/lang3/builder/DiffBuilderTest.html?line=95#src-95" title="View Test Source">
+ <span class="aui-icon aui-icon-small aui-iconfont-file-txt aui-icon-medium-gray"></span>
+</a>
+<a href="../../../../../org/apache/commons/lang3/builder/DiffBuilderTest_testBoolean_6q.html" title="View Test Summary Page"><span class="aui-icon aui-icon-small aui-iconfont-file-ppt aui-icon-medium-gray"></span></a>
+</td>
+</tr>
+<tr id="test-2764">
+<td><a name="testA-2764"></a><input type="checkbox" id="cb-2764" value="2764" name="testMethod" autocomplete="off" title="Check to highlight coverage of this test in the source code"/></td>
+<td style="vertical-align: middle"  class="link" onclick="window.location.href='../../../../../org/apache/commons/lang3/builder/DiffBuilderTest_testFloatArray_24s.html';">
+<span class="sortValue">0.75</span>
+<div>
+<div title="75% Covered" style="min-width:40px;" class="barNegative contribBarNegative contribBarNegative"><div class="barPositive contribBarPositive contribBarPositive" style="width:75%"></div></div></div></td>
+<td id="tc-2764">  <span class="sortValue">org.apache.commons.lang3.builder.DiffBuilderTest.testFloatArray</span><a href="../../../../../org/apache/commons/lang3/builder/DiffBuilderTest_testFloatArray_24s.html" title="View Test Summary Page">org.apache.commons.lang3.builder.DiffBuilderTest.testFloatArray</a>
+</td>
+<td>      <span class="sortValue">1</span><span class="aui-lozenge aui-lozenge-success">PASS</span>
+  </td>
+<td> <a href="../../../../../org/apache/commons/lang3/builder/DiffBuilderTest.html?line=217#src-217" title="View Test Source">
+ <span class="aui-icon aui-icon-small aui-iconfont-file-txt aui-icon-medium-gray"></span>
+</a>
+<a href="../../../../../org/apache/commons/lang3/builder/DiffBuilderTest_testFloatArray_24s.html" title="View Test Summary Page"><span class="aui-icon aui-icon-small aui-iconfont-file-ppt aui-icon-medium-gray"></span></a>
+</td>
+</tr>
+<tr id="test-2058">
+<td><a name="testA-2058"></a><input type="checkbox" id="cb-2058" value="2058" name="testMethod" autocomplete="off" title="Check to highlight coverage of this test in the source code"/></td>
+<td style="vertical-align: middle"  class="link" onclick="window.location.href='../../../../../org/apache/commons/lang3/builder/ReflectionDiffBuilderTest_test_no_differences_inheritance_1l6.html';">
+<span class="sortValue">0.75</span>
+<div>
+<div title="75% Covered" style="min-width:40px;" class="barNegative contribBarNegative contribBarNegative"><div class="barPositive contribBarPositive contribBarPositive" style="width:75%"></div></div></div></td>
+<td id="tc-2058">  <span class="sortValue">org.apache.commons.lang3.builder.ReflectionDiffBuilderTest.test_no_differences_inheritance</span><a href="../../../../../org/apache/commons/lang3/builder/ReflectionDiffBuilderTest_test_no_differences_inheritance_1l6.html" title="View Test Summary Page">org.apache.commons.lang3.builder.ReflectionDiffBuilderTest.test_no_differences_inheritance</a>
+</td>
+<td>      <span class="sortValue">1</span><span class="aui-lozenge aui-lozenge-success">PASS</span>
+  </td>
+<td> <a href="../../../../../org/apache/commons/lang3/builder/ReflectionDiffBuilderTest.html?line=113#src-113" title="View Test Source">
+ <span class="aui-icon aui-icon-small aui-iconfont-file-txt aui-icon-medium-gray"></span>
+</a>
+<a href="../../../../../org/apache/commons/lang3/builder/ReflectionDiffBuilderTest_test_no_differences_inheritance_1l6.html" title="View Test Summary Page"><span class="aui-icon aui-icon-small aui-iconfont-file-ppt aui-icon-medium-gray"></span></a>
+</td>
+</tr>
+<tr id="test-2671">
+<td><a name="testA-2671"></a><input type="checkbox" id="cb-2671" value="2671" name="testMethod" autocomplete="off" title="Check to highlight coverage of this test in the source code"/></td>
+<td style="vertical-align: middle"  class="link" onclick="window.location.href='../../../../../org/apache/commons/lang3/builder/DiffBuilderTest_testByte_227.html';">
+<span class="sortValue">0.75</span>
+<div>
+<div title="75% Covered" style="min-width:40px;" class="barNegative contribBarNegative contribBarNegative"><div class="barPositive contribBarPositive contribBarPositive" style="width:75%"></div></div></div></td>
+<td id="tc-2671">  <span class="sortValue">org.apache.commons.lang3.builder.DiffBuilderTest.testByte</span><a href="../../../../../org/apache/commons/lang3/builder/DiffBuilderTest_testByte_227.html" title="View Test Summary Page">org.apache.commons.lang3.builder.DiffBuilderTest.testByte</a>
+</td>
+<td>      <span class="sortValue">1</span><span class="aui-lozenge aui-lozenge-success">PASS</span>
+  </td>
+<td> <a href="../../../../../org/apache/commons/lang3/builder/DiffBuilderTest.html?line=123#src-123" title="View Test Source">
+ <span class="aui-icon aui-icon-small aui-iconfont-file-txt aui-icon-medium-gray"></span>
+</a>
+<a href="../../../../../org/apache/commons/lang3/builder/DiffBuilderTest_testByte_227.html" title="View Test Summary Page"><span class="aui-icon aui-icon-small aui-iconfont-file-ppt aui-icon-medium-gray"></span></a>
+</td>
+</tr>
+<tr id="test-1774">
+<td><a name="testA-1774"></a><input type="checkbox" id="cb-1774" value="1774" name="testMethod" autocomplete="off" title="Check to highlight coverage of this test in the source code"/></td>
+<td style="vertical-align: middle"  class="link" onclick="window.location.href='../../../../../org/apache/commons/lang3/builder/HashCodeBuilderAndEqualsBuilderTest_testIntegerWithTransients_1da.html';">
+<span class="sortValue">0.75</span>
+<div>
+<div title="75% Covered" style="min-width:40px;" class="barNegative contribBarNegative contribBarNegative"><div class="barPositive contribBarPositive contribBarPositive" style="width:75%"></div></div></div></td>
+<td id="tc-1774">  <span class="sortValue">org.apache.commons.lang3.builder.HashCodeBuilderAndEqualsBuilderTest.testIntegerWithTransients</span><a href="../../../../../org/apache/commons/lang3/builder/HashCodeBuilderAndEqualsBuilderTest_testIntegerWithTransients_1da.html" title="View Test Summary Page">org.apache.commons.lang3.builder.HashCodeBuilderAndEqualsBuilderTest.testIntegerWithTransients</a>
+</td>
+<td>      <span class="sortValue">1</span><span class="aui-lozenge aui-lozenge-success">PASS</span>
+  </td>
+<td> <a href="../../../../../org/apache/commons/lang3/builder/HashCodeBuilderAndEqualsBuilderTest.html?line=43#src-43" title="View Test Source">
+ <span class="aui-icon aui-icon-small aui-iconfont-file-txt aui-icon-medium-gray"></span>
+</a>
+<a href="../../../../../org/apache/commons/lang3/builder/HashCodeBuilderAndEqualsBuilderTest_testIntegerWithTransients_1da.html" title="View Test Summary Page"><span class="aui-icon aui-icon-small aui-iconfont-file-ppt aui-icon-medium-gray"></span></a>
+</td>
+</tr>
+<tr id="test-1133">
+<td><a name="testA-1133"></a><input type="checkbox" id="cb-1133" value="1133" name="testMethod" autocomplete="off" title="Check to highlight coverage of this test in the source code"/></td>
+<td style="vertical-align: middle"  class="link" onclick="window.location.href='../../../../../org/apache/commons/lang3/builder/ReflectionDiffBuilderTest_test_primitive_difference_vh.html';">
+<span class="sortValue">0.75</span>
+<div>
+<div title="75% Covered" style="min-width:40px;" class="barNegative contribBarNegative contribBarNegative"><div class="barPositive contribBarPositive contribBarPositive" style="width:75%"></div></div></div></td>
+<td id="tc-1133">  <span class="sortValue">org.apache.commons.lang3.builder.ReflectionDiffBuilderTest.test_primitive_difference</span><a href="../../../../../org/apache/commons/lang3/builder/ReflectionDiffBuilderTest_test_primitive_difference_vh.html" title="View Test Summary Page">org.apache.commons.lang3.builder.ReflectionDiffBuilderTest.test_primitive_difference</a>
+</td>
+<td>      <span class="sortValue">1</span><span class="aui-lozenge aui-lozenge-success">PASS</span>
+  </td>
+<td> <a href="../../../../../org/apache/commons/lang3/builder/ReflectionDiffBuilderTest.html?line=82#src-82" title="View Test Source">
+ <span class="aui-icon aui-icon-small aui-iconfont-file-txt aui-icon-medium-gray"></span>
+</a>
+<a href="../../../../../org/apache/commons/lang3/builder/ReflectionDiffBuilderTest_test_primitive_difference_vh.html" title="View Test Summary Page"><span class="aui-icon aui-icon-small aui-iconfont-file-ppt aui-icon-medium-gray"></span></a>
+</td>
+</tr>
+<tr id="test-3248">
+<td><a name="testA-3248"></a><input type="checkbox" id="cb-3248" value="3248" name="testMethod" autocomplete="off" title="Check to highlight coverage of this test in the source code"/></td>
+<td style="vertical-align: middle"  class="link" onclick="window.location.href='../../../../../org/apache/commons/lang3/builder/HashCodeBuilderTest_testToHashCodeExclude_2i8.html';">
+<span class="sortValue">0.75</span>
+<div>
+<div title="75% Covered" style="min-width:40px;" class="barNegative contribBarNegative contribBarNegative"><div class="barPositive contribBarPositive contribBarPositive" style="width:75%"></div></div></div></td>
+<td id="tc-3248">  <span class="sortValue">org.apache.commons.lang3.builder.HashCodeBuilderTest.testToHashCodeExclude</span><a href="../../../../../org/apache/commons/lang3/builder/HashCodeBuilderTest_testToHashCodeExclude_2i8.html" title="View Test Summary Page">org.apache.commons.lang3.builder.HashCodeBuilderTest.testToHashCodeExclude</a>
+</td>
+<td>      <span class="sortValue">1</span><span class="aui-lozenge aui-lozenge-success">PASS</span>
+  </td>
+<td> <a href="../../../../../org/apache/commons/lang3/builder/HashCodeBuilderTest.html?line=605#src-605" title="View Test Source">
+ <span class="aui-icon aui-icon-small aui-iconfont-file-txt aui-icon-medium-gray"></span>
+</a>
+<a href="../../../../../org/apache/commons/lang3/builder/HashCodeBuilderTest_testToHashCodeExclude_2i8.html" title="View Test Summary Page"><span class="aui-icon aui-icon-small aui-iconfont-file-ppt aui-icon-medium-gray"></span></a>
+</td>
+</tr>
+<tr id="test-3343">
+<td><a name="testA-3343"></a><input type="checkbox" id="cb-3343" value="3343" name="testMethod" autocomplete="off" title="Check to highlight coverage of this test in the source code"/></td>
+<td style="vertical-align: middle"  class="link" onclick="window.location.href='../../../../../org/apache/commons/lang3/builder/DiffBuilderTest_testSimilarObjectIgnoresAppends_2kv.html';">
+<span class="sortValue">0.75</span>
+<div>
+<div title="75% Covered" style="min-width:40px;" class="barNegative contribBarNegative contribBarNegative"><div class="barPositive contribBarPositive contribBarPositive" style="width:75%"></div></div></div></td>
+<td id="tc-3343">  <span class="sortValue">org.apache.commons.lang3.builder.DiffBuilderTest.testSimilarObjectIgnoresAppends</span><a href="../../../../../org/apache/commons/lang3/builder/DiffBuilderTest_testSimilarObjectIgnoresAppends_2kv.html" title="View Test Summary Page">org.apache.commons.lang3.builder.DiffBuilderTest.testSimilarObjectIgnoresAppends</a>
+</td>
+<td>      <span class="sortValue">1</span><span class="aui-lozenge aui-lozenge-success">PASS</span>
+  </td>
+<td> <a href="../../../../../org/apache/commons/lang3/builder/DiffBuilderTest.html?line=447#src-447" title="View Test Source">
+ <span class="aui-icon aui-icon-small aui-iconfont-file-txt aui-icon-medium-gray"></span>
+</a>
+<a href="../../../../../org/apache/commons/lang3/builder/DiffBuilderTest_testSimilarObjectIgnoresAppends_2kv.html" title="View Test Summary Page"><span class="aui-icon aui-icon-small aui-iconfont-file-ppt aui-icon-medium-gray"></span></a>
+</td>
+</tr>
+<tr id="test-123">
+<td><a name="testA-123"></a><input type="checkbox" id="cb-123" value="123" name="testMethod" autocomplete="off" title="Check to highlight coverage of this test in the source code"/></td>
+<td style="vertical-align: middle"  class="link" onclick="window.location.href='../../../../../org/apache/commons/lang3/builder/DiffBuilderTest_testChar_3f.html';">
+<span class="sortValue">0.75</span>
+<div>
+<div title="75% Covered" style="min-width:40px;" class="barNegative contribBarNegative contribBarNegative"><div class="barPositive contribBarPositive contribBarPositive" style="width:75%"></div></div></div></td>
+<td id="tc-123">  <span class="sortValue">org.apache.commons.lang3.builder.DiffBuilderTest.testChar</span><a href="../../../../../org/apache/commons/lang3/builder/DiffBuilderTest_testChar_3f.html" title="View Test Summary Page">org.apache.commons.lang3.builder.DiffBuilderTest.testChar</a>
+</td>
+<td>      <span class="sortValue">1</span><span class="aui-lozenge aui-lozenge-success">PASS</span>
+  </td>
+<td> <a href="../../../../../org/apache/commons/lang3/builder/DiffBuilderTest.html?line=149#src-149" title="View Test Source">
+ <span class="aui-icon aui-icon-small aui-iconfont-file-txt aui-icon-medium-gray"></span>
+</a>
+<a href="../../../../../org/apache/commons/lang3/builder/DiffBuilderTest_testChar_3f.html" title="View Test Summary Page"><span class="aui-icon aui-icon-small aui-iconfont-file-ppt aui-icon-medium-gray"></span></a>
+</td>
+</tr>
+<tr id="test-1568">
+<td><a name="testA-1568"></a><input type="checkbox" id="cb-1568" value="1568" name="testMethod" autocomplete="off" title="Check to highlight coverage of this test in the source code"/></td>
+<td style="vertical-align: middle"  class="link" onclick="window.location.href='../../../../../org/apache/commons/lang3/builder/DiffBuilderTest_testObjectsNotSameButEqual_17k.html';">
+<span class="sortValue">0.75</span>
+<div>
+<div title="75% Covered" style="min-width:40px;" class="barNegative contribBarNegative contribBarNegative"><div class="barPositive contribBarPositive contribBarPositive" style="width:75%"></div></div></div></td>
+<td id="tc-1568">  <span class="sortValue">org.apache.commons.lang3.builder.DiffBuilderTest.testObjectsNotSameButEqual</span><a href="../../../../../org/apache/commons/lang3/builder/DiffBuilderTest_testObjectsNotSameButEqual_17k.html" title="View Test Summary Page">org.apache.commons.lang3.builder.DiffBuilderTest.testObjectsNotSameButEqual</a>
+</td>
+<td>      <span class="sortValue">1</span><span class="aui-lozenge aui-lozenge-success">PASS</span>
+  </td>
+<td> <a href="../../../../../org/apache/commons/lang3/builder/DiffBuilderTest.html?line=345#src-345" title="View Test Source">
+ <span class="aui-icon aui-icon-small aui-iconfont-file-txt aui-icon-medium-gray"></span>
+</a>
+<a href="../../../../../org/apache/commons/lang3/builder/DiffBuilderTest_testObjectsNotSameButEqual_17k.html" title="View Test Summary Page"><span class="aui-icon aui-icon-small aui-iconfont-file-ppt aui-icon-medium-gray"></span></a>
+</td>
+</tr>
+
+            </tbody>
+        </table>
+
+        
+        <div>&#160;</div>
+
+    
+    </div>
+
+    
+    <footer class="aui-dialog2-footer">
+        <div class="aui-dialog2-footer-actions">
+            <button data-dialog-id="contr-tests-dialog" class="aui-button aui-button-primary dialog-close-button">Apply</button>
+        </div>
+        <div class="aui-dialog2-footer-hint">Select tests to highlight code covered by them in the source view.</div>
+    </footer>
+</section>
+
+ 
+        
+        
+
+
+
+
+
+<h2>Source view</h2>
+
+
+<div style="display: table; width: 100%;">
+    <div style="display: table-cell">
+        <button class="aui-button aui-button-link"
+                title="Toggles all methods in the source to be either expanded or collapsed."
+                onclick="toggleAllInlineMethods(this); return false;" id="method-expander">
+            Collapse all methods
+        </button>
+    </div>
+    <div style="display: table-cell">
+        <div style="text-align: right; margin-bottom: 10px">
+            <button class="aui-button aui-button-subtle" id="popupHelp">
+    <span class="aui-icon aui-icon-small aui-iconfont-help"></span>&#160;Show legend
+</button>
+<script>
+    AJS.InlineDialog(AJS.$("#popupHelp"), "helpDialog",
+            function(content, trigger, showPopup) {
+                content.css({"padding":"20px"}).html(SRC_FILE_LEGEND_TEXT);
+                showPopup();
+                return false;
+            },
+            {
+                width: 700, hideDelay: 60000
+            }
+    );
+</script>        </div>
+    </div>
+</div>
+
+<table cellspacing="0" cellpadding="0" class="srcView" width="100%">
+
+    
+<tbody> <tr id="l1">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=1#src-1">1</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-1" class="srcLine"><span class="comment">/*</span></span></td>
+</tr>
+ <tr id="l2">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=2#src-2">2</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-2" class="srcLine"><span class="comment"> * Licensed to the Apache Software Foundation (ASF) under one or more</span></span></td>
+</tr>
+ <tr id="l3">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=3#src-3">3</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-3" class="srcLine"><span class="comment"> * contributor license agreements.  See the NOTICE file distributed with</span></span></td>
+</tr>
+ <tr id="l4">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=4#src-4">4</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-4" class="srcLine"><span class="comment"> * this work for additional information regarding copyright ownership.</span></span></td>
+</tr>
+ <tr id="l5">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=5#src-5">5</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-5" class="srcLine"><span class="comment"> * The ASF licenses this file to You under the Apache License, Version 2.0</span></span></td>
+</tr>
+ <tr id="l6">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=6#src-6">6</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-6" class="srcLine"><span class="comment"> * (the &quot;License&quot;); you may not use this file except in compliance with</span></span></td>
+</tr>
+ <tr id="l7">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=7#src-7">7</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-7" class="srcLine"><span class="comment"> * the License.  You may obtain a copy of the License at</span></span></td>
+</tr>
+ <tr id="l8">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=8#src-8">8</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-8" class="srcLine"><span class="comment"> *</span></span></td>
+</tr>
+ <tr id="l9">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=9#src-9">9</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-9" class="srcLine"><span class="comment"> *   http://www.apache.org/licenses/LICENSE-2.0</span></span></td>
+</tr>
+ <tr id="l10">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=10#src-10">10</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-10" class="srcLine"><span class="comment"> *</span></span></td>
+</tr>
+ <tr id="l11">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=11#src-11">11</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-11" class="srcLine"><span class="comment"> * Unless required by applicable law or agreed to in writing, software</span></span></td>
+</tr>
+ <tr id="l12">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=12#src-12">12</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-12" class="srcLine"><span class="comment"> * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span></span></td>
+</tr>
+ <tr id="l13">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=13#src-13">13</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-13" class="srcLine"><span class="comment"> * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span></span></td>
+</tr>
+ <tr id="l14">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=14#src-14">14</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-14" class="srcLine"><span class="comment"> * See the License for the specific language governing permissions and</span></span></td>
+</tr>
+ <tr id="l15">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=15#src-15">15</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-15" class="srcLine"><span class="comment"> * limitations under the License.</span></span></td>
+</tr>
+ <tr id="l16">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=16#src-16">16</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-16" class="srcLine"><span class="comment"> */</span></span></td>
+</tr>
+ <tr id="l17">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=17#src-17">17</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-17" class="srcLine"></span></td>
+</tr>
+ <tr id="l18">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=18#src-18">18</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-18" class="srcLine"><span class="keyword">package</span> org.apache.commons.<a href="../../lang3/pkg-summary.html">lang3</a>.<a href="../builder/pkg-summary.html">builder</a>;</span></td>
+</tr>
+ <tr id="l19">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=19#src-19">19</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-19" class="srcLine"></span></td>
+</tr>
+ <tr id="l20">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=20#src-20">20</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-20" class="srcLine"><span class="comment">// adapted from org.apache.axis.utils.IDKey</span></span></td>
+</tr>
+ <tr id="l21">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=21#src-21">21</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-21" class="srcLine"></span></td>
+</tr>
+ <tr id="l22">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=22#src-22">22</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-22" class="srcLine"><span class="comment">/**</span></span></td>
+</tr>
+ <tr id="l23">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=23#src-23">23</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-23" class="srcLine"><span class="comment"> * Wrap an identity key (System.identityHashCode()) </span></span></td>
+</tr>
+ <tr id="l24">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=24#src-24">24</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-24" class="srcLine"><span class="comment"> * so that an object can only be equal() to itself.</span></span></td>
+</tr>
+ <tr id="l25">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=25#src-25">25</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-25" class="srcLine"><span class="comment"> * </span></span></td>
+</tr>
+ <tr id="l26">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=26#src-26">26</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-26" class="srcLine"><span class="comment"> * This is necessary to disambiguate the occasional duplicate</span></span></td>
+</tr>
+ <tr id="l27">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=27#src-27">27</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-27" class="srcLine"><span class="comment"> * identityHashCodes that can occur.</span></span></td>
+</tr>
+ <tr id="l28">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=28#src-28">28</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-28" class="srcLine"><span class="comment"> */</span> </span></td>
+</tr>
+<tr class="inlineStatsRow" align="right" valign="middle">
+<td class="coverageCount"><a name="29" class="nolink">&#160;</a></td>
+    <td class="coverageCount aui-icon aui-icon-small aui-iconfont-arrows-right" id='inlineStatsToggle-29' onclick="toggleInlineStats(this, 'inlinestats-29');"/>
+    <td align="center" valign="middle">
+        <table id="inlinestats-29" style="display:none;" class="inlineStats" width="100%" cellspacing="1px" cellpadding="1px">
+            <tr onclick="toggleInlineStats(document.getElementById('inlineStatsToggle-29'), 'inlinestats-29');return true;">
+                <td><div>
+<div title="75% Covered" style="min-width:40px;" class="barNegative contribBarNegative barNegative"><div class="barPositive contribBarPositive barPositive" style="width:75%"></div></div></div></td><td>75%</td>
+                <td class="inlineStat">Uncovered Elements: 4 (16)</td>
+                <td class="inlineStat">Complexity: 5</td>
+                <td class="inlineStat">Complexity Density: 0.56</td>
+                            </tr>
+        </table>
+    </td>
+</tr>
+<tr id="l29">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=29#src-29">29</a></td>
+<td align="right" class="coverageCount NoHilight "   onclick="return showTestsForLine(this, 29, 'Tests that hit IDKey');" >&#160;&#160;</td>
+<td class=" srcCell" id="id-29"><span class="spacer"></span><span id="src-29" class="srcLine"><span class="keyword">final</span> <span class="keyword">class</span> <a href="../../../../../org/apache/commons/lang3/builder/IDKey.html#IDKey">IDKey</a> {</span></td>
+</tr>
+ <tr id="l30">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=30#src-30">30</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-30" class="srcLine">        <span class="keyword">private</span> <span class="keyword">final</span> Object value;</span></td>
+</tr>
+ <tr id="l31">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=31#src-31">31</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-31" class="srcLine">        <span class="keyword">private</span> <span class="keyword">final</span> <span class="keyword">int</span> id;</span></td>
+</tr>
+ <tr id="l32">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=32#src-32">32</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-32" class="srcLine"></span></td>
+</tr>
+ <tr id="l33">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=33#src-33">33</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-33" class="srcLine">        <span class="comment">/**</span></span></td>
+</tr>
+ <tr id="l34">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=34#src-34">34</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-34" class="srcLine"><span class="comment">         * Constructor for IDKey</span></span></td>
+</tr>
+ <tr id="l35">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=35#src-35">35</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-35" class="srcLine"><span class="comment">         * </span><span class="javadoc">@param</span><span class="comment"> _value The value</span></span></td>
+</tr>
+ <tr id="l36">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=36#src-36">36</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-36" class="srcLine"><span class="comment">         */</span> </span></td>
+</tr>
+<tr class="inlineStatsRow" align="right" valign="middle">
+<td class="coverageCount"><a name="37" class="nolink">&#160;</a></td>
+    <td class="coverageCount aui-icon aui-icon-small aui-iconfont-arrows-right" id='inlineStatsToggle-37' onclick="toggleInlineStats(this, 'inlinestats-37');"/>
+    <td align="center" valign="middle">
+        <table id="inlinestats-37" style="display:none;" class="inlineStats" width="100%" cellspacing="1px" cellpadding="1px">
+            <tr onclick="toggleInlineStats(document.getElementById('inlineStatsToggle-37'), 'inlinestats-37');return true;">
+                <td><div>
+<div title="100% Covered" style="min-width:40px;" class="barNegative contribBarNegative barNegative"><div class="barPositive contribBarPositive barPositive" style="width:100%"></div></div></div></td><td>100%</td>
+                <td class="inlineStat">Uncovered Elements: 0 (2)</td>
+                <td class="inlineStat">Complexity: 1</td>
+                <td class="inlineStat">Complexity Density: 0.5</td>
+                            </tr>
+        </table>
+    </td>
+</tr>
+<tr id="l37">
+<td align="right" class="lineCount Good"><a class="lineNumHref" href="?line=37#src-37">37</a></td>
+<td align="right" class="coverageCount Good hitByTest"   onclick="return showTestsForLine(this, 37, 'Tests that hit IDKey(Object)');" ><span title="Line 37, Col 9: method entered 3,052 times." class="nolink">&#160;3052</span></td>
+<td class=" methodStart  srcCell" id="id-37"><img title="Method Statistics" onclick="toggleSrcRowVis(this, 37,44);" id="img-37" src="../../../../../img/collapse.gif"  alt="toggle" class="icon"/><span id="src-37" class="srcLine"><span class="nolink" title="Line 37, Col 9: method entered 3,052 times.">        <span class="keyword">public</span> <a href="../../../../../org/apache/commons/lang3/builder/IDKey.html#IDKey">IDKey</a>(<span class="keyword">final</span> Object _value) {</span><span class="foldControl" onclick="toggleSrcRowVis(document.getElementById('img-37'), 37,44);" id="e37" style="display:none;border:none;">...</span></span></td>
+</tr>
+ <tr id="l38">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=38#src-38">38</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-38" class="srcLine">            <span class="comment">// This is the Object hash code </span></span></td>
+</tr>
+ <tr id="l39">
+<td align="right" class="lineCount Good"><a class="lineNumHref" href="?line=39#src-39">39</a></td>
+<td align="right" class="coverageCount Good hitByTest"   onclick="return showTestsForLine(this, 39, 'Tests that hit line # 39');" ><span title="Line 39, Col 13: statement executed 3,052 times." class="nolink">&#160;3052</span></td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-39" class="srcLine"><span class="nolink" title="Line 39, Col 13: statement executed 3,052 times.">            id = System.identityHashCode(_value);  </span></span></td>
+</tr>
+ <tr id="l40">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=40#src-40">40</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-40" class="srcLine">            <span class="comment">// There have been some cases (LANG-459) that return the </span></span></td>
+</tr>
+ <tr id="l41">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=41#src-41">41</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-41" class="srcLine">            <span class="comment">// same identity hash code for different objects.  So </span></span></td>
+</tr>
+ <tr id="l42">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=42#src-42">42</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-42" class="srcLine">            <span class="comment">// the value is also added to disambiguate these cases.</span></span></td>
+</tr>
+ <tr id="l43">
+<td align="right" class="lineCount Good"><a class="lineNumHref" href="?line=43#src-43">43</a></td>
+<td align="right" class="coverageCount Good hitByTest"   onclick="return showTestsForLine(this, 43, 'Tests that hit line # 43');" ><span title="Line 43, Col 13: statement executed 3,052 times." class="nolink">&#160;3052</span></td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-43" class="srcLine"><span class="nolink" title="Line 43, Col 13: statement executed 3,052 times.">            value = _value;</span></span></td>
+</tr>
+ <tr id="l44">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=44#src-44">44</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-44" class="srcLine">        }</span></td>
+</tr>
+ <tr id="l45">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=45#src-45">45</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-45" class="srcLine"></span></td>
+</tr>
+ <tr id="l46">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=46#src-46">46</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-46" class="srcLine">        <span class="comment">/**</span></span></td>
+</tr>
+ <tr id="l47">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=47#src-47">47</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-47" class="srcLine"><span class="comment">         * returns hash code - i.e. the system identity hashcode.</span></span></td>
+</tr>
+ <tr id="l48">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=48#src-48">48</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-48" class="srcLine"><span class="comment">         * </span><span class="javadoc">@return</span><span class="comment"> the hashcode</span></span></td>
+</tr>
+ <tr id="l49">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=49#src-49">49</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-49" class="srcLine"><span class="comment">         */</span> </span></td>
+</tr>
+<tr class="inlineStatsRow" align="right" valign="middle">
+<td class="coverageCount"><a name="50" class="nolink">&#160;</a></td>
+    <td class="coverageCount aui-icon aui-icon-small aui-iconfont-arrows-right" id='inlineStatsToggle-50' onclick="toggleInlineStats(this, 'inlinestats-50');"/>
+    <td align="center" valign="middle">
+        <table id="inlinestats-50" style="display:none;" class="inlineStats" width="100%" cellspacing="1px" cellpadding="1px">
+            <tr onclick="toggleInlineStats(document.getElementById('inlineStatsToggle-50'), 'inlinestats-50');return true;">
+                <td><div>
+<div title="100% Covered" style="min-width:40px;" class="barNegative contribBarNegative barNegative"><div class="barPositive contribBarPositive barPositive" style="width:100%"></div></div></div></td><td>100%</td>
+                <td class="inlineStat">Uncovered Elements: 0 (1)</td>
+                <td class="inlineStat">Complexity: 1</td>
+                <td class="inlineStat">Complexity Density: 1</td>
+                            </tr>
+        </table>
+    </td>
+</tr>
+<tr id="l50">
+<td align="right" class="lineCount Good"><a class="lineNumHref" href="?line=50#src-50">50</a></td>
+<td align="right" class="coverageCount Good hitByTest"   onclick="return showTestsForLine(this, 50, 'Tests that hit hashCode()&#160;:&#160;int');" ><span title="Line 50, Col 9: method entered 2,296 times." class="nolink">&#160;2296</span></td>
+<td class=" methodStart  srcCell" id="id-50"><img title="Method Statistics" onclick="toggleSrcRowVis(this, 50,53);" id="img-50" src="../../../../../img/collapse.gif"  alt="toggle" class="icon"/><span id="src-50" class="srcLine"><span class="nolink" title="Line 50, Col 9: method entered 2,296 times.">        @Override</span><span class="foldControl" onclick="toggleSrcRowVis(document.getElementById('img-50'), 50,53);" id="e50" style="display:none;border:none;">...</span></span></td>
+</tr>
+ <tr id="l51">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=51#src-51">51</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-51" class="srcLine">        <span class="keyword">public</span> <span class="keyword">int</span> hashCode() {</span></td>
+</tr>
+ <tr id="l52">
+<td align="right" class="lineCount Good"><a class="lineNumHref" href="?line=52#src-52">52</a></td>
+<td align="right" class="coverageCount Good hitByTest"   onclick="return showTestsForLine(this, 52, 'Tests that hit line # 52');" ><span title="Line 52, Col 12: statement executed 2,296 times." class="nolink">&#160;2296</span></td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-52" class="srcLine"><span class="nolink" title="Line 52, Col 12: statement executed 2,296 times.">           <span class="keyword">return</span> id;</span></span></td>
+</tr>
+ <tr id="l53">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=53#src-53">53</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-53" class="srcLine">        }</span></td>
+</tr>
+ <tr id="l54">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=54#src-54">54</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-54" class="srcLine"></span></td>
+</tr>
+ <tr id="l55">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=55#src-55">55</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-55" class="srcLine">        <span class="comment">/**</span></span></td>
+</tr>
+ <tr id="l56">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=56#src-56">56</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-56" class="srcLine"><span class="comment">         * checks if instances are equal</span></span></td>
+</tr>
+ <tr id="l57">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=57#src-57">57</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-57" class="srcLine"><span class="comment">         * </span><span class="javadoc">@param</span><span class="comment"> other The other object to compare to</span></span></td>
+</tr>
+ <tr id="l58">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=58#src-58">58</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-58" class="srcLine"><span class="comment">         * </span><span class="javadoc">@return</span><span class="comment"> if the instances are for the same object</span></span></td>
+</tr>
+ <tr id="l59">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=59#src-59">59</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-59" class="srcLine"><span class="comment">         */</span> </span></td>
+</tr>
+<tr class="inlineStatsRow" align="right" valign="middle">
+<td class="coverageCount"><a name="60" class="nolink">&#160;</a></td>
+    <td class="coverageCount aui-icon aui-icon-small aui-iconfont-arrows-right" id='inlineStatsToggle-60' onclick="toggleInlineStats(this, 'inlinestats-60');"/>
+    <td align="center" valign="middle">
+        <table id="inlinestats-60" style="display:none;" class="inlineStats" width="100%" cellspacing="1px" cellpadding="1px">
+            <tr onclick="toggleInlineStats(document.getElementById('inlineStatsToggle-60'), 'inlinestats-60');return true;">
+                <td><div>
+<div title="60% Covered" style="min-width:40px;" class="barNegative contribBarNegative barNegative"><div class="barPositive contribBarPositive barPositive" style="width:60%"></div></div></div></td><td>60%</td>
+                <td class="inlineStat">Uncovered Elements: 4 (10)</td>
+                <td class="inlineStat">Complexity: 3</td>
+                <td class="inlineStat">Complexity Density: 0.5</td>
+                            </tr>
+        </table>
+    </td>
+</tr>
+<tr id="l60">
+<td align="right" class="lineCount Good"><a class="lineNumHref" href="?line=60#src-60">60</a></td>
+<td align="right" class="coverageCount Good hitByTest"   onclick="return showTestsForLine(this, 60, 'Tests that hit equals(Object)&#160;:&#160;boolean');" ><span title="Line 60, Col 9: method entered 1,110 times." class="nolink">&#160;1110</span></td>
+<td class=" methodStart  srcCell" id="id-60"><img title="Method Statistics" onclick="toggleSrcRowVis(this, 60,71);" id="img-60" src="../../../../../img/collapse.gif"  alt="toggle" class="icon"/><span id="src-60" class="srcLine"><span class="nolink" title="Line 60, Col 9: method entered 1,110 times.">        @Override</span><span class="foldControl" onclick="toggleSrcRowVis(document.getElementById('img-60'), 60,71);" id="e60" style="display:none;border:none;">...</span></span></td>
+</tr>
+ <tr id="l61">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=61#src-61">61</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-61" class="srcLine">        <span class="keyword">public</span> <span class="keyword">boolean</span> equals(<span class="keyword">final</span> Object other) {</span></td>
+</tr>
+ <tr id="l62">
+<td align="right" class="lineCount Good"><a class="lineNumHref" href="?line=62#src-62">62</a></td>
+<td align="right" class="coverageCount Bad hitByTest"   onclick="return showTestsForLine(this, 62, 'Tests that hit line # 62');" ><span title="Line 62, Col 16: true branch executed 0 times, false branch executed 1,110 times." class="nolink">&#160;1110</span></td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-62" class="srcLineHilight"><span class="nolink" title="Line 62, Col 16: true branch executed 0 times, false branch executed 1,110 times.">            <span class="keyword">if</span> (!(other <span class="keyword">instanceof</span> <a href="../../../../../org/apache/commons/lang3/builder/IDKey.html#IDKey">IDKey</a>)) {</span></span></td>
+</tr>
+ <tr id="l63">
+<td align="right" class="lineCount Bad"><a class="lineNumHref" href="?line=63#src-63">63</a></td>
+<td align="right" class="coverageCount Bad missedByTest"   ><span title="Line 63, Col 17: statement not executed." class="nolink">&#160;0</span></td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-63" class="srcLineHilight"><span class="nolink" title="Line 63, Col 17: statement not executed.">                <span class="keyword">return</span> <span class="keyword">false</span>;</span></span></td>
+</tr>
+ <tr id="l64">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=64#src-64">64</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-64" class="srcLine">            }</span></td>
+</tr>
+ <tr id="l65">
+<td align="right" class="lineCount Good"><a class="lineNumHref" href="?line=65#src-65">65</a></td>
+<td align="right" class="coverageCount Good hitByTest"   onclick="return showTestsForLine(this, 65, 'Tests that hit line # 65');" ><span title="Line 65, Col 13: statement executed 1,110 times." class="nolink">&#160;1110</span></td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-65" class="srcLine"><span class="nolink" title="Line 65, Col 13: statement executed 1,110 times.">            <span class="keyword">final</span> <a href="../../../../../org/apache/commons/lang3/builder/IDKey.html#IDKey">IDKey</a> idKey = (<a href="../../../../../org/apache/commons/lang3/builder/IDKey.html#IDKey">IDKey</a>) other;</span></span></td>
+</tr>
+ <tr id="l66">
+<td align="right" class="lineCount Good"><a class="lineNumHref" href="?line=66#src-66">66</a></td>
+<td align="right" class="coverageCount Bad hitByTest"   onclick="return showTestsForLine(this, 66, 'Tests that hit line # 66');" ><span title="Line 66, Col 16: true branch executed 0 times, false branch executed 1,110 times." class="nolink">&#160;1110</span></td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-66" class="srcLineHilight"><span class="nolink" title="Line 66, Col 16: true branch executed 0 times, false branch executed 1,110 times.">            <span class="keyword">if</span> (id != idKey.id) {</span></span></td>
+</tr>
+ <tr id="l67">
+<td align="right" class="lineCount Bad"><a class="lineNumHref" href="?line=67#src-67">67</a></td>
+<td align="right" class="coverageCount Bad missedByTest"   ><span title="Line 67, Col 17: statement not executed." class="nolink">&#160;0</span></td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-67" class="srcLineHilight"><span class="nolink" title="Line 67, Col 17: statement not executed.">                <span class="keyword">return</span> <span class="keyword">false</span>;</span></span></td>
+</tr>
+ <tr id="l68">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=68#src-68">68</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-68" class="srcLine">            }</span></td>
+</tr>
+ <tr id="l69">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=69#src-69">69</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-69" class="srcLine">            <span class="comment">// Note that identity equals is used.</span></span></td>
+</tr>
+ <tr id="l70">
+<td align="right" class="lineCount Good"><a class="lineNumHref" href="?line=70#src-70">70</a></td>
+<td align="right" class="coverageCount Good hitByTest"   onclick="return showTestsForLine(this, 70, 'Tests that hit line # 70');" ><span title="Line 70, Col 13: statement executed 1,110 times." class="nolink">&#160;1110</span></td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-70" class="srcLine"><span class="nolink" title="Line 70, Col 13: statement executed 1,110 times.">            <span class="keyword">return</span> value == idKey.value;</span></span></td>
+</tr>
+ <tr id="l71">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=71#src-71">71</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-71" class="srcLine">         }</span></td>
+</tr>
+ <tr id="l72">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=72#src-72">72</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-72" class="srcLine">}</span></td>
+</tr>
+ 
+    </tbody></table>    </div>
+</div><!-- .aui-tabs -->
+
+<script type="text/javascript"> 
+    var ol_bgclass = "overBG";
+    var ol_fgclass = "overFG";
+    var ol_cgclass = "overCaption";
+    var ol_captionfontclass= "overCaption";
+    var ol_closefontclass = "closeFont";
+    var ol_closeclick = 1;
+    var ol_close = 'X';
+    var ol_wrap = 1;
+    var rootRelPath = '../../../../../';
+    var testsPerFile = -1;
+</script>
+<script src="IDKey.js" type="text/javascript"></script>
+
+                        </div> <!-- class="aui-page-panel-content-clover" -->
+                    <footer id="footer" role="contentinfo">
+    <section class="footer-body">
+        <ul>
+            <li>
+                Report generated by <a target="_new" href="https://openclover.org">OpenClover</a> v 4.5.2
+                on Fri Apr 26 2024 18:07:39 CDT using coverage data from Fri Apr 26 2024 18:07:27 CDT.
+            </li>
+        </ul>
+        <ul>
+            <li>OpenClover is free and open-source software. </li>
+        </ul>
+    </section>
+</footer>                </section> <!-- class="aui-page-panel-content" -->
+            </div> <!-- class="aui-page-panel-inner" -->
+        </div> <!-- class="aui-page-panel" -->
+    </div> <!-- id="page" -->
+</body>
+</html>

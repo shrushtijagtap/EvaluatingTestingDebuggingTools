@@ -1,0 +1,15 @@
+diff --git a/Users/shreyachaudhary/Desktop/extra/CS527-Project/Bugs/BugSwarm/new_bug/commons-lang-224267191/Buggy-version/src/main/java/org/apache/commons/lang3/reflect/MethodUtils.java b/Users/shreyachaudhary/Desktop/extra/CS527-Project/Bugs/BugSwarm/new_bug/commons-lang-224267191/Patched-Version/src/main/java/org/apache/commons/lang3/reflect/MethodUtils.java
+index 107f317c4..2855410aa 100644
+--- a/Users/shreyachaudhary/Desktop/extra/CS527-Project/Bugs/BugSwarm/new_bug/commons-lang-224267191/Buggy-version/src/main/java/org/apache/commons/lang3/reflect/MethodUtils.java
++++ b/Users/shreyachaudhary/Desktop/extra/CS527-Project/Bugs/BugSwarm/new_bug/commons-lang-224267191/Patched-Version/src/main/java/org/apache/commons/lang3/reflect/MethodUtils.java
+@@ -904,7 +904,7 @@ public static List<Method> getMethodsListWithAnnotation(final Class<?> cls,
+         Validate.isTrue(annotationCls != null, "The annotation class must not be null");
+         List<Class<?>> classes = (searchSupers ? getAllSuperclassesAndInterfaces(cls)
+                 : new ArrayList<Class<?>>());
+-        classes.add(cls);
++        classes.add(0, cls);
+         final List<Method> annotatedMethods = new ArrayList<>();
+         for (Class<?> acls : classes) {
+             final Method[] methods = (ignoreAccess ? acls.getDeclaredMethods() : acls.getMethods());
+
+             

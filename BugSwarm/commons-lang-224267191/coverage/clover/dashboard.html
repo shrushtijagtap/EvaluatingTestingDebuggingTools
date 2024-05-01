@@ -1,0 +1,1063 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+
+    
+    
+    <link rel="SHORTCUT ICON" href="img/clover.ico" />
+
+    <link rel="stylesheet" href="aui/css/aui.min.css" media="all"/>
+    <link rel="stylesheet" href="aui/css/aui-experimental.min.css" media="all"/>
+    <!--[if IE 9]><link rel="stylesheet" href="aui/css/aui-ie9.min.css" media="all"/><![endif]-->
+
+    <style type="text/css" media="all">
+        @import url('style.css');
+        @import url('tree.css');
+        
+    </style>
+
+    <script src="jquery-1.8.3.min.js" type="text/javascript"></script>
+    <script src="aui/js/aui.min.js" type="text/javascript"></script>
+    <script src="aui/js/aui-experimental.min.js" type="text/javascript"></script>
+    <script src="aui/js/aui-soy.min.js" type="text/javascript"></script>
+
+    <script src="package-nodes-tree.js" type="text/javascript"></script>
+    <script src="clover-tree.js" type="text/javascript"></script>
+    <script src="clover.js" type="text/javascript"></script>
+    <script src="clover-descriptions.js" type="text/javascript"></script>
+    <script src="cloud.js" type="text/javascript"></script>
+
+            <title>Apache Commons Lang 3.6-SNAPSHOT</title>
+    </head>
+
+<body onresize="processTreeMapDashJson(treeMapJson);" >
+    <div id="page">
+        
+        
+
+
+<header id="header" role="banner">
+    <nav class="aui-header aui-dropdown2-trigger-group" role="navigation">
+        <div class="aui-header-inner">
+            <div class="aui-header-primary">
+                <h1 id="logo" class="aui-header-logo aui-header-logo-clover">
+                    <a href="https://openclover.org" title="Visit OpenClover home page"><span class="aui-header-logo-device">OpenClover</span></a>
+                </h1>
+                            </div>
+            <div class="aui-header-secondary">
+                <ul class="aui-nav">
+                    <li id="system-help-menu">
+                        <a class="aui-nav-link" title="Open online documentation" target="_blank"
+                           href="https://openclover.org/documentation">
+                            <span class="aui-icon aui-icon-small aui-iconfont-help">&#160;Help</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+        
+        <div class="aui-page-panel">
+            <div class="aui-page-panel-inner">
+                <div class="aui-page-panel-nav aui-page-panel-nav-clover">
+                    
+
+<div class="aui-page-header-inner" style="margin-bottom: 20px;">
+    <div class="aui-page-header-image">
+                    <a href="http://commons.apache.org/proper/commons-lang/" target="_top">
+                <div class="aui-avatar aui-avatar-large aui-avatar-project">
+            <div class="aui-avatar-inner">
+                                    <img src="img/clover_logo_large.png" alt="Clover icon"/>
+                            </div>
+        </div>
+                    </a>
+            </div>
+    <div class="aui-page-header-main" >
+        <h1>
+                            <a href="http://commons.apache.org/proper/commons-lang/" target="_top">
+                                        Apache Commons Lang 3.6-SNAPSHOT
+                                        </a>
+                    </h1>
+    </div>
+</div>
+
+<nav class="aui-navgroup aui-navgroup-vertical">
+    <div class="aui-navgroup-inner">
+                                            <ul class="aui-nav">
+                <li class="aui-nav-selected">
+                    <a href="dashboard.html">Project overview</a>
+                </li>
+            </ul>
+        
+                <div class="aui-nav-heading packages-nav-heading">
+            <strong>Packages</strong>
+        </div>
+        <div class="aui-nav project-packages">
+            <form method="get" action="#" class="aui package-filter-container">
+                <input type="text" autocomplete="off" class="package-filter text"
+                       placeholder="Type to filter packages..." name="package-filter" id="package-filter"
+                       title="Start typing package name (or part of the name) to search through the tree. Use arrow keys and the Enter key to navigate."/>
+            </form>
+            <p class="package-filter-no-results-message hidden">
+                <small>No results found.</small>
+            </p>
+                                                  <div class="packages-tree-wrapper" data-root-relative="" data-package-name="">
+                <div class="packages-tree-container"></div>
+                <div class="clover-packages-lozenges"></div>
+            </div>
+        </div>
+        
+            </div>
+</nav>                </div>
+                <section class="aui-page-panel-content">
+                    <div class="aui-page-panel-content-clover">
+
+                    
+                    <ol class="aui-nav aui-nav-breadcrumbs">
+            
+        <li><a href="dashboard.html">Project Clover database Fri Apr 26 2024 18:06:03 CDT</a></li>
+    </ol>
+    
+<h1 class="aui-h2-clover">
+            Project overview
+    </h1>
+<div class="aui-tabs horizontal-tabs">
+        <ul class="tabs-menu">
+            <li class="menu-item active-tab">
+            <a href="dashboard.html">Dashboard</a>
+        </li>
+                <li class="menu-item ">
+            <a href="pkg-summary.html"><strong>Application code</strong></a>
+        </li>
+                <li class="menu-item ">
+            <a href="testsrc-pkg-summary.html"><strong>Test code</strong></a>
+        </li>
+        <li class="menu-item ">
+            <a href="test-pkg-summary.html"><strong>Test results</strong></a>
+        </li>
+                <li class="menu-item ">
+            <a href="top-risks.html"><strong>Top risks</strong></a>
+        </li>
+        <li class="menu-item ">
+            <a href="quick-wins.html"><strong>Quick wins</strong></a>
+        </li>
+                                                <li class="menu-item ">
+                <a href="treemap.html"><strong>Coverage tree map</strong></a>
+            </li>
+            </ul>
+    <div class="tabs-pane active-pane" id="tabs-first">
+
+        <div>&#160;</div>
+
+
+
+
+
+
+<div class="aui-group">
+    <div class="aui-item">
+        <div class="dashboard-widget">
+            <header class="dashboard-widget-header">
+                
+                <h3>
+                    Code coverage
+                    <small style="float:right; font-weight: normal">
+                        225 classes,
+                        22,539 /
+                        23,889 elements
+                    </small>
+                </h3>
+            </header>
+            <div class="dashboard-widget-content">
+                <div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">0.94348866</span>94.3%</div><div style="display: table-cell">
+ <div title="94.3% Covered"  style="min-width:200px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:94.3%"></div></div></div></div>
+                <p><a href="pkg-summary.html">See more</a></p>
+            </div>
+        </div>
+
+        <div class="dashboard-widget">
+            <header class="dashboard-widget-header">
+                <h3>
+                    Test results
+                    <small style="float:right; font-weight: normal">
+                        3,843 /
+                        3,850 tests
+                        26.91 secs
+                    </small>
+                </h3>
+            </header>
+            <div class="dashboard-widget-content">
+                                    
+
+<div style="display: table; width: 100%">
+            <div class="barGraphValue"><span class="sortValue">0.9981818</span>99.8%</div>         <div style="display: table-cell">
+            
+            <div title="0% Errors" style="min-width: 40px;" class="testBarError">
+                <div title="99.8% of tests passed&lt;br/&gt;0.2% of tests failed" class="testBarFail" style="width: 100%"><div class="testBarPass" style="width: 99.8%"></div></div>
+            </div>
+        </div>
+    </div>                                <p><a href="test-pkg-summary.html">See more</a></p>
+            </div>
+        </div>
+
+        <div class="dashboard-widget">
+            <header class="dashboard-widget-header">
+                <h3>Code metrics</h3>
+            </header>
+                         
+
+<div id="$statsId" class="aui-item" style="display: ${display}">
+<div style="display: table">
+    <div class="stats-box">
+        <div class="stats-box-label"><label title="Total number of branches in this project">Branches:</label></div>
+        <div class="stats-box-value">7,096</div>
+    </div>
+    <div class="stats-box">
+        <div class="stats-box-label"><label title="Total number of statements in this project">Statements:</label></div>
+        <div class="stats-box-value">13,720</div>
+    </div>
+    <div class="stats-box">
+        <div class="stats-box-label"><label title="Total number of methods in this project">Methods:</label></div>
+        <div class="stats-box-value">3,073</div>
+    </div>
+    <div class="stats-box">
+        <div class="stats-box-label"><label title="Total number of classes in this project">Classes:</label></div>
+        <div class="stats-box-value">225</div>
+    </div>
+            <div class="stats-box">
+            <div class="stats-box-label"><label title="Total number of files in this project">Files:</label></div>
+            <div class="stats-box-value">141</div>
+        </div>
+                <div class="stats-box">
+            <div class="stats-box-label"><label title="Total number of packages in this project">Packages:</label></div>
+            <div class="stats-box-value">14</div>
+        </div>
+        <div class="stats-box">
+        <div class="stats-box-label"><label title="Total number of lines of code in this project">LOC:</label></div>
+        <div class="stats-box-value">76,779</div>
+    </div>
+    <div class="stats-box">
+        <div class="stats-box-label"><label title="Total number of non-comment lines of code in this project">NCLOC:</label></div>
+        <div class="stats-box-value">27,207</div>
+    </div>
+    <div class="stats-box">
+        <div class="stats-box-label"><label title="Cyclomatic complexity is the number of paths in this project">Total complexity:</label></div>
+        <div class="stats-box-value">7,637</div>
+    </div>
+    <div class="stats-box">
+        <div class="stats-box-label">
+            <label title="Complexity density is the complexity divided by the number of statements in this project">Complexity density:</label>
+        </div>
+        <div class="stats-box-value">0.56</div>
+    </div>
+    <div class="stats-box">
+        <div class="stats-box-label"><label title="Number of statements per method.">Statements/Method:</label></div>
+        <div class="stats-box-value">4.46</div>
+    </div>
+    <div class="stats-box">
+        <div class="stats-box-label"><label title="Number of methods per class.">Methods/Class:</label></div>
+        <div class="stats-box-value">13.66</div>
+    </div>
+            <div class="stats-box">
+            <div class="stats-box-label"><label title="Number of classes per package.">Classes/Package:</label></div>
+            <div class="stats-box-value">16.07</div>
+        </div>
+        <div class="stats-box">
+        <div class="stats-box-label"><label title="Complexity divided by the number of methods in this project">Average method complexity:</label></div>
+        <div class="stats-box-value">2.49</div>
+    </div>
+</div>
+
+</div>        </div>
+
+                <div class="dashboard-widget">
+            <header class="dashboard-widget-header">
+                <h3>Class Coverage Distribution</h3>
+            </header>
+            <div class="dashboard-widget-content">
+                <div style="text-align: center">                     <img src="img/classDistrubutionChart.png" alt="img/classDistrubutionChart.png" usemap="#classDistrubutionChart.png"/>
+                </div>
+                <map id="classDistrubutionChart.png" name="classDistrubutionChart.png">
+<area shape="rect" coords="282,15,304,206" title="154 classes have 91-100% coverage" alt="" nohref="nohref"/>
+<area shape="rect" coords="258,184,280,206" title="18 classes have 81-90% coverage" alt="" nohref="nohref"/>
+<area shape="rect" coords="233,198,255,206" title="7 classes have 71-80% coverage" alt="" nohref="nohref"/>
+<area shape="rect" coords="209,197,231,206" title="8 classes have 61-70% coverage" alt="" nohref="nohref"/>
+<area shape="rect" coords="184,203,206,206" title="3 classes have 51-60% coverage" alt="" nohref="nohref"/>
+<area shape="rect" coords="160,203,182,206" title="3 classes have 41-50% coverage" alt="" nohref="nohref"/>
+<area shape="rect" coords="111,205,133,206" title="1 class has 21-30% coverage" alt="" nohref="nohref"/>
+<area shape="rect" coords="38,205,60,206" title="1 class has 0% coverage" alt="" nohref="nohref"/>
+</map>
+            </div>
+        </div>
+        
+                <div class="dashboard-widget">
+            <header class="dashboard-widget-header">
+                <h3>Class Complexity</h3>
+            </header>
+            <div class="dashboard-widget-content">
+                <div style="text-align: center">
+                    <img src="img/classComplexityChart.png" alt="img/classComplexityChart.png" usemap="#classComplexityChart.png"/>
+                </div>
+                <map id="classComplexityChart.png" name="classComplexityChart.png">
+<area shape="poly" coords="205,208,202,210,200,208,202,205,205,208,205,208" title="Complexity: 6; Coverage: 64%; Class: TypeUtils.WildcardTypeImpl" alt="" href="org/apache/commons/lang3/reflect/TypeUtils.html#TypeUtils.WildcardTypeImpl"/>
+<area shape="poly" coords="202,208,200,210,197,208,200,205,202,208,202,208" title="Complexity: 7; Coverage: 63%; Class: TypeUtils.ParameterizedTypeImpl" alt="" href="org/apache/commons/lang3/reflect/TypeUtils.html#TypeUtils.ParameterizedTypeImpl"/>
+<area shape="poly" coords="172,208,169,211,167,208,169,206,172,208,172,208" title="Complexity: 5; Coverage: 50%; Class: TypeUtils.GenericArrayTypeImpl" alt="" href="org/apache/commons/lang3/reflect/TypeUtils.html#TypeUtils.GenericArrayTypeImpl"/>
+<area shape="poly" coords="290,208,288,211,285,208,288,206,290,208,290,208" title="Complexity: 4; Coverage: 100%; Class: TypeUtils.WildcardTypeBuilder" alt="" href="org/apache/commons/lang3/reflect/TypeUtils.html#TypeUtils.WildcardTypeBuilder"/>
+<area shape="poly" coords="209,169,207,172,204,169,207,167,209,169,209,169" title="Complexity: 219; Coverage: 66%; Class: TypeUtils" alt="" href="org/apache/commons/lang3/reflect/TypeUtils.html#TypeUtils"/>
+<area shape="poly" coords="195,208,193,210,190,208,193,205,195,208,195,208" title="Complexity: 7; Coverage: 60%; Class: TypeLiteral" alt="" href="org/apache/commons/lang3/reflect/TypeLiteral.html#TypeLiteral"/>
+<area shape="poly" coords="271,191,269,194,266,191,269,189,271,191,271,191" title="Complexity: 98; Coverage: 92%; Class: MethodUtils" alt="" href="org/apache/commons/lang3/reflect/MethodUtils.html#MethodUtils"/>
+<area shape="poly" coords="290,208,288,210,285,208,288,205,290,208,290,208" title="Complexity: 6; Coverage: 100%; Class: MemberUtils.Executable" alt="" href="org/apache/commons/lang3/reflect/MemberUtils.html#MemberUtils.Executable"/>
+<area shape="poly" coords="278,201,276,203,273,201,276,198,278,201,278,201" title="Complexity: 44; Coverage: 95%; Class: MemberUtils" alt="" href="org/apache/commons/lang3/reflect/MemberUtils.html#MemberUtils"/>
+<area shape="poly" coords="290,208,288,210,285,208,288,205,290,208,290,208" title="Complexity: 7; Coverage: 100%; Class: InheritanceUtils" alt="" href="org/apache/commons/lang3/reflect/InheritanceUtils.html#InheritanceUtils"/>
+<area shape="poly" coords="288,199,285,202,283,199,285,197,288,199,288,199" title="Complexity: 54; Coverage: 99%; Class: FieldUtils" alt="" href="org/apache/commons/lang3/reflect/FieldUtils.html#FieldUtils"/>
+<area shape="poly" coords="274,205,271,207,269,205,271,202,274,205,274,205" title="Complexity: 22; Coverage: 93%; Class: ConstructorUtils" alt="" href="org/apache/commons/lang3/reflect/ConstructorUtils.html#ConstructorUtils"/>
+<area shape="poly" coords="290,207,288,209,285,207,288,204,290,207,290,207" title="Complexity: 12; Coverage: 100%; Class: StopWatch.State" alt="" href="org/apache/commons/lang3/time/StopWatch.html#StopWatch.State"/>
+<area shape="poly" coords="285,203,283,205,280,203,283,200,285,203,285,203" title="Complexity: 35; Coverage: 98%; Class: StopWatch" alt="" href="org/apache/commons/lang3/time/StopWatch.html#StopWatch"/>
+<area shape="poly" coords="290,208,288,211,285,208,288,206,290,208,290,208" title="Complexity: 5; Coverage: 100%; Class: FormatCache.MultipartKey" alt="" href="org/apache/commons/lang3/time/FormatCache.html#FormatCache.MultipartKey"/>
+<area shape="poly" coords="269,206,266,208,264,206,266,203,269,206,269,206" title="Complexity: 17; Coverage: 91%; Class: FormatCache" alt="" href="org/apache/commons/lang3/time/FormatCache.html#FormatCache"/>
+<area shape="poly" coords="243,208,240,210,238,208,240,205,243,208,243,208" title="Complexity: 6; Coverage: 80%; Class: FastDatePrinter.TimeZoneDisplayKey" alt="" href="org/apache/commons/lang3/time/FastDatePrinter.html#FastDatePrinter.TimeZoneDisplayKey"/>
+<area shape="poly" coords="290,207,288,209,285,207,288,204,290,207,290,207" title="Complexity: 11; Coverage: 100%; Class: FastDatePrinter.Iso8601_Rule" alt="" href="org/apache/commons/lang3/time/FastDatePrinter.html#FastDatePrinter.Iso8601_Rule"/>
+<area shape="poly" coords="290,208,288,211,285,208,288,206,290,208,290,208" title="Complexity: 5; Coverage: 100%; Class: FormatCache.MultipartKey" alt="" href="org/apache/commons/lang3/time/FormatCache.html#FormatCache.MultipartKey"/>
+<area shape="poly" coords="290,208,288,211,285,208,288,206,290,208,290,208" title="Complexity: 4; Coverage: 100%; Class: TypeUtils.WildcardTypeBuilder" alt="" href="org/apache/commons/lang3/reflect/TypeUtils.html#TypeUtils.WildcardTypeBuilder"/>
+<area shape="poly" coords="231,208,228,211,226,208,228,206,231,208,231,208" title="Complexity: 4; Coverage: 75%; Class: FastDatePrinter.WeekYear" alt="" href="org/apache/commons/lang3/time/FastDatePrinter.html#FastDatePrinter.WeekYear"/>
+<area shape="poly" coords="245,208,243,211,240,208,243,206,245,208,245,208" title="Complexity: 5; Coverage: 81%; Class: FastDatePrinter.DayInWeekField" alt="" href="org/apache/commons/lang3/time/FastDatePrinter.html#FastDatePrinter.DayInWeekField"/>
+<area shape="poly" coords="252,208,250,211,247,208,250,206,252,208,252,208" title="Complexity: 5; Coverage: 84%; Class: FastDatePrinter.TwentyFourHourField" alt="" href="org/apache/commons/lang3/time/FastDatePrinter.html#FastDatePrinter.TwentyFourHourField"/>
+<area shape="poly" coords="252,208,250,211,247,208,250,206,252,208,252,208" title="Complexity: 5; Coverage: 84%; Class: FastDatePrinter.TwentyFourHourField" alt="" href="org/apache/commons/lang3/time/FastDatePrinter.html#FastDatePrinter.TwentyFourHourField"/>
+<area shape="poly" coords="290,208,288,211,285,208,288,206,290,208,290,208" title="Complexity: 4; Coverage: 100%; Class: TypeUtils.WildcardTypeBuilder" alt="" href="org/apache/commons/lang3/reflect/TypeUtils.html#TypeUtils.WildcardTypeBuilder"/>
+<area shape="poly" coords="290,208,288,211,285,208,288,206,290,208,290,208" title="Complexity: 4; Coverage: 100%; Class: TypeUtils.WildcardTypeBuilder" alt="" href="org/apache/commons/lang3/reflect/TypeUtils.html#TypeUtils.WildcardTypeBuilder"/>
+<area shape="poly" coords="290,208,288,211,285,208,288,206,290,208,290,208" title="Complexity: 5; Coverage: 100%; Class: FormatCache.MultipartKey" alt="" href="org/apache/commons/lang3/time/FormatCache.html#FormatCache.MultipartKey"/>
+<area shape="poly" coords="252,208,250,211,247,208,250,206,252,208,252,208" title="Complexity: 5; Coverage: 84%; Class: FastDatePrinter.TwentyFourHourField" alt="" href="org/apache/commons/lang3/time/FastDatePrinter.html#FastDatePrinter.TwentyFourHourField"/>
+<area shape="poly" coords="250,208,247,211,245,208,247,206,250,208,250,208" title="Complexity: 5; Coverage: 83%; Class: FastDatePrinter.UnpaddedMonthField" alt="" href="org/apache/commons/lang3/time/FastDatePrinter.html#FastDatePrinter.UnpaddedMonthField"/>
+<area shape="poly" coords="290,208,288,210,285,208,288,205,290,208,290,208" title="Complexity: 6; Coverage: 100%; Class: MemberUtils.Executable" alt="" href="org/apache/commons/lang3/reflect/MemberUtils.html#MemberUtils.Executable"/>
+<area shape="poly" coords="290,208,288,211,285,208,288,206,290,208,290,208" title="Complexity: 5; Coverage: 100%; Class: FormatCache.MultipartKey" alt="" href="org/apache/commons/lang3/time/FormatCache.html#FormatCache.MultipartKey"/>
+<area shape="poly" coords="290,208,288,211,285,208,288,206,290,208,290,208" title="Complexity: 3; Coverage: 100%; Class: FastDatePrinter.StringLiteral" alt="" href="org/apache/commons/lang3/time/FastDatePrinter.html#FastDatePrinter.StringLiteral"/>
+<area shape="poly" coords="290,208,288,211,285,208,288,206,290,208,290,208" title="Complexity: 3; Coverage: 100%; Class: FastDatePrinter.StringLiteral" alt="" href="org/apache/commons/lang3/time/FastDatePrinter.html#FastDatePrinter.StringLiteral"/>
+<area shape="poly" coords="276,189,273,191,271,189,273,186,276,189,276,189" title="Complexity: 112; Coverage: 94%; Class: FastDatePrinter" alt="" href="org/apache/commons/lang3/time/FastDatePrinter.html#FastDatePrinter"/>
+<area shape="poly" coords="290,208,288,210,285,208,288,205,290,208,290,208" title="Complexity: 7; Coverage: 100%; Class: InheritanceUtils" alt="" href="org/apache/commons/lang3/reflect/InheritanceUtils.html#InheritanceUtils"/>
+<area shape="poly" coords="290,209,288,211,285,209,288,206,290,209,290,209" title="Complexity: 2; Coverage: 100%; Class: FastDateParser.TimeZoneStrategy.TzInfo" alt="" href="org/apache/commons/lang3/time/FastDateParser.html#FastDateParser.TimeZoneStrategy.TzInfo"/>
+<area shape="poly" coords="285,207,283,209,280,207,283,204,285,207,285,207" title="Complexity: 11; Coverage: 98%; Class: FastDateParser.TimeZoneStrategy" alt="" href="org/apache/commons/lang3/time/FastDateParser.html#FastDateParser.TimeZoneStrategy"/>
+<area shape="poly" coords="283,207,281,209,278,207,281,204,283,207,283,207" title="Complexity: 11; Coverage: 97%; Class: FastDateParser.NumberStrategy" alt="" href="org/apache/commons/lang3/time/FastDateParser.html#FastDateParser.NumberStrategy"/>
+<area shape="poly" coords="290,209,288,211,285,209,288,206,290,209,290,209" title="Complexity: 2; Coverage: 100%; Class: FastDateParser.TimeZoneStrategy.TzInfo" alt="" href="org/apache/commons/lang3/time/FastDateParser.html#FastDateParser.TimeZoneStrategy.TzInfo"/>
+<area shape="poly" coords="290,208,288,210,285,208,288,205,290,208,290,208" title="Complexity: 6; Coverage: 100%; Class: MemberUtils.Executable" alt="" href="org/apache/commons/lang3/reflect/MemberUtils.html#MemberUtils.Executable"/>
+<area shape="poly" coords="290,208,288,211,285,208,288,206,290,208,290,208" title="Complexity: 5; Coverage: 100%; Class: FormatCache.MultipartKey" alt="" href="org/apache/commons/lang3/time/FormatCache.html#FormatCache.MultipartKey"/>
+<area shape="poly" coords="53,209,50,211,48,209,50,206,53,209,53,209" title="Complexity: 1; Coverage: 0%; Class: FastDateParser.Strategy" alt="" href="org/apache/commons/lang3/time/FastDateParser.html#FastDateParser.Strategy"/>
+<area shape="poly" coords="290,206,288,209,285,206,288,204,290,206,290,206" title="Complexity: 15; Coverage: 100%; Class: FastDateParser.StrategyParser" alt="" href="org/apache/commons/lang3/time/FastDateParser.html#FastDateParser.StrategyParser"/>
+<area shape="poly" coords="290,208,288,211,285,208,288,206,290,208,290,208" title="Complexity: 5; Coverage: 100%; Class: FormatCache.MultipartKey" alt="" href="org/apache/commons/lang3/time/FormatCache.html#FormatCache.MultipartKey"/>
+<area shape="poly" coords="276,193,273,196,271,193,273,191,276,193,276,193" title="Complexity: 85; Coverage: 94%; Class: FastDateParser" alt="" href="org/apache/commons/lang3/time/FastDateParser.html#FastDateParser"/>
+<area shape="poly" coords="274,201,271,204,269,201,271,199,274,201,274,201" title="Complexity: 43; Coverage: 93%; Class: FastDateFormat" alt="" href="org/apache/commons/lang3/time/FastDateFormat.html#FastDateFormat"/>
+<area shape="poly" coords="269,206,266,209,264,206,266,204,269,206,269,206" title="Complexity: 15; Coverage: 91%; Class: DurationFormatUtils.Token" alt="" href="org/apache/commons/lang3/time/DurationFormatUtils.html#DurationFormatUtils.Token"/>
+<area shape="poly" coords="276,195,273,198,271,195,273,193,276,195,276,195" title="Complexity: 75; Coverage: 94%; Class: DurationFormatUtils" alt="" href="org/apache/commons/lang3/time/DurationFormatUtils.html#DurationFormatUtils"/>
+<area shape="poly" coords="290,208,288,211,285,208,288,206,290,208,290,208" title="Complexity: 5; Coverage: 100%; Class: FormatCache.MultipartKey" alt="" href="org/apache/commons/lang3/time/FormatCache.html#FormatCache.MultipartKey"/>
+<area shape="poly" coords="281,182,278,184,276,182,278,179,281,182,281,182" title="Complexity: 150; Coverage: 96%; Class: DateUtils" alt="" href="org/apache/commons/lang3/time/DateUtils.html#DateUtils"/>
+<area shape="poly" coords="276,206,273,208,271,206,273,203,276,206,276,206" title="Complexity: 17; Coverage: 94%; Class: DateFormatUtils" alt="" href="org/apache/commons/lang3/time/DateFormatUtils.html#DateFormatUtils"/>
+<area shape="poly" coords="290,198,288,200,285,198,288,195,290,198,290,198" title="Complexity: 61; Coverage: 100%; Class: WordUtils" alt="" href="org/apache/commons/lang3/text/WordUtils.html#WordUtils"/>
+<area shape="poly" coords="276,189,273,192,271,189,273,187,276,189,276,189" title="Complexity: 108; Coverage: 94%; Class: StrTokenizer" alt="" href="org/apache/commons/lang3/text/StrTokenizer.html#StrTokenizer"/>
+<area shape="poly" coords="278,190,276,192,273,190,276,187,278,190,278,190" title="Complexity: 106; Coverage: 95%; Class: StrSubstitutor" alt="" href="org/apache/commons/lang3/text/StrSubstitutor.html#StrSubstitutor"/>
+<area shape="poly" coords="290,208,288,211,285,208,288,206,290,208,290,208" title="Complexity: 3; Coverage: 100%; Class: FastDatePrinter.StringLiteral" alt="" href="org/apache/commons/lang3/time/FastDatePrinter.html#FastDatePrinter.StringLiteral"/>
+<area shape="poly" coords="290,209,288,211,285,209,288,206,290,209,290,209" title="Complexity: 2; Coverage: 100%; Class: FastDateParser.TimeZoneStrategy.TzInfo" alt="" href="org/apache/commons/lang3/time/FastDateParser.html#FastDateParser.TimeZoneStrategy.TzInfo"/>
+<area shape="poly" coords="264,208,262,210,259,208,262,205,264,208,264,208" title="Complexity: 6; Coverage: 89%; Class: StrMatcher.StringMatcher" alt="" href="org/apache/commons/lang3/text/StrMatcher.html#StrMatcher.StringMatcher"/>
+<area shape="poly" coords="290,208,288,211,285,208,288,206,290,208,290,208" title="Complexity: 3; Coverage: 100%; Class: FastDatePrinter.StringLiteral" alt="" href="org/apache/commons/lang3/time/FastDatePrinter.html#FastDatePrinter.StringLiteral"/>
+<area shape="poly" coords="290,208,288,211,285,208,288,206,290,208,290,208" title="Complexity: 3; Coverage: 100%; Class: FastDatePrinter.StringLiteral" alt="" href="org/apache/commons/lang3/time/FastDatePrinter.html#FastDatePrinter.StringLiteral"/>
+<area shape="poly" coords="290,205,288,208,285,205,288,203,290,205,290,205" title="Complexity: 21; Coverage: 100%; Class: StrMatcher" alt="" href="org/apache/commons/lang3/text/StrMatcher.html#StrMatcher"/>
+<area shape="poly" coords="290,208,288,211,285,208,288,206,290,208,290,208" title="Complexity: 3; Coverage: 100%; Class: FastDatePrinter.StringLiteral" alt="" href="org/apache/commons/lang3/time/FastDatePrinter.html#FastDatePrinter.StringLiteral"/>
+<area shape="poly" coords="290,208,288,211,285,208,288,206,290,208,290,208" title="Complexity: 4; Coverage: 100%; Class: TypeUtils.WildcardTypeBuilder" alt="" href="org/apache/commons/lang3/reflect/TypeUtils.html#TypeUtils.WildcardTypeBuilder"/>
+<area shape="poly" coords="290,208,288,211,285,208,288,206,290,208,290,208" title="Complexity: 4; Coverage: 100%; Class: TypeUtils.WildcardTypeBuilder" alt="" href="org/apache/commons/lang3/reflect/TypeUtils.html#TypeUtils.WildcardTypeBuilder"/>
+<area shape="poly" coords="290,208,288,210,285,208,288,205,290,208,290,208" title="Complexity: 8; Coverage: 100%; Class: StrBuilder.StrBuilderWriter" alt="" href="org/apache/commons/lang3/text/StrBuilder.html#StrBuilder.StrBuilderWriter"/>
+<area shape="poly" coords="290,205,288,208,285,205,288,203,290,205,290,205" title="Complexity: 20; Coverage: 100%; Class: StrBuilder.StrBuilderReader" alt="" href="org/apache/commons/lang3/text/StrBuilder.html#StrBuilder.StrBuilderReader"/>
+<area shape="poly" coords="226,208,224,211,221,208,224,206,226,208,226,208" title="Complexity: 5; Coverage: 73%; Class: StrBuilder.StrBuilderTokenizer" alt="" href="org/apache/commons/lang3/text/StrBuilder.html#StrBuilder.StrBuilderTokenizer"/>
+<area shape="poly" coords="283,135,281,137,278,135,281,132,283,135,283,135" title="Complexity: 408; Coverage: 97%; Class: StrBuilder" alt="" href="org/apache/commons/lang3/text/StrBuilder.html#StrBuilder"/>
+<area shape="poly" coords="255,207,252,210,250,207,252,205,255,207,255,207" title="Complexity: 10; Coverage: 85%; Class: FormattableUtils" alt="" href="org/apache/commons/lang3/text/FormattableUtils.html#FormattableUtils"/>
+<area shape="poly" coords="250,196,247,198,245,196,247,193,250,196,250,196" title="Complexity: 73; Coverage: 83%; Class: ExtendedMessageFormat" alt="" href="org/apache/commons/lang3/text/ExtendedMessageFormat.html#ExtendedMessageFormat"/>
+<area shape="poly" coords="290,208,288,210,285,208,288,205,290,208,290,208" title="Complexity: 6; Coverage: 100%; Class: MemberUtils.Executable" alt="" href="org/apache/commons/lang3/reflect/MemberUtils.html#MemberUtils.Executable"/>
+<area shape="poly" coords="271,196,269,198,266,196,269,193,271,196,271,196" title="Complexity: 73; Coverage: 92%; Class: ExceptionUtils" alt="" href="org/apache/commons/lang3/exception/ExceptionUtils.html#ExceptionUtils"/>
+<area shape="poly" coords="290,206,288,209,285,206,288,204,290,206,290,206" title="Complexity: 16; Coverage: 100%; Class: DefaultExceptionContext" alt="" href="org/apache/commons/lang3/exception/DefaultExceptionContext.html#DefaultExceptionContext"/>
+<area shape="poly" coords="290,206,288,209,285,206,288,204,290,206,290,206" title="Complexity: 15; Coverage: 100%; Class: FastDateParser.StrategyParser" alt="" href="org/apache/commons/lang3/time/FastDateParser.html#FastDateParser.StrategyParser"/>
+<area shape="poly" coords="290,206,288,209,285,206,288,204,290,206,290,206" title="Complexity: 15; Coverage: 100%; Class: FastDateParser.StrategyParser" alt="" href="org/apache/commons/lang3/time/FastDateParser.html#FastDateParser.StrategyParser"/>
+<area shape="poly" coords="290,208,288,211,285,208,288,206,290,208,290,208" title="Complexity: 3; Coverage: 100%; Class: FastDatePrinter.StringLiteral" alt="" href="org/apache/commons/lang3/time/FastDatePrinter.html#FastDatePrinter.StringLiteral"/>
+<area shape="poly" coords="278,188,276,191,273,188,276,186,278,188,278,188" title="Complexity: 113; Coverage: 95%; Class: Validate" alt="" href="org/apache/commons/lang3/Validate.html#Validate"/>
+<area shape="poly" coords="290,208,288,211,285,208,288,206,290,208,290,208" title="Complexity: 3; Coverage: 100%; Class: FastDatePrinter.StringLiteral" alt="" href="org/apache/commons/lang3/time/FastDatePrinter.html#FastDatePrinter.StringLiteral"/>
+<area shape="poly" coords="290,208,288,211,285,208,288,206,290,208,290,208" title="Complexity: 3; Coverage: 100%; Class: FastDatePrinter.StringLiteral" alt="" href="org/apache/commons/lang3/time/FastDatePrinter.html#FastDatePrinter.StringLiteral"/>
+<area shape="poly" coords="290,208,288,211,285,208,288,206,290,208,290,208" title="Complexity: 3; Coverage: 100%; Class: FastDatePrinter.StringLiteral" alt="" href="org/apache/commons/lang3/time/FastDatePrinter.html#FastDatePrinter.StringLiteral"/>
+<area shape="poly" coords="283,204,281,206,278,204,281,201,283,204,283,204" title="Complexity: 29; Coverage: 97%; Class: ThreadUtils" alt="" href="org/apache/commons/lang3/ThreadUtils.html#ThreadUtils"/>
+<area shape="poly" coords="278,204,276,207,273,204,276,202,278,204,278,204" title="Complexity: 25; Coverage: 95%; Class: SystemUtils" alt="" href="org/apache/commons/lang3/SystemUtils.html#SystemUtils"/>
+<area shape="poly" coords="288,36,285,39,283,36,285,34,288,36,288,36" title="Complexity: 948; Coverage: 99%; Class: StringUtils" alt="" href="org/apache/commons/lang3/StringUtils.html#StringUtils"/>
+<area shape="poly" coords="290,208,288,211,285,208,288,206,290,208,290,208" title="Complexity: 5; Coverage: 100%; Class: FormatCache.MultipartKey" alt="" href="org/apache/commons/lang3/time/FormatCache.html#FormatCache.MultipartKey"/>
+<area shape="poly" coords="290,208,288,211,285,208,288,206,290,208,290,208" title="Complexity: 3; Coverage: 100%; Class: FastDatePrinter.StringLiteral" alt="" href="org/apache/commons/lang3/time/FastDatePrinter.html#FastDatePrinter.StringLiteral"/>
+<area shape="poly" coords="290,206,288,208,285,206,288,203,290,206,290,206" title="Complexity: 17; Coverage: 100%; Class: StringEscapeUtils" alt="" href="org/apache/commons/lang3/StringEscapeUtils.html#StringEscapeUtils"/>
+<area shape="poly" coords="271,208,269,210,266,208,269,205,271,208,271,208" title="Complexity: 6; Coverage: 92%; Class: SerializationUtils.ClassLoaderAwareObjectInputStream" alt="" href="org/apache/commons/lang3/SerializationUtils.html#SerializationUtils.ClassLoaderAwareObjectInputStream"/>
+<area shape="poly" coords="276,206,273,208,271,206,273,203,276,206,276,206" title="Complexity: 18; Coverage: 94%; Class: SerializationUtils" alt="" href="org/apache/commons/lang3/SerializationUtils.html#SerializationUtils"/>
+<area shape="poly" coords="290,208,288,211,285,208,288,206,290,208,290,208" title="Complexity: 4; Coverage: 100%; Class: TypeUtils.WildcardTypeBuilder" alt="" href="org/apache/commons/lang3/reflect/TypeUtils.html#TypeUtils.WildcardTypeBuilder"/>
+<area shape="poly" coords="290,209,288,211,285,209,288,206,290,209,290,209" title="Complexity: 1; Coverage: 100%; Class: Range.ComparableComparator" alt="" href="org/apache/commons/lang3/Range.html#Range.ComparableComparator"/>
+<area shape="poly" coords="281,200,278,203,276,200,278,198,281,200,281,200" title="Complexity: 48; Coverage: 96%; Class: Range" alt="" href="org/apache/commons/lang3/Range.html#Range"/>
+<area shape="poly" coords="290,206,288,209,285,206,288,204,290,206,290,206" title="Complexity: 15; Coverage: 100%; Class: FastDateParser.StrategyParser" alt="" href="org/apache/commons/lang3/time/FastDateParser.html#FastDateParser.StrategyParser"/>
+<area shape="poly" coords="290,200,288,202,285,200,288,197,290,200,290,200" title="Complexity: 51; Coverage: 100%; Class: RandomStringUtils" alt="" href="org/apache/commons/lang3/RandomStringUtils.html#RandomStringUtils"/>
+<area shape="poly" coords="290,209,288,211,285,209,288,206,290,209,290,209" title="Complexity: 2; Coverage: 100%; Class: FastDateParser.TimeZoneStrategy.TzInfo" alt="" href="org/apache/commons/lang3/time/FastDateParser.html#FastDateParser.TimeZoneStrategy.TzInfo"/>
+<area shape="poly" coords="288,195,285,198,283,195,285,193,288,195,288,195" title="Complexity: 74; Coverage: 99%; Class: ObjectUtils" alt="" href="org/apache/commons/lang3/ObjectUtils.html#ObjectUtils"/>
+<area shape="poly" coords="290,208,288,210,285,208,288,205,290,208,290,208" title="Complexity: 7; Coverage: 100%; Class: InheritanceUtils" alt="" href="org/apache/commons/lang3/reflect/InheritanceUtils.html#InheritanceUtils"/>
+<area shape="poly" coords="290,209,288,211,285,209,288,206,290,209,290,209" title="Complexity: 1; Coverage: 100%; Class: Range.ComparableComparator" alt="" href="org/apache/commons/lang3/Range.html#Range.ComparableComparator"/>
+<area shape="poly" coords="290,200,288,202,285,200,288,197,290,200,290,200" title="Complexity: 50; Coverage: 100%; Class: LocaleUtils" alt="" href="org/apache/commons/lang3/LocaleUtils.html#LocaleUtils"/>
+<area shape="poly" coords="257,205,254,207,252,205,254,202,257,205,257,205" title="Complexity: 23; Coverage: 86%; Class: JavaVersion" alt="" href="org/apache/commons/lang3/JavaVersion.html#JavaVersion"/>
+<area shape="poly" coords="290,206,288,208,285,206,288,203,290,206,290,206" title="Complexity: 19; Coverage: 100%; Class: EnumUtils" alt="" href="org/apache/commons/lang3/EnumUtils.html#EnumUtils"/>
+<area shape="poly" coords="271,152,269,154,266,152,269,149,271,152,271,152" title="Complexity: 314; Coverage: 92%; Class: Conversion" alt="" href="org/apache/commons/lang3/Conversion.html#Conversion"/>
+<area shape="poly" coords="278,181,276,183,273,181,276,178,278,181,278,181" title="Complexity: 156; Coverage: 95%; Class: ClassUtils" alt="" href="org/apache/commons/lang3/ClassUtils.html#ClassUtils"/>
+<area shape="poly" coords="290,208,288,211,285,208,288,206,290,208,290,208" title="Complexity: 5; Coverage: 100%; Class: FormatCache.MultipartKey" alt="" href="org/apache/commons/lang3/time/FormatCache.html#FormatCache.MultipartKey"/>
+<area shape="poly" coords="290,203,288,205,285,203,288,200,290,203,290,203" title="Complexity: 35; Coverage: 100%; Class: CharUtils" alt="" href="org/apache/commons/lang3/CharUtils.html#CharUtils"/>
+<area shape="poly" coords="288,203,285,206,283,203,285,201,288,203,288,203" title="Complexity: 31; Coverage: 99%; Class: CharSetUtils" alt="" href="org/apache/commons/lang3/CharSetUtils.html#CharSetUtils"/>
+<area shape="poly" coords="290,205,288,207,285,205,288,202,290,205,290,205" title="Complexity: 24; Coverage: 100%; Class: CharSet" alt="" href="org/apache/commons/lang3/CharSet.html#CharSet"/>
+<area shape="poly" coords="271,201,269,204,266,201,269,199,271,201,271,201" title="Complexity: 43; Coverage: 92%; Class: CharSequenceUtils" alt="" href="org/apache/commons/lang3/CharSequenceUtils.html#CharSequenceUtils"/>
+<area shape="poly" coords="290,206,288,209,285,206,288,204,290,206,290,206" title="Complexity: 14; Coverage: 100%; Class: CharRange.CharacterIterator" alt="" href="org/apache/commons/lang3/CharRange.html#CharRange.CharacterIterator"/>
+<area shape="poly" coords="290,205,288,207,285,205,288,202,290,205,290,205" title="Complexity: 24; Coverage: 100%; Class: CharSet" alt="" href="org/apache/commons/lang3/CharSet.html#CharSet"/>
+<area shape="poly" coords="290,208,288,211,285,208,288,206,290,208,290,208" title="Complexity: 3; Coverage: 100%; Class: FastDatePrinter.StringLiteral" alt="" href="org/apache/commons/lang3/time/FastDatePrinter.html#FastDatePrinter.StringLiteral"/>
+<area shape="poly" coords="290,179,288,182,285,179,288,177,290,179,290,179" title="Complexity: 164; Coverage: 100%; Class: BooleanUtils" alt="" href="org/apache/commons/lang3/BooleanUtils.html#BooleanUtils"/>
+<area shape="poly" coords="290,205,288,207,285,205,288,202,290,205,290,205" title="Complexity: 22; Coverage: 100%; Class: BitField" alt="" href="org/apache/commons/lang3/BitField.html#BitField"/>
+<area shape="poly" coords="283,18,281,20,278,18,281,15,283,18,283,18" title="Complexity: 1,049; Coverage: 97%; Class: ArrayUtils" alt="" href="org/apache/commons/lang3/ArrayUtils.html#ArrayUtils"/>
+<area shape="poly" coords="262,207,259,209,257,207,259,204,262,207,262,207" title="Complexity: 13; Coverage: 88%; Class: ArchUtils" alt="" href="org/apache/commons/lang3/ArchUtils.html#ArchUtils"/>
+<area shape="poly" coords="266,198,264,201,261,198,264,196,266,198,266,198" title="Complexity: 59; Coverage: 90%; Class: AnnotationUtils" alt="" href="org/apache/commons/lang3/AnnotationUtils.html#AnnotationUtils"/>
+<area shape="poly" coords="283,162,281,164,278,162,281,159,283,162,283,162" title="Complexity: 258; Coverage: 97%; Class: NumberUtils" alt="" href="org/apache/commons/lang3/math/NumberUtils.html#NumberUtils"/>
+<area shape="poly" coords="290,205,288,207,285,205,288,202,290,205,290,205" title="Complexity: 24; Coverage: 100%; Class: CharSet" alt="" href="org/apache/commons/lang3/CharSet.html#CharSet"/>
+<area shape="poly" coords="283,186,281,189,278,186,281,184,283,186,283,186" title="Complexity: 126; Coverage: 97%; Class: Fraction" alt="" href="org/apache/commons/lang3/math/Fraction.html#Fraction"/>
+<area shape="poly" coords="290,203,288,206,285,203,288,201,290,203,290,203" title="Complexity: 32; Coverage: 100%; Class: MutableShort" alt="" href="org/apache/commons/lang3/mutable/MutableShort.html#MutableShort"/>
+<area shape="poly" coords="290,207,288,209,285,207,288,204,290,207,290,207" title="Complexity: 12; Coverage: 100%; Class: StopWatch.State" alt="" href="org/apache/commons/lang3/time/StopWatch.html#StopWatch.State"/>
+<area shape="poly" coords="290,203,288,206,285,203,288,201,290,203,290,203" title="Complexity: 31; Coverage: 100%; Class: MutableLong" alt="" href="org/apache/commons/lang3/mutable/MutableLong.html#MutableLong"/>
+<area shape="poly" coords="290,203,288,206,285,203,288,201,290,203,290,203" title="Complexity: 31; Coverage: 100%; Class: MutableLong" alt="" href="org/apache/commons/lang3/mutable/MutableLong.html#MutableLong"/>
+<area shape="poly" coords="290,203,288,206,285,203,288,201,290,203,290,203" title="Complexity: 32; Coverage: 100%; Class: MutableShort" alt="" href="org/apache/commons/lang3/mutable/MutableShort.html#MutableShort"/>
+<area shape="poly" coords="290,203,288,206,285,203,288,201,290,203,290,203" title="Complexity: 32; Coverage: 100%; Class: MutableShort" alt="" href="org/apache/commons/lang3/mutable/MutableShort.html#MutableShort"/>
+<area shape="poly" coords="290,203,288,206,285,203,288,201,290,203,290,203" title="Complexity: 32; Coverage: 100%; Class: MutableShort" alt="" href="org/apache/commons/lang3/mutable/MutableShort.html#MutableShort"/>
+<area shape="poly" coords="290,206,288,208,285,206,288,203,290,206,290,206" title="Complexity: 18; Coverage: 100%; Class: MutableBoolean" alt="" href="org/apache/commons/lang3/mutable/MutableBoolean.html#MutableBoolean"/>
+<area shape="poly" coords="271,207,269,209,266,207,269,204,271,207,271,207" title="Complexity: 11; Coverage: 92%; Class: Triple" alt="" href="org/apache/commons/lang3/tuple/Triple.html#Triple"/>
+<area shape="poly" coords="281,207,278,209,276,207,278,204,281,207,281,207" title="Complexity: 12; Coverage: 96%; Class: Pair" alt="" href="org/apache/commons/lang3/tuple/Pair.html#Pair"/>
+<area shape="poly" coords="290,207,288,210,285,207,288,205,290,207,290,207" title="Complexity: 9; Coverage: 100%; Class: MutableTriple" alt="" href="org/apache/commons/lang3/tuple/MutableTriple.html#MutableTriple"/>
+<area shape="poly" coords="290,208,288,210,285,208,288,205,290,208,290,208" title="Complexity: 8; Coverage: 100%; Class: StrBuilder.StrBuilderWriter" alt="" href="org/apache/commons/lang3/text/StrBuilder.html#StrBuilder.StrBuilderWriter"/>
+<area shape="poly" coords="290,208,288,211,285,208,288,206,290,208,290,208" title="Complexity: 5; Coverage: 100%; Class: FormatCache.MultipartKey" alt="" href="org/apache/commons/lang3/time/FormatCache.html#FormatCache.MultipartKey"/>
+<area shape="poly" coords="250,208,247,211,245,208,247,206,250,208,250,208" title="Complexity: 5; Coverage: 83%; Class: FastDatePrinter.UnpaddedMonthField" alt="" href="org/apache/commons/lang3/time/FastDatePrinter.html#FastDatePrinter.UnpaddedMonthField"/>
+<area shape="poly" coords="290,203,288,206,285,203,288,201,290,203,290,203" title="Complexity: 31; Coverage: 100%; Class: MutableLong" alt="" href="org/apache/commons/lang3/mutable/MutableLong.html#MutableLong"/>
+<area shape="poly" coords="290,208,288,210,285,208,288,205,290,208,290,208" title="Complexity: 7; Coverage: 100%; Class: InheritanceUtils" alt="" href="org/apache/commons/lang3/reflect/InheritanceUtils.html#InheritanceUtils"/>
+<area shape="poly" coords="290,207,288,210,285,207,288,205,290,207,290,207" title="Complexity: 9; Coverage: 100%; Class: MutableTriple" alt="" href="org/apache/commons/lang3/tuple/MutableTriple.html#MutableTriple"/>
+<area shape="poly" coords="290,208,288,210,285,208,288,205,290,208,290,208" title="Complexity: 8; Coverage: 100%; Class: StrBuilder.StrBuilderWriter" alt="" href="org/apache/commons/lang3/text/StrBuilder.html#StrBuilder.StrBuilderWriter"/>
+<area shape="poly" coords="276,207,273,209,271,207,273,204,276,207,276,207" title="Complexity: 12; Coverage: 94%; Class: Memoizer" alt="" href="org/apache/commons/lang3/concurrent/Memoizer.html#Memoizer"/>
+<area shape="poly" coords="269,208,266,211,264,208,266,206,269,208,269,208" title="Complexity: 3; Coverage: 91%; Class: LazyInitializer" alt="" href="org/apache/commons/lang3/concurrent/LazyInitializer.html#LazyInitializer"/>
+<area shape="poly" coords="290,209,288,211,285,209,288,206,290,209,290,209" title="Complexity: 2; Coverage: 100%; Class: FastDateParser.TimeZoneStrategy.TzInfo" alt="" href="org/apache/commons/lang3/time/FastDateParser.html#FastDateParser.TimeZoneStrategy.TzInfo"/>
+<area shape="poly" coords="290,209,288,211,285,209,288,206,290,209,290,209" title="Complexity: 2; Coverage: 100%; Class: FastDateParser.TimeZoneStrategy.TzInfo" alt="" href="org/apache/commons/lang3/time/FastDateParser.html#FastDateParser.TimeZoneStrategy.TzInfo"/>
+<area shape="poly" coords="290,209,288,211,285,209,288,206,290,209,290,209" title="Complexity: 1; Coverage: 100%; Class: Range.ComparableComparator" alt="" href="org/apache/commons/lang3/Range.html#Range.ComparableComparator"/>
+<area shape="poly" coords="290,208,288,211,285,208,288,206,290,208,290,208" title="Complexity: 5; Coverage: 100%; Class: FormatCache.MultipartKey" alt="" href="org/apache/commons/lang3/time/FormatCache.html#FormatCache.MultipartKey"/>
+<area shape="poly" coords="285,205,283,207,280,205,283,202,285,205,285,205" title="Complexity: 22; Coverage: 98%; Class: EventCountCircuitBreaker" alt="" href="org/apache/commons/lang3/concurrent/EventCountCircuitBreaker.html#EventCountCircuitBreaker"/>
+<area shape="poly" coords="290,207,288,210,285,207,288,205,290,207,290,207" title="Complexity: 9; Coverage: 100%; Class: MutableTriple" alt="" href="org/apache/commons/lang3/tuple/MutableTriple.html#MutableTriple"/>
+<area shape="poly" coords="290,208,288,210,285,208,288,205,290,208,290,208" title="Complexity: 6; Coverage: 100%; Class: MemberUtils.Executable" alt="" href="org/apache/commons/lang3/reflect/MemberUtils.html#MemberUtils.Executable"/>
+<area shape="poly" coords="285,204,283,206,280,204,283,201,285,204,285,204" title="Complexity: 29; Coverage: 98%; Class: ConcurrentUtils" alt="" href="org/apache/commons/lang3/concurrent/ConcurrentUtils.html#ConcurrentUtils"/>
+<area shape="poly" coords="290,208,288,211,285,208,288,206,290,208,290,208" title="Complexity: 3; Coverage: 100%; Class: FastDatePrinter.StringLiteral" alt="" href="org/apache/commons/lang3/time/FastDatePrinter.html#FastDatePrinter.StringLiteral"/>
+<area shape="poly" coords="209,208,207,211,204,208,207,206,209,208,209,208" title="Complexity: 3; Coverage: 66%; Class: ConcurrentException" alt="" href="org/apache/commons/lang3/concurrent/ConcurrentException.html#ConcurrentException"/>
+<area shape="poly" coords="290,208,288,211,285,208,288,206,290,208,290,208" title="Complexity: 4; Coverage: 100%; Class: TypeUtils.WildcardTypeBuilder" alt="" href="org/apache/commons/lang3/reflect/TypeUtils.html#TypeUtils.WildcardTypeBuilder"/>
+<area shape="poly" coords="290,208,288,211,285,208,288,206,290,208,290,208" title="Complexity: 4; Coverage: 100%; Class: TypeUtils.WildcardTypeBuilder" alt="" href="org/apache/commons/lang3/reflect/TypeUtils.html#TypeUtils.WildcardTypeBuilder"/>
+<area shape="poly" coords="290,208,288,210,285,208,288,205,290,208,290,208" title="Complexity: 7; Coverage: 100%; Class: InheritanceUtils" alt="" href="org/apache/commons/lang3/reflect/InheritanceUtils.html#InheritanceUtils"/>
+<area shape="poly" coords="290,206,288,209,285,206,288,204,290,206,290,206" title="Complexity: 14; Coverage: 100%; Class: CharRange.CharacterIterator" alt="" href="org/apache/commons/lang3/CharRange.html#CharRange.CharacterIterator"/>
+<area shape="poly" coords="290,208,288,211,285,208,288,206,290,208,290,208" title="Complexity: 3; Coverage: 100%; Class: FastDatePrinter.StringLiteral" alt="" href="org/apache/commons/lang3/time/FastDatePrinter.html#FastDatePrinter.StringLiteral"/>
+<area shape="poly" coords="283,206,281,208,278,206,281,203,283,206,283,206" title="Complexity: 18; Coverage: 97%; Class: BackgroundInitializer" alt="" href="org/apache/commons/lang3/concurrent/BackgroundInitializer.html#BackgroundInitializer"/>
+<area shape="poly" coords="219,208,216,211,214,208,216,206,219,208,219,208" title="Complexity: 3; Coverage: 70%; Class: AtomicSafeInitializer" alt="" href="org/apache/commons/lang3/concurrent/AtomicSafeInitializer.html#AtomicSafeInitializer"/>
+<area shape="poly" coords="245,208,243,211,240,208,243,206,245,208,245,208" title="Complexity: 3; Coverage: 81%; Class: AtomicInitializer" alt="" href="org/apache/commons/lang3/concurrent/AtomicInitializer.html#AtomicInitializer"/>
+<area shape="poly" coords="290,209,288,211,285,209,288,206,290,209,290,209" title="Complexity: 2; Coverage: 100%; Class: FastDateParser.TimeZoneStrategy.TzInfo" alt="" href="org/apache/commons/lang3/time/FastDateParser.html#FastDateParser.TimeZoneStrategy.TzInfo"/>
+<area shape="poly" coords="290,207,288,210,285,207,288,205,290,207,290,207" title="Complexity: 10; Coverage: 100%; Class: AbstractCircuitBreaker" alt="" href="org/apache/commons/lang3/concurrent/AbstractCircuitBreaker.html#AbstractCircuitBreaker"/>
+<area shape="poly" coords="259,208,257,210,254,208,257,205,259,208,259,208" title="Complexity: 6; Coverage: 87%; Class: EventUtils.EventBindingInvocationHandler" alt="" href="org/apache/commons/lang3/event/EventUtils.html#EventUtils.EventBindingInvocationHandler"/>
+<area shape="poly" coords="262,208,259,211,257,208,259,206,262,208,262,208" title="Complexity: 5; Coverage: 88%; Class: EventUtils" alt="" href="org/apache/commons/lang3/event/EventUtils.html#EventUtils"/>
+<area shape="poly" coords="290,209,288,211,285,209,288,206,290,209,290,209" title="Complexity: 1; Coverage: 100%; Class: Range.ComparableComparator" alt="" href="org/apache/commons/lang3/Range.html#Range.ComparableComparator"/>
+<area shape="poly" coords="281,206,278,208,276,206,278,203,281,206,281,206" title="Complexity: 18; Coverage: 96%; Class: EventListenerSupport" alt="" href="org/apache/commons/lang3/event/EventListenerSupport.html#EventListenerSupport"/>
+<area shape="poly" coords="290,208,288,211,285,208,288,206,290,208,290,208" title="Complexity: 3; Coverage: 100%; Class: FastDatePrinter.StringLiteral" alt="" href="org/apache/commons/lang3/time/FastDatePrinter.html#FastDatePrinter.StringLiteral"/>
+<area shape="poly" coords="290,207,288,210,285,207,288,205,290,207,290,207" title="Complexity: 10; Coverage: 100%; Class: AbstractCircuitBreaker" alt="" href="org/apache/commons/lang3/concurrent/AbstractCircuitBreaker.html#AbstractCircuitBreaker"/>
+<area shape="poly" coords="264,206,262,209,259,206,262,204,264,206,264,206" title="Complexity: 14; Coverage: 89%; Class: UnicodeEscaper" alt="" href="org/apache/commons/lang3/text/translate/UnicodeEscaper.html#UnicodeEscaper"/>
+<area shape="poly" coords="290,207,288,209,285,207,288,204,290,207,290,207" title="Complexity: 11; Coverage: 100%; Class: FastDatePrinter.Iso8601_Rule" alt="" href="org/apache/commons/lang3/time/FastDatePrinter.html#FastDatePrinter.Iso8601_Rule"/>
+<area shape="poly" coords="285,204,283,207,280,204,283,202,285,204,285,204" title="Complexity: 26; Coverage: 98%; Class: NumericEntityUnescaper" alt="" href="org/apache/commons/lang3/text/translate/NumericEntityUnescaper.html#NumericEntityUnescaper"/>
+<area shape="poly" coords="290,207,288,209,285,207,288,204,290,207,290,207" title="Complexity: 12; Coverage: 100%; Class: StopWatch.State" alt="" href="org/apache/commons/lang3/time/StopWatch.html#StopWatch.State"/>
+<area shape="poly" coords="283,207,281,210,278,207,281,205,283,207,283,207" title="Complexity: 9; Coverage: 97%; Class: LookupTranslator" alt="" href="org/apache/commons/lang3/text/translate/LookupTranslator.html#LookupTranslator"/>
+<area shape="poly" coords="179,208,176,210,174,208,176,205,179,208,179,208" title="Complexity: 6; Coverage: 53%; Class: JavaUnicodeEscaper" alt="" href="org/apache/commons/lang3/text/translate/JavaUnicodeEscaper.html#JavaUnicodeEscaper"/>
+<area shape="poly" coords="290,207,288,209,285,207,288,204,290,207,290,207" title="Complexity: 12; Coverage: 100%; Class: StopWatch.State" alt="" href="org/apache/commons/lang3/time/StopWatch.html#StopWatch.State"/>
+<area shape="poly" coords="290,209,288,211,285,209,288,206,290,209,290,209" title="Complexity: 2; Coverage: 100%; Class: FastDateParser.TimeZoneStrategy.TzInfo" alt="" href="org/apache/commons/lang3/time/FastDateParser.html#FastDateParser.TimeZoneStrategy.TzInfo"/>
+<area shape="poly" coords="281,206,278,209,276,206,278,204,281,206,281,206" title="Complexity: 14; Coverage: 96%; Class: CharSequenceTranslator" alt="" href="org/apache/commons/lang3/text/translate/CharSequenceTranslator.html#CharSequenceTranslator"/>
+<area shape="poly" coords="290,208,288,211,285,208,288,206,290,208,290,208" title="Complexity: 3; Coverage: 100%; Class: FastDatePrinter.StringLiteral" alt="" href="org/apache/commons/lang3/time/FastDatePrinter.html#FastDatePrinter.StringLiteral"/>
+<area shape="poly" coords="290,208,288,210,285,208,288,205,290,208,290,208" title="Complexity: 8; Coverage: 100%; Class: StrBuilder.StrBuilderWriter" alt="" href="org/apache/commons/lang3/text/StrBuilder.html#StrBuilder.StrBuilderWriter"/>
+<area shape="poly" coords="155,201,152,203,150,201,152,198,155,201,155,201" title="Complexity: 46; Coverage: 43%; Class: ToStringStyle.JsonToStringStyle" alt="" href="org/apache/commons/lang3/builder/ToStringStyle.html#ToStringStyle.JsonToStringStyle"/>
+<area shape="poly" coords="209,209,207,211,204,209,207,206,209,209,209,209" title="Complexity: 2; Coverage: 66%; Class: ToStringStyle.NoClassNameToStringStyle" alt="" href="org/apache/commons/lang3/builder/ToStringStyle.html#ToStringStyle.NoClassNameToStringStyle"/>
+<area shape="poly" coords="231,209,228,211,226,209,228,206,231,209,231,209" title="Complexity: 2; Coverage: 75%; Class: ToStringStyle.MultiLineToStringStyle" alt="" href="org/apache/commons/lang3/builder/ToStringStyle.html#ToStringStyle.MultiLineToStringStyle"/>
+<area shape="poly" coords="236,209,233,211,231,209,233,206,236,209,236,209" title="Complexity: 2; Coverage: 77%; Class: ToStringStyle.SimpleToStringStyle" alt="" href="org/apache/commons/lang3/builder/ToStringStyle.html#ToStringStyle.SimpleToStringStyle"/>
+<area shape="poly" coords="209,209,207,211,204,209,207,206,209,209,209,209" title="Complexity: 2; Coverage: 66%; Class: ToStringStyle.NoClassNameToStringStyle" alt="" href="org/apache/commons/lang3/builder/ToStringStyle.html#ToStringStyle.NoClassNameToStringStyle"/>
+<area shape="poly" coords="195,209,193,211,190,209,193,206,195,209,195,209" title="Complexity: 2; Coverage: 60%; Class: ToStringStyle.NoFieldNameToStringStyle" alt="" href="org/apache/commons/lang3/builder/ToStringStyle.html#ToStringStyle.NoFieldNameToStringStyle"/>
+<area shape="poly" coords="172,209,169,211,167,209,169,206,172,209,172,209" title="Complexity: 2; Coverage: 50%; Class: ToStringStyle.DefaultToStringStyle" alt="" href="org/apache/commons/lang3/builder/ToStringStyle.html#ToStringStyle.DefaultToStringStyle"/>
+<area shape="poly" coords="264,169,262,172,259,169,262,167,264,169,264,169" title="Complexity: 219; Coverage: 89%; Class: ToStringStyle" alt="" href="org/apache/commons/lang3/builder/ToStringStyle.html#ToStringStyle"/>
+<area shape="poly" coords="219,197,216,199,214,197,216,194,219,197,219,197" title="Complexity: 68; Coverage: 70%; Class: ToStringBuilder" alt="" href="org/apache/commons/lang3/builder/ToStringBuilder.html#ToStringBuilder"/>
+<area shape="poly" coords="122,202,119,204,117,202,119,199,122,202,122,202" title="Complexity: 41; Coverage: 29%; Class: StandardToStringStyle" alt="" href="org/apache/commons/lang3/builder/StandardToStringStyle.html#StandardToStringStyle"/>
+<area shape="poly" coords="274,199,271,202,269,199,271,197,274,199,274,199" title="Complexity: 53; Coverage: 93%; Class: ReflectionToStringBuilder" alt="" href="org/apache/commons/lang3/builder/ReflectionToStringBuilder.html#ReflectionToStringBuilder"/>
+<area shape="poly" coords="266,207,264,210,261,207,264,205,266,207,266,207" title="Complexity: 10; Coverage: 90%; Class: ReflectionDiffBuilder" alt="" href="org/apache/commons/lang3/builder/ReflectionDiffBuilder.html#ReflectionDiffBuilder"/>
+<area shape="poly" coords="290,208,288,210,285,208,288,205,290,208,290,208" title="Complexity: 7; Coverage: 100%; Class: InheritanceUtils" alt="" href="org/apache/commons/lang3/reflect/InheritanceUtils.html#InheritanceUtils"/>
+<area shape="poly" coords="224,206,221,208,219,206,221,203,224,206,224,206" title="Complexity: 18; Coverage: 72%; Class: MultilineRecursiveToStringStyle" alt="" href="org/apache/commons/lang3/builder/MultilineRecursiveToStringStyle.html#MultilineRecursiveToStringStyle"/>
+<area shape="poly" coords="231,208,228,211,226,208,228,206,231,208,231,208" title="Complexity: 5; Coverage: 75%; Class: IDKey" alt="" href="org/apache/commons/lang3/builder/IDKey.html#IDKey"/>
+<area shape="poly" coords="283,196,281,199,278,196,281,194,283,196,283,196" title="Complexity: 69; Coverage: 97%; Class: HashCodeBuilder" alt="" href="org/apache/commons/lang3/builder/HashCodeBuilder.html#HashCodeBuilder"/>
+<area shape="poly" coords="269,180,266,183,264,180,266,178,269,180,269,180" title="Complexity: 157; Coverage: 91%; Class: EqualsBuilder" alt="" href="org/apache/commons/lang3/builder/EqualsBuilder.html#EqualsBuilder"/>
+<area shape="poly" coords="290,207,288,210,285,207,288,205,290,207,290,207" title="Complexity: 9; Coverage: 100%; Class: MutableTriple" alt="" href="org/apache/commons/lang3/tuple/MutableTriple.html#MutableTriple"/>
+<area shape="poly" coords="288,189,285,192,283,189,285,187,288,189,288,189" title="Complexity: 108; Coverage: 99%; Class: DiffBuilder" alt="" href="org/apache/commons/lang3/builder/DiffBuilder.html#DiffBuilder"/>
+<area shape="poly" coords="290,208,288,211,285,208,288,206,290,208,290,208" title="Complexity: 5; Coverage: 100%; Class: FormatCache.MultipartKey" alt="" href="org/apache/commons/lang3/time/FormatCache.html#FormatCache.MultipartKey"/>
+<area shape="poly" coords="269,181,266,184,264,181,266,179,269,181,269,181" title="Complexity: 152; Coverage: 91%; Class: CompareToBuilder" alt="" href="org/apache/commons/lang3/builder/CompareToBuilder.html#CompareToBuilder"/>
+</map>
+            </div>
+        </div>
+        
+                    <div class="dashboard-widget">
+                <header class="dashboard-widget-header">
+                    <h3>Coverage tree map</h3>
+                </header>
+                <div class="dashboard-widget-content">
+                    <div id="infovis" style="width:100%; height:250px;">
+                        <div id="treemap-loader" style="position:relative;top:50px;">
+                            <p>
+                                Generating Coverage Tree Map. Please wait...
+                            </p>
+                            <p>
+                                <img src="img/ajax-loader.gif" alt="Loading Treemap"/>
+                            </p>
+                        </div>
+                    </div>
+                    <p><a href="treemap.html">See more</a></p>
+                </div>
+
+            </div>
+            </div>
+
+
+    <div class="aui-item">
+        <div class="dashboard-widget">
+            <header class="dashboard-widget-header">
+                <h3>Top 20 project risks</h3>
+            </header>
+            <div class="dashboard-widget-content">
+                
+                                                                <a class="tag" href="org/apache/commons/lang3/text/translate/NumericEntityUnescaper.html"
+                            style="font-size: 28px;color:#89c495"
+                            title="Average Method Complexity - 8.667 , Coverage - 98.5% ">NumericEntityUnescaper</a>
+                                    
+                                                                <a class="tag" href="org/apache/commons/lang3/StringUtils.html"
+                            style="font-size: 19px;color:#89c495"
+                            title="Average Method Complexity - 4.176 , Coverage - 99.1% ">StringUtils</a>
+                                    
+                                                                <a class="tag" href="org/apache/commons/lang3/time/FastDateParser.html"
+                            style="font-size: 22px;color:#89c495"
+                            title="Average Method Complexity - 5.5 , Coverage - 98.1% ">FastDateParser.TimeZoneStrategy</a>
+                                    
+                                                                <a class="tag" href="org/apache/commons/lang3/CharSetUtils.html"
+                            style="font-size: 19px;color:#89c495"
+                            title="Average Method Complexity - 3.875 , Coverage - 99% ">CharSetUtils</a>
+                                    
+                                                                <a class="tag" href="org/apache/commons/lang3/math/NumberUtils.html"
+                            style="font-size: 20px;color:#89c495"
+                            title="Average Method Complexity - 4.526 , Coverage - 97.8% ">NumberUtils</a>
+                                    
+                                                                <a class="tag" href="org/apache/commons/lang3/text/translate/LookupTranslator.html"
+                            style="font-size: 20px;color:#89c495"
+                            title="Average Method Complexity - 4.5 , Coverage - 97.6% ">LookupTranslator</a>
+                                    
+                                                                <a class="tag" href="org/apache/commons/lang3/math/Fraction.html"
+                            style="font-size: 18px;color:#89c495"
+                            title="Average Method Complexity - 3.706 , Coverage - 97.5% ">Fraction</a>
+                                    
+                                                                <a class="tag" href="org/apache/commons/lang3/time/DurationFormatUtils.html"
+                            style="font-size: 23px;color:#89c495"
+                            title="Average Method Complexity - 6.25 , Coverage - 94.2% ">DurationFormatUtils</a>
+                                    
+                                                                <a class="tag" href="org/apache/commons/lang3/ArrayUtils.html"
+                            style="font-size: 18px;color:#89c495"
+                            title="Average Method Complexity - 3.278 , Coverage - 97.7% ">ArrayUtils</a>
+                                    
+                                                                <a class="tag" href="org/apache/commons/lang3/text/translate/CharSequenceTranslator.html"
+                            style="font-size: 18px;color:#89c495"
+                            title="Average Method Complexity - 3.5 , Coverage - 96.2% ">CharSequenceTranslator</a>
+                                    
+                                                                <a class="tag" href="org/apache/commons/lang3/reflect/MemberUtils.html"
+                            style="font-size: 18px;color:#89c495"
+                            title="Average Method Complexity - 3.667 , Coverage - 95.5% ">MemberUtils</a>
+                                    
+                                                                <a class="tag" href="org/apache/commons/lang3/time/FastDateParser.html"
+                            style="font-size: 17px;color:#89c495"
+                            title="Average Method Complexity - 2.75 , Coverage - 97.7% ">FastDateParser.NumberStrategy</a>
+                                    
+                                                                <a class="tag" href="org/apache/commons/lang3/Conversion.html"
+                            style="font-size: 25px;color:#14892c"
+                            title="Average Method Complexity - 7.476 , Coverage - 92.4% ">Conversion</a>
+                                    
+                                                                <a class="tag" href="org/apache/commons/lang3/ObjectUtils.html"
+                            style="font-size: 15px;color:#89c495"
+                            title="Average Method Complexity - 2.056 , Coverage - 99.1% ">ObjectUtils</a>
+                                    
+                                                                <a class="tag" href="org/apache/commons/lang3/text/StrBuilder.html"
+                            style="font-size: 17px;color:#89c495"
+                            title="Average Method Complexity - 2.738 , Coverage - 97.2% ">StrBuilder</a>
+                                    
+                                                                <a class="tag" href="org/apache/commons/lang3/concurrent/ConcurrentUtils.html"
+                            style="font-size: 16px;color:#89c495"
+                            title="Average Method Complexity - 2.231 , Coverage - 98.6% ">ConcurrentUtils</a>
+                                    
+                                                                <a class="tag" href="org/apache/commons/lang3/CharSequenceUtils.html"
+                            style="font-size: 21px;color:#14892c"
+                            title="Average Method Complexity - 5.375 , Coverage - 92.5% ">CharSequenceUtils</a>
+                                    
+                                                                <a class="tag" href="org/apache/commons/lang3/time/FastDatePrinter.html"
+                            style="font-size: 18px;color:#89c495"
+                            title="Average Method Complexity - 3.613 , Coverage - 94.7% ">FastDatePrinter</a>
+                                    
+                                                                <a class="tag" href="org/apache/commons/lang3/ClassUtils.html"
+                            style="font-size: 17px;color:#89c495"
+                            title="Average Method Complexity - 2.786 , Coverage - 95.6% ">ClassUtils</a>
+                                    
+                                                                <a class="tag" href="org/apache/commons/lang3/builder/CompareToBuilder.html"
+                            style="font-size: 21px;color:#14892c"
+                            title="Average Method Complexity - 4.903 , Coverage - 91.6% ">CompareToBuilder</a>
+                                                    <p><a href="top-risks.html">See more</a></p>
+            </div>
+        </div>
+
+        <div class="dashboard-widget">
+            <header class="dashboard-widget-header">
+                <h3>Most complex packages</h3>
+            </header>
+            <div class="dashboard-widget-content">
+                
+                <table class="aui">
+                                            
+                                                <tr>
+                            <td>1. </td>
+                            <td><div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">0.9740841</span>97.4%</div><div style="display: table-cell">
+ <div title="97.4% Covered"  style="min-width:40px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:97.4%"></div></div></div></div></td>
+                            <td>
+                                <a href="org/apache/commons/lang3/pkg-summary.html">org.apache.commons.lang3</a>
+                                <span class="aui-badge" title="Package complexity">3424</span>
+                            </td>
+                        </tr>
+                                            
+                                                <tr>
+                            <td>2. </td>
+                            <td><div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">0.86169153</span>86.2%</div><div style="display: table-cell">
+ <div title="86.2% Covered"  style="min-width:40px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:86.2%"></div></div></div></div></td>
+                            <td>
+                                <a href="org/apache/commons/lang3/builder/pkg-summary.html">org.apache.commons.lang3.builder</a>
+                                <span class="aui-badge" title="Package complexity">979</span>
+                            </td>
+                        </tr>
+                                            
+                                                <tr>
+                            <td>3. </td>
+                            <td><div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">0.95425755</span>95.4%</div><div style="display: table-cell">
+ <div title="95.4% Covered"  style="min-width:40px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:95.4%"></div></div></div></div></td>
+                            <td>
+                                <a href="org/apache/commons/lang3/text/pkg-summary.html">org.apache.commons.lang3.text</a>
+                                <span class="aui-badge" title="Package complexity">854</span>
+                            </td>
+                        </tr>
+                                            
+                                                <tr>
+                            <td>4. </td>
+                            <td><div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">0.95269674</span>95.3%</div><div style="display: table-cell">
+ <div title="95.3% Covered"  style="min-width:40px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:95.3%"></div></div></div></div></td>
+                            <td>
+                                <a href="org/apache/commons/lang3/time/pkg-summary.html">org.apache.commons.lang3.time</a>
+                                <span class="aui-badge" title="Package complexity">721</span>
+                            </td>
+                        </tr>
+                                            
+                                                <tr>
+                            <td>5. </td>
+                            <td><div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">0.7975976</span>79.8%</div><div style="display: table-cell">
+ <div title="79.8% Covered"  style="min-width:40px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:79.8%"></div></div></div></div></td>
+                            <td>
+                                <a href="org/apache/commons/lang3/reflect/pkg-summary.html">org.apache.commons.lang3.reflect</a>
+                                <span class="aui-badge" title="Package complexity">479</span>
+                            </td>
+                        </tr>
+                                    </table>
+            </div>
+        </div>
+
+        <div class="dashboard-widget">
+            <header class="dashboard-widget-header">
+                <h3>Most complex classes</h3>
+            </header>
+            <div class="dashboard-widget-content">
+                <table class="aui">
+                                            
+                                                <tr>
+                            <td>1. </td>
+                            <td><div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">0.97659993</span>97.7%</div><div style="display: table-cell">
+ <div title="97.7% Covered"  style="min-width:40px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:97.7%"></div></div></div></div></td>
+                            <td>
+                                <a  href="org/apache/commons/lang3/ArrayUtils.html"  title="org.apache.commons.lang3.ArrayUtils">ArrayUtils</a>
+                                <span class="aui-badge" title="Class complexity">1049</span>
+                            </td>
+                        </tr>
+                                            
+                                                <tr>
+                            <td>2. </td>
+                            <td><div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">0.9907682</span>99.1%</div><div style="display: table-cell">
+ <div title="99.1% Covered"  style="min-width:40px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:99.1%"></div></div></div></div></td>
+                            <td>
+                                <a  href="org/apache/commons/lang3/StringUtils.html"  title="org.apache.commons.lang3.StringUtils">StringUtils</a>
+                                <span class="aui-badge" title="Class complexity">948</span>
+                            </td>
+                        </tr>
+                                            
+                                                <tr>
+                            <td>3. </td>
+                            <td><div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">0.9717682</span>97.2%</div><div style="display: table-cell">
+ <div title="97.2% Covered"  style="min-width:40px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:97.2%"></div></div></div></div></td>
+                            <td>
+                                <a  href="org/apache/commons/lang3/text/StrBuilder.html"  title="org.apache.commons.lang3.text.StrBuilder">StrBuilder</a>
+                                <span class="aui-badge" title="Class complexity">408</span>
+                            </td>
+                        </tr>
+                                            
+                                                <tr>
+                            <td>4. </td>
+                            <td><div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">0.9240506</span>92.4%</div><div style="display: table-cell">
+ <div title="92.4% Covered"  style="min-width:40px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:92.4%"></div></div></div></div></td>
+                            <td>
+                                <a  href="org/apache/commons/lang3/Conversion.html"  title="org.apache.commons.lang3.Conversion">Conversion</a>
+                                <span class="aui-badge" title="Class complexity">314</span>
+                            </td>
+                        </tr>
+                                            
+                                                <tr>
+                            <td>5. </td>
+                            <td><div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">0.9777778</span>97.8%</div><div style="display: table-cell">
+ <div title="97.8% Covered"  style="min-width:40px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:97.8%"></div></div></div></div></td>
+                            <td>
+                                <a  href="org/apache/commons/lang3/math/NumberUtils.html"  title="org.apache.commons.lang3.math.NumberUtils">NumberUtils</a>
+                                <span class="aui-badge" title="Class complexity">258</span>
+                            </td>
+                        </tr>
+                                    </table>
+            </div>
+        </div>
+
+                <div class="dashboard-widget">
+            <header class="dashboard-widget-header">
+                <h3>Least tested methods</h3>
+            </header>
+            <div class="dashboard-widget-content">
+                <table class="aui">
+                                            
+
+                    <tr>
+                        <td align="right">1.</td>
+                        <td align="right"><div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">0.0</span>0%</div><div style="display: table-cell">
+ <div title="0% Covered"  style="min-width:40px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:0%"></div></div></div></div></td>
+                        <td>
+                              <!-- normal method -->
+                                                      <a title="TypeUtils.isAssignable(Type,TypeVariable&lt;?&gt;,Map&lt;TypeVariable&lt;?&gt;,&#160;Type&gt;)&#160;:&#160;boolean" href="org/apache/commons/lang3/reflect/TypeUtils.html?line=678#src-678">TypeUtils.isAssignable(Type,TypeVariable&lt;?&gt;,Map&lt;TypeVariable&lt;?&gt;,&#160;Type&gt;)&#160;:&#160;boolean</a>
+                            <span class="aui-badge" title="Method complexity">10</span>
+
+                        </td>
+                    </tr>
+                                            
+
+                    <tr>
+                        <td align="right">2.</td>
+                        <td align="right"><div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">0.0</span>0%</div><div style="display: table-cell">
+ <div title="0% Covered"  style="min-width:40px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:0%"></div></div></div></div></td>
+                        <td>
+                              <!-- normal method -->
+                                                      <a title="TypeUtils.unrollBounds(Map&lt;TypeVariable&lt;?&gt;,&#160;Type&gt;,Type[])&#160;:&#160;Type[]" href="org/apache/commons/lang3/reflect/TypeUtils.html?line=1409#src-1409">TypeUtils.unrollBounds(Map&lt;TypeVariable&lt;?&gt;,&#160;Type&gt;,Type[])&#160;:&#160;Type[]</a>
+                            <span class="aui-badge" title="Method complexity">3</span>
+
+                        </td>
+                    </tr>
+                                            
+
+                    <tr>
+                        <td align="right">3.</td>
+                        <td align="right"><div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">0.0</span>0%</div><div style="display: table-cell">
+ <div title="0% Covered"  style="min-width:40px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:0%"></div></div></div></div></td>
+                        <td>
+                              <!-- normal method -->
+                                                      <a title="ToStringStyle.JsonToStringStyle.append(StringBuffer,String,int[],Boolean)&#160;:&#160;void" href="org/apache/commons/lang3/builder/ToStringStyle.html?line=2433#src-2433">ToStringStyle.JsonToStringStyle.append(StringBuffer,String,int[],Boolean)&#160;:&#160;void</a>
+                            <span class="aui-badge" title="Method complexity">3</span>
+
+                        </td>
+                    </tr>
+                                            
+
+                    <tr>
+                        <td align="right">4.</td>
+                        <td align="right"><div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">0.0</span>0%</div><div style="display: table-cell">
+ <div title="0% Covered"  style="min-width:40px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:0%"></div></div></div></div></td>
+                        <td>
+                              <!-- normal method -->
+                                                      <a title="ToStringStyle.JsonToStringStyle.append(StringBuffer,String,short[],Boolean)&#160;:&#160;void" href="org/apache/commons/lang3/builder/ToStringStyle.html?line=2449#src-2449">ToStringStyle.JsonToStringStyle.append(StringBuffer,String,short[],Boolean)&#160;:&#160;void</a>
+                            <span class="aui-badge" title="Method complexity">3</span>
+
+                        </td>
+                    </tr>
+                                            
+
+                    <tr>
+                        <td align="right">5.</td>
+                        <td align="right"><div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">0.0</span>0%</div><div style="display: table-cell">
+ <div title="0% Covered"  style="min-width:40px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:0%"></div></div></div></div></td>
+                        <td>
+                              <!-- normal method -->
+                                                      <a title="ToStringStyle.JsonToStringStyle.append(StringBuffer,String,byte[],Boolean)&#160;:&#160;void" href="org/apache/commons/lang3/builder/ToStringStyle.html?line=2465#src-2465">ToStringStyle.JsonToStringStyle.append(StringBuffer,String,byte[],Boolean)&#160;:&#160;void</a>
+                            <span class="aui-badge" title="Method complexity">3</span>
+
+                        </td>
+                    </tr>
+                                            
+
+                    <tr>
+                        <td align="right">6.</td>
+                        <td align="right"><div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">0.0</span>0%</div><div style="display: table-cell">
+ <div title="0% Covered"  style="min-width:40px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:0%"></div></div></div></div></td>
+                        <td>
+                              <!-- normal method -->
+                                                      <a title="ToStringStyle.JsonToStringStyle.append(StringBuffer,String,char[],Boolean)&#160;:&#160;void" href="org/apache/commons/lang3/builder/ToStringStyle.html?line=2481#src-2481">ToStringStyle.JsonToStringStyle.append(StringBuffer,String,char[],Boolean)&#160;:&#160;void</a>
+                            <span class="aui-badge" title="Method complexity">3</span>
+
+                        </td>
+                    </tr>
+                                            
+
+                    <tr>
+                        <td align="right">7.</td>
+                        <td align="right"><div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">0.0</span>0%</div><div style="display: table-cell">
+ <div title="0% Covered"  style="min-width:40px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:0%"></div></div></div></div></td>
+                        <td>
+                              <!-- normal method -->
+                                                      <a title="ToStringStyle.JsonToStringStyle.append(StringBuffer,String,double[],Boolean)&#160;:&#160;void" href="org/apache/commons/lang3/builder/ToStringStyle.html?line=2497#src-2497">ToStringStyle.JsonToStringStyle.append(StringBuffer,String,double[],Boolean)&#160;:&#160;void</a>
+                            <span class="aui-badge" title="Method complexity">3</span>
+
+                        </td>
+                    </tr>
+                                            
+
+                    <tr>
+                        <td align="right">8.</td>
+                        <td align="right"><div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">0.0</span>0%</div><div style="display: table-cell">
+ <div title="0% Covered"  style="min-width:40px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:0%"></div></div></div></div></td>
+                        <td>
+                              <!-- normal method -->
+                                                      <a title="ToStringStyle.JsonToStringStyle.append(StringBuffer,String,float[],Boolean)&#160;:&#160;void" href="org/apache/commons/lang3/builder/ToStringStyle.html?line=2513#src-2513">ToStringStyle.JsonToStringStyle.append(StringBuffer,String,float[],Boolean)&#160;:&#160;void</a>
+                            <span class="aui-badge" title="Method complexity">3</span>
+
+                        </td>
+                    </tr>
+                                            
+
+                    <tr>
+                        <td align="right">9.</td>
+                        <td align="right"><div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">0.0</span>0%</div><div style="display: table-cell">
+ <div title="0% Covered"  style="min-width:40px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:0%"></div></div></div></div></td>
+                        <td>
+                              <!-- normal method -->
+                                                      <a title="ToStringStyle.JsonToStringStyle.append(StringBuffer,String,boolean[],Boolean)&#160;:&#160;void" href="org/apache/commons/lang3/builder/ToStringStyle.html?line=2529#src-2529">ToStringStyle.JsonToStringStyle.append(StringBuffer,String,boolean[],Boolean)&#160;:&#160;void</a>
+                            <span class="aui-badge" title="Method complexity">3</span>
+
+                        </td>
+                    </tr>
+                                            
+
+                    <tr>
+                        <td align="right">10.</td>
+                        <td align="right"><div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">0.0</span>0%</div><div style="display: table-cell">
+ <div title="0% Covered"  style="min-width:40px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:0%"></div></div></div></div></td>
+                        <td>
+                              <!-- normal method -->
+                                                      <a title="ExceptionUtils.getStackFrames(String)&#160;:&#160;String[]" href="org/apache/commons/lang3/exception/ExceptionUtils.html?line=613#src-613">ExceptionUtils.getStackFrames(String)&#160;:&#160;String[]</a>
+                            <span class="aui-badge" title="Method complexity">2</span>
+
+                        </td>
+                    </tr>
+                                            
+
+                    <tr>
+                        <td align="right">11.</td>
+                        <td align="right"><div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">0.0</span>0%</div><div style="display: table-cell">
+ <div title="0% Covered"  style="min-width:40px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:0%"></div></div></div></div></td>
+                        <td>
+                              <!-- normal method -->
+                                                      <a title="TypeUtils.ParameterizedTypeImpl.hashCode()&#160;:&#160;int" href="org/apache/commons/lang3/reflect/TypeUtils.html?line=206#src-206">TypeUtils.ParameterizedTypeImpl.hashCode()&#160;:&#160;int</a>
+                            <span class="aui-badge" title="Method complexity">1</span>
+
+                        </td>
+                    </tr>
+                                            
+
+                    <tr>
+                        <td align="right">12.</td>
+                        <td align="right"><div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">0.0</span>0%</div><div style="display: table-cell">
+ <div title="0% Covered"  style="min-width:40px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:0%"></div></div></div></div></td>
+                        <td>
+                              <!-- normal method -->
+                                                      <a title="TypeUtils.extractTypeArgumentsFrom(Map&lt;TypeVariable&lt;?&gt;,&#160;Type&gt;,TypeVariable&lt;?&gt;[])&#160;:&#160;Type[]" href="org/apache/commons/lang3/reflect/TypeUtils.html?line=1534#src-1534">TypeUtils.extractTypeArgumentsFrom(Map&lt;TypeVariable&lt;?&gt;,&#160;Type&gt;,TypeVariable&lt;?&gt;[])&#160;:&#160;Type[]</a>
+                            <span class="aui-badge" title="Method complexity">1</span>
+
+                        </td>
+                    </tr>
+                                            
+
+                    <tr>
+                        <td align="right">13.</td>
+                        <td align="right"><div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">0.0</span>0%</div><div style="display: table-cell">
+ <div title="0% Covered"  style="min-width:40px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:0%"></div></div></div></div></td>
+                        <td>
+                              <!-- normal method -->
+                                                      <a title="ExceptionUtils.getStackFrames(Throwable)&#160;:&#160;String[]" href="org/apache/commons/lang3/exception/ExceptionUtils.html?line=597#src-597">ExceptionUtils.getStackFrames(Throwable)&#160;:&#160;String[]</a>
+                            <span class="aui-badge" title="Method complexity">2</span>
+
+                        </td>
+                    </tr>
+                                            
+
+                    <tr>
+                        <td align="right">14.</td>
+                        <td align="right"><div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">0.0</span>0%</div><div style="display: table-cell">
+ <div title="0% Covered"  style="min-width:40px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:0%"></div></div></div></div></td>
+                        <td>
+                              <!-- normal method -->
+                                                      <a title="MultilineRecursiveToStringStyle.reflectionAppendArrayDetail(StringBuffer,String,Object)&#160;:&#160;void" href="org/apache/commons/lang3/builder/MultilineRecursiveToStringStyle.html?line=137#src-137">MultilineRecursiveToStringStyle.reflectionAppendArrayDetail(StringBuffer,String,Object)&#160;:&#160;void</a>
+                            <span class="aui-badge" title="Method complexity">1</span>
+
+                        </td>
+                    </tr>
+                                            
+
+                    <tr>
+                        <td align="right">15.</td>
+                        <td align="right"><div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">0.0</span>0%</div><div style="display: table-cell">
+ <div title="0% Covered"  style="min-width:40px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:0%"></div></div></div></div></td>
+                        <td>
+                              <!-- normal method -->
+                                                      <a title="MultilineRecursiveToStringStyle.appendDetail(StringBuffer,String,short[])&#160;:&#160;void" href="org/apache/commons/lang3/builder/MultilineRecursiveToStringStyle.html?line=164#src-164">MultilineRecursiveToStringStyle.appendDetail(StringBuffer,String,short[])&#160;:&#160;void</a>
+                            <span class="aui-badge" title="Method complexity">1</span>
+
+                        </td>
+                    </tr>
+                                            
+
+                    <tr>
+                        <td align="right">16.</td>
+                        <td align="right"><div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">0.0</span>0%</div><div style="display: table-cell">
+ <div title="0% Covered"  style="min-width:40px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:0%"></div></div></div></div></td>
+                        <td>
+                              <!-- normal method -->
+                                                      <a title="MultilineRecursiveToStringStyle.appendDetail(StringBuffer,String,byte[])&#160;:&#160;void" href="org/apache/commons/lang3/builder/MultilineRecursiveToStringStyle.html?line=173#src-173">MultilineRecursiveToStringStyle.appendDetail(StringBuffer,String,byte[])&#160;:&#160;void</a>
+                            <span class="aui-badge" title="Method complexity">1</span>
+
+                        </td>
+                    </tr>
+                                            
+
+                    <tr>
+                        <td align="right">17.</td>
+                        <td align="right"><div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">0.0</span>0%</div><div style="display: table-cell">
+ <div title="0% Covered"  style="min-width:40px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:0%"></div></div></div></div></td>
+                        <td>
+                              <!-- normal method -->
+                                                      <a title="MultilineRecursiveToStringStyle.appendDetail(StringBuffer,String,float[])&#160;:&#160;void" href="org/apache/commons/lang3/builder/MultilineRecursiveToStringStyle.html?line=200#src-200">MultilineRecursiveToStringStyle.appendDetail(StringBuffer,String,float[])&#160;:&#160;void</a>
+                            <span class="aui-badge" title="Method complexity">1</span>
+
+                        </td>
+                    </tr>
+                                            
+
+                    <tr>
+                        <td align="right">18.</td>
+                        <td align="right"><div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">0.0</span>0%</div><div style="display: table-cell">
+ <div title="0% Covered"  style="min-width:40px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:0%"></div></div></div></div></td>
+                        <td>
+                              <!-- normal method -->
+                                                      <a title="TypeUtils.WildcardTypeImpl.hashCode()&#160;:&#160;int" href="org/apache/commons/lang3/reflect/TypeUtils.html?line=273#src-273">TypeUtils.WildcardTypeImpl.hashCode()&#160;:&#160;int</a>
+                            <span class="aui-badge" title="Method complexity">1</span>
+
+                        </td>
+                    </tr>
+                                            
+
+                    <tr>
+                        <td align="right">19.</td>
+                        <td align="right"><div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">0.0</span>0%</div><div style="display: table-cell">
+ <div title="0% Covered"  style="min-width:40px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:0%"></div></div></div></div></td>
+                        <td>
+                              <!-- normal method -->
+                                                      <a title="Validate.validState(boolean)&#160;:&#160;void" href="org/apache/commons/lang3/Validate.html?line=805#src-805">Validate.validState(boolean)&#160;:&#160;void</a>
+                            <span class="aui-badge" title="Method complexity">2</span>
+
+                        </td>
+                    </tr>
+                                            
+
+                    <tr>
+                        <td align="right">20.</td>
+                        <td align="right"><div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">0.0</span>0%</div><div style="display: table-cell">
+ <div title="0% Covered"  style="min-width:40px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:0%"></div></div></div></div></td>
+                        <td>
+                              <!-- normal method -->
+                                                      <a title="Validate.validState(boolean,String,Object)&#160;:&#160;void" href="org/apache/commons/lang3/Validate.html?line=827#src-827">Validate.validState(boolean,String,Object)&#160;:&#160;void</a>
+                            <span class="aui-badge" title="Method complexity">2</span>
+
+                        </td>
+                    </tr>
+                                    </table>
+            </div>
+        </div>
+        
+    </div>
+</div>
+                            </div> <!-- tabs-pane active-pane -->
+                        </div>
+
+    <script type="text/javascript" src="jit.js" ></script>
+    <script type="text/javascript" src="treemap-dash-json.js" ></script>
+
+                        </div> <!-- class="aui-page-panel-content-clover" -->
+                    <footer id="footer" role="contentinfo">
+    <section class="footer-body">
+        <ul>
+            <li>
+                Report generated by <a target="_new" href="https://openclover.org">OpenClover</a> v 4.5.2
+                on Fri Apr 26 2024 18:07:39 CDT using coverage data from Fri Apr 26 2024 18:07:27 CDT.
+            </li>
+        </ul>
+        <ul>
+            <li>OpenClover is free and open-source software. </li>
+        </ul>
+    </section>
+</footer>                </section> <!-- class="aui-page-panel-content" -->
+            </div> <!-- class="aui-page-panel-inner" -->
+        </div> <!-- class="aui-page-panel" -->
+    </div> <!-- id="page" -->
+</body>
+</html>
