@@ -1,0 +1,10 @@
+var clover = new Object();
+
+// JSON: {classes : [{name, id, sl, el,  methods : [{sl, el}, ...]}, ...]}
+clover.pageData = {"classes":[{"el":115,"id":50103,"methods":[{"el":45,"sc":5,"sl":41},{"el":63,"sc":5,"sl":47},{"el":86,"sc":5,"sl":65},{"el":108,"sc":5,"sl":88},{"el":114,"sc":5,"sl":110}],"name":"ClassConstantReferenceTest","sl":22}]}
+
+// JSON: {test_ID : {"methods": [ID1, ID2, ID3...], "name" : "testXXX() void"}, ...};
+clover.testTargets = {"test_2271":{"methods":[{"sl":65}],"name":"testClassConstantModernInvisible","pass":true,"statements":[{"sl":67},{"sl":68},{"sl":69},{"sl":70},{"sl":71},{"sl":72},{"sl":73},{"sl":74},{"sl":75},{"sl":76},{"sl":77},{"sl":78},{"sl":79},{"sl":80},{"sl":85}]},"test_2873":{"methods":[{"sl":110}],"name":"testObjectProperties","pass":true,"statements":[{"sl":112},{"sl":113}]},"test_4441":{"methods":[{"sl":88}],"name":"testClassConstantLegacy","pass":true,"statements":[{"sl":90},{"sl":91},{"sl":92},{"sl":93},{"sl":94},{"sl":95},{"sl":96},{"sl":97},{"sl":98},{"sl":99},{"sl":100},{"sl":101},{"sl":102},{"sl":107}]},"test_560":{"methods":[{"sl":47}],"name":"testClassConstantModernVisible","pass":true,"statements":[{"sl":49},{"sl":50},{"sl":51},{"sl":52},{"sl":53},{"sl":54},{"sl":55},{"sl":56},{"sl":57},{"sl":58},{"sl":59},{"sl":60},{"sl":61},{"sl":62}]}}
+
+// JSON: { lines : [{tests : [testid1, testid2, testid3, ...]}, ...]};
+clover.srcFileLines = [[], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [560], [], [560], [560], [560], [560], [560], [560], [560], [560], [560], [560], [560], [560], [560], [560], [], [], [2271], [], [2271], [2271], [2271], [2271], [2271], [2271], [2271], [2271], [2271], [2271], [2271], [2271], [2271], [2271], [], [], [], [], [2271], [], [], [4441], [], [4441], [4441], [4441], [4441], [4441], [4441], [4441], [4441], [4441], [4441], [4441], [4441], [4441], [], [], [], [], [4441], [], [], [2873], [], [2873], [2873], [], []]

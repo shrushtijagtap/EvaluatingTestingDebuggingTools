@@ -1,0 +1,10 @@
+var clover = new Object();
+
+// JSON: {classes : [{name, id, sl, el,  methods : [{sl, el}, ...]}, ...]}
+clover.pageData = {"classes":[{"el":26,"id":37063,"methods":[{"el":10,"sc":5,"sl":7},{"el":15,"sc":5,"sl":12},{"el":20,"sc":5,"sl":17},{"el":25,"sc":5,"sl":22}],"name":"TypeListForLoadedTest","sl":5}]}
+
+// JSON: {test_ID : {"methods": [ID1, ID2, ID3...], "name" : "testXXX() void"}, ...};
+clover.testTargets = {"test_1034":{"methods":[{"sl":7},{"sl":12},{"sl":17}],"name":"testGetOnlyTwoElementList","pass":true,"statements":[{"sl":9},{"sl":14},{"sl":19}]},"test_1926":{"methods":[{"sl":7},{"sl":17},{"sl":22}],"name":"testGetOnlySingleList","pass":true,"statements":[{"sl":9},{"sl":19},{"sl":24}]},"test_2311":{"methods":[{"sl":7},{"sl":17},{"sl":22}],"name":"testNonEmptyToInternalNames","pass":true,"statements":[{"sl":9},{"sl":19},{"sl":24}]},"test_2743":{"methods":[{"sl":7},{"sl":12},{"sl":17},{"sl":22}],"name":"testSubList","pass":true,"statements":[{"sl":9},{"sl":14},{"sl":19},{"sl":24}]},"test_3492":{"methods":[{"sl":7},{"sl":12},{"sl":17},{"sl":22}],"name":"testFilter","pass":true,"statements":[{"sl":9},{"sl":14},{"sl":19},{"sl":24}]},"test_3871":{"methods":[{"sl":17}],"name":"testEmptyToInternalNames","pass":true,"statements":[{"sl":19}]},"test_5337":{"methods":[{"sl":7},{"sl":12},{"sl":17}],"name":"testNonEmptyStackSize","pass":true,"statements":[{"sl":9},{"sl":14},{"sl":19}]},"test_5395":{"methods":[{"sl":17}],"name":"testEmptyStackSize","pass":true,"statements":[{"sl":19}]},"test_752":{"methods":[{"sl":17}],"name":"testGetOnlyEmptyList","pass":true,"statements":[{"sl":19}]}}
+
+// JSON: { lines : [{tests : [testid1, testid2, testid3, ...]}, ...]};
+clover.srcFileLines = [[], [], [], [], [], [], [], [2311, 2743, 1034, 1926, 5337, 3492], [], [2311, 2743, 1034, 1926, 5337, 3492], [], [], [2743, 1034, 5337, 3492], [], [2743, 1034, 5337, 3492], [], [], [3871, 2311, 2743, 1034, 1926, 5337, 752, 3492, 5395], [], [3871, 2311, 2743, 1034, 1926, 5337, 752, 3492, 5395], [], [], [2311, 2743, 1926, 3492], [], [2311, 2743, 1926, 3492], [], []]

@@ -1,4 +1,0 @@
--------------------------------------------------------------------------------
-Test set: net.bytebuddy.implementation.StubMethodTest
--------------------------------------------------------------------------------
-Tests run: 11, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.015 sec - in net.bytebuddy.implementation.StubMethodTest

@@ -1,4 +1,0 @@
--------------------------------------------------------------------------------
-Test set: net.bytebuddy.implementation.auxiliary.TypeProxyCreationTest
--------------------------------------------------------------------------------
-Tests run: 9, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.034 sec - in net.bytebuddy.implementation.auxiliary.TypeProxyCreationTest

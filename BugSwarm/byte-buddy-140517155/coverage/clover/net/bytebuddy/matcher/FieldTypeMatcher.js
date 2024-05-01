@@ -1,0 +1,10 @@
+var clover = new Object();
+
+// JSON: {classes : [{name, id, sl, el,  methods : [{sl, el}, ...]}, ...]}
+clover.pageData = {"classes":[{"el":47,"id":24031,"methods":[{"el":25,"sc":5,"sl":23},{"el":30,"sc":5,"sl":27},{"el":36,"sc":5,"sl":32},{"el":41,"sc":5,"sl":38},{"el":46,"sc":5,"sl":43}],"name":"FieldTypeMatcher","sl":11}]}
+
+// JSON: {test_ID : {"methods": [ID1, ID2, ID3...], "name" : "testXXX() void"}, ...};
+clover.testTargets = {"test_1060":{"methods":[{"sl":23},{"sl":27}],"name":"testGenericFieldType","pass":true,"statements":[{"sl":24},{"sl":29}]},"test_1531":{"methods":[{"sl":23},{"sl":32},{"sl":38},{"sl":43}],"name":"testObjectProperties","pass":true,"statements":[{"sl":24},{"sl":34},{"sl":40},{"sl":45}]},"test_2109":{"methods":[{"sl":23},{"sl":27}],"name":"testMatch","pass":true,"statements":[{"sl":24},{"sl":29}]},"test_2631":{"methods":[{"sl":23},{"sl":27}],"name":"testClassHierarchyFoundWithType","pass":true,"statements":[{"sl":24},{"sl":29}]},"test_2898":{"methods":[{"sl":23},{"sl":27}],"name":"testNoMatch","pass":true,"statements":[{"sl":24},{"sl":29}]},"test_3365":{"methods":[{"sl":23},{"sl":27}],"name":"testExactTypeNotFoundWrongType","pass":true,"statements":[{"sl":24},{"sl":29}]},"test_3474":{"methods":[{"sl":23},{"sl":27}],"name":"testExactTypeFoundWithType","pass":true,"statements":[{"sl":24},{"sl":29}]},"test_449":{"methods":[{"sl":23},{"sl":27}],"name":"testClassHierarchyNotFoundWrongType","pass":true,"statements":[{"sl":24},{"sl":29}]},"test_588":{"methods":[{"sl":23},{"sl":27}],"name":"testFieldType","pass":true,"statements":[{"sl":24},{"sl":29}]}}
+
+// JSON: { lines : [{tests : [testid1, testid2, testid3, ...]}, ...]};
+clover.srcFileLines = [[], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [2109, 449, 1060, 3474, 588, 1531, 2631, 3365, 2898], [2109, 449, 1060, 3474, 588, 1531, 2631, 3365, 2898], [], [], [2109, 449, 1060, 3474, 588, 2631, 3365, 2898], [], [2109, 449, 1060, 3474, 588, 2631, 3365, 2898], [], [], [1531], [], [1531], [], [], [], [1531], [], [1531], [], [], [1531], [], [1531], [], []]

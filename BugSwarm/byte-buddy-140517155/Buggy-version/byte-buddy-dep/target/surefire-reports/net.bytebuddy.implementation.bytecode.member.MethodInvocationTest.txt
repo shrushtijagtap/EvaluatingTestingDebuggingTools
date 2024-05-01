@@ -1,4 +1,0 @@
--------------------------------------------------------------------------------
-Test set: net.bytebuddy.implementation.bytecode.member.MethodInvocationTest
--------------------------------------------------------------------------------
-Tests run: 54, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.046 sec - in net.bytebuddy.implementation.bytecode.member.MethodInvocationTest

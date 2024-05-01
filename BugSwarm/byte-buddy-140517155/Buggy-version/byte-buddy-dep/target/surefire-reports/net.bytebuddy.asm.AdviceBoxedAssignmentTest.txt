@@ -1,4 +1,0 @@
--------------------------------------------------------------------------------
-Test set: net.bytebuddy.asm.AdviceBoxedAssignmentTest
--------------------------------------------------------------------------------
-Tests run: 10, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.022 sec - in net.bytebuddy.asm.AdviceBoxedAssignmentTest

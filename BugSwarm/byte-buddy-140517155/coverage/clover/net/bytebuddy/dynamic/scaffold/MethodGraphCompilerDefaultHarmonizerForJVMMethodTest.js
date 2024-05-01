@@ -1,0 +1,10 @@
+var clover = new Object();
+
+// JSON: {classes : [{name, id, sl, el,  methods : [{sl, el}, ...]}, ...]}
+clover.pageData = {"classes":[{"el":93,"id":39605,"methods":[{"el":34,"sc":5,"sl":31},{"el":40,"sc":5,"sl":36},{"el":46,"sc":5,"sl":42},{"el":52,"sc":5,"sl":48},{"el":58,"sc":5,"sl":54},{"el":64,"sc":5,"sl":60},{"el":70,"sc":5,"sl":66},{"el":77,"sc":5,"sl":72},{"el":89,"sc":21,"sl":83},{"el":92,"sc":5,"sl":79}],"name":"MethodGraphCompilerDefaultHarmonizerForJVMMethodTest","sl":21}]}
+
+// JSON: {test_ID : {"methods": [ID1, ID2, ID3...], "name" : "testXXX() void"}, ...};
+clover.testTargets = {"test_107":{"methods":[{"sl":54}],"name":"testMethodReturnTypeInequality","pass":true,"statements":[{"sl":56}]},"test_1202":{"methods":[{"sl":72}],"name":"testFactory","pass":true,"statements":[{"sl":74}]},"test_1472":{"methods":[{"sl":79},{"sl":83}],"name":"testObjectProperties","pass":true,"statements":[{"sl":81},{"sl":85},{"sl":86},{"sl":87},{"sl":88},{"sl":91}]},"test_2337":{"methods":[{"sl":42}],"name":"testMethodEquality","pass":true,"statements":[{"sl":44}]},"test_3210":{"methods":[{"sl":66}],"name":"testMethodParameterTypesEquality","pass":true,"statements":[{"sl":68}]},"test_4326":{"methods":[{"sl":48}],"name":"testMethodReturnTypeInequalityHashCode","pass":true,"statements":[{"sl":50}]},"test_50":{"methods":[{"sl":36}],"name":"testMethodEqualityHashCode","pass":true,"statements":[{"sl":38}]},"test_5127":{"methods":[{"sl":60}],"name":"testMethodParameterTypesHashCode","pass":true,"statements":[{"sl":62}]}}
+
+// JSON: { lines : [{tests : [testid1, testid2, testid3, ...]}, ...]};
+clover.srcFileLines = [[], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [50], [], [50], [], [], [], [2337], [], [2337], [], [], [], [4326], [], [4326], [], [], [], [107], [], [107], [], [], [], [5127], [], [5127], [], [], [], [3210], [], [3210], [], [], [], [1202], [], [1202], [], [], [], [], [1472], [], [1472], [], [1472], [], [1472], [1472], [1472], [1472], [], [], [1472], [], []]

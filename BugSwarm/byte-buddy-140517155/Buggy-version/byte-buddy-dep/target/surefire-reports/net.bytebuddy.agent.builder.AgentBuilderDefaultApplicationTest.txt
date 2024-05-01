@@ -1,4 +1,0 @@
--------------------------------------------------------------------------------
-Test set: net.bytebuddy.agent.builder.AgentBuilderDefaultApplicationTest
--------------------------------------------------------------------------------
-Tests run: 116, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 40.463 sec - in net.bytebuddy.agent.builder.AgentBuilderDefaultApplicationTest

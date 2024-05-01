@@ -1,4 +1,0 @@
--------------------------------------------------------------------------------
-Test set: net.bytebuddy.implementation.bytecode.assign.primitive.PrimitiveWideningDelegateNontrivialTest
--------------------------------------------------------------------------------
-Tests run: 15, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0 sec - in net.bytebuddy.implementation.bytecode.assign.primitive.PrimitiveWideningDelegateNontrivialTest
