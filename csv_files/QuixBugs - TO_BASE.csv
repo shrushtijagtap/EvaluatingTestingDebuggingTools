@@ -1,0 +1,8 @@
+Bugname,total pass,total fail,line no,pass cover,fail cover,suspiciousness_score,rank
+TO_BASE,6,7,15,0,7,1,1
+TO_BASE,6,7,16,0,7,1,1
+TO_BASE,6,7,18,0,7,1,1
+TO_BASE,6,7,19,0,7,1,1
+TO_BASE,6,7,20,0,7,1,1
+TO_BASE,6,7,21,0,7,1,1
+TO_BASE,6,7,24,0,7,1,1
