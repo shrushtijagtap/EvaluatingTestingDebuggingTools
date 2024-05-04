@@ -35,7 +35,7 @@ diff files: contains diff for all bugs <br>
 Number of buggy commits in Java projects: 1983<br>
 
 ## Tests per Bug
-Java Repositories
+<br>Java Repositories<br>
 Number of buggy commits in Java projects: 1983<br>
 | Repository | Number of Bugs | Tests Passed | Tests Failed |
 |-------------|----------------|--------------|--------------|
