@@ -32,25 +32,22 @@ diff files: contains diff for all bugs <br>
 
 ## Number of Bugs Collected
 2919 bugs collected<br>
-Number of buggy commits in Python projects: 934<br>
 Number of buggy commits in Java projects: 1983<br>
 
 ## Tests per Bug
+Java Repositories
+Number of buggy commits in Java projects: 1983<br>
 | Repository | Number of Bugs | Tests Passed | Tests Failed |
 |-------------|----------------|--------------|--------------|
 | gwtbootstrap3/gwtbootstrap3 | 6 | 40 | 4 |
 | ontop/ontop | 6 | 6145 | 38 |
 | ocpsoft/rewrite | 7 | 2542 | 11 |
-| bwhmather/verktyg | 18 | 3976 | 37 |
-| wavesoft/CCLib | 8 | 1 | 15 |
-| marshallward/f90nml | 65 | 3456 | 89 |
 | brettwooldridge/HikariCP | 3 | 403 | 6 |
 | swagger-api/swagger-core | 10 | 2965 | 125 |
 | jprante/elasticsearch-jdbc | 1 | 0 | 0 |
 | NanoHttpd/nanohttpd | 1 | 0 | 0 |
 | chewiebug/GCViewer | 5 | 1363 | 4 |
 | mybatis/mybatis-3 | 9 | 2316 | 162 |
-| byteweaver/django-coupons | 4 | 96 | 4 |
 | zxing/zxing | 6 | 0 | 0 |
 | sannies/mp4parser | 9 | 832 | 17 |
 | square/okhttp | 74 | 99782 | 337 |
@@ -71,21 +68,16 @@ Number of buggy commits in Java projects: 1983<br>
 | davidmoten/rxjava-jdbc | 16 | 2507 | 165 |
 | FluentLenium/FluentLenium | 5 | 3302 | 178 |
 | Nukkit/Nukkit | 16 | 0 | 0 |
-| ansible/ansible | 4 | 0 | 0 |
 | stagemonitor/stagemonitor | 11 | 764 | 46 |
 | puniverse/quasar | 8 | 1986 | 13 |
 | SonarSource/sonarlint-intellij | 3 | 274 | 5 |
-| scikit-learn/scikit-learn | 26 | 150995 | 120 |
 | owlcs/owlapi | 33 | 107217 | 225 |
 | SpigotMC/BungeeCord | 6 | 141 | 7 |
 | NitorCreations/nflow | 36 | 8799 | 54 |
-| dnanexus/dx-toolkit | 8 | 80 | 8 |
 | square/retrofit | 26 | 4580 | 45 |
 | uwescience/myria | 5 | 845 | 51 |
-| web2py/web2py | 14 | 2077 | 51 |
 | Azure/azure-sdk-for-java | 8 | 0 | 0 |
 | SonarSource/sonar-php | 21 | 6786 | 436 |
-| hivesolutions/appier | 60 | 1937 | 94 |
 | raphw/byte-buddy | 355 | 1152493 | 907 |
 | SonarSource/sonar-xml | 2 | 82 | 0 |
 | ProjectKorra/ProjectKorra | 9 | 0 | 0 |
@@ -110,20 +102,10 @@ Number of buggy commits in Java projects: 1983<br>
 | HubSpot/Baragon | 91 | 0 | 0 |
 | keeps/roda | 1 | 0 | 0 |
 | otavanopisto/muikku | 1 | 0 | 0 |
-| Charcoal-SE/SmokeDetector | 7 | 216 | 41 |
-| biolab/orange3 | 2 | 0 | 0 |
-| cloudify-cosmo/cloudify-system-tests | 3 | 0 | 0 |
 | GoClipse/goclipse | 7 | 286 | 5 |
 | ethereum/ethereumj | 2 | 0 | 0 |
 | google/closure-compiler | 1 | 0 | 0 |
-| getnikola/nikola | 4 | 730 | 38 |
-| terasolunaorg/guideline | 170 | 0 | 0 |
 | square/wire | 14 | 224 | 4 |
-| okpy/ok | 4 | 1091 | 43 |
-| python/mypy | 65 | 94907 | 10 |
-| jacebrowning/doorstop | 3 | 1815 | 5 |
-| wbond/package_control_channel | 61 | 478611 | 62 |
-| zimmerman-zimmerman/OIPA | 6 | 971 | 15 |
 | Flipkart/foxtrot | 2 | 0 | 0 |
 | jcabi/jcabi-s3 | 3 | 0 | 0 |
 | jcabi/jcabi-parent | 2 | 0 | 0 |
@@ -135,32 +117,21 @@ Number of buggy commits in Java projects: 1983<br>
 | orbit/orbit | 2 | 182 | 2 |
 | UniversalMediaServer/UniversalMediaServer | 23 | 7248 | 83 |
 | ome/bioformats | 2 | 3290 | 2 |
-| ccnmtl/dmt | 9 | 1141 | 12 |
-| Theano/Theano | 1 | 0 | 1 |
-| jkenlooper/chill | 1 | 20 | 13 |
-| joblib/joblib | 3 | 2914 | 4 |
 | pgjdbc/pgjdbc | 18 | 58016 | 5490 |
 | belluccifranco/sic | 11 | 679 | 19 |
 | square/javapoet | 12 | 1354 | 24 |
 | spring-projects/spring-data-jpa | 31 | 22358 | 119 |
-| Unidata/netcdf4-python | 35 | 3092 | 92 |
 | openpnp/openpnp | 6 | 40 | 9 |
 | cryptomator/cryptomator | 1 | 23 | 3 |
-| nicolargo/glances | 3 | 69 | 3 |
 | crate/crate-jdbc | 3 | 248 | 3 |
-| pydanny/cookiecutter-django | 11 | 17 | 17 |
 | terasolunaorg/terasoluna-gfw-functionaltest | 1 | 282 | 2 |
 | TNG/JGiven | 1 | 680 | 60 |
-| numpy/numpy | 112 | 724063 | 182 |
 | Adobe-Consulting-Services/acs-aem-commons | 109 | 121912 | 233 |
 | UNC-Libraries/Carolina-Digital-Repository | 3 | 1626 | 11 |
 | brianfrankcooper/YCSB | 2 | 85 | 5 |
 | igniterealtime/Openfire | 8 | 5050 | 160 |
 | languagetool-org/languagetool | 4 | 1904 | 57 |
 | thm-projects/arsnova-backend | 9 | 374 | 70 |
-| spesmilo/electrum | 6 | 853 | 73 |
-| paramiko/paramiko | 13 | 1581 | 119 |
-| hylang/hy | 5 | 2646 | 78 |
 | SynBioDex/libSBOLj | 2 | 458 | 5 |
 | keycloak/keycloak | 2 | 368 | 1 |
 | apache/jackrabbit-oak | 5 | 2365 | 299 |
@@ -176,9 +147,6 @@ Number of buggy commits in Java projects: 1983<br>
 | rackerlabs/blueflood | 4 | 1164 | 8 |
 | spring-projects/spring-data-commons | 1 | 1144 | 9 |
 | yasserg/crawler4j | 1 | 0 | 0 |
-| EducationalTestingService/skll | 5 | 84 | 5 |
-| ProgVal/Limnoria | 4 | 3266 | 4 |
-| QInfer/python-qinfer | 1 | 297 | 2 |
 | Wikidata/Wikidata-Toolkit | 6 | 3916 | 8 |
 | alibaba/fastjson | 4 | 19037 | 6 |
 | ibissource/iaf | 4 | 8398 | 13 |
@@ -194,6 +162,74 @@ Number of buggy commits in Java projects: 1983<br>
 | qupath/qupath | 1 | 4 | 1 |
 | apache/iceberg | 1 | 1092 | 443 |
 | apache/maven | 10 | 6741 | 21 |
+| broadinstitute/picard | 3 | 10685 | 2 |
+| JSQLParser/JSqlParser | 1 | 4282 | 2 |
+| JabRef/jabref | 2 | 55 | 2 |
+| OpenAPITools/openapi-generator | 8 | 0 | 0 |
+| ReactiveX/RxJava | 1 | 13128 | 6 |
+| TheAlgorithms/Java | 8 | 31787 | 12 |
+| alibaba/COLA | 9 | 276 | 39 |
+| alibaba/fastjson2 | 18 | 100605 | 26 |
+| alibaba/nacos | 5 | 29 | 416 |
+| apache/servicecomb-java-chassis | 1 | 593 | 1 |
+| apolloconfig/apollo | 2 | 219 | 56 |
+| bobocode-projects/java-fundamentals-exercises | 1 | 179 | 1 |
+| dromara/hertzbeat | 15 | 2948 | 87 |
+| embulk/embulk | 1 | 47 | 2 |
+| halo-dev/halo | 3 | 1596 | 11 |
+| hashgraph/hedera-mirror-node | 1 | 286 | 1 |
+| jitsi/jicofo | 2 | 36 | 40 |
+| marcwrobel/jbanking | 6 | 7874 | 8 |
+| GIScience/openrouteservice | 1 | 1694 | 6 |
+| graphql-java/graphql-java | 1 | 2965 | 1 |
+| pxb1988/dex2jar | 3 | 8 | 5 |
+| apache/shiro | 1 | 651 | 1 |
+| debezium/debezium | 1 | 764 | 4 |
+| google/error-prone | 5 | 0 | 0 |
+| javaparser/javaparser | 8 | 15528 | 16 |
+| crate/crate | 14 | 0 | 0 |
+| JanusGraph/janusgraph | 1 | 306 | 1 |
+| flowable/flowable-engine | 2 | 3706 | 2 |
+| psi-probe/psi-probe | 8 | 1620 | 36 |
+| sofastack/sofa-ark | 1 | 0 | 0 |
+
+<br>Python Repositories:<br>
+Number of buggy commits in Python projects: 934<br>
+| Repository | Number of Bugs | Tests Passed | Tests Failed |
+|-------------|----------------|--------------|--------------|
+| bwhmather/verktyg | 18 | 3976 | 37 |
+| wavesoft/CCLib | 8 | 1 | 15 |
+| marshallward/f90nml | 65 | 3456 | 89 |
+| byteweaver/django-coupons | 4 | 96 | 4 |
+| ansible/ansible | 4 | 0 | 0 |
+| scikit-learn/scikit-learn | 26 | 150995 | 120 |
+| dnanexus/dx-toolkit | 8 | 80 | 8 |
+| web2py/web2py | 14 | 2077 | 51 |
+| hivesolutions/appier | 60 | 1937 | 94 |
+| Charcoal-SE/SmokeDetector | 7 | 216 | 41 |
+| biolab/orange3 | 2 | 0 | 0 |
+| cloudify-cosmo/cloudify-system-tests | 3 | 0 | 0 |
+| getnikola/nikola | 4 | 730 | 38 |
+| terasolunaorg/guideline | 170 | 0 | 0 |
+| okpy/ok | 4 | 1091 | 43 |
+| python/mypy | 65 | 94907 | 10 |
+| jacebrowning/doorstop | 3 | 1815 | 5 |
+| wbond/package_control_channel | 61 | 478611 | 62 |
+| zimmerman-zimmerman/OIPA | 6 | 971 | 15 |
+| ccnmtl/dmt | 9 | 1141 | 12 |
+| Theano/Theano | 1 | 0 | 1 |
+| jkenlooper/chill | 1 | 20 | 13 |
+| joblib/joblib | 3 | 2914 | 4 |
+| Unidata/netcdf4-python | 35 | 3092 | 92 |
+| nicolargo/glances | 3 | 69 | 3 |
+| pydanny/cookiecutter-django | 11 | 17 | 17 |
+| numpy/numpy | 112 | 724063 | 182 |
+| spesmilo/electrum | 6 | 853 | 73 |
+| paramiko/paramiko | 13 | 1581 | 119 |
+| hylang/hy | 5 | 2646 | 78 |
+| EducationalTestingService/skll | 5 | 84 | 5 |
+| ProgVal/Limnoria | 4 | 3266 | 4 |
+| QInfer/python-qinfer | 1 | 297 | 2 |
 | LASY-org/lasy | 11 | 20 | 9 |
 | IHVH/OEMIB_PI01_19_TBOT | 4 | 20 | 4 |
 | jaraco/jaraco.functools | 2 | 0 | 0 |
@@ -214,52 +250,22 @@ Number of buggy commits in Java projects: 1983<br>
 | precice/python-bindings | 1 | 53 | 1 |
 | AntonLydike/riscemu | 2 | 0 | 6 |
 | pynucastro/pynucastro | 1 | 220 | 2 |
-| broadinstitute/picard | 3 | 10685 | 2 |
-| JSQLParser/JSqlParser | 1 | 4282 | 2 |
-| JabRef/jabref | 2 | 55 | 2 |
-| OpenAPITools/openapi-generator | 8 | 0 | 0 |
-| ReactiveX/RxJava | 1 | 13128 | 6 |
-| TheAlgorithms/Java | 8 | 31787 | 12 |
-| alibaba/COLA | 9 | 276 | 39 |
-| alibaba/fastjson2 | 18 | 100605 | 26 |
-| alibaba/nacos | 5 | 29 | 416 |
-| apache/servicecomb-java-chassis | 1 | 593 | 1 |
-| apolloconfig/apollo | 2 | 219 | 56 |
-| bobocode-projects/java-fundamentals-exercises | 1 | 179 | 1 |
-| dromara/hertzbeat | 15 | 2948 | 87 |
-| embulk/embulk | 1 | 47 | 2 |
-| halo-dev/halo | 3 | 1596 | 11 |
-| hashgraph/hedera-mirror-node | 1 | 286 | 1 |
 | jerryjliu/llama_index | 6 | 0 | 0 |
-| jitsi/jicofo | 2 | 36 | 40 |
-| marcwrobel/jbanking | 6 | 7874 | 8 |
 | huggingface/diffusers | 41 | 3 | 3 |
-| GIScience/openrouteservice | 1 | 1694 | 6 |
 | Delgan/loguru | 9 | 2929 | 13 |
 | SigmaHQ/sigma | 6 | 212 | 6 |
 | falconry/falcon | 9 | 6868 | 48 |
-| graphql-java/graphql-java | 1 | 2965 | 1 |
 | joke2k/django-environ | 7 | 16873 | 141 |
-| pxb1988/dex2jar | 3 | 8 | 5 |
-| apache/shiro | 1 | 651 | 1 |
 | aws/aws-sam-cli | 3 | 16353 | 3 |
-| debezium/debezium | 1 | 764 | 4 |
-| google/error-prone | 5 | 0 | 0 |
-| javaparser/javaparser | 8 | 15528 | 16 |
 | pypa/pipenv | 1 | 0 | 0 |
 | EstrellaXD/Auto_Bangumi | 1 | 13 | 2 |
-| crate/crate | 14 | 0 | 0 |
 | saulpw/visidata | 5 | 0 | 0 |
-| JanusGraph/janusgraph | 1 | 306 | 1 |
 | TheAlgorithms/Python | 1 | 0 | 1 |
 | kellyjonbrazil/jc | 1 | 1349 | 6 |
 | Pythagora-io/gpt-pilot | 1 | 105 | 2 |
-| flowable/flowable-engine | 2 | 3706 | 2 |
 | mkdocs/mkdocs | 8 | 7660 | 176 |
 | nedbat/coveragepy | 3 | 0 | 0 |
-| psi-probe/psi-probe | 8 | 1620 | 36 |
 | simonw/datasette | 1 | 1375 | 12 |
-| sofastack/sofa-ark | 1 | 0 | 0 |
 | vitalik/django-ninja | 1 | 0 | 0 |
 
 ##5 Test Samples
