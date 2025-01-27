@@ -55,15 +55,7 @@ The work significantly reduces debugging time and offers a robust framework for 
 
 ---
 
-### 🔑 Key Achievements
-
-- Demonstrated **substantial efficiency improvements** in software testing and debugging.  
-- Created a framework for **future research** in automated testing and bug localization.  
-- Generated **actionable insights** into the performance of automated tools like Randoop and EvoSuite.
-
----
-
 
 ### 📎 Links
 
-- [Report]([https://www.overleaf.com/1889112563sctsshxzcnwy#4f0263](https://drive.google.com/file/d/1rjaWIFTPgTwsIduqUMYGL7V2DrWls0m8/view))  
+- [Report](https://www.overleaf.com/1889112563sctsshxzcnwy#4f0263](https://drive.google.com/file/d/1rjaWIFTPgTwsIduqUMYGL7V2DrWls0m8/view)
